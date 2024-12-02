@@ -110,7 +110,15 @@ a {
     min-width: 100%;
 
     /* don't edit code above */
+    /* padding-left: 40px;
+    padding-right: 40px; */
      
+}
+
+.aboutInfo {
+    margin-left: 45px;
+    margin-right: 45px;
+    font-size: 20px;
 }
 
 
