@@ -1,0 +1,146 @@
+body {
+    background-color: #000000;
+}
+
+/* -----------MENU SECTION----------- */
+#menuSection {
+    min-height: 50px;
+    min-width: 100%;
+    background-color: #000000;
+    font-size: 25px;
+    
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    padding-top: 10px;
+}
+#menuTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+.menu {
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: #838383;
+}
+a {
+    /* remove underline and color */
+    text-decoration: none;
+    color: #838383;
+}
+
+
+
+/* ----------------------HOME---------------------- */
+#homeSection {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+
+    /* don't edit code above */
+    
+    text-align: center;
+}
+#title {
+    font-size: 3em;
+}
+#logo {
+    height: 150px;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#loginButton {
+    font-size: 20px;
+    min-width: 200px;
+    min-height: 40px;
+    color: #efefef;
+    background-color: #838383;
+    border: #4b4b4b solid 3px;
+}
+
+
+
+/* ----------------------PROFILE---------------------- */
+#profileSection {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+
+    /* don't edit code above */
+     
+}
+
+
+
+/* ----------------------GALLERY---------------------- */
+#gallerySection {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+
+    /* don't edit code above */
+     
+}
+
+
+
+/* ----------------------ABOUT---------------------- */
+#aboutSection {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+
+    /* don't edit code above */
+     
+}
+
+
+
+/* ----------------------CONTACT---------------------- */
+#contactSection {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+
+    /* don't edit code above */
+     
+}
+
+
+
+/* ----------------------HELP---------------------- */
+#helpSection {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+
+    /* don't edit code above */
+     
+}
