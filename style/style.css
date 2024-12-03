@@ -137,6 +137,13 @@ a {
      
 }
 
+.center{
+    text-align: center;
+}
+#contactImgContainer {
+    align-items: center;
+}
+
 
 
 /* ----------------------HELP---------------------- */
