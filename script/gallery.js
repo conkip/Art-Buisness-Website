@@ -29,7 +29,8 @@ const allPaintings = {
 
 function addPainting(imgList, titleList, paintingName) {
     function onPaintingClick() {
-        //open gallery extended for that painting
+        document.getElementById("gallerySection").style.visibility = "hidden"
+        document.getElementById("extendedImg").src = `../paintings/${allPaintings[paintingName][1]}`;
     }
     const newPainting = imgList.insertCell(-1)
     const newTitle = titleList.insertCell(-1)
@@ -65,5 +66,3 @@ addAllPaintings();
 addAllPaintings();
 addAllPaintings();
 addAllPaintings();
-
-
