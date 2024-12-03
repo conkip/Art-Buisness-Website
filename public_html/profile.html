@@ -11,6 +11,32 @@
     <meta charset="utf-8"/>
     <title>Creative Canvas</title>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <style>
+      #yourFavs {
+        width: 800px;
+        overflow-x: scroll;
+        display: block;
+      }
+      #yourBids {
+        width: 800px;
+        overflow-x: scroll;
+        display: block;
+      }
+      .paintingImg {
+        height: 150px;
+        width: 150px;
+        margin-left: 25px;
+        margin-right: 25px;
+      }
+      .paintingTitle {
+        text-align: center;
+        font-size: 15px;
+      }
+      .listCell {
+        width: 200px;
+      }
+
+    </style>
   </head>
   
   <body>
@@ -41,10 +67,29 @@
     </div>
     <!-- change this part to work as profile page -->
     <div id="profileSection">
-      <h1> Profile Page </h1>
+      <h1 id="hello"> Hello, name! </h1>
+      <h2> Your Favorites </h2>
+      <table id="yourFavs">
+        <tr>
+
+        </tr>
+        <tr>
+          
+        </tr>
+      </table>
+      <h2> Your Bids </h2>
+      <table id="yourBids">
+        <tr>
+
+        </tr>
+        <tr>
+          
+        </tr>
+      </table>
     </div>
 
-    <script>
+    <script src="../script/profile.js">
+      
     </script> 
   </body>
 </html>
