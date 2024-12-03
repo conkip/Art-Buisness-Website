@@ -1,6 +1,24 @@
 body {
     background-color: #000000;
 }
+.section {
+    position: relative;
+    top: 80px;
+    left: 0px;
+    z-index: 1;
+    overflow: auto;
+    color: #efefef;
+    min-width: 100%;
+ 
+}
+
+.title {
+    font-size: 3em;
+}
+
+.center{
+    text-align: center;
+}
 
 /* -----------MENU SECTION----------- */
 #menuSection {
@@ -34,22 +52,6 @@ a {
 
 
 /* ----------------------HOME---------------------- */
-#homeSection {
-    position: relative;
-    top: 80px;
-    left: 0px;
-    z-index: 1;
-    overflow: auto;
-    color: #efefef;
-    min-width: 100%;
-
-    /* don't edit code above */
-    
-    text-align: center;
-}
-#title {
-    font-size: 3em;
-}
 #logo {
     height: 200px;
     margin-left: auto;
@@ -68,52 +70,13 @@ a {
 
 
 /* ----------------------PROFILE---------------------- */
-#profileSection {
-    position: relative;
-    top: 80px;
-    left: 0px;
-    z-index: 1;
-    overflow: auto;
-    color: #efefef;
-    min-width: 100%;
-
-    /* don't edit code above */
-    
-}
-
 
 
 /* ----------------------GALLERY---------------------- */
-#gallerySection {
-    position: relative;
-    top: 80px;
-    left: 0px;
-    z-index: 1;
-    overflow: auto;
-    color: #efefef;
-    min-width: 100%;
-
-    /* don't edit code above */
-     
-}
 
 
 
 /* ----------------------ABOUT---------------------- */
-#aboutSection {
-    position: relative;
-    top: 80px;
-    left: 0px;
-    z-index: 1;
-    overflow: auto;
-    color: #efefef;
-    min-width: 100%;
-
-    /* don't edit code above */
-    /* padding-left: 40px;
-    padding-right: 40px; */
-     
-}
 
 .aboutInfo {
     margin-left: 45px;
@@ -124,38 +87,6 @@ a {
 
 
 /* ----------------------CONTACT---------------------- */
-#contactSection {
-    position: relative;
-    top: 80px;
-    left: 0px;
-    z-index: 1;
-    overflow: auto;
-    color: #efefef;
-    min-width: 100%;
-
-    /* don't edit code above */
-     
-}
-
-.center{
-    text-align: center;
-}
-#contactImgContainer {
-    align-items: center;
-}
-
 
 
 /* ----------------------HELP---------------------- */
-#helpSection {
-    position: relative;
-    top: 80px;
-    left: 0px;
-    z-index: 1;
-    overflow: auto;
-    color: #efefef;
-    min-width: 100%;
-
-    /* don't edit code above */
-     
-}
