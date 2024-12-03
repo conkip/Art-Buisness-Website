@@ -62,4 +62,7 @@ function addAllPaintings() {
 }
 
 addAllPaintings();
+addAllPaintings();
+addAllPaintings();
+addAllPaintings();
 
