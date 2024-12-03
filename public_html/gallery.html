@@ -12,6 +12,26 @@
     <title>Creative Canvas</title>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
   </head>
+  <style>
+      #galleryList {
+        width: 1000px;
+        overflow-x: scroll;
+        display: block;
+      }
+      .galleryImg {
+        height: 200px;
+        width: 200px;
+        margin-left: 25px;
+        margin-right: 25px;
+      }
+      .galleryTitle {
+        text-align: center;
+        font-size: 20px;
+      }
+      .galleryCell {
+        width: 250px;
+      }
+  </style>
   
   <body>
     <!-- Menu in the same on every page. Do not change. -->
@@ -41,10 +61,17 @@
     </div>
     <!-- change this part to work as gallery page -->
     <div id="gallerySection">
-      <h1> Gallery Page </h1>
+      <h3>Browse the Gallery and make a bid.</h3>
+      <table id="galleryList">
+        <tr>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+
     </div>
 
-    <script>
+    <script src="../script/gallery.js">
     </script> 
   </body>
 </html>
