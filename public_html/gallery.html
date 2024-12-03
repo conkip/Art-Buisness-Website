@@ -34,6 +34,37 @@
       .galleryCell {
         width: 250px;
       }
+      #extendedImg {
+        height: 300px;
+        width: 300px;
+      }
+      #extendedTitle {
+        font-size: 40px;
+        margin-top: 10px;
+      }
+      #extendedDescription {
+        font-size: 20px;
+        margin-top: 40px;
+      }
+      .extendedText {
+        color: #efefef;
+        font-size: 30px;
+        margin: 20px;
+      }
+      #statusBar {
+        height: 40px;
+        width: 600px;
+        background-color: #838383;
+        margin: 30px;
+      }
+      #curStatus {
+        height: 40px;
+        width: 50%;
+        background-color: #efefef;
+      }
+      .tdTop {
+        vertical-align: top;
+      }
   </style>
   
   <body>
@@ -75,23 +106,22 @@
     </div>
 
 
-    <div id="galleryExtended" style="visibility: hidden;">
+    <div id="galleryExtended" style="visibility: collapse;">
       <table>
         <tr>
           <td>
             <img id="extendedImg">
           </td>
-          <td>
-            <p id="extendedTitle"></p>
-            <p id="extendedDesciption"></p>
+          <td class="tdTop">
+            <p class="extendedText" id="extendedTitle"></p>
+            <p class="extendedText" id="extendedDescription"></p>
           </td>
         </tr>
       </table>
-      <h3> Bid Status </h3>
+      <h3 class="extendedText"> Bid Status </h3>
       <div id="statusBar">
-        <div id="dayStatus"></div>
+        <div id="curStatus"></div>
       </div>
-
 
     </div>
 
