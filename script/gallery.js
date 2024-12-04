@@ -27,6 +27,8 @@ const allPaintings = {
         ]
 };
 
+document.getElementById("heart").onclick = heartArt;
+
 function addPainting(imgList, titleList, paintingName) {
     function onPaintingClick() {
         document.getElementById("gallerySection").style.visibility = "collapse";
@@ -34,6 +36,9 @@ function addPainting(imgList, titleList, paintingName) {
         document.getElementById("extendedImg").src = `../paintings/${allPaintings[paintingName][1]}`;
         document.getElementById("extendedTitle").innerText = allPaintings[paintingName][0];
         document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
+        // get bid status info
+        // get heart status
+
     }
     const newPainting = imgList.insertCell(-1)
     const newTitle = titleList.insertCell(-1)
@@ -63,6 +68,11 @@ function addAllPaintings() {
         }
         addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], key);
     }
+}
+
+function heartArt() {
+    document.getElementById("heart").style.filter = "grayscale(0%)";
+    // store in user's list
 }
 
 addAllPaintings();
