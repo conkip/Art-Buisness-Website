@@ -60,5 +60,5 @@ function setUpEx() {
     addPainting(list.rows[0],list.rows[1], "TheGreatWave");
 }
 
-setUpEx();
+setUpEx(); 
 
