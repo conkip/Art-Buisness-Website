@@ -71,10 +71,133 @@ a {
 
 /* ----------------------PROFILE---------------------- */
 
+#yourFavs {
+    width:95%;
+    overflow-x: scroll;
+    display: block;
+}
+#yourBids {
+    width: 95%;
+    overflow-x: scroll;
+    display: block;
+}
+.paintingImg {
+    height: 150px;
+    width: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.paintingTitle {
+    text-align: center;
+    font-size: 15px;
+}
+.listCell {
+    width: 200px;
+}
+
 
 /* ----------------------GALLERY---------------------- */
 
-
+#galleryHeader {
+    text-align: center;
+}
+#galleryList {
+    margin-left: auto;
+    margin-right: auto;
+}
+.galleryImg {
+    height: 200px;
+    width: 200px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+.galleryTitle {
+    text-align: center;
+    font-size: 20px;
+}
+.galleryCell {
+    width: 250px;
+}
+#extendedImg {
+    height: 300px;
+    width: 300px;
+}
+#extendedTitle {
+    font-size: 40px;
+    margin-top: 10px;
+}
+#extendedDescription {
+    font-size: 20px;
+    margin-top: 40px;
+}
+.extendedText {
+    color: #efefef;
+    font-size: 30px;
+    margin-left: 30px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.bidLabel {
+    font-size: 40px;
+    color: #efefef;
+    margin-left: 15px;
+    margin-top: 80px;
+    margin-bottom: 10px;
+}
+#daysLeft {
+    float: right;
+    font-size: 20px;
+}
+#curBid {
+    float: left;
+    font-size: 20px;
+}
+#bidHolder {
+    float: right;
+    font-size: 20px;
+}
+#bidInfo {
+    width: 620px;
+    margin: 20px
+}
+#statusBar {
+    height: 40px;
+    width: 600px;
+    background-color: #efefef;
+    margin: 30px;
+    margin-top: 40px;
+}
+#curStatus {
+    height: 40px;
+    width: 40%;
+    background-color: #838383;
+}
+#daysLeft {
+    text-align: right;
+}
+#newBid {
+    text-align: left;
+    font-size: 30px;
+    width: 250px
+}
+#makeBid {
+    font-size: 20px;
+    min-width: 150px;
+    min-height: 35px;
+    color: #efefef;
+    background-color: #838383;
+    border: #4b4b4b solid 3px;
+    margin-left: 30px;
+}
+.tdTop {
+    vertical-align: top;
+}
+#heart {
+    width: 40px;
+    filter: grayscale(100%);
+    float: right;
+    margin-top: -30px;
+}
 
 /* ----------------------ABOUT---------------------- */
 
