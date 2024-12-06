@@ -27,17 +27,46 @@ const allPaintings = {
         ]
 };
 
-document.getElementById("heart").onclick = heartArt;
+let curPainting = "";
 
+//add onclick functions to heart and submit bid
+document.getElementById("heart").onclick = heartArt;
+document.getElementById("makeBid").onclick = submitBid
+
+
+// addPainting puts the given painting in the gallery with its img and title
+// adds the onclick function to both the img and the title and set class to match style
 function addPainting(imgList, titleList, paintingName) {
+    
+    // onclick function displays the clicked on image in the gallery extended view
+    // and hides the rest of the gallery from view
+    // with the correct bid info and heart status
     function onPaintingClick() {
         document.getElementById("gallerySection").style.visibility = "collapse";
         document.getElementById("galleryExtended").style.visibility = "visible";
         document.getElementById("extendedImg").src = `../paintings/${allPaintings[paintingName][1]}`;
         document.getElementById("extendedTitle").innerText = allPaintings[paintingName][0];
         document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
+        curPainting = paintingName;
+
+
         // get bid status info
+        
+        // numDaysLeft = <<curPaintings days left>>;
+        // document.getElementById("daysLeft").innerText = "Days Left: " + numDaysLeft;
+        // document.getElementById("curStatus").style.width = (((30 - numDaysLeft) / 30) * 600) + "px";
+        // document.getElementById("curBid").innerText = "Current Bid: $" + <<curPaintings highest bid>>;
+        // document.getElementById("bidHolder").innerText = "Bid Holder: " + <<curPaintings bid holder>>;
+        
+
         // get heart status
+
+        // if (curPainting in <<users favorites>>) {
+        //     document.getElementById("heart").style.filter = "grayscale(0%)";
+        // } else {
+        //     document.getElementById("heart").style.filter = "grayscale(100%)";
+
+        // }
 
     }
     const newPainting = imgList.insertCell(-1)
@@ -57,6 +86,8 @@ function addPainting(imgList, titleList, paintingName) {
     newTitle.appendChild(text); 
 }
 
+
+// adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
     list = document.getElementById("galleryList");
 
@@ -70,11 +101,52 @@ function addAllPaintings() {
     }
 }
 
+// when the heart is clicked add or remove it from the users favorites list
 function heartArt() {
-    document.getElementById("heart").style.filter = "grayscale(0%)";
-    // store in user's list
+    heart = document.getElementById("heart")
+    if (heart.style.filter ==  "grayscale(100%)") {
+        document.getElementById("heart").style.filter = "grayscale(0%)";
+        // add to current user's favorite list
+        // <<users favorites>>.push(curPainting);
+
+    } else {
+        document.getElementById("heart").style.filter = "grayscale(0%)";
+        // remove from current user's favorite list
+        // <<users favorites>>.remove(curPainting);
+    }
 }
 
+// saves the users bid the database
+function submitBid() {
+    heart = document.getElementById("heart")
+    if (heart.style.filter ==  "grayscale(100%)") {
+        document.getElementById("heart").style.filter = "grayscale(0%)";
+        // add to current user's favorite list
+        
+
+    } else {
+        document.getElementById("heart").style.filter = "grayscale(0%)";
+        // remove from current user's favorite list
+        // <<users favorites>>.remove(curPainting);
+    }
+    // let bid = document.getElementById("newBid").value;
+    // if (bid > <<curPaintings highest bid>>){
+    //     <<curPaintings highest bid>> = bid;
+    //     <<curPaintings bid holder>> = user;
+    //     <<users bids>>.push(curPainting); // if the not current in list
+    //     document.getElementById("curBid").innerText = "Current Bid: $" + bid;
+    //     document.getElementById("bidHolder").innerText = "Bid Holder: " + user;
+    //     
+    // } else {
+    //     // some kind of alert to say that is not a valid bid
+    // }
+    
+}
+
+
+
+
+// fills up the gallery for testing
 addAllPaintings();
 addAllPaintings();
 addAllPaintings();
