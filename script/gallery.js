@@ -110,7 +110,7 @@ function heartArt() {
         // <<users favorites>>.push(curPainting);
 
     } else {
-        document.getElementById("heart").style.filter = "grayscale(0%)";
+        document.getElementById("heart").style.filter = "grayscale(100%)";
         // remove from current user's favorite list
         // <<users favorites>>.remove(curPainting);
     }
@@ -118,17 +118,6 @@ function heartArt() {
 
 // saves the users bid the database
 function submitBid() {
-    heart = document.getElementById("heart")
-    if (heart.style.filter ==  "grayscale(100%)") {
-        document.getElementById("heart").style.filter = "grayscale(0%)";
-        // add to current user's favorite list
-        
-
-    } else {
-        document.getElementById("heart").style.filter = "grayscale(0%)";
-        // remove from current user's favorite list
-        // <<users favorites>>.remove(curPainting);
-    }
     // let bid = document.getElementById("newBid").value;
     // if (bid > <<curPaintings highest bid>>){
     //     <<curPaintings highest bid>> = bid;
