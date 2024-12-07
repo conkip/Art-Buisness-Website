@@ -1,9 +1,11 @@
 # Art-Buisness-Website
+very cool
 
-plan: make a react website
-"contracted to build a website for an art buisness" (aunt)
+idea to dynamically change painting size:
+1. divide the desired height by the total height
+2. multiply the width and height by that
 
-multiplayer interaction: users can bid on paintings
+or
 
-login
-include pictures of art displayed nicely, as well as information to contact Casey and mabye some hyperlinks
+divide width by height to get ratio
+multiply that by desired height to get width
