@@ -9,3 +9,12 @@ or
 
 divide width by height to get ratio
 multiply that by desired height to get width
+
+descriptions of art could include size, date, artist, type (ex- acrylic on canvas), and price
+
+
+possibly-
+add sorting the galery based on: (high->low and low->high)
+price
+size
+date

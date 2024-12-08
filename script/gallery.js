@@ -1,29 +1,29 @@
 // database of paintings
 const allPaintings = {
-    "Sunflowers":[
-        "Sunflowers",
-        "sunflowers.jpg",
-        "This is a painting of some sunflowers",
+    "BeyondTheLimit":[
+        "Beyond The Limit",
+        "BeyondTheLimit.jpg",
+        "?x?\n20??"
         ],
-    "StaryNight":[
-        "Stary Night",
-        "starynight.jpg",
-        "This is a painting of a stary night",
+    "ChasingBlues":[
+        "Chasing Blues",
+        "ChasingBlues.jpg",
+        "?x?\n20??"
         ],
-    "MonaLisa":[
-        "Mona Lisa",
-        "monalisa.jpg",
-        "This is a painting of mona lisa",
+    "CircularEcho":[
+        "Circular Echo",
+        "CircularEcho.jpg",
+        "?x?\n20??"
         ],
-    "PearlEaring":[
-        "Pearl Earing",
-        "pearlearing.jpg",
-        "This is a painting of a girl with a pearl earing"
+    "ColorSpectrum":[
+        "Color Spectrum",
+        "ColorSpectrum.jpg",
+        "?x?\n20??"
         ],
-    "TheGreatWave":[
-        "The Great Wave",
-        "greatwave.jpg",
-        "This is a painting of a wave"
+    "ColorsInMotion":[
+        "Colors In Motion",
+        "ColorsInMotion.jpg",
+        "?x?\n20??"
         ]
 };
 

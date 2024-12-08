@@ -16,10 +16,14 @@ body {
     font-size: 3em;
 }
 
-.center{
-    text-align: center;
+.centerElem{
+    display: block;
     margin-left:auto;
     margin-right:auto;
+}
+
+.centerText {
+    text-align: center;
 }
 
 /* -----------MENU SECTION----------- */
@@ -100,13 +104,6 @@ a {
 
 /* ----------------------GALLERY---------------------- */
 
-#galleryHeader {
-    text-align: center;
-}
-#galleryList {
-    margin-left: auto;
-    margin-right: auto;
-}
 .galleryImg {
     height: 200px;
     width: 200px;
