@@ -2,7 +2,7 @@
   Connor Kippes, Leah Knodel, Blue Garrabrant
   CSC337
   Final Project - Creative Canvas Art Website
-  This is the page showing a detailed view of a painting. 
+  This is our contact page html. 
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +10,19 @@
   <head>
     <meta charset="utf-8"/>
     <title>Creative Canvas</title>
-    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
   </head>
 
   <style>
+    #imgsCont{
+      display:flex;
+      justify-content: space-evenly;
+    }
+    .imgCont{
+      display:flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
   </style>
   
   <body>
@@ -43,29 +52,24 @@
       </table>
     </div>
 
-    <!-- change this part to work as help page -->
-    <div class="section">
-      <h1> Help Page </h1>
-      <p>
-        Navigate pages by clicking on the name in the navigation bar.
-        <br>
+    <!-- change this part to work as contact page -->
+    <div id="contactSection">
+      <h1 class = "center title"> Contacts </h1>
+      <div id = "imgsCont">
+        <div class = "imgCont">
+          <img id ="contactImg1" src="./img/phone-icon.png" alt="Phone Icon" width="200" height="200">
+          <h2>(928) 453-4930</h2>
+        </div>
+        <div class = "center imgCont">
+          <img id ="contactImg2" src="./img/email-icon.png" alt="Email Icon" width="200" height="200">
+          <h2>kaseylkurowsky@gmail.com</h2>
+        </div>
+      </div>
 
-        When in the Gallery page, you may click on an image of a painting to
-        see a more detailed view.
-        <br>
-
-        In this view you may place a bid on a painting by typing 
-        into the text field and clicking enter or the bid button.
-        <br>
-
-        You also may favorite a painting by clicking the heart Icon
-        and will see it turn from white to red.
-
-
-      </p>
     </div>
 
     <script>
     </script> 
   </body>
 </html>
+
