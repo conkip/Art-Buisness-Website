@@ -12,6 +12,26 @@
     <title>Creative Canvas</title>
     <link rel="stylesheet" type="text/css" href="./style/style.css">
   </head>
+
+  <style>
+    #allLoginStuff{
+      display:flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+    .formStuff{
+      display:flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+    .someInput{
+        font-size: 20px;
+        width: 200px;
+        height: 25px;
+        margin: 20px;
+        margin-top:10px;
+    }
+  </style>
   
   <body>
     <!-- Menu in the same on every page. Do not change. -->
@@ -39,32 +59,40 @@
         </tr>
       </table>
     </div>
+
     <!-- change this part to work as home page -->
     <div class="section">
-        <h1 class = "title centerText">Login</h1>
-        <form class="centerText">
-            <label for="fname">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <!-- include later once handling passwords
-            <label for="lname">Password:</label><br>
-            <input type="password" id="lname" name="lname">
-            -->
-            <input type="submit" value = "Login">
-        </form>
-        <h1> or </h1>
-        <h1 class = "title centerText">Sign Up</h1>
-        <form class="centerText">
-            <label for="fname">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <!-- include later once handling passwords
-            <label for="lname">Password:</label><br>
-            <input type="password" id="lname" name="lname">
-            -->
-            <input type = "submit" value = "Sign Up">
-        </form>
+        <div id = "allLoginStuff">
+            <div class = "formStuff">
+                <h1 class = "title centerText">Login</h1>
+                <form class="centerText" action="javascript:clickButton('loginUsername')">
+                    <label class = "subtitle" for="loginUsername">Username:</label><br>
+                    <input class = "someInput" type="text" id="loginUsername" name="loginUsername"><br>
+                    <!-- include later once handling passwords
+                    <label for="lname">Password:</label><br>
+                    <input type="password" id="lname" name="lname">
+                    -->
+                    <input class = "someButton" type="submit" value = "Login">
+                </form>
+            </div>
+
+            <h1 class = "title"> or </h1>
+
+            <div class = "formStuff">
+                <h1 class = "title centerText">Sign Up</h1>
+                <form class="centerText" action="javascript:clickButton('signupUsername')">
+                    <label class = "subtitle" for="signupUsername">Username:</label><br>
+                    <input class = "someInput" type="text" id="signupUsername" name="signupUsername"><br>
+                    <!-- include later once handling passwords
+                    <label for="lname">Password:</label><br>
+                    <input type="password" id="lname" name="lname">
+                    -->
+                    <input class = "someButton" type = "submit" value = "Sign Up">
+                </form>
+            </div>
+        </div>
     </div>
 
-    <script>
-    </script> 
+    <script src = "./script/login.js"></script> 
   </body>
 </html>

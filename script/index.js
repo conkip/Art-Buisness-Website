@@ -7,7 +7,6 @@
   handles directing to the login page
 */
 
-function clickLoginSignup {
-    
-    //go to login page
+function clickLoginSignup() {
+    window.location.href = '/login.html';
 }
