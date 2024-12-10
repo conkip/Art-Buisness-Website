@@ -103,7 +103,10 @@ a {
 
 
 /* ----------------------GALLERY---------------------- */
-
+#galleryList {
+    margin-left: auto;
+    margin-right: auto;
+}
 .galleryImg {
     height: 200px;
     width: 200px;
