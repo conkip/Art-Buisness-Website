@@ -3,27 +3,97 @@ const allPaintings = {
     "BeyondTheLimit":[
         "Beyond The Limit",
         "BeyondTheLimit.jpg",
-        "?x?\n20??"
+        "_ x _\n20__"
         ],
     "ChasingBlues":[
         "Chasing Blues",
         "ChasingBlues.jpg",
-        "?x?\n20??"
+        "_ x _\n20__"
         ],
     "CircularEcho":[
         "Circular Echo",
         "CircularEcho.jpg",
-        "?x?\n20??"
+        "_ x _\n20__"
         ],
     "ColorSpectrum":[
         "Color Spectrum",
         "ColorSpectrum.jpg",
-        "?x?\n20??"
+        "_ x _\n20__"
         ],
     "ColorsInMotion":[
         "Colors In Motion",
         "ColorsInMotion.jpg",
-        "?x?\n20??"
+        "_ x _\n20__"
+        ],
+    "ColorsOfLiberty":[
+        "Colors Of Liberty",
+        "ColorsOfLiberty.jpg",
+        "_ x _\n20__"
+        ],
+    "CosmicTides":[
+        "Cosmic Tides",
+        "CosmicTides.jpg",
+        "_ x _\n20__"
+        ],
+    "DotFusion":[
+        "Dot Fusion",
+        "DotFusion.jpg",
+        "_ x _\n20__"
+        ],
+    "EternalLight":[
+        "Eternal Light",
+        "EternalLight.jpg",
+        "_ x _\n20__"
+        ],
+    "EternalSunshine":[
+        "Eternal Sunshine",
+        "EternalSunshine.jpg",
+        "_ x _\n20__"
+        ],
+    "FlowingEssence":[
+        "Flowing Essence",
+        "FlowingEssence.jpg",
+        "_ x _\n20__"
+        ],
+    "HazyDrift":[
+        "Hazy Drift",
+        "HazyDrift.jpg",
+        "_ x _\n20__"
+        ],
+    "LiquidHorizons":[
+        "Liquid Horizons",
+        "LiquidHorizons.jpg",
+        "_ x _\n20__"
+        ],
+    "OribitsInMotion":[
+        "Oribits In Motion",
+        "OribitsInMotion.jpg",
+        "_ x _\n20__"
+        ],
+    "Pinwheel":[
+        "Pinwheel",
+        "Pinwheel.jpg",
+        "_ x _\n20__"
+        ],
+    "RetroVibe":[
+        "Retro Vibe",
+        "RetroVibe.jpg",
+        "_ x _\n20__"
+        ],
+    "SpectrumOfTheSea":[
+        "Spectrum Of The Sea",
+        "SpectrumOfTheSea.jpg",
+        "_ x _\n20__"
+        ],
+    "StrokesOfLight":[
+        "Strokes Of Light",
+        "StrokesOfLight.jpg",
+        "_ x _\n20__"
+        ],
+    "SunsAwakening":[
+        "Sun's Awakening",
+        "SunsAwakening.jpg",
+        "_ x _\n20__"
         ]
 };
 
@@ -136,7 +206,4 @@ function submitBid() {
 
 
 // fills up the gallery for testing
-addAllPaintings();
-addAllPaintings();
-addAllPaintings();
 addAllPaintings();
