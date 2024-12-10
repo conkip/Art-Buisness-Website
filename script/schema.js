@@ -1,13 +1,14 @@
-const { default: mongoose, mongo } = require("mongoose");
+const mongoose = require("mongoose");
 
 const PaintingSchema = new mongoose.Schema({
-    work_number: Number,
+    painting_number: Number,
     name:       String,
     highest_bid:      Number,
+    img:    String,
     sold:       {
         type: Boolean,
         default: false
-    },
+    }
 });
 const Painting = mongoose.model("Painting", PaintingSchema);
 
