@@ -27,7 +27,44 @@ const allPaintings = {
         ]
 };
 
-let curPainting = "";
+const mongoose = require("mongoose");
+const db = mongoose.connection;
+
+
+// ADDED BID HOLDER AND DAYS LEFT TO PAINTINGSCHEMA
+
+// const PaintingSchema = new mongoose.Schema({
+//     painting_number: Number,
+//     name:       String,
+//     highest_bid:      Number,
+//     bid_holder:       String, //might need to be changed to user number if usernames are not unique
+//     days_left:      Number,
+//     img:    String,
+//     sold:       {
+//         type: Boolean,
+//         default: false
+//     }
+// });
+// const Painting = mongoose.model("Painting", PaintingSchema);
+
+// const UserSchema = new mongoose.Schema({
+//     user_number: Number,
+//     username: String,
+//     admin_acct: Boolean,
+//     my_bids: [{
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: "Painting"
+//     }],
+//     my_likes: [{
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: "Painting"
+//     }],
+// });
+// const User = mongoose.model("User", UserSchema);
+
+const currentUserNum = 1; // NEEDS TO BE CHANGED
+const currentPaintingNum = 1; // NEEDS TO BE CHANGED
+
 
 //add onclick functions to heart and submit bid
 document.getElementById("heart").onclick = heartArt;
@@ -42,33 +79,34 @@ function addPainting(imgList, titleList, paintingName) {
     // and hides the rest of the gallery from view
     // with the correct bid info and heart status
     function onPaintingClick() {
+        
         document.getElementById("profileSection").style.visibility = "collapse";
         document.getElementById("galleryExtended").style.visibility = "visible";
         document.getElementById("extendedImg").src = `./paintings/${allPaintings[paintingName][1]}`;
         document.getElementById("extendedTitle").innerText = allPaintings[paintingName][0];
         document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
-        curPainting = paintingName;
+        let curPainting = await Painting.findOne({name: paintingName});
 
 
         // get bid status info
         
-        // numDaysLeft = <<curPaintings days left>>;
-        // document.getElementById("daysLeft").innerText = "Days Left: " + numDaysLeft;
-        // document.getElementById("curStatus").style.width = (((30 - numDaysLeft) / 30) * 600) + "px";
-        // document.getElementById("curBid").innerText = "Current Bid: $" + <<curPaintings highest bid>>;
-        // document.getElementById("bidHolder").innerText = "Bid Holder: " + <<curPaintings bid holder>>;
+        numDaysLeft = curPainting.days_left;
+        document.getElementById("daysLeft").innerText = "Days Left: " + numDaysLeft;
+        document.getElementById("curStatus").style.width = (((30 - numDaysLeft) / 30) * 600) + "px";
+        document.getElementById("curBid").innerText = "Current Bid: $" + curPainting.highest_bid;
+        document.getElementById("bidHolder").innerText = "Bid Holder: " + curPainting.bid_holder;
         
 
         // get heart status
 
-        // if (curPainting in <<users favorites>>) {
-        //     document.getElementById("heart").style.filter = "grayscale(0%)";
-        // } else {
-        //     document.getElementById("heart").style.filter = "grayscale(100%)";
-
-        // }
-
+        let curUser = await User.findOne({user_number: currentUserNum});
+        if (curPainting in curUser.my_likes) {
+            document.getElementById("heart").style.filter = "grayscale(0%)";
+        } else {
+            document.getElementById("heart").style.filter = "grayscale(100%)";
+        }
     }
+
     const newPainting = imgList.insertCell(-1)
     const newTitle = titleList.insertCell(-1)
     const image = document.createElement("img"); 
@@ -88,33 +126,47 @@ function addPainting(imgList, titleList, paintingName) {
 
 // when the heart is clicked add or remove it from the users favorites list
 function heartArt() {
+    if (currentUser == 0) {
+        alert("You must be logged in to favorite a painting or make a bid.");
+        return;
+    }
+    let curUser = await User.findOne({user_number: currentUserNum});
+    let curPainting = await Painting.findOne({painting_number: currentPaintingNum});
+
     heart = document.getElementById("heart")
     if (heart.style.filter ==  "grayscale(100%)") {
         document.getElementById("heart").style.filter = "grayscale(0%)";
         // add to current user's favorite list
-        // <<users favorites>>.push(curPainting);
+        curUser.my_likes.push(curPainting);
 
     } else {
         document.getElementById("heart").style.filter = "grayscale(100%)";
         // remove from current user's favorite list
-        // <<users favorites>>.remove(curPainting);
+        curUser.my_likes.splice(curUser.my_likes.indexOf,1); //not sure if this will work
     }
+    await curUser.save()
 }
 
 // saves the users bid the database
 function submitBid() {
-    // let bid = document.getElementById("newBid").value;
-    // if (bid > <<curPaintings highest bid>>){
-    //     <<curPaintings highest bid>> = bid;
-    //     <<curPaintings bid holder>> = user;
-    //     <<users bids>>.push(curPainting); // if the not current in list
-    //     document.getElementById("curBid").innerText = "Current Bid: $" + bid;
-    //     document.getElementById("bidHolder").innerText = "Bid Holder: " + user;
-    //     
-    // } else {
-    //     // some kind of alert to say that is not a valid bid
-    // }
-    
+    let curPainting = await Painting.findOne({painting_number: currentPaintingNum});
+    let curUser = await User.findOne({user_number: currentUserNum});
+    let bid = document.getElementById("newBid").value;
+    if (bid > curPainting.highest_bid){
+        curPainting.highest_bid = bid;
+        curPainting.bid_holder = curUser.username;
+        curUser.my_bids.push(curPainting);
+        if (curPainting in curUser.my_bids) {
+            curUser.my_bids.push(curPainting);
+        } // add to bid list if the not current in list
+        document.getElementById("curBid").innerText = "Current Bid: $" + bid;
+        document.getElementById("bidHolder").innerText = "Bid Holder: " + curUser.username;
+        curPainting.save();
+        curUser.save();
+        
+    } else {
+        alert("The new bid must be higher than the previous highest bid.");
+    } 
 }
 
 
