@@ -101,7 +101,7 @@ let curPainting = "";
 
 //add onclick functions to heart and submit bid
 document.getElementById("heart").onclick = heartArt;
-document.getElementById("makeBid").onclick = submitBid
+document.getElementById("makeBid").onclick = submitBid;
 
 
 // addPainting puts the given painting in the gallery with its img and title
@@ -119,7 +119,6 @@ function addPainting(imgList, titleList, paintingName) {
         document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
         curPainting = paintingName;
 
-
         // get bid status info
         
         // numDaysLeft = <<curPaintings days left>>;
@@ -127,7 +126,6 @@ function addPainting(imgList, titleList, paintingName) {
         // document.getElementById("curStatus").style.width = (((30 - numDaysLeft) / 30) * 600) + "px";
         // document.getElementById("curBid").innerText = "Current Bid: $" + <<curPaintings highest bid>>;
         // document.getElementById("bidHolder").innerText = "Bid Holder: " + <<curPaintings bid holder>>;
-        
 
         // get heart status
 
@@ -135,7 +133,6 @@ function addPainting(imgList, titleList, paintingName) {
         //     document.getElementById("heart").style.filter = "grayscale(0%)";
         // } else {
         //     document.getElementById("heart").style.filter = "grayscale(100%)";
-
         // }
 
     }
@@ -155,7 +152,6 @@ function addPainting(imgList, titleList, paintingName) {
     newPainting.appendChild(image); 
     newTitle.appendChild(text); 
 }
-
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
@@ -201,9 +197,6 @@ function submitBid() {
     // }
     
 }
-
-
-
 
 // fills up the gallery for testing
 addAllPaintings();

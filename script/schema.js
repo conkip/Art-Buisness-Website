@@ -1,7 +1,9 @@
+const { default: mongoose, mongo } = require("mongoose");
+
 const PaintingSchema = new mongoose.Schema({
     work_number: Number,
     name:       String,
-    price:      Number,
+    highest_bid:      Number,
     sold:       {
         type: Boolean,
         default: false
@@ -15,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     admin_acct: Boolean,
     my_bids: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: Painting
+        ref: "Painting"
     }],
     my_likes: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -23,3 +25,4 @@ const UserSchema = new mongoose.Schema({
     }],
 });
 const User = mongoose.model("User", UserSchema);
+
