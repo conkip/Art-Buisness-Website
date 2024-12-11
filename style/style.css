@@ -218,6 +218,33 @@ a {
 
 
 /* ----------------------CONTACT---------------------- */
-
+#imgsCont{
+    display:flex;
+    justify-content: space-evenly;
+}
+.imgCont{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
 
 /* ----------------------HELP---------------------- */
+
+/* ----------------------LOGIN---------------------- */
+#allLoginStuff{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.formStuff{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.someInput{
+      font-size: 20px;
+      width: 200px;
+      height: 25px;
+      margin: 20px;
+      margin-top:10px;
+}
