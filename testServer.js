@@ -61,7 +61,7 @@ async function startServer()
     User = mongoose.model("User", UserSchema);
 
     // only need to set up once so commented out for now
-    await setupPaintings();
+    // await setupPaintings();
 
 
     

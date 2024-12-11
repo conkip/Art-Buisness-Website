@@ -10,13 +10,13 @@
 function clickButton(name) {
     let usernameTextbox = document.getElementById("loginUsername");
     let username = usernameTextbox.value;
-    let domainName = "127.0.0.1"; // change to "leah.knodel.me"
+    let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
     url = "";
     if(name == "loginUsername"){
         url = `http://${domainName}/login/${username}`
     }
     else {//if(name == "signupUsername"){
-        url = `http://${domainName}/login/${username}`
+        url = `http://${domainName}/signup/${username}`
     }
     fetch(url)
         .then(response => response.json())
