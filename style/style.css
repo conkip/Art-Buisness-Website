@@ -248,3 +248,11 @@ a {
       margin: 20px;
       margin-top:10px;
 }
+
+#invalidLoginText {
+    color: red;
+}
+
+#invalidSignupText {
+    color:red;
+}

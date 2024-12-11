@@ -68,7 +68,6 @@ async function startServer()
     // db routes
 
     app.get('/getPaintings', async (req, res) => {
-        console.log("hello");
         const paintings = await Painting.find();
         res.send(paintings);
     });
@@ -80,11 +79,6 @@ async function startServer()
         let curUsername = req.cookies.username;
         res.send(curUsername)
     });
-
-    app.get("/setCookie/:username", (req, res) => {
-        res.cookie("username", "russ");
-        res.send("Cookie Set")
-    })
 
     app.get("/clearCookie", (req, res) => {
         res.clearCookie("username");
@@ -98,14 +92,24 @@ async function startServer()
     app.get("/login/:someUsername", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
+
+        let someUsername = req.params.someUsername;
         
         let user = await User.findOne({username:someUsername})
-        res.send(user);
+        if(user != null){
+            // set up the username cookie when you login successfully
+            res.cookie("username", someUsername);
+            res.send(true);
+        }
+        else
+            res.send(false);
     });
 
     app.get("/signup/:someUsername", async(req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
+
+        let someUsername = req.params.someUsername;
 
         let user = await User.findOne({username:someUsername})
 
@@ -125,12 +129,18 @@ async function startServer()
         }
     });
 
-    app.get("/getuser", (req,res) => {
+    app.get("/getCurUser", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
 
-        // send the current user
-        res.send(username);
+        let someUsername = req.params.someUsername;
+
+        // get current cookie
+        let curUsername = req.cookies.username;
+
+        // search db for it
+        let user = await User.findOne({username:curUsername})
+        res.send(user);
     });
 
     
@@ -140,6 +150,8 @@ async function startServer()
     app.get("/login/:someUsername", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
+
+        let someUsername = req.params.someUsername;
 
         let user = await User.findOne({username:someUsername})
         res.send(user);

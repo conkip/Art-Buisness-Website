@@ -47,7 +47,7 @@
         <div id = "allLoginStuff">
             <div class = "formStuff">
                 <h1 class = "title centerText">Login</h1>
-                <form class="centerText" action="javascript:clickButton('loginUsername')">
+                <form class="centerText" action="javascript:clickLoginButton()">
                     <label class = "subtitle" for="loginUsername">Username:</label><br>
                     <input class = "someInput" type="text" id="loginUsername" name="loginUsername"><br>
                     <!-- include later once handling passwords
@@ -55,6 +55,8 @@
                     <input type="password" id="lname" name="lname">
                     -->
                     <input class = "someButton" type="submit" value = "Login">
+                    <p id= "invalidLoginText" class = "subtitle centerText" 
+                    style="visibility: hidden;">Username not found</p>
                 </form>
             </div>
 
@@ -62,7 +64,7 @@
 
             <div class = "formStuff">
                 <h1 class = "title centerText">Sign Up</h1>
-                <form class="centerText" action="javascript:clickButton('signupUsername')">
+                <form class="centerText" action="javascript:clickSignupButton()">
                     <label class = "subtitle" for="signupUsername">Username:</label><br>
                     <input class = "someInput" type="text" id="signupUsername" name="signupUsername"><br>
                     <!-- include later once handling passwords
@@ -70,6 +72,8 @@
                     <input type="password" id="lname" name="lname">
                     -->
                     <input class = "someButton" type = "submit" value = "Sign Up">
+                    <p id= "invalidSignupText" class = "subtitle centerText"
+                    style="visibility: hidden;">Username taken</p>
                 </form>
             </div>
         </div>
