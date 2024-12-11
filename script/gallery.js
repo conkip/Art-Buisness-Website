@@ -84,7 +84,9 @@ function addAllPaintings() {
                 if (list.rows[list.rows.length - 1].cells.length == 4) {
                     //add two new rows to only have 4 in each row
                     list.insertRow(-1);
+                    //list.rows[list.rows.length - 2].classList.add('centerElem');
                     list.insertRow(-1);
+                    //list.rows[list.rows.length - 1].classList.add('centerElem');
                 }
                 addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], painting);
             }
