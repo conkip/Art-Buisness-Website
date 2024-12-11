@@ -27,7 +27,8 @@ function addPainting(imgList, titleList, painting) {
         document.getElementById("galleryExtended").style.visibility = "visible";
         document.getElementById("extendedImg").src = `../paintings/${painting.image}`;
         document.getElementById("extendedTitle").innerText = painting.name;
-        document.getElementById("extendedDescription").innerText = painting.desc;
+        let extdDesc = document.getElementById("extendedDescription").innerText = painting.desc;
+        extdDesc.classList.add('subtitle');
         curPainting = painting.name;
 
 
@@ -51,16 +52,16 @@ function addPainting(imgList, titleList, painting) {
 
     }
 
-    const newPainting = imgList.insertCell(-1)
-    const newTitle = titleList.insertCell(-1)
+    const newPainting = imgList.insertCell(-1);
+    const newTitle = titleList.insertCell(-1);
     const image = document.createElement("img"); 
     const text = document.createElement("p"); 
     newPainting.className = "galleryCell";
     newTitle.className = "galleryCell";
     image.className = "galleryImg";
     text.className = "galleryTitle";
-    image.onclick = onPaintingClick
-    text.onclick = onPaintingClick
+    image.onclick = onPaintingClick;
+    text.onclick = onPaintingClick;
     image.src = `../paintings/${painting.image}`;
     image.alt = painting.name;
     text.innerText = painting.name;
@@ -82,11 +83,10 @@ function addAllPaintings() {
 
             for (let painting of data) {
                 if (list.rows[list.rows.length - 1].cells.length == 4) {
-                    //add two new rows to only have 4 in each row
+                    // once 4 paintings are in a row, add two new rows:
+                    // one for the images and one for the titles
                     list.insertRow(-1);
-                    //list.rows[list.rows.length - 2].classList.add('centerElem');
                     list.insertRow(-1);
-                    //list.rows[list.rows.length - 1].classList.add('centerElem');
                 }
                 addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], painting);
             }

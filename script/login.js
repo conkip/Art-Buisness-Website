@@ -19,7 +19,7 @@ function clickLoginButton() {
     fetch(`http://${domainName}/login/${username}`)
         .then(data => {
             console.log('Response:', data);
-            if(data == null){
+            if(!data){
                 // no user found so display no user found of that name
                 invalidLoginText.style.visibility = 'visible';
                 setTimeout(() => {
@@ -27,7 +27,9 @@ function clickLoginButton() {
                 }, 2000);
             }
             else{
-                window.location.href = '/index.html';
+                data.json();
+
+                //window.location.href = '/index.html';
             }
         })
         .catch(error => console.error('Error:', error));

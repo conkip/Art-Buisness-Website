@@ -193,7 +193,7 @@ async function setupPaintings() {
     let painting1 = new Painting({
         name: "Beyone The Limit",
         image: "BeyondTheLimit.jpg",
-        desc: "24x24 x 3\n2015\nOil\nWood\nExpoxy coating"
+        desc: "24x24 x 3\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
     });
 
     await painting1.save();
@@ -201,7 +201,7 @@ async function setupPaintings() {
     let painting2 = new Painting({
         name: "Blue Pallete",
         image: "BluePallete.jpg",
-        desc: "36x36\n2015\nOil\nFabric\nTextured"
+        desc: "36x36\n2015\nOil Paint\nFabric Canvas\nTextured Finish"
     });
 
     await painting2.save();
@@ -209,7 +209,7 @@ async function setupPaintings() {
     let painting3 = new Painting({
         name: "Chasing Blues",
         image: "ChasingBlues.jpg",
-        desc: "16x24\n2015\nOil\n_\n_"
+        desc: "16x24\n2015\nOil Paint\n_ Canvas\n_ Finish"
     });
 
     await painting3.save();
@@ -217,7 +217,7 @@ async function setupPaintings() {
     let painting4 = new Painting({
         name: "Circular Echo",
         image: "CircularEcho.jpg",
-        desc: "24x24\n2015\n_\n_\n_"
+        desc: "24x24\n2015\n_ Paint\n_ Canvas\n_ Finish"
     });
 
     await painting4.save();
@@ -225,7 +225,7 @@ async function setupPaintings() {
     let painting5 = new Painting({
         name: "Colors In Motion",
         image: "ColorsInMotion.jpg",
-        desc: "30x36\n2015\nAcrylic\n_\n_"
+        desc: "30x36\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
     });
 
     await painting5.save();
@@ -233,7 +233,7 @@ async function setupPaintings() {
     let painting6 = new Painting({
         name: "Colors Of Liberty",
         image: "ColorsOfLiberty.jpg",
-        desc: "24x30\n2015\n_\n_\n_"
+        desc: "24x30\n2015\n_ Paint\n_Canvas\n_ Finish"
     });
 
     await painting6.save();
@@ -241,7 +241,7 @@ async function setupPaintings() {
     let painting7 = new Painting({
         name: "Color Spectrum",
         image: "ColorSpectrum.jpg",
-        desc: "36x48\n2015\nAcrylic\nWood\nEpoxy Coating"
+        desc: "36x48\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating"
     });
 
     await painting7.save();
@@ -249,7 +249,7 @@ async function setupPaintings() {
     let painting8 = new Painting({
         name: "Cosmic Tides",
         image: "CosmicTides.jpg",
-        desc: "12x18\n2015\nAcrylic\n_\n_"
+        desc: "12x18\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
     });
 
     await painting8.save();
@@ -257,7 +257,7 @@ async function setupPaintings() {
     let painting9 = new Painting({
         name: "Dot Fusion",
         image: "DotFusion.jpg",
-        desc: "48x48\n2015\n_\n_\n_"
+        desc: "48x48\n2015\n_ Paint\n_ Canvas\n_ Finish"
     });
 
     await painting9.save();
@@ -265,7 +265,7 @@ async function setupPaintings() {
     let painting10 = new Painting({
         name: "Dot Symphony",
         image: "DotSymphony.jpg",
-        desc: "_x_\n2015\n_\n_\n_"
+        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish"
     });
 
     await painting10.save();
@@ -273,7 +273,7 @@ async function setupPaintings() {
     let painting11 = new Painting({
         name: "Eternal Light",
         image: "EternalLight.jpg",
-        desc: "36x48\n2015\nOil\n_\n_\nFramed"
+        desc: "36x48\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed"
     });
 
     await painting11.save();
@@ -281,7 +281,7 @@ async function setupPaintings() {
     let painting12 = new Painting({
         name: "Eternal Sunshine",
         image: "EternalSunshine.jpg",
-        desc: "36x48\n2015\nAcrylic\n_\n_"
+        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
     });
 
     await painting12.save();
@@ -289,7 +289,7 @@ async function setupPaintings() {
     let painting13 = new Painting({
         name: "Flowing Essence",
         image: "FlowingEssence.jpg",
-        desc: "6x6 x 3\n2015\nAcrylic\nWood\nEpoxy Coating"
+        desc: "6x6 x 3\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating"
     });
 
     await painting13.save();
@@ -297,7 +297,7 @@ async function setupPaintings() {
     let painting14 = new Painting({
         name: "Hazy Drift",
         image: "HazyDrift.jpg",
-        desc: "36x60\n2015\nAcrylic\n_\n_"
+        desc: "36x60\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
     });
 
     await painting14.save();
@@ -305,7 +305,7 @@ async function setupPaintings() {
     let painting15 = new Painting({
         name: "Liquid Dreamscapes",
         image: "LiquidDreamscapes.jpg",
-        desc: "_x_\n2015\n_\n_\n_"
+        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish"
     });
 
     await painting15.save();
@@ -313,7 +313,7 @@ async function setupPaintings() {
     let painting16 = new Painting({
         name: "Liquid Horizons",
         image: "LiquidHorizons.jpg",
-        desc: "48x60\n2015\n_\n_\n_"
+        desc: "48x60\n2015\n_ Paint\n_ Canvas\n_ Finish"
     });
 
     await painting16.save();
@@ -321,7 +321,7 @@ async function setupPaintings() {
     let painting17 = new Painting({
         name: "Oribits In Motion",
         image: "OribitsInMotion.jpg",
-        desc: "8x8 x 4\n2015\n_\nWood\n_"
+        desc: "8x8 x 4\n2015\n_ Paint\nWood Canvas\n_ Finish"
     });
 
     await painting17.save();
@@ -329,7 +329,7 @@ async function setupPaintings() {
     let painting18 = new Painting({
         name: "Pinwheel",
         image: "Pinwheel.jpg",
-        desc: "36x48\n2015\nAcrylic\n_\n_"
+        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
     });
 
     await painting18.save();
@@ -337,7 +337,7 @@ async function setupPaintings() {
     let painting19 = new Painting({
         name: "Retro Vibe",
         image: "RetroVibe.jpg",
-        desc: "36x48\n2015\nAcrylic\nWood\nEpoxy coating"
+        desc: "36x48\n2015\nAcrylic Paint\nWood Canvas\nEpoxy coating"
     });
 
     await painting19.save();
@@ -345,7 +345,7 @@ async function setupPaintings() {
     let painting20 = new Painting({
         name: "Spectrum Of The Sea",
         image: "SpectrumOfTheSea.jpg",
-        desc: "18x24\n2015\nAcrylic\n_\n_\nFloating Frame"
+        desc: "18x24\n2015\nAcrylic Paint\n_ Canvas\n_ Finish\nFloating Frame"
     });
 
     await painting20.save();
@@ -353,7 +353,7 @@ async function setupPaintings() {
     let painting21 = new Painting({
         name: "Strokes Of Light",
         image: "StrokesOfLight.jpg",
-        desc: "18x24\n2015\nOil\n_\n_\nFramed"
+        desc: "18x24\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed"
     });
 
     await painting21.save();
@@ -361,7 +361,7 @@ async function setupPaintings() {
     let painting22 = new Painting({
         name: "Sun's Awakening",
         image: "SunsAwakening.jpg",
-        desc: "18x24\n2015\nAcrylic\nWood\nEpoxy Coating\nFramed"
+        desc: "18x24\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating\nFramed"
     });
 
     await painting22.save();
