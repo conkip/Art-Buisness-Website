@@ -10,9 +10,10 @@
 function clickButton() {
     let usernameTextbox = document.getElementById("loginUsername");
     let username = usernameTextbox.value;
-
+    let domainName = "leah.knodel.me";
     // change current user in database
-    fetch(`http://leah.knodel.me/${username}`)
+    //mabye do cookies
+    fetch(`http://${domainName}/username/${username}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
