@@ -8,105 +8,6 @@
   when a user clicks on a painting to open the extended view
 */
 
-// database of paintings
-const allPaintings = {
-    "BeyondTheLimit":[
-        "Beyond The Limit",
-        "BeyondTheLimit.jpg",
-        "_ x _\n20__"
-        ],
-    "ChasingBlues":[
-        "Chasing Blues",
-        "ChasingBlues.jpg",
-        "_ x _\n20__"
-        ],
-    "CircularEcho":[
-        "Circular Echo",
-        "CircularEcho.jpg",
-        "_ x _\n20__"
-        ],
-    "ColorSpectrum":[
-        "Color Spectrum",
-        "ColorSpectrum.jpg",
-        "_ x _\n20__"
-        ],
-    "ColorsInMotion":[
-        "Colors In Motion",
-        "ColorsInMotion.jpg",
-        "_ x _\n20__"
-        ],
-    "ColorsOfLiberty":[
-        "Colors Of Liberty",
-        "ColorsOfLiberty.jpg",
-        "_ x _\n20__"
-        ],
-    "CosmicTides":[
-        "Cosmic Tides",
-        "CosmicTides.jpg",
-        "_ x _\n20__"
-        ],
-    "DotFusion":[
-        "Dot Fusion",
-        "DotFusion.jpg",
-        "_ x _\n20__"
-        ],
-    "EternalLight":[
-        "Eternal Light",
-        "EternalLight.jpg",
-        "_ x _\n20__"
-        ],
-    "EternalSunshine":[
-        "Eternal Sunshine",
-        "EternalSunshine.jpg",
-        "_ x _\n20__"
-        ],
-    "FlowingEssence":[
-        "Flowing Essence",
-        "FlowingEssence.jpg",
-        "_ x _\n20__"
-        ],
-    "HazyDrift":[
-        "Hazy Drift",
-        "HazyDrift.jpg",
-        "_ x _\n20__"
-        ],
-    "LiquidHorizons":[
-        "Liquid Horizons",
-        "LiquidHorizons.jpg",
-        "_ x _\n20__"
-        ],
-    "OribitsInMotion":[
-        "Oribits In Motion",
-        "OribitsInMotion.jpg",
-        "_ x _\n20__"
-        ],
-    "Pinwheel":[
-        "Pinwheel",
-        "Pinwheel.jpg",
-        "_ x _\n20__"
-        ],
-    "RetroVibe":[
-        "Retro Vibe",
-        "RetroVibe.jpg",
-        "_ x _\n20__"
-        ],
-    "SpectrumOfTheSea":[
-        "Spectrum Of The Sea",
-        "SpectrumOfTheSea.jpg",
-        "_ x _\n20__"
-        ],
-    "StrokesOfLight":[
-        "Strokes Of Light",
-        "StrokesOfLight.jpg",
-        "_ x _\n20__"
-        ],
-    "SunsAwakening":[
-        "Sun's Awakening",
-        "SunsAwakening.jpg",
-        "_ x _\n20__"
-        ]
-};
-
 let curPainting = "";
 
 //add onclick functions to heart and submit bid
@@ -116,7 +17,7 @@ document.getElementById("makeBid").onclick = submitBid;
 
 // addPainting puts the given painting in the gallery with its img and title
 // adds the onclick function to both the img and the title and set class to match style
-function addPainting(imgList, titleList, paintingName) {
+function addPainting(imgList, titleList, painting) {
     
     // onclick function displays the clicked on image in the gallery extended view
     // and hides the rest of the gallery from view
@@ -124,10 +25,10 @@ function addPainting(imgList, titleList, paintingName) {
     function onPaintingClick() {
         document.getElementById("gallerySection").style.visibility = "collapse";
         document.getElementById("galleryExtended").style.visibility = "visible";
-        document.getElementById("extendedImg").src = `../paintings/${allPaintings[paintingName][1]}`;
-        document.getElementById("extendedTitle").innerText = allPaintings[paintingName][0];
-        document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
-        curPainting = paintingName;
+        document.getElementById("extendedImg").src = `../paintings/${painting.image}`;
+        document.getElementById("extendedTitle").innerText = painting.name;
+        document.getElementById("extendedDescription").innerText = painting.desc;
+        curPainting = painting.name;
 
 
         // get bid status info
@@ -149,6 +50,7 @@ function addPainting(imgList, titleList, paintingName) {
         // }
 
     }
+
     const newPainting = imgList.insertCell(-1)
     const newTitle = titleList.insertCell(-1)
     const image = document.createElement("img"); 
@@ -159,11 +61,11 @@ function addPainting(imgList, titleList, paintingName) {
     text.className = "galleryTitle";
     image.onclick = onPaintingClick
     text.onclick = onPaintingClick
-    image.src = `./paintings/${allPaintings[paintingName][1]}`;
-    image.alt = allPaintings[paintingName][0]
-    text.innerText = allPaintings[paintingName][0];  
-    newPainting.appendChild(image); 
-    newTitle.appendChild(text); 
+    image.src = `../paintings/${painting.image}`;
+    image.alt = painting.name;
+    text.innerText = painting.name;
+    newPainting.appendChild(image);
+    newTitle.appendChild(text);
 }
 
 
@@ -171,24 +73,23 @@ function addPainting(imgList, titleList, paintingName) {
 function addAllPaintings() {
     list = document.getElementById("galleryList");
 
-    let domainName = "127.0.0.1"; // change to "leah.knodel.me"
+    let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
     url = `http://${domainName}/getPaintings`
     fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
-            window.location.href = '/index.html';
+
+            for (let painting of data) {
+                if (list.rows[list.rows.length - 1].cells.length == 4) {
+                    //add two new rows to only have 4 in each row
+                    list.insertRow(-1);
+                    list.insertRow(-1);
+                }
+                addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], painting);
+            }
         })
         .catch(error => console.error('Error:', error));
-
-    for (const [key, value] of Object.entries(allPaintings)) {
-        if (list.rows[list.rows.length - 1].cells.length == 4) {
-            //add two new rows to only have 4 in each row
-            list.insertRow(-1);
-            list.insertRow(-1);
-        }
-        addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], key);
-    }
 }
 
 // when the heart is clicked add or remove it from the users favorites list

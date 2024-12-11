@@ -22,9 +22,9 @@ function clickButton(name) {
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
-            window.location.href = '/index.html';
+            //window.location.href = '/index.html';
         })
-        .catch(error => console.error('Error with logging in or signing up', error));
+        .catch(error => console.error('Error:', error));
     
     window.location.href = '/index.html';
     

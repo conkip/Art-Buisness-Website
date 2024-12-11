@@ -60,13 +60,15 @@ async function startServer()
 
     User = mongoose.model("User", UserSchema);
 
-    await setupPaintings();
+    //only need to set up once
+    //await setupPaintings();
 
 
     
     // db routes
 
     app.get('/getPaintings', async (req, res) => {
+        console.log("hello");
         const paintings = await Painting.find();
         res.send(paintings);
     });
