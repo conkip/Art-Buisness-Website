@@ -60,8 +60,8 @@ async function startServer()
 
     User = mongoose.model("User", UserSchema);
 
-    //only need to set up once
-    //await setupPaintings();
+    // only need to set up once so commented out for now
+    await setupPaintings();
 
 
     
@@ -339,8 +339,8 @@ async function setupPaintings() {
     await painting20.save();
 
     let painting21 = new Painting({
-        name: "StrokesOfLight",
-        image: "Strokes Of Light.jpg",
+        name: "Strokes Of Light",
+        image: "StrokesOfLight.jpg",
         desc: "18x24\n2015\nOil\n_\n_\nFramed"
     });
 
