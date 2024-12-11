@@ -12,11 +12,6 @@ function clickLoginSignup() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Function to change content
-  function updatePageContent() {
-    const heading = document.getElementById("dynamic-heading");
-    heading.textContent = "Updated Before Page Fully Loaded";
-  }
-
-  updatePageContent();
+  //do something with this
+  //document.getElementById("test1").textContent = "hwkhekahldhlwa"
 });

@@ -112,8 +112,8 @@ a {
     margin-right: auto;
 }
 .galleryImg {
-    height: 200px;
-    width: 200px;
+    max-height: 200px;
+    max-width: 200px;
     margin-left: 25px;
     margin-right: 25px;
 }

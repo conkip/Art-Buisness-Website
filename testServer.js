@@ -18,8 +18,8 @@ app.use(cookieParser());
 const mongoose = require('mongoose');
 const URL = "mongodb://127.0.0.1/projdb"; //change to 'mongodb://leah.knodel.me/projdb'
 
-const User = null;
-const Painting = null;
+let User = null;
+let Painting = null;
 
 let username = null;
 
@@ -54,8 +54,8 @@ async function startServer()
 
     const UserSchema = new mongoose.Schema({
         username: String,
-        my_bids: [Painting],
-        my_likes: [Painting]
+        my_bids: [PaintingSchema],
+        my_likes: [PaintingSchema]
     });
 
     User = mongoose.model("User", UserSchema);
@@ -66,32 +66,27 @@ async function startServer()
     
     // db routes
 
-    app.get('/users', async (req, res) => {
-        const users = await User.find(); // Fetch all users
-        res.json(users);
+    app.get('/getPaintings', async (req, res) => {
+        const paintings = await Painting.find();
+        res.send(paintings);
     });
-
-    app
 
 
     // cookie routes
 
     app.get("/getCookie", (req,res) => {
-        let old_count = req.cookies.username;
-        if(old_count === undefined)
-            old_count = "Guest"
-        else
-            old_count = Number(old_count);
+        let curUsername = req.cookies.username;
+        res.send(curUsername)
     });
 
     app.get("/setCookie/:username", (req, res) => {
         res.cookie("username", "russ");
-        res.send("Hello World")
+        res.send("Cookie Set")
     })
 
     app.get("/clearCookie", (req, res) => {
-        res.clearCookie("username"); // Clear the "username" cookie
-        res.send("Cookie has been cleared!");
+        res.clearCookie("username");
+        res.send("Cookie Cleared");
     });
 
 

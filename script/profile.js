@@ -1,34 +1,16 @@
-// database of paintings
-const allPaintings = {
-    "Sunflowers":[
-        "Sunflowers",
-        "sunflowers.jpg",
-        "This is a painting of some sunflowers",
-        ],
-    "StaryNight":[
-        "Stary Night",
-        "starynight.jpg",
-        "This is a painting of a stary night",
-        ],
-    "MonaLisa":[
-        "Mona Lisa",
-        "monalisa.jpg",
-        "This is a painting of mona lisa",
-        ],
-    "PearlEaring":[
-        "Pearl Earing",
-        "pearlearing.jpg",
-        "This is a painting of a girl with a pearl earing"
-        ],
-    "TheGreatWave":[
-        "The Great Wave",
-        "greatwave.jpg",
-        "This is a painting of a wave"
-        ]
-};
+/*
+  Connor Kippes, Leah Knodel, Blue Garrabrant
+  CSC337
+  Final Project - Creative Canvas Art Website
 
-let curPainting = "";
+  Javascript for profile.js
+  fills up favorited and bidded on paintings based on the current user
+*/
 
+document.addEventListener("DOMContentLoaded", () => {
+    //do something with this
+    document.getElementById("test1").textContent = "hwkhekahldhlwa"
+  });
 //add onclick functions to heart and submit bid
 document.getElementById("heart").onclick = heartArt;
 document.getElementById("makeBid").onclick = submitBid
@@ -44,7 +26,7 @@ function addPainting(imgList, titleList, paintingName) {
     function onPaintingClick() {
         document.getElementById("profileSection").style.visibility = "collapse";
         document.getElementById("galleryExtended").style.visibility = "visible";
-        document.getElementById("extendedImg").src = `./paintings/${allPaintings[paintingName][1]}`;
+        document.getElementById("extendedImg").src = `../paintings/${allPaintings[paintingName][1]}`;
         document.getElementById("extendedTitle").innerText = allPaintings[paintingName][0];
         document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
         curPainting = paintingName;

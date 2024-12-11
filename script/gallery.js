@@ -1,3 +1,13 @@
+/*
+  Connor Kippes, Leah Knodel, Blue Garrabrant
+  CSC337
+  Final Project - Creative Canvas Art Website
+
+  Javascript for gallery.js
+  handles setting up the gallery with all the paintings in the database and
+  when a user clicks on a painting to open the extended view
+*/
+
 // database of paintings
 const allPaintings = {
     "BeyondTheLimit":[
@@ -101,7 +111,7 @@ let curPainting = "";
 
 //add onclick functions to heart and submit bid
 document.getElementById("heart").onclick = heartArt;
-document.getElementById("makeBid").onclick = submitBid
+document.getElementById("makeBid").onclick = submitBid;
 
 
 // addPainting puts the given painting in the gallery with its img and title
@@ -114,7 +124,7 @@ function addPainting(imgList, titleList, paintingName) {
     function onPaintingClick() {
         document.getElementById("gallerySection").style.visibility = "collapse";
         document.getElementById("galleryExtended").style.visibility = "visible";
-        document.getElementById("extendedImg").src = `./paintings/${allPaintings[paintingName][1]}`;
+        document.getElementById("extendedImg").src = `../paintings/${allPaintings[paintingName][1]}`;
         document.getElementById("extendedTitle").innerText = allPaintings[paintingName][0];
         document.getElementById("extendedDescription").innerText = allPaintings[paintingName][2];
         curPainting = paintingName;
@@ -160,6 +170,16 @@ function addPainting(imgList, titleList, paintingName) {
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
     list = document.getElementById("galleryList");
+
+    let domainName = "127.0.0.1"; // change to "leah.knodel.me"
+    url = `http://${domainName}/getPaintings`
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response:', data);
+            window.location.href = '/index.html';
+        })
+        .catch(error => console.error('Error:', error));
 
     for (const [key, value] of Object.entries(allPaintings)) {
         if (list.rows[list.rows.length - 1].cells.length == 4) {
