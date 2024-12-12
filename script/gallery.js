@@ -8,7 +8,21 @@
   when a user clicks on a painting to open the extended view
 */
 
-let curPainting = "";
+let curPainting = null;
+let curUser = null;
+document.addEventListener("DOMContentLoaded", () => {
+    let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
+    fetch(`http://${domainName}/getCurUser`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response:', data);
+            // no user logged in
+            if(data != null){
+                curUser = data;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
 
 //add onclick functions to heart and submit bid
 document.getElementById("heart").onclick = heartArt;
@@ -23,6 +37,10 @@ function addPainting(imgList, titleList, painting) {
     // and hides the rest of the gallery from view
     // with the correct bid info and heart status
     function onPaintingClick() {
+        curPainting = painting;
+        updateHeart();
+        updateBid();
+
         document.getElementById("gallerySection").style.visibility = "collapse";
         document.getElementById("galleryExtended").style.visibility = "visible";
         document.getElementById("extendedImg").src = `../paintings/${painting.image}`;
@@ -30,26 +48,6 @@ function addPainting(imgList, titleList, painting) {
         let extdDesc = document.getElementById("extendedDescription").innerText = painting.desc;
         extdDesc.classList.add('subtitle');
         curPainting = painting.name;
-
-
-        // get bid status info
-        
-        // numDaysLeft = <<curPaintings days left>>;
-        // document.getElementById("daysLeft").innerText = "Days Left: " + numDaysLeft;
-        // document.getElementById("curStatus").style.width = (((30 - numDaysLeft) / 30) * 600) + "px";
-        // document.getElementById("curBid").innerText = "Current Bid: $" + <<curPaintings highest bid>>;
-        // document.getElementById("bidHolder").innerText = "Bid Holder: " + <<curPaintings bid holder>>;
-        
-
-        // get heart status
-
-        // if (curPainting in <<users favorites>>) {
-        //     document.getElementById("heart").style.filter = "grayscale(0%)";
-        // } else {
-        //     document.getElementById("heart").style.filter = "grayscale(100%)";
-
-        // }
-
     }
 
     const newPainting = imgList.insertCell(-1);
@@ -95,34 +93,96 @@ function addAllPaintings() {
 }
 
 // when the heart is clicked add or remove it from the users favorites list
-function heartArt() {
-    heart = document.getElementById("heart")
-    if (heart.style.filter ==  "grayscale(100%)") {
-        document.getElementById("heart").style.filter = "grayscale(0%)";
-        // add to current user's favorite list
-        // <<users favorites>>.push(curPainting);
+async function heartArt() {
+    if(curUser == null) {
+        console.log("not logged in")
+        //display must be logged in to like a painting
+    }
+    else
+    {
+        heart = document.getElementById("heart")
+        if (heart.style.filter ==  "grayscale(100%)") {
+            // change the heart
+            document.getElementById("heart").style.filter = "grayscale(0%)";
+            curUser.my_likes.push(curPainting);
+            console.log(curUser);
+            await curUser.save();
 
-    } else {
-        document.getElementById("heart").style.filter = "grayscale(100%)";
-        // remove from current user's favorite list
-        // <<users favorites>>.remove(curPainting);
+        } else {
+            document.getElementById("heart").style.filter = "grayscale(100%)";
+            const index = curUser.my_likes.indexOf(painting);
+            curUser.my_likes.splice(index,1);
+            await curUser.save()
+        }
     }
 }
 
+
 // saves the users bid the database
-function submitBid() {
-    // let bid = document.getElementById("newBid").value;
-    // if (bid > <<curPaintings highest bid>>){
-    //     <<curPaintings highest bid>> = bid;
-    //     <<curPaintings bid holder>> = user;
-    //     <<users bids>>.push(curPainting); // if the not current in list
-    //     document.getElementById("curBid").innerText = "Current Bid: $" + bid;
-    //     document.getElementById("bidHolder").innerText = "Bid Holder: " + user;
-    //     
-    // } else {
-    //     // some kind of alert to say that is not a valid bid
-    // }
-    
+async function submitBid() {
+    if(curUser == null) {
+        console.log("not logged in")
+        //display must be logged in to like a painting
+    }
+    else
+    {
+        let foundPainting = false;
+        for(let painting of curUser.my_bids)
+        {
+            if(painting.name == curPainting.name){
+                foundPainting = true;
+                break;
+            }
+        }
+        if(!foundPainting) {
+            curUser.my_bids.push(curPainting);
+            await curUser.save()
+        }
+
+        curPainting.bid = parseInt(document.getElementById("newBid").value);
+        curPainting.bidHolder = curUser.username;
+    } 
+}
+
+// updates the heart image based on if the user has the painting favorited or not
+function updateHeart() {
+    if(curUser != null) {
+        let foundPainting = false;
+        for(let painting of curUser.my_likes)
+        {
+            if(painting.name == curPainting.name){
+                //change heart to red
+                document.getElementById("heart").style.filter = "grayscale(0%)";
+                foundPainting = true;
+                break;
+            }
+        }
+        if(!foundPainting){
+            document.getElementById("heart").style.filter = "grayscale(100%)";
+        }
+    }
+}
+
+// updates the current bid based on if the user has made a bid or not
+function updateBid() {
+    let exprDate = curPainting.bidExpiration.split("/");
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    daysLeft = (parseInt(exprDate[1]) - day)
+    daysLeft += (parseInt(exprDate[0]) - month) * 31 //assuming flat rate of months
+    daysLeft += (parseInt(exprDate[2]) - year) * 365
+
+
+    document.getElementById("daysLeft").innerText = "Days Left: " + daysLeft
+    document.getElementById("curStatus").style.width = (((30 - daysLeft) / 30) * 600) + "px";
+
+    document.getElementById("curBid").innerText = "Current Bid: $" + curPainting.bid;
+    document.getElementById("bidHolder").innerText = "Bid Holder: " + curPainting.bidHolder;
 }
 
 

@@ -48,9 +48,9 @@ async function startServer()
             type: Boolean,
             default: false
         },
-        bidDaysLeft: {
-            type: Number,
-            default: 10
+        bidExpiration: {
+            type: String,
+            default: "12/30/2024"
         }
     });
 

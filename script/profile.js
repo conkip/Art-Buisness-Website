@@ -88,24 +88,35 @@ async function heartArt() {
             document.getElementById("heart").style.filter = "grayscale(100%)";
             const index = curUser.my_likes.indexOf(painting);
             curUser.my_likes.splice(index,1);
+            await curUser.save()
         }
     }
 }
 
 // saves the users bid the database
-function submitBid() {
-    // let bid = document.getElementById("newBid").value;
-    // if (bid > <<curPaintings highest bid>>){
-    //     <<curPaintings highest bid>> = bid;
-    //     <<curPaintings bid holder>> = user;
-    //     <<users bids>>.push(curPainting); // if the not current in list
-    //     document.getElementById("curBid").innerText = "Current Bid: $" + bid;
-    //     document.getElementById("bidHolder").innerText = "Bid Holder: " + user;
-    //     
-    // } else {
-    //     // some kind of alert to say that is not a valid bid
-    // }
-    
+async function submitBid() {
+    if(curUser == null) {
+        console.log("not logged in")
+        //display must be logged in to like a painting
+    }
+    else
+    {
+        let foundPainting = false;
+        for(let painting of curUser.my_bids)
+        {
+            if(painting.name == curPainting.name){
+                foundPainting = true;
+                break;
+            }
+        }
+        if(!foundPainting) {
+            curUser.my_bids.push(curPainting);
+            await curUser.save()
+        }
+
+        curPainting.bid = parseInt(document.getElementById("newBid").value);
+        curPainting.bidHolder = curUser.username;
+    } 
 }
 
 
@@ -125,7 +136,7 @@ function setupPaintings(favs, bids) {
 function updateHeart() {
     if(curUser != null) {
         let foundPainting = false;
-        for(let painting of user.my_likes)
+        for(let painting of curUser.my_likes)
         {
             if(painting.name == curPainting.name){
                 //change heart to red
@@ -142,31 +153,23 @@ function updateHeart() {
 
 // updates the current bid based on if the user has made a bid or not
 function updateBid() {
-    if(curUser != null) {
-        let foundPainting = false;
-        for(let painting of user.my_likes)
-        {
-            if(painting.name == curPainting.name){
-                //change heart to red
-                document.getElementById("heart").style.filter = "grayscale(0%)";
-                foundPainting = true;
-                break;
-            }
-        }
-        if(!foundPainting){
-            document.getElementById("heart").style.filter = "grayscale(100%)";
-        }
-    }
-    else
-    {
-        //bid = 0$
-    }
-    // get bid status info
-        
-    // numDaysLeft = <<curPaintings days left>>;
-    // document.getElementById("daysLeft").innerText = "Days Left: " + numDaysLeft;
-    // document.getElementById("curStatus").style.width = (((30 - numDaysLeft) / 30) * 600) + "px";
-    // document.getElementById("curBid").innerText = "Current Bid: $" + <<curPaintings highest bid>>;
-    // document.getElementById("bidHolder").innerText = "Bid Holder: " + <<curPaintings bid holder>>;
+    let exprDate = curPainting.bidExpiration.split("/");
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    daysLeft = (parseInt(exprDate[1]) - day)
+    daysLeft += (parseInt(exprDate[0]) - month) * 31 //assuming flat rate of months
+    daysLeft += (parseInt(exprDate[2]) - year) * 365
+
+
+    document.getElementById("daysLeft").innerText = "Days Left: " + daysLeft
+    document.getElementById("curStatus").style.width = (((30 - daysLeft) / 30) * 600) + "px";
+
+    document.getElementById("curBid").innerText = "Current Bid: $" + curPainting.bid;
+    document.getElementById("bidHolder").innerText = "Bid Holder: " + curPainting.bidHolder;
 }
 

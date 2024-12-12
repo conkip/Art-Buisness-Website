@@ -79,7 +79,7 @@
       <div id="bidInfo">
         <p class="bidLabel">Bid Status</p>
         <p class="extendedText">
-          <span id="daysLeft">Days Left: 15</span>
+          <span id="daysLeft">Days Left: </span>
         </p>
         
         <div id="statusBar">
@@ -87,13 +87,13 @@
         </div>
 
         <p class="extendedText">
-          <span id="curBid">Current Bid: $123</span>
-          <span id="bidHolder">Bid Holder: John Doe</span>
+          <span id="curBid">Current Bid: $</span>
+          <span id="bidHolder">Bid Holder: </span>
         </p>
 
         <p class="bidLabel">Make A Bid</p>
         <label for="newBid" class="extendedText">$</label>
-        <input id="newBid" name="newBid" type="number" min="1" pattern="^\d+\.\d{2}$">
+        <input id="newBid" name="newBid" type="number" min="1" pattern="^\d+\.\d{2}$" required>
         <input id="makeBid" name="makeBid" type="submit" value="Submit Bid">
       </div>
 
