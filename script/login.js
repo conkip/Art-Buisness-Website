@@ -17,6 +17,7 @@ function clickLoginButton() {
     let username = usernameTextbox.value;
     let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
     fetch(`http://${domainName}/login/${username}`)
+        .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
             if(!data){
@@ -27,9 +28,7 @@ function clickLoginButton() {
                 }, 2000);
             }
             else{
-                data.json();
-
-                //window.location.href = '/index.html';
+                window.location.href = '/index.html';
             }
         })
         .catch(error => console.error('Error:', error));
