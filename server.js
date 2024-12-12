@@ -80,7 +80,7 @@ async function startServer()
         res.send(curUsername)
     });
 
-    app.get("/clearCookie", (req, res) => {
+    app.get("/clearCookies", (req, res) => {
         res.clearCookie("username");
         res.send("Cookie Cleared");
     });
@@ -132,8 +132,6 @@ async function startServer()
     app.get("/getCurUser", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
-
-        let someUsername = req.params.someUsername;
 
         // get current cookie
         let curUsername = req.cookies.username;
