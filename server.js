@@ -48,6 +48,10 @@ async function startServer()
             type: Boolean,
             default: false
         },
+        bidDaysLeft: {
+            type: Number,
+            default: 10
+        }
     });
 
     Painting = mongoose.model("Painting", PaintingSchema);
