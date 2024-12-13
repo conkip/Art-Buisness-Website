@@ -6,6 +6,8 @@
   Javascript for login.js
   handles loging in or creating a new account
 */
+let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
+
 let invaldLoginText = document.getElementById("invalidLoginText");
 invalidLoginText.style.visibility = 'hidden';
 
@@ -15,7 +17,6 @@ invalidSignupText.style.visibility = 'hidden';
 function clickLoginButton() {
     let usernameTextbox = document.getElementById("loginUsername");
     let username = usernameTextbox.value;
-    let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
     fetch(`http://${domainName}/login/${username}`)
         .then(response => response.json())
         .then(data => {
@@ -37,7 +38,6 @@ function clickLoginButton() {
 function clickSignupButton() {
     let usernameTextbox = document.getElementById("signupUsername");
     let username = usernameTextbox.value;
-    let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
     fetch(`http://${domainName}/signup/${username}`)
         .then(response => response.json())
         .then(data => {

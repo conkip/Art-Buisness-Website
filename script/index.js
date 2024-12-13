@@ -7,6 +7,8 @@
   handles directing to the login page
 */
 
+let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
+
 let loginSignupButton = document.getElementById("loginSignupButton");
 let logoutButton = document.getElementById("logoutButton");
 
@@ -14,11 +16,17 @@ function clickLoginSignup() {
     window.location.href = '/login.html';
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
-  fetch(`http://${domainName}/getCurUser`)
+function onStartup() {
+  	fetch(`http://${domainName}/getCurUser`)
+		.then((response) => {
+			if (response.headers.get('Content-Length') === '0') {
+				return null;
+			}
+			return response.json();
+		})
         .then(data => {
             console.log('Response:', data);
+			
             // no user logged in
             if(data == null){
               loginSignupButton.style.display = "block";
@@ -34,18 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
         .catch(error => console.error('Error:', error));
-});
+}
+
+onStartup();
 
 function clickLogout() {
-  let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
-  fetch(`http://${domainName}/clearCookies`)
+	fetch(`http://${domainName}/clearCookies`)
         .then(data => {
             console.log('Response:', data);
             //hide buttons
             loginSignupButton.style.display = "block";
             loginSignupButton.style.marginLeft = "auto";
             loginSignupButton.style.marginRight = "auto";
-            logoutButton.style.display =  "none";
+        	logoutButton.style.display =  "none";
         })
         .catch(error => console.error('Error:', error));
 }

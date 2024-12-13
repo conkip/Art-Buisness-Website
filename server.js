@@ -36,59 +36,24 @@ async function startServer()
         name: String,
         image: String,
         desc: String,
-        bid: {
-            type: Number,
-            default: 0
-        },
-        bidHolder: {
-            type: String,
-            default: ""
-        },
-        sold: {
-            type: Boolean,
-            default: false
-        },
-        bidExpiration: {
-            type: String,
-            default: "12/30/2024"
-        }
+        bid: { type: Number, default: 0 },
+        bidHolder: { type: String, default: "" },
+        sold: { type: Boolean, default: false },
+        bidExpiration: { type: String, default: "12/30/2024" }
     });
 
     Painting = mongoose.model("Painting", PaintingSchema);
 
     const UserSchema = new mongoose.Schema({
         username: String,
-        my_bids: [PaintingSchema],
-        my_likes: [PaintingSchema]
+        my_bids: { type: [String], default: [] },
+        my_likes: { type: [String], default: [] }
     });
 
     User = mongoose.model("User", UserSchema);
 
     // only need to set up once so commented out for now
     // await setupPaintings();
-
-
-    
-    // db routes
-
-    app.get('/getPaintings', async (req, res) => {
-        const paintings = await Painting.find();
-        res.send(paintings);
-    });
-
-
-    // cookie routes
-
-    app.get("/getCookie", (req,res) => {
-        let curUsername = req.cookies.username;
-        res.send(curUsername)
-    });
-
-    app.get("/clearCookies", (req, res) => {
-        res.clearCookie("username");
-        res.send("Cookie Cleared");
-    });
-
 
 
     // login routes
@@ -98,6 +63,7 @@ async function startServer()
         res.statusCode = 200;
 
         let someUsername = req.params.someUsername;
+        someUsername = someUsername.replaceAll("%20", " ");
         
         let user = await User.findOne({username:someUsername})
         if(user != null){
@@ -114,6 +80,7 @@ async function startServer()
         res.statusCode = 200;
 
         let someUsername = req.params.someUsername;
+        someUsername = someUsername.replaceAll("%20", " ");
 
         let user = await User.findOne({username:someUsername})
 
@@ -139,44 +106,111 @@ async function startServer()
 
         // get current cookie
         let curUsername = req.cookies.username;
+        curUsername = curUsername.replaceAll("%20", " ");
 
         // search db for it
         let user = await User.findOne({username:curUsername})
+
         res.send(user);
+    });
+
+
+
+    // logout route
+
+    app.get("/clearCookies", (req, res) => {
+        res.clearCookie("username");
+        res.send("Cookie Cleared");
     });
 
     
 
-    // gallery routes
+    // db routes
 
-    app.get("/login/:someUsername", async (req,res) => {
+    app.get('/getPaintings', async (req, res) => {
+        const paintings = await Painting.find();
+        res.send(paintings);
+    });
+
+    app.get('/getPainting/:paintingName', async (req, res) => {
+        let paintingName = req.params.paintingName;
+        paintingName = paintingName.replaceAll("%20", " ");
+
+        let painting = await Painting.findOne({name:paintingName});
+        console.log(painting);
+        res.send(painting);
+    });
+
+    app.get("/updateLike/:curUsername/:paintingName/:isLiked", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
 
-        let someUsername = req.params.someUsername;
+        let curUsername = req.params.curUsername;
+        curUsername = curUsername.replaceAll("%20", " ");
+        let paintingName = req.params.paintingName;
+        paintingName = paintingName.replaceAll("%20", " ");
+        let isLiked = req.params.isLiked;
 
-        let user = await User.findOne({username:someUsername})
-        res.send(user);
+        let theUser = await User.findOne({username:curUsername});
+
+        if(isLiked == "false"){
+            theUser.my_likes.push(paintingName);
+        }
+        else {
+            const index = theUser.my_likes.indexOf(paintingName);
+            theUser.my_likes.splice(index,1);
+        }
+
+        theUser.save();
+        res.send("Updated like successfully");
     });
 
-    /**
-         * reportError is a general function called whenever the url is incorrect
-         * and it displays a 404 page not found error.
-         * 
-         * req: request that is made to the server- not used in this
-         * res: response to send to the server
-         */
-    function reportError(req,res) {
-        res.statusCode = 404;
-        //res.setHeader("Content-Type", "text/plain");
-        res.send(`404: url=${req.url}`);
-    }
+    app.get("/updateUserBid/:curUsername/:paintingName", async (req,res) => {
+        console.log("Request received on URL:", req.url);
+        res.statusCode = 200;
+
+        let curUsername = req.params.curUsername;
+        curUsername = curUsername.replaceAll("%20", " ");
+        let paintingName = req.params.paintingName;
+        paintingName = paintingName.replaceAll("%20", " ");
+
+        let theUser = await User.findOne({username:curUsername});
+
+        theUser.my_bids.push(paintingName);
+
+        theUser.save();
+        res.send("Updated bid successfully");
+    });
+
+    app.get("/updatePaintingBid/:curUsername/:paintingName/:bidAmount", async (req,res) => {
+        console.log("Request received on URL:", req.url);
+        res.statusCode = 200;
+
+        let curUsername = req.params.curUsername;
+        curUsername = curUsername.replaceAll("%20", " ");
+        let paintingName = req.params.paintingName;
+        paintingName = paintingName.replaceAll("%20", " ");
+        let bidAmount = parseInt(req.params.bidAmount);
+
+        let thePainting = await Painting.findOne({name:paintingName});
+
+        thePainting.bid = bidAmount;
+        thePainting.bidHolder = curUsername;
+
+        thePainting.save();
+        res.send("Updated bid successfully");
+    });
 
     app.use(express.static("public_html"));
     app.use("/img", express.static("img"));
     app.use("/paintings", express.static("paintings"));
     app.use("/script", express.static("script"));
     app.use("/style", express.static("style"));
+
+    // error for undefined routes
+    app.use((req, res, next) => {
+        res.status(404).send('<h1>404 - Page Not Found</h1>');
+    });
     
 
     app.listen(port, hostname, () => {
@@ -193,7 +227,7 @@ async function setupPaintings() {
     });
 
     let painting1 = new Painting({
-        name: "Beyone The Limit",
+        name: "Beyond The Limit",
         image: "BeyondTheLimit.jpg",
         desc: "24x24 x 3\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
     });

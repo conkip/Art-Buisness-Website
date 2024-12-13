@@ -27,8 +27,21 @@ body {
     margin-right:auto;
 }
 
+.centerNonBlock {
+    margin-left:auto;
+    margin-right:auto;
+}
+
 .centerText {
     text-align: center;
+}
+
+.someButton {
+    font-size: 20px;
+    width: 200px;
+    height: 40px;
+    color: #ffffff;
+    background-color: #4b4b4b;
 }
 
 /* -----------MENU SECTION----------- */
@@ -69,13 +82,6 @@ a {
     margin-right: auto;
     margin-bottom: 0px;
 }
-.someButton {
-    font-size: 20px;
-    width: 200px;
-    height: 40px;
-    color: #ffffff;
-    background-color: #4b4b4b;
-}
 
 
 
@@ -107,10 +113,6 @@ a {
 
 
 /* ----------------------GALLERY---------------------- */
-#galleryList {
-    margin-left: auto;
-    margin-right: auto;
-}
 .galleryImg {
     max-height: 200px;
     max-width: 200px;
@@ -186,15 +188,6 @@ a {
     text-align: left;
     font-size: 30px;
     width: 250px
-}
-#makeBid {
-    font-size: 20px;
-    min-width: 150px;
-    min-height: 35px;
-    color: #efefef;
-    background-color: #838383;
-    border: #4b4b4b solid 3px;
-    margin-left: 30px;
 }
 .tdTop {
     vertical-align: top;

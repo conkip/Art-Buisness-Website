@@ -40,10 +40,19 @@
         </tr>
       </table>
     </div>
-    <!-- change this part to work as gallery page -->
+
+
     <div id="gallerySection" class="section centerText">
       <h1 class ="title">Gallery</h3>
-      <table id = "galleryList">
+      <table id = "galleryList" class = "centerNonBlock">
+        <tr>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+      <br><br><br>
+      <h1 class ="title">Sold</h3>
+      <table id = "soldList" class = "centerNonBlock">
         <tr>
         </tr>
         <tr>
@@ -84,12 +93,12 @@
         <p class="bidLabel">Make A Bid</p>
         <label for="newBid" class="extendedText">$</label>
         <input id="newBid" name="newBid" type="number" min="1" pattern="^\d+\.\d{2}$">
-        <input id="makeBid" name="makeBid" type="submit" value="Submit Bid">
+        <input id="makeBid" class="someButton" name="makeBid" type="submit" value="Submit Bid">
       </div>
 
     </div>
 
-    <script src="../script/gallery.js">
-    </script> 
+    <script src="../script/extendedGallery.js"></script>
+    <script src="../script/gallery.js"></script>
   </body>
 </html>
