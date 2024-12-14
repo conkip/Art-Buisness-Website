@@ -7,7 +7,8 @@
   handles directing to the login page
 */
 
-let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
+let domainName = "127.0.0.1"; // change to "leah.knodel.me"
+let port = 3000 // change to 80
 
 let loginSignupButton = document.getElementById("loginSignupButton");
 let logoutButton = document.getElementById("logoutButton");
@@ -17,7 +18,7 @@ function clickLoginSignup() {
 }
 
 function onStartup() {
-  	fetch(`http://${domainName}/getCurUser`)
+  	fetch(`http://${domainName}:${port}/getCurUser`)
 		.then((response) => {
 			if (response.headers.get('Content-Length') === '0') {
 				return null;
@@ -47,7 +48,7 @@ function onStartup() {
 onStartup();
 
 function clickLogout() {
-	fetch(`http://${domainName}/clearCookies`)
+	fetch(`http://${domainName}:${port}/clearCookies`)
         .then(data => {
             console.log('Response:', data);
             //hide buttons

@@ -6,7 +6,8 @@
   Javascript for login.js
   handles loging in or creating a new account
 */
-let domainName = "127.0.0.1:3000"; // change to "leah.knodel.me"
+let domainName = "127.0.0.1"; // change to "leah.knodel.me"
+let port = 3000; // change to 80
 
 let invaldLoginText = document.getElementById("invalidLoginText");
 invalidLoginText.style.visibility = 'hidden';
@@ -17,7 +18,7 @@ invalidSignupText.style.visibility = 'hidden';
 function clickLoginButton() {
     let usernameTextbox = document.getElementById("loginUsername");
     let username = usernameTextbox.value;
-    fetch(`http://${domainName}/login/${username}`)
+    fetch(`http://${domainName}:${port}/login/${username}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
@@ -38,12 +39,12 @@ function clickLoginButton() {
 function clickSignupButton() {
     let usernameTextbox = document.getElementById("signupUsername");
     let username = usernameTextbox.value;
-    fetch(`http://${domainName}/signup/${username}`)
+    fetch(`http://${domainName}:${port}/signup/${username}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
             if(data){
-                fetch(`http://${domainName}/login/${username}`)
+                fetch(`http://${domainName}:${port}/login/${username}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log('Response:', data);

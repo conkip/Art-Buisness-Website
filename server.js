@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 const mongoose = require('mongoose');
-const URL = "mongodb://127.0.0.1/projdb"; //change to 'mongodb://leah.knodel.me/projdb'
+const URL = `mongodb://${hostname}/projdb`; //change to 'mongodb://leah.knodel.me/projdb'
 
 let User = null;
 let Painting = null;
@@ -53,7 +53,7 @@ async function startServer()
     User = mongoose.model("User", UserSchema);
 
     // only need to set up once so commented out for now
-    // await setupPaintings();
+    await setupPaintings();
 
 
     // login routes
@@ -106,7 +106,9 @@ async function startServer()
 
         // get current cookie
         let curUsername = req.cookies.username;
-        curUsername = curUsername.replaceAll("%20", " ");
+        if(curUsername != undefined) {
+            curUsername = curUsername.replaceAll("%20", " ");
+        }
 
         // search db for it
         let user = await User.findOne({username:curUsername})
@@ -285,7 +287,8 @@ async function setupPaintings() {
     let painting8 = new Painting({
         name: "Cosmic Tides",
         image: "CosmicTides.jpg",
-        desc: "12x18\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
+        desc: "12x18\n2015\nAcrylic Paint\n_ Canvas\n_ Finish",
+        sold: true
     });
 
     await painting8.save();
@@ -301,7 +304,8 @@ async function setupPaintings() {
     let painting10 = new Painting({
         name: "Dot Symphony",
         image: "DotSymphony.jpg",
-        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish"
+        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish",
+        sold: true
     });
 
     await painting10.save();
@@ -309,7 +313,8 @@ async function setupPaintings() {
     let painting11 = new Painting({
         name: "Eternal Light",
         image: "EternalLight.jpg",
-        desc: "36x48\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed"
+        desc: "36x48\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed",
+        sold: true
     });
 
     await painting11.save();
@@ -317,7 +322,8 @@ async function setupPaintings() {
     let painting12 = new Painting({
         name: "Eternal Sunshine",
         image: "EternalSunshine.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
+        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish",
+        sold: true
     });
 
     await painting12.save();
@@ -325,7 +331,8 @@ async function setupPaintings() {
     let painting13 = new Painting({
         name: "Flowing Essence",
         image: "FlowingEssence.jpg",
-        desc: "6x6 x 3\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating"
+        desc: "6x6 x 3\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating",
+        sold: true
     });
 
     await painting13.save();
@@ -341,7 +348,8 @@ async function setupPaintings() {
     let painting15 = new Painting({
         name: "Liquid Dreamscapes",
         image: "LiquidDreamscapes.jpg",
-        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish"
+        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish",
+        sold: true
     });
 
     await painting15.save();
@@ -365,7 +373,8 @@ async function setupPaintings() {
     let painting18 = new Painting({
         name: "Pinwheel",
         image: "Pinwheel.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
+        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish",
+        sold: true
     });
 
     await painting18.save();
@@ -373,7 +382,8 @@ async function setupPaintings() {
     let painting19 = new Painting({
         name: "Retro Vibe",
         image: "RetroVibe.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\nWood Canvas\nEpoxy coating"
+        desc: "36x48\n2015\nAcrylic Paint\nWood Canvas\nEpoxy coating",
+        sold: true
     });
 
     await painting19.save();
@@ -381,7 +391,8 @@ async function setupPaintings() {
     let painting20 = new Painting({
         name: "Spectrum Of The Sea",
         image: "SpectrumOfTheSea.jpg",
-        desc: "18x24\n2015\nAcrylic Paint\n_ Canvas\n_ Finish\nFloating Frame"
+        desc: "18x24\n2015\nAcrylic Paint\n_ Canvas\n_ Finish\nFloating Frame",
+        sold: true
     });
 
     await painting20.save();
@@ -389,7 +400,8 @@ async function setupPaintings() {
     let painting21 = new Painting({
         name: "Strokes Of Light",
         image: "StrokesOfLight.jpg",
-        desc: "18x24\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed"
+        desc: "18x24\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed",
+        sold: true
     });
 
     await painting21.save();

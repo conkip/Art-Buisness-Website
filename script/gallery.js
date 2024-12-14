@@ -12,7 +12,7 @@
 function addAllPaintings() {
     list = document.getElementById("galleryList");
 
-    fetch(`http://${domainName}/getPaintings`)
+    fetch(`http://${domainName}:${port}/getPaintings`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
