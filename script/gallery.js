@@ -10,14 +10,18 @@
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
-    list = document.getElementById("galleryList");
 
     fetch(`http://${domainName}:${port}/getPaintings`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
-
             for (let painting of data) {
+                // adds to propper section of the gallery if it is sold or not
+                let list = document.getElementById("galleryList");
+                if(painting.sold){
+                    list = document.getElementById("soldList");
+                }
+
                 if (list.rows[list.rows.length - 1].cells.length == 4) {
                     // once 4 paintings are in a row, add two new rows:
                     // one for the images and one for the titles
@@ -26,6 +30,8 @@ function addAllPaintings() {
                 }
                 addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], painting);
             }
+
+            list = document.getElementById("soldList");
         })
         .catch(error => console.error('Error:', error));
 }

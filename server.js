@@ -9,14 +9,20 @@
 
 const express = require('express')
 const app = express();
-const port = 3000;
-const hostname = '127.0.0.1'; //change to 'leah.knodel.me'
+
+// const hostName = '127.0.0.1';
+// const port = 3000;
+
+let databaseName = 'localhost:27017';
+
+let hostName = '0.0.0.0' // or '142.93.207.86' or 'kaseycreativecanvas.com'
+let port = 80;
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 const mongoose = require('mongoose');
-const URL = `mongodb://${hostname}/projdb`; //change to 'mongodb://leah.knodel.me/projdb'
+const URL = `mongodb://${databaseName}/projdb`;
 
 let User = null;
 let Painting = null;
@@ -52,7 +58,8 @@ async function startServer()
 
     User = mongoose.model("User", UserSchema);
 
-    // only need to set up once so commented out for now
+    //delete first and then add paintings to db when running the server
+    await mongoose.connection.db.collection("paintings").deleteMany({});
     await setupPaintings();
 
 
@@ -215,8 +222,8 @@ async function startServer()
     });
     
 
-    app.listen(port, hostname, () => {
-        console.log(`Server running at http://${hostname}:${port}/`);
+    app.listen(port, hostName, () => {
+        console.log(`Server running at http://${hostName}:${port}/`);
     });
 }
 

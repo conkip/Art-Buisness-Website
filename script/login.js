@@ -6,8 +6,12 @@
   Javascript for login.js
   handles loging in or creating a new account
 */
-let domainName = "127.0.0.1"; // change to "leah.knodel.me"
-let port = 3000; // change to 80
+
+// let domainName = "127.0.0.1";
+// let port = 3000;
+
+let domainName = '142.93.207.86';
+let port = 80;
 
 let invaldLoginText = document.getElementById("invalidLoginText");
 invalidLoginText.style.visibility = 'hidden';

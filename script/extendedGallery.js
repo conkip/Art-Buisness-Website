@@ -1,15 +1,17 @@
 /*
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
+  Connor Kippes
 
   Javascript for extendedGallery.js
   handles setting up the gallery with all the paintings in the database and
   when a user clicks on a painting to open the extended view
 */
 
-let domainName = "127.0.0.1"; // change to "leah.knodel.me"
-let port = 3000; //change to 80
+// let domainName = "127.0.0.1";
+// let port = 3000;
+
+let domainName = '142.93.207.86'
+let port = 80;
+
 let curUser = null;
 let curPainting = null;
 

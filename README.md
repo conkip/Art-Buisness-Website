@@ -14,3 +14,9 @@ add little error message when try to submit bid but not logged in like done with
 
 TODO:
 add a back arrow to the extended view
+
+sky blue
+dark blue
+soft off white
+
+cream gray
