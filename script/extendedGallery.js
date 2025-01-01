@@ -6,11 +6,11 @@
   when a user clicks on a painting to open the extended view
 */
 
-// let domainName = "127.0.0.1";
-// let port = 3000;
+let domainName = "127.0.0.1";
+let port = 3000;
 
-let domainName = '142.93.207.86'
-let port = 80;
+// let domainName = '142.93.207.86'
+// let port = 80;
 
 let curUser = null;
 let curPainting = null;

@@ -1,5 +1,7 @@
+/* change text colors to ##52524a */
+
 body {
-    background-color: #000000;
+    background-color: #f4f0e0/*#ebe8e2 /*#f5f5f5 /*#f4f0e0 /*#f2f0ef*/;
 }
 .section {
     position: relative;
@@ -48,7 +50,7 @@ body {
 #menuSection {
     min-height: 50px;
     min-width: 100%;
-    background-color: #000000;
+    background-color: #f4f0e0;
     font-size: 25px;
     
     position:fixed;

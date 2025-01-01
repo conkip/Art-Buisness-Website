@@ -10,13 +10,13 @@
 const express = require('express')
 const app = express();
 
-// const hostName = '127.0.0.1';
-// const port = 3000;
+const hostName = '127.0.0.1';
+const port = 3000;
 
 let databaseName = 'localhost:27017';
 
-let hostName = '0.0.0.0' // or '142.93.207.86' or 'kaseycreativecanvas.com'
-let port = 80;
+// let hostName = '0.0.0.0' // or '142.93.207.86' or 'kaseycreativecanvas.com'
+// let port = 80;
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());

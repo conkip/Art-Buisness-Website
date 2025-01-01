@@ -7,11 +7,11 @@
   handles directing to the login page
 */
 
-// let domainName = "127.0.0.1";
-// let port = 3000
+let domainName = "127.0.0.1";
+let port = 3000
 
-let domainName = '142.93.207.86';
-let port = 80;
+// let domainName = '142.93.207.86';
+// let port = 80;
 
 let loginSignupButton = document.getElementById("loginSignupButton");
 let logoutButton = document.getElementById("logoutButton");
@@ -21,6 +21,8 @@ function clickLoginSignup() {
 }
 
 function onStartup() {
+    document.getElementById("logo").style.filter = 'sepia(1) brightness(0.35) contrast(1.2)';
+
   	fetch(`http://${domainName}:${port}/getCurUser`)
 		.then((response) => {
 			if (response.headers.get('Content-Length') === '0') {
