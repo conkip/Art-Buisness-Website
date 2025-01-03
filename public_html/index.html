@@ -43,12 +43,18 @@
     <!-- change this part to work as home page -->
     <div class="section">
       <!-- <h1 id="title"> Creative Canvas </h1>  -->
-      <img class = "centerElem" id="logo" src="../img/logoEx.png" alt="Creative Canvas Logo">
+      <img class = "centerElem sepiaFilter" id="logo" src="../img/logoEx.png" alt="Creative Canvas Logo">
+
+      <button id = "loginSignupButton" onclick="clickLoginSignup()" class = "centerElem someButton" style = "display:none;">Login/Sign Up</button>
+      <button id = "logoutButton" onclick="clickLogout()" class = "centerElem someButton" style = "display:none;">Logout</button>
+      <br><br>
+
       <h2>
         <!-- Browse our gallery and bid on your favorite pieces. <br> -->
-        <p class="aboutInfo">
-          Kasey Kurowsky is the creative force behind Creative Canvas by 
-          Kasey, a studio specializing in one-of-a-kind abstract art.
+        <p class="aboutInfo centerText">
+          Kasey Kurowsky is the creative force behind Creative Canvas, 
+          a studio specializing in one-of-a-kind abstract art.
+          <br><br><br>
           A self-taught artist, Kasey draws inspiration from the vibrant 
           colors and textures found in everyday life, transforming them 
           into compelling visual stories through acrylic and oil mediums.
@@ -59,7 +65,7 @@
         </p>
         <br>
         <p class = "aboutInfo centerText">
-          Creative Canvas by Kasey is not just a studio—it’s a 
+          Creative Canvas by Kasey is not just a studio - it’s a 
           space where creativity flourishes, and each artwork tells a 
           story as distinctive as its creator.
           <br><br><br>
@@ -68,10 +74,6 @@
         </p>
         <br>
       </h2>
-      <h3 class = "centerText" id ="test1">Please log in or create your account now.</h3>
-      <button id = "loginSignupButton" onclick="clickLoginSignup()" class = "centerElem someButton" style = "display:none;">Login/Sign Up</button>
-      <button id = "logoutButton" onclick="clickLogout()" class = "centerElem someButton" style = "display:none;">Logout</button>
-      <br><br>
     </div>
 
     <script src = "../script/index.js"></script>

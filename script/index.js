@@ -21,8 +21,6 @@ function clickLoginSignup() {
 }
 
 function onStartup() {
-    document.getElementById("logo").style.filter = 'sepia(1) brightness(0.35) contrast(1.2)';
-
   	fetch(`http://${domainName}:${port}/getCurUser`)
 		.then((response) => {
 			if (response.headers.get('Content-Length') === '0') {

@@ -9,7 +9,7 @@ body {
     left: 0px;
     z-index: 1;
     overflow: auto;
-    color: #efefef;
+    color: #585953;
     min-width: 100%;
  
 }
@@ -39,11 +39,17 @@ body {
 }
 
 .someButton {
-    font-size: 20px;
-    width: 200px;
-    height: 40px;
+    font-size: 25px;
+    width: 300px;
+    height: 60px;
     color: #ffffff;
-    background-color: #4b4b4b;
+    background-color: #585953;
+    border-radius:50px;
+    border: none;
+}
+
+.sepiaFilter {
+    filter: sepia(1) brightness(.35) contrast(1);
 }
 
 /* -----------MENU SECTION----------- */
@@ -67,12 +73,12 @@ body {
     text-align: center;
     padding-left: 40px;
     padding-right: 40px;
-    color: #838383;
+    color: #70716a;
 }
 a {
     /* remove underline and color */
     text-decoration: none;
-    color: #838383;
+    color: #585953;
 }
 
 
