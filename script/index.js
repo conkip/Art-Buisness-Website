@@ -7,12 +7,6 @@
   handles directing to the login page
 */
 
-let domainName = "127.0.0.1";
-let port = 3000
-
-// let domainName = '142.93.207.86';
-// let port = 80;
-
 let loginSignupButton = document.getElementById("loginSignupButton");
 let logoutButton = document.getElementById("logoutButton");
 

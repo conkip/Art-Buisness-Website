@@ -1,8 +1,6 @@
 <!-- 
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
-  This is our profile page html. 
+  Connor Kippes
+  profile page to show liked paintings
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -43,17 +41,8 @@
     <!-- change this part to work as profile page -->
     <div id="profileSection" class="section">
       <h1 id="profileGreeting" class = "title centerText">,</h1>
-      <h2> Your Favorites </h2>
-      <table id="yourFavs">
-        <tr>
-
-        </tr>
-        <tr>
-          
-        </tr>
-      </table>
-      <h2> Your Bids </h2>
-      <table id="yourBids">
+      <h2> Your Likes </h2>
+      <table id="yourLikes">
         <tr>
 
         </tr>
@@ -76,29 +65,9 @@
           </td>
         </tr>
       </table>
-      <div id="bidInfo">
-        <p class="bidLabel">Bid Status</p>
-        <p class="extendedText">
-          <span id="daysLeft">Days Left: </span>
-        </p>
-        
-        <div id="statusBar">
-          <div id="curStatus"></div>
-        </div>
-
-        <p class="extendedText">
-          <span id="curBid">Current Bid: $</span>
-          <span id="bidHolder">Bid Holder: </span>
-        </p>
-
-        <p class="bidLabel">Make A Bid</p>
-        <label for="newBid" class="extendedText">$</label>
-        <input id="newBid" name="newBid" type="number" min="1" pattern="^\d+\.\d{2}$" required>
-        <input id="makeBid" name="makeBid" type="submit" value="Submit Bid">
-      </div>
-
     </div>
     
+    <script src = "../script/serverInfo.js"></script>
     <script src="../script/extendedGallery.js"></script>
     <script src="../script/profile.js"></script>
   </body>

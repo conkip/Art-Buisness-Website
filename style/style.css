@@ -1,7 +1,13 @@
-/* change text colors to ##52524a */
+/* Connor Kippes
+CSS for all the pages
+*/
+
+
+/* -----------OVERALL----------- */
 
 body {
     background-color: #fffbe6 /*#f4f0e0/*#ebe8e2 /*#f5f5f5 /*#f4f0e0 /*#f2f0ef*/;
+    /*overflow-x: hidden;*/
 }
 .section {
     position: relative;
@@ -10,8 +16,6 @@ body {
     z-index: 1;
     overflow: auto;
     color: #585953;
-    min-width: 100%;
- 
 }
 
 .title {
@@ -51,6 +55,11 @@ body {
 .sepiaFilter {
     filter: sepia(1) brightness(.35) contrast(1);
 }
+p {
+    font-size: 24px;
+    margin-left: 7%;
+    margin-right: 7%;
+}
 
 /* -----------MENU SECTION----------- */
 #menuSection {
@@ -73,7 +82,6 @@ body {
     text-align: center;
     padding-left: 40px;
     padding-right: 40px;
-    color: #70716a;
 }
 a {
     /* remove underline and color */
@@ -95,16 +103,12 @@ a {
 
 /* ----------------------PROFILE---------------------- */
 
-#yourFavs {
+#yourLikes {
     width:95%;
     overflow-x: scroll;
     display: block;
 }
-#yourBids {
-    width: 95%;
-    overflow-x: scroll;
-    display: block;
-}
+
 .paintingImg {
     height: 150px;
     width: 150px;
@@ -154,49 +158,6 @@ a {
     margin-top: -15px;
     margin-bottom: -15px;
 }
-.bidLabel {
-    font-size: 40px;
-    color: #585953;
-    margin-left: 15px;
-    margin-top: 80px;
-    margin-bottom: 10px;
-}
-#daysLeft {
-    float: right;
-    font-size: 20px;
-}
-#curBid {
-    float: left;
-    font-size: 20px;
-}
-#bidHolder {
-    float: right;
-    font-size: 20px;
-}
-#bidInfo {
-    width: 620px;
-    margin: 20px
-}
-#statusBar {
-    height: 40px;
-    width: 600px;
-    background-color: #585953;
-    margin: 30px;
-    margin-top: 40px;
-}
-#curStatus {
-    height: 40px;
-    width: 40%;
-    background-color: #838383;
-}
-#daysLeft {
-    text-align: right;
-}
-#newBid {
-    text-align: left;
-    font-size: 30px;
-    width: 250px
-}
 .tdTop {
     vertical-align: top;
 }
@@ -209,12 +170,6 @@ a {
 }
 
 /* ----------------------ABOUT---------------------- */
-
-.aboutInfo {
-    margin-left: 45px;
-    margin-right: 45px;
-    font-size: 20px;
-}
 
 
 

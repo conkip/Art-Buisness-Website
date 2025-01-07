@@ -10,13 +10,13 @@
 const express = require('express')
 const app = express();
 
-const hostName = '127.0.0.1';
+const domainName = '127.0.0.1';
 const port = 3000;
 
-let databaseName = 'localhost:27017';
-
-// let hostName = '0.0.0.0' // or '142.93.207.86' or 'kaseycreativecanvas.com'
+// let domainName = 'kaseycreativecanvas.com';
 // let port = 80;
+
+let databaseName = 'localhost:27017';
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -42,17 +42,13 @@ async function startServer()
         name: String,
         image: String,
         desc: String,
-        bid: { type: Number, default: 0 },
-        bidHolder: { type: String, default: "" },
         sold: { type: Boolean, default: false },
-        bidExpiration: { type: String, default: "12/30/2024" }
     });
 
     Painting = mongoose.model("Painting", PaintingSchema);
 
     const UserSchema = new mongoose.Schema({
         username: String,
-        my_bids: { type: [String], default: [] },
         my_likes: { type: [String], default: [] }
     });
 
@@ -174,42 +170,6 @@ async function startServer()
         res.send("Updated like successfully");
     });
 
-    app.get("/updateUserBid/:curUsername/:paintingName", async (req,res) => {
-        console.log("Request received on URL:", req.url);
-        res.statusCode = 200;
-
-        let curUsername = req.params.curUsername;
-        curUsername = curUsername.replaceAll("%20", " ");
-        let paintingName = req.params.paintingName;
-        paintingName = paintingName.replaceAll("%20", " ");
-
-        let theUser = await User.findOne({username:curUsername});
-
-        theUser.my_bids.push(paintingName);
-
-        theUser.save();
-        res.send("Updated bid successfully");
-    });
-
-    app.get("/updatePaintingBid/:curUsername/:paintingName/:bidAmount", async (req,res) => {
-        console.log("Request received on URL:", req.url);
-        res.statusCode = 200;
-
-        let curUsername = req.params.curUsername;
-        curUsername = curUsername.replaceAll("%20", " ");
-        let paintingName = req.params.paintingName;
-        paintingName = paintingName.replaceAll("%20", " ");
-        let bidAmount = parseInt(req.params.bidAmount);
-
-        let thePainting = await Painting.findOne({name:paintingName});
-
-        thePainting.bid = bidAmount;
-        thePainting.bidHolder = curUsername;
-
-        thePainting.save();
-        res.send("Updated bid successfully");
-    });
-
     app.use(express.static("public_html"));
     app.use("/img", express.static("img"));
     app.use("/paintings", express.static("paintings"));
@@ -222,8 +182,8 @@ async function startServer()
     });
     
 
-    app.listen(port, hostName, () => {
-        console.log(`Server running at http://${hostName}:${port}/`);
+    app.listen(port, domainName, () => {
+        console.log(`Server running at http://${domainName}:${port}/`);
     });
 }
 

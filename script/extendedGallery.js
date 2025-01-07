@@ -6,12 +6,6 @@
   when a user clicks on a painting to open the extended view
 */
 
-let domainName = "127.0.0.1";
-let port = 3000;
-
-// let domainName = '142.93.207.86'
-// let port = 80;
-
 let curUser = null;
 let curPainting = null;
 
@@ -46,7 +40,6 @@ async function addPainting(imgList, titleList, painting) {
     async function onPaintingClick(localPainting) {
         curPainting = localPainting;
         updateHeart(localPainting);
-        updateBid(localPainting);
 
         document.getElementById("gallerySection").style.display = "none"; //visibility = "collapse";
         let extendedGallery = document.getElementById("galleryExtended");
@@ -97,28 +90,6 @@ function updateHeart(localPainting) {
     }
 }
 
-// updates the current bid based on if the user has made a bid or not
-function updateBid(localPainting) {
-    let exprDate = localPainting.bidExpiration.split("/");
-
-    const date = new Date();
-
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-
-    daysLeft = (parseInt(exprDate[1]) - day)
-    daysLeft += (parseInt(exprDate[0]) - month) * 31 //assuming flat rate of months
-    daysLeft += (parseInt(exprDate[2]) - year) * 365
-
-
-    document.getElementById("daysLeft").innerText = "Days Left: " + daysLeft
-    document.getElementById("curStatus").style.width = (((30 - daysLeft) / 30) * 600) + "px";
-
-    document.getElementById("curBid").innerText = "Current Bid: $" + localPainting.bid;
-    document.getElementById("bidHolder").innerText = "Bid Holder: " + localPainting.bidHolder;
-}
-
 // when the heart is clicked add or remove it from the users favorites list
 async function heartClicked() {
     if(curUser == null) {
@@ -140,32 +111,4 @@ async function heartClicked() {
     }
 }
 
-
-// saves the users bid the database
-async function submitBid() {
-    if(curUser == null) {
-        console.log("not logged in")
-        //display must be logged in to like a painting
-    }
-    else
-    {
-        let foundPainting = false;
-        for(let paintingName of curUser.my_bids)
-        {
-            if(paintingName == curPainting.name){
-                foundPainting = true;
-                break;
-            }
-        }
-        if(!foundPainting) {
-            fetch(`/updateUserBid/${curUser.username}/${curPainting.name}/`);
-        }
-
-        let bidAmount = parseInt(document.getElementById("newBid").value);
-        let bidHolder = curUser.username;
-        fetch(`/updatePaintingBid/${bidHolder}/${curPainting.name}/${bidAmount}`);
-    } 
-}
-
 document.getElementById("heart").onclick = heartClicked;
-document.getElementById("makeBid").onclick = submitBid;

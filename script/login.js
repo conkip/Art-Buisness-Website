@@ -7,11 +7,8 @@
   handles loging in or creating a new account
 */
 
-let domainName = "127.0.0.1";
-let port = 3000;
-
-// let domainName = '142.93.207.86';
-// let port = 80;
+let domainName = 'kaseycreativecanvas.com';
+let port = 80;
 
 let invaldLoginText = document.getElementById("invalidLoginText");
 invalidLoginText.style.visibility = 'hidden';

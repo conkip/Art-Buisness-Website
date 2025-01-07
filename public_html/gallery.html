@@ -1,8 +1,6 @@
 <!-- 
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
-  This is our gallery page html. 
+  Connor Kippes
+  gallery page showing off clickable artwork
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -75,29 +73,9 @@
           </td>
         </tr>
       </table>
-      <div id="bidInfo">
-        <p class="bidLabel">Bid Status</p>
-        <p class="extendedText">
-          <span id="daysLeft">Days Left: 15</span>
-        </p>
-        
-        <div id="statusBar">
-          <div id="curStatus"></div>
-        </div>
-
-        <p class="extendedText">
-          <span id="curBid">Current Bid: $123</span>
-          <span id="bidHolder">Bid Holder: John Doe</span>
-        </p>
-
-        <p class="bidLabel">Make A Bid</p>
-        <label for="newBid" class="extendedText">$</label>
-        <input id="newBid" name="newBid" type="number" min="1" pattern="^\d+\.\d{2}$">
-        <input id="makeBid" class="someButton" name="makeBid" type="submit" value="Submit Bid">
-      </div>
-
     </div>
 
+    <script src="../script/serverInfo.js"></script>
     <script src="../script/extendedGallery.js"></script>
     <script src="../script/gallery.js"></script>
   </body>

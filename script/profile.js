@@ -38,18 +38,7 @@ function setupPaintings(likes, bids) {
         .then((response) => response.json())
         .then(data => {
             console.log('Response:', data);
-            let list = document.getElementById("yourFavs");
-            addPainting(list.rows[0],list.rows[1], data);
-        })
-        .catch(error => console.error('Error:', error));
-    }
-    for(let paintingName of bids) {
-        fetch(`http://${domainName}:${port}/getPainting/${paintingName}`)
-        .then((response) => response.json())
-        .then(data => {
-            console.log('Response:', data);
-
-            let list = document.getElementById("yourBids");
+            let list = document.getElementById("yourLikes");
             addPainting(list.rows[0],list.rows[1], data);
         })
         .catch(error => console.error('Error:', error));
