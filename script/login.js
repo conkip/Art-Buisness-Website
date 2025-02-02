@@ -7,27 +7,29 @@
   handles loging in or creating a new account
 */
 
-let domainName = 'kaseycreativecanvas.com';
-let port = 80;
-
 let invaldLoginText = document.getElementById("invalidLoginText");
-invalidLoginText.style.visibility = 'hidden';
+invalidLoginText.style.display = 'none';
 
 let invalidSignupText = document.getElementById("invalidSignupText");
-invalidSignupText.style.visibility = 'hidden';
+invalidSignupText.style.display = 'none';
 
-function clickLoginButton() {
-    let usernameTextbox = document.getElementById("loginUsername");
+async function clickLoginButton() {
+    let usernameTextbox = document.getElementById("username");
     let username = usernameTextbox.value;
-    fetch(`http://${domainName}:${port}/login/${username}`)
+
+    let passwordTextbox = document.getElementById("password");
+    let password = passwordTextbox.value;
+
+    fetch(`http://${domainName}:${port}/login/${username}/${password}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
             if(!data){
-                // no user found so display no user found of that name
-                invalidLoginText.style.visibility = 'visible';
+                // no user found or password is incorrect
+                // so display no user found of that name
+                invalidLoginText.style.display = 'block';
                 setTimeout(() => {
-                    invalidLoginText.style.visibility = 'hidden';
+                    invalidLoginText.style.display = 'none';
                 }, 2000);
             }
             else{
@@ -37,15 +39,19 @@ function clickLoginButton() {
         .catch(error => console.error('Error:', error));
 }
 
-function clickSignupButton() {
-    let usernameTextbox = document.getElementById("signupUsername");
+async function clickSignupButton() {
+    let usernameTextbox = document.getElementById("username");
     let username = usernameTextbox.value;
-    fetch(`http://${domainName}:${port}/signup/${username}`)
+
+    let passwordTextbox = document.getElementById("password");
+    let password = passwordTextbox.value;
+
+    fetch(`http://${domainName}:${port}/signup/${username}/${password}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
             if(data){
-                fetch(`http://${domainName}:${port}/login/${username}`)
+                fetch(`http://${domainName}:${port}/login/${username}/${password}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log('Response:', data);
@@ -54,11 +60,13 @@ function clickSignupButton() {
                 window.location.href = '/index.html';
             }
             else {
-                invalidSignupText.style.visibility = 'visible';
+                // username taken
+                invalidSignupText.style.display = "block";
                 setTimeout(() => {
-                    invalidSignupText.style.visibility = 'hidden';
+                    invalidSignupText.style.display = 'none';
                 }, 2000);
             }
         })
         .catch(error => console.error('Error:', error));
 }
+

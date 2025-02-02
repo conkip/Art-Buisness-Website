@@ -39,45 +39,32 @@
         </tr>
       </table>
     </div>
-
     <!-- change this part to work as home page -->
     <div class="section">
         <div id = "allLoginStuff">
             <div class = "formStuff">
                 <h1 class = "title centerText">Login</h1>
-                <form class="centerText" action="javascript:clickLoginButton()">
-                    <label class = "subtitle" for="loginUsername">Username:</label><br>
-                    <input class = "someInput" type="text" id="loginUsername" name="loginUsername" required><br>
-                    <!-- include later once handling passwords
-                    <label for="lname">Password:</label><br>
-                    <input type="password" id="lname" name="lname">
-                    -->
-                    <input class = "someButton" type="submit" value = "Login">
-                    <p id= "invalidLoginText" class = "subtitle centerText" 
-                    style="visibility: hidden;">Username not found</p>
-                </form>
-            </div>
+                <form class="centerText" action="javascript:doNothing()">
+                    <p id= "invalidLoginText" class = "subtitle centerText noWrap" 
+                    style="display: none;">Username or password is incorrect.</p>
 
-            <h1 class = "title"> or </h1>
+                    <p id= "invalidSignupText" class = "subtitle centerText noWrap" 
+                    style="display: none;">Username is already taken.</p>
 
-            <div class = "formStuff">
-                <h1 class = "title centerText">Sign Up</h1>
-                <form class="centerText" action="javascript:clickSignupButton()">
-                    <label class = "subtitle" for="signupUsername">Username:</label><br>
-                    <input class = "someInput" type="text" id="signupUsername" name="signupUsername" required><br>
-                    <!-- include later once handling passwords
-                    <label for="lname">Password:</label><br>
-                    <input type="password" id="lname" name="lname">
-                    -->
-                    <input class = "someButton" type = "submit" value = "Sign Up">
-                    <p id= "invalidSignupText" class = "subtitle centerText"
-                    style="visibility: hidden;">Username taken</p>
+                    <label class = "subtitle" for="username">Username:</label>
+                    <input class = "someInput" type="text" id="username" name="loginUsername" required><br>
+                    <label class = "subtitle" for="password">Password:</label>
+                    <input class = "someInput" type="password" id="password" name="loginUsername" required><br>
+                    <br>
+                    <input class = "someButton" type="button" onclick= "clickLoginButton()" value = "Login">
+                    <br><br>
+                    <input class = "someButton" type="button" onclick= "clickSignupButton()" value = "Signup">
                 </form>
             </div>
         </div>
     </div>
 
-    <script src = "../script/serverInfo.js"></script>
     <script src = "../script/login.js"></script> 
+    <script src = "../script/serverInfo.js"></script>
   </body>
 </html>

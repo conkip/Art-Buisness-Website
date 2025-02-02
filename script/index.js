@@ -14,7 +14,9 @@ function clickLoginSignup() {
     window.location.href = '/login.html';
 }
 
-function onStartup() {
+async function onStartup() {
+    //need this for
+    await setTimeout(() => { console.log('waited for a sec');}, 100); 
   	fetch(`http://${domainName}:${port}/getCurUser`)
 		.then((response) => {
 			if (response.headers.get('Content-Length') === '0') {

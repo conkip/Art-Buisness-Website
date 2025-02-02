@@ -47,7 +47,7 @@ async function addPainting(imgList, titleList, painting) {
         extendedGallery.style.marginTop = "70px";
         document.getElementById("extendedImg").src = `../paintings/${localPainting.image}`;
         document.getElementById("extendedTitle").innerText = localPainting.name;
-        document.getElementById("extendedDescription").innerText = localPainting.desc;
+        document.getElementById("extendedDescription").innerText = formatDescription(localPainting.desc);
         document.getElementById("extendedDescription").classList.add('subtitle');
     }
 
@@ -66,6 +66,21 @@ async function addPainting(imgList, titleList, painting) {
     text.innerText = painting.name;
     newPainting.appendChild(image);
     newTitle.appendChild(text);
+}
+
+function formatDescription(desc) {
+    let stuff = desc.split("\n");
+
+    let newString = "";
+    newString += "Size: " + stuff[0] + " in\n";
+    newString += "Date: " + stuff[1] + "\n";
+    newString += "Artist: Kasey Kurowsky\n\n"
+
+    newString += stuff[2] + "\n";
+    newString += stuff[3] + "\n";
+    newString += stuff[4] + "\n";
+
+    return newString;
 }
 
 // updates the heart image based on if the user has the painting favorited or not

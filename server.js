@@ -7,7 +7,9 @@
   server for handling get opperations and talking to the database
 */
 
-const express = require('express')
+const express = require('express');
+const bcrypt = require('bcrypt');
+
 const app = express();
 
 const domainName = '127.0.0.1';
@@ -49,6 +51,7 @@ async function startServer()
 
     const UserSchema = new mongoose.Schema({
         username: String,
+        password: String,
         my_likes: { type: [String], default: [] }
     });
 
@@ -61,29 +64,44 @@ async function startServer()
 
     // login routes
 
-    app.get("/login/:someUsername", async (req,res) => {
+    app.get("/login/:someUsername/:somePassword", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
 
         let someUsername = req.params.someUsername;
         someUsername = someUsername.replaceAll("%20", " ");
+
+        let somePassword = req.params.somePassword;
+        somePassword = somePassword.replaceAll("%20", " ");
         
-        let user = await User.findOne({username:someUsername})
-        if(user != null){
-            // set up the username cookie when you login successfully
-            res.cookie("username", someUsername);
-            res.send(true);
+        let user = await User.findOne({username:someUsername});
+
+        if(user != null) {
+            let isMatch = await bcrypt.compare(somePassword, user.password);
+            if(isMatch) {
+                // set up the username cookie when you login successfully
+                res.cookie("username", someUsername);
+                res.send(true); 
+            }
+            else {
+                res.send(false);
+            }
         }
-        else
+        else {
             res.send(false);
+        }
     });
 
-    app.get("/signup/:someUsername", async(req,res) => {
+    app.get("/signup/:someUsername/:somePassword", async(req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
 
         let someUsername = req.params.someUsername;
         someUsername = someUsername.replaceAll("%20", " ");
+
+        let somePassword = req.params.somePassword;
+        somePassword = somePassword.replaceAll("%20", " ");
+        somePassword = await hashPassword(somePassword);
 
         let user = await User.findOne({username:someUsername})
 
@@ -94,7 +112,8 @@ async function startServer()
         }
         else{
             const newUser = new User({
-                username: someUsername
+                username: someUsername,
+                password: somePassword
             });
     
             await newUser.save();
@@ -187,6 +206,18 @@ async function startServer()
     });
 }
 
+
+
+async function hashPassword(password) {
+    const saltRounds = 10; // Number of salt rounds (higher is more secure but slower)
+    
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(password, salt);
+    return hash;
+}
+
+
+
 async function setupPaintings() {
     let template = new Painting({
         name: "Example",
@@ -198,7 +229,7 @@ async function setupPaintings() {
     let painting1 = new Painting({
         name: "Beyond The Limit",
         image: "BeyondTheLimit.jpg",
-        desc: "24x24 x 3\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
+        desc: "3 x 24x24\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
     });
 
     await painting1.save();
@@ -298,7 +329,7 @@ async function setupPaintings() {
     let painting13 = new Painting({
         name: "Flowing Essence",
         image: "FlowingEssence.jpg",
-        desc: "6x6 x 3\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating",
+        desc: "3 x 6x6\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating",
         sold: true
     });
 
@@ -332,7 +363,7 @@ async function setupPaintings() {
     let painting17 = new Painting({
         name: "Oribits In Motion",
         image: "OribitsInMotion.jpg",
-        desc: "8x8 x 4\n2015\n_ Paint\nWood Canvas\n_ Finish"
+        desc: "4 x 8x8\n2015\n_ Paint\nWood Canvas\n_ Finish"
     });
 
     await painting17.save();
