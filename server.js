@@ -161,7 +161,6 @@ async function startServer()
         paintingName = paintingName.replaceAll("%20", " ");
 
         let painting = await Painting.findOne({name:paintingName});
-        console.log(painting);
         res.send(painting);
     });
 

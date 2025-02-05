@@ -15,8 +15,8 @@ function clickLoginSignup() {
 }
 
 async function onStartup() {
-    //need this for
-    await setTimeout(() => { console.log('waited for a sec');}, 100); 
+    // need this so that logout button updates
+    await setTimeout(() => { console.log('waited for a sec');}, 500); 
   	fetch(`http://${domainName}:${port}/getCurUser`)
 		.then((response) => {
 			if (response.headers.get('Content-Length') === '0') {
