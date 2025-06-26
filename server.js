@@ -244,7 +244,7 @@ async function setupPaintings() {
     let painting3 = new Painting({
         name: "Chasing Blues",
         image: "ChasingBlues.jpg",
-        desc: "16x24\n2015\nOil Paint\n_ Canvas\n_ Finish"
+        desc: "16x24\n2021\nOil Paint\nWood Canvas\n_ Finish"
     });
 
     await painting3.save();
@@ -410,5 +410,128 @@ async function setupPaintings() {
     });
 
     await painting22.save();
+
+    // To name:
+
+    let painting23 = new Painting({
+        name: "_",
+        image: "P23.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting23.save();
+
+    let painting24 = new Painting({
+        name: "_",
+        image: "P24.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting24.save();
+
+    let painting25 = new Painting({
+        name: "_",
+        image: "P25.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting25.save();
+
+    let painting26 = new Painting({
+        name: "_",
+        image: "P26.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting26.save();
+
+    let painting27 = new Painting({
+        name: "_",
+        image: "P27.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_",
+        sold: true
+    });
+
+    await painting27.save();
+
+    let painting28 = new Painting({
+        name: "_",
+        image: "P28.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting28.save();
+
+    let painting29 = new Painting({
+        name: "_",
+        image: "P29.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting29.save();
+
+    let painting30 = new Painting({
+        name: "_",
+        image: "P30.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting30.save();
+
+    let painting31 = new Painting({
+        name: "_",
+        image: "P31.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting31.save();
+
+    let painting32 = new Painting({
+        name: "_",
+        image: "P32.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting32.save();
+
+    let painting33 = new Painting({
+        name: "_",
+        image: "P33.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting33.save();
+
+    let painting34 = new Painting({
+        name: "_",
+        image: "P34.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting34.save();
+
+    let painting35 = new Painting({
+        name: "_",
+        image: "P35.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting35.save();
+
+    let painting36 = new Painting({
+        name: "_",
+        image: "P36.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting36.save();
+
+    let painting37 = new Painting({
+        name: "_",
+        image: "P37.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting37.save();
 }
 startServer();
