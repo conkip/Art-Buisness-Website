@@ -201,7 +201,7 @@ async function startServer()
     
 
     app.listen(port, domainName, () => {
-        console.log(`Server running at http://${domainName}:${port}/`);
+        console.log(`Server running at https://${domainName}:${port}/`);
     });
 }
 

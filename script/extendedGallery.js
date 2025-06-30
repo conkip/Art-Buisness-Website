@@ -10,7 +10,7 @@ let curUser = null;
 let curPainting = null;
 
 async function onStartup() {
-    await fetch(`http://${domainName}:${port}/getCurUser`)
+    await fetch(`/getCurUser`)
         .then((response) => {
             if (response.headers.get('Content-Length') === '0') {
                 return null;
@@ -32,7 +32,6 @@ onStartup();
 // addPainting puts the given painting in the gallery with its img and title
 // adds the onclick function to both the img and the title and set class to match style
 async function addPainting(imgList, titleList, painting) {
-    let url = `http://${domainName}:${port}/getPainting/${painting.name}`;
 
     // onclick function displays the clicked on image in the gallery extended view
     // and hides the rest of the gallery from view

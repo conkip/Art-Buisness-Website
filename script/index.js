@@ -17,7 +17,7 @@ function clickLoginSignup() {
 async function onStartup() {
     // need this so that logout button updates
     await setTimeout(() => { console.log('waited for a sec');}, 500); 
-  	fetch(`http://${domainName}:${port}/getCurUser`)
+  	fetch(`/getCurUser`)
 		.then((response) => {
 			if (response.headers.get('Content-Length') === '0') {
 				return null;
@@ -47,7 +47,7 @@ async function onStartup() {
 onStartup();
 
 function clickLogout() {
-	fetch(`http://${domainName}:${port}/clearCookies`)
+	fetch(`/clearCookies`)
         .then(data => {
             console.log('Response:', data);
             //hide buttons

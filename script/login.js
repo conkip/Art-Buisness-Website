@@ -20,7 +20,7 @@ async function clickLoginButton() {
     let passwordTextbox = document.getElementById("password");
     let password = passwordTextbox.value;
 
-    fetch(`http://${domainName}:${port}/login/${username}/${password}`)
+    fetch(`/login/${username}/${password}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
@@ -46,12 +46,12 @@ async function clickSignupButton() {
     let passwordTextbox = document.getElementById("password");
     let password = passwordTextbox.value;
 
-    fetch(`http://${domainName}:${port}/signup/${username}/${password}`)
+    fetch(`/signup/${username}/${password}`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
             if(data){
-                fetch(`http://${domainName}:${port}/login/${username}/${password}`)
+                fetch(`/login/${username}/${password}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log('Response:', data);
