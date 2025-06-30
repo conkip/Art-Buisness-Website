@@ -16,9 +16,9 @@ function addAllPaintings() {
             console.log('Response:', data);
             for (let painting of data) {
                 // adds to propper section of the gallery if it is sold or not
-                let list = document.getElementById("galleryList");
+                let list = document.getElementById("gallery-table");
                 if(painting.sold){
-                    list = document.getElementById("soldList");
+                    list = document.getElementById("sold-table");
                 }
 
                 if (list.rows[list.rows.length - 1].cells.length == 4) {
@@ -30,7 +30,7 @@ function addAllPaintings() {
                 addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], painting);
             }
 
-            list = document.getElementById("soldList");
+            list = document.getElementById("sold-table");
         })
         .catch(error => console.error('Error:', error));
 }

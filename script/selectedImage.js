@@ -40,24 +40,31 @@ async function addPainting(imgList, titleList, painting) {
         curPainting = localPainting;
         updateHeart(localPainting);
 
-        document.getElementById("gallerySection").style.display = "none"; //visibility = "collapse";
-        let extendedGallery = document.getElementById("galleryExtended");
+        document.getElementById("gallery-section").style.display = "none"; //visibility = "collapse";
+        let extendedGallery = document.getElementById("selected-view");
         extendedGallery.style.visibility = "visible";
         extendedGallery.style.marginTop = "70px";
-        document.getElementById("extendedImg").src = `../paintings/${localPainting.image}`;
-        document.getElementById("extendedTitle").innerText = localPainting.name;
-        document.getElementById("extendedDescription").innerText = formatDescription(localPainting.desc);
-        document.getElementById("extendedDescription").classList.add('subtitle');
+        document.getElementById("selected-image").src = `../paintings/${localPainting.image}`;
+        document.getElementById("selected-image1").src = `../paintings/${localPainting.image}`;
+        document.getElementById("selected-image2").src = `../paintings/${localPainting.image}`;
+        document.getElementById("selected-image3").src = `../paintings/${localPainting.image}`;
+        document.getElementById("selected-image4").src = `../paintings/${localPainting.image}`;
+        document.getElementById("selected-title").innerText = localPainting.name;
+
+        let description = "";
+        
+        document.getElementById("selected-description").innerText = formatDescription(localPainting.desc);
+        document.getElementById("selected-description").classList.add('subtitle');
     }
 
     const newPainting = imgList.insertCell(-1);
     const newTitle = titleList.insertCell(-1);
     const image = document.createElement("img"); 
     const text = document.createElement("p"); 
-    newPainting.className = "galleryCell";
-    newTitle.className = "galleryCell";
-    image.className = "galleryImg";
-    text.className = "galleryTitle";
+    newPainting.className = "gallery-cell";
+    newTitle.className = "gallery-cell";
+    image.className = "gallery-image";
+    text.className = "gallery-title";
     image.onclick = () => onPaintingClick(painting);
     text.onclick = () => onPaintingClick(painting);
     image.src = `../paintings/${painting.image}`;
@@ -102,6 +109,8 @@ function updateHeart(localPainting) {
             document.getElementById("heart").style.filter = "grayscale(100%)";
         }
     }
+
+    //if not logged in, add paintings to cookies and add to profile that way
 }
 
 // when the heart is clicked add or remove it from the users favorites list

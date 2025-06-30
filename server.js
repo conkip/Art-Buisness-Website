@@ -6,6 +6,7 @@
   Javascript for testServer.js
   server for handling get opperations and talking to the database
 */
+const setupPaintings = require('./setupPaintings');
 
 const express = require('express');
 const bcrypt = require('bcrypt');
@@ -16,7 +17,7 @@ const domainName = '127.0.0.1';
 const port = 3000;
 
 // let domainName = 'kaseycreativecanvas.com';
-// let port = 80;
+// let port = 443;
 
 let databaseName = 'localhost:27017';
 
@@ -43,7 +44,13 @@ async function startServer()
     const PaintingSchema = new mongoose.Schema({
         name: String,
         image: String,
+        dimensions: String,
+        date: String,
+        paint: String,
+        canvas: String,
+        finish: String,
         desc: String,
+        framed: { type: Boolean, default: false },
         sold: { type: Boolean, default: false },
     });
 
@@ -59,7 +66,7 @@ async function startServer()
 
     //delete first and then add paintings to db when running the server
     await mongoose.connection.db.collection("paintings").deleteMany({});
-    await setupPaintings();
+    await setupPaintings(Painting);
 
 
     // login routes
@@ -215,323 +222,4 @@ async function hashPassword(password) {
     return hash;
 }
 
-
-
-async function setupPaintings() {
-    let template = new Painting({
-        name: "Example",
-        image: "Example.jpg",
-        desc: "Dimensions (ex- 24x24)\nDate (ex- 2015)\nPaint Type (ex- Oil, acrylic)\n" +
-              "Support/Surface (ex- Wood, Fabric)\nFinish (Matte, Glossy)\nFramed(optional)",
-    });
-
-    let painting1 = new Painting({
-        name: "Beyond The Limit",
-        image: "BeyondTheLimit.jpg",
-        desc: "3 x 24x24\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
-    });
-
-    await painting1.save();
-
-    let painting2 = new Painting({
-        name: "Blue Pallete",
-        image: "BluePallete.jpg",
-        desc: "36x36\n2015\nOil Paint\nFabric Canvas\nTextured Finish"
-    });
-
-    await painting2.save();
-
-    let painting3 = new Painting({
-        name: "Chasing Blues",
-        image: "ChasingBlues.jpg",
-        desc: "16x24\n2021\nOil Paint\nWood Canvas\n_ Finish"
-    });
-
-    await painting3.save();
-
-    let painting4 = new Painting({
-        name: "Circular Echo",
-        image: "CircularEcho.jpg",
-        desc: "24x24\n2015\n_ Paint\n_ Canvas\n_ Finish"
-    });
-
-    await painting4.save();
-
-    let painting5 = new Painting({
-        name: "Colors In Motion",
-        image: "ColorsInMotion.jpg",
-        desc: "30x36\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
-    });
-
-    await painting5.save();
-
-    let painting6 = new Painting({
-        name: "Colors Of Liberty",
-        image: "ColorsOfLiberty.jpg",
-        desc: "24x30\n2015\n_ Paint\n_Canvas\n_ Finish"
-    });
-
-    await painting6.save();
-
-    let painting7 = new Painting({
-        name: "Color Spectrum",
-        image: "ColorSpectrum.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating"
-    });
-
-    await painting7.save();
-
-    let painting8 = new Painting({
-        name: "Cosmic Tides",
-        image: "CosmicTides.jpg",
-        desc: "12x18\n2015\nAcrylic Paint\n_ Canvas\n_ Finish",
-        sold: true
-    });
-
-    await painting8.save();
-
-    let painting9 = new Painting({
-        name: "Dot Fusion",
-        image: "DotFusion.jpg",
-        desc: "48x48\n2015\n_ Paint\n_ Canvas\n_ Finish"
-    });
-
-    await painting9.save();
-
-    let painting10 = new Painting({
-        name: "Dot Symphony",
-        image: "DotSymphony.jpg",
-        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish",
-        sold: true
-    });
-
-    await painting10.save();
-
-    let painting11 = new Painting({
-        name: "Eternal Light",
-        image: "EternalLight.jpg",
-        desc: "36x48\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed",
-        sold: true
-    });
-
-    await painting11.save();
-
-    let painting12 = new Painting({
-        name: "Eternal Sunshine",
-        image: "EternalSunshine.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish",
-        sold: true
-    });
-
-    await painting12.save();
-
-    let painting13 = new Painting({
-        name: "Flowing Essence",
-        image: "FlowingEssence.jpg",
-        desc: "3 x 6x6\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating",
-        sold: true
-    });
-
-    await painting13.save();
-
-    let painting14 = new Painting({
-        name: "Hazy Drift",
-        image: "HazyDrift.jpg",
-        desc: "36x60\n2015\nAcrylic Paint\n_ Canvas\n_ Finish"
-    });
-
-    await painting14.save();
-
-    let painting15 = new Painting({
-        name: "Liquid Dreamscapes",
-        image: "LiquidDreamscapes.jpg",
-        desc: "_x_\n2015\n_ Paint\n_ Canvas\n_ Finish",
-        sold: true
-    });
-
-    await painting15.save();
-
-    let painting16 = new Painting({
-        name: "Liquid Horizons",
-        image: "LiquidHorizons.jpg",
-        desc: "48x60\n2015\n_ Paint\n_ Canvas\n_ Finish"
-    });
-
-    await painting16.save();
-
-    let painting17 = new Painting({
-        name: "Oribits In Motion",
-        image: "OribitsInMotion.jpg",
-        desc: "4 x 8x8\n2015\n_ Paint\nWood Canvas\n_ Finish"
-    });
-
-    await painting17.save();
-
-    let painting18 = new Painting({
-        name: "Pinwheel",
-        image: "Pinwheel.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\n_ Canvas\n_ Finish",
-        sold: true
-    });
-
-    await painting18.save();
-
-    let painting19 = new Painting({
-        name: "Retro Vibe",
-        image: "RetroVibe.jpg",
-        desc: "36x48\n2015\nAcrylic Paint\nWood Canvas\nEpoxy coating",
-        sold: true
-    });
-
-    await painting19.save();
-
-    let painting20 = new Painting({
-        name: "Spectrum Of The Sea",
-        image: "SpectrumOfTheSea.jpg",
-        desc: "18x24\n2015\nAcrylic Paint\n_ Canvas\n_ Finish\nFloating Frame",
-        sold: true
-    });
-
-    await painting20.save();
-
-    let painting21 = new Painting({
-        name: "Strokes Of Light",
-        image: "StrokesOfLight.jpg",
-        desc: "18x24\n2015\nOil Paint\n_ Canvas\n_ Finish\nFramed",
-        sold: true
-    });
-
-    await painting21.save();
-
-    let painting22 = new Painting({
-        name: "Sun's Awakening",
-        image: "SunsAwakening.jpg",
-        desc: "18x24\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating\nFramed"
-    });
-
-    await painting22.save();
-
-    // To name:
-
-    let painting23 = new Painting({
-        name: "_",
-        image: "P23.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting23.save();
-
-    let painting24 = new Painting({
-        name: "_",
-        image: "P24.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting24.save();
-
-    let painting25 = new Painting({
-        name: "_",
-        image: "P25.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting25.save();
-
-    let painting26 = new Painting({
-        name: "_",
-        image: "P26.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting26.save();
-
-    let painting27 = new Painting({
-        name: "_",
-        image: "P27.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_",
-        sold: true
-    });
-
-    await painting27.save();
-
-    let painting28 = new Painting({
-        name: "_",
-        image: "P28.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting28.save();
-
-    let painting29 = new Painting({
-        name: "_",
-        image: "P29.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting29.save();
-
-    let painting30 = new Painting({
-        name: "_",
-        image: "P30.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting30.save();
-
-    let painting31 = new Painting({
-        name: "_",
-        image: "P31.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting31.save();
-
-    let painting32 = new Painting({
-        name: "_",
-        image: "P32.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting32.save();
-
-    let painting33 = new Painting({
-        name: "_",
-        image: "P33.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting33.save();
-
-    let painting34 = new Painting({
-        name: "_",
-        image: "P34.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting34.save();
-
-    let painting35 = new Painting({
-        name: "_",
-        image: "P35.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting35.save();
-
-    let painting36 = new Painting({
-        name: "_",
-        image: "P36.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting36.save();
-
-    let painting37 = new Painting({
-        name: "_",
-        image: "P37.jpg",
-        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
-    });
-
-    await painting37.save();
-}
 startServer();
