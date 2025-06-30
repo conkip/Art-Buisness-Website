@@ -4,5 +4,24 @@
     "express": "^4.21.2",
     "mongodb": "^6.12.0",
     "mongoose": "^8.8.4"
-  }
+  },
+  "name": "art-buisness-website",
+  "version": "1.0.0",
+  "description": "very cool",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conkip/Art-Buisness-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conkip/Art-Buisness-Website/issues"
+  },
+  "homepage": "https://github.com/conkip/Art-Buisness-Website#readme"
 }
