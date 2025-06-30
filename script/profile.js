@@ -8,7 +8,7 @@
 */
 
 function afterStartup() {
-    fetch(`http://${domainName}:${port}/getCurUser`)
+    fetch(`/getCurUser`)
         .then((response) => {
             if (response.headers.get('Content-Length') === '0') {
                 return null;
@@ -34,7 +34,7 @@ afterStartup();
 // example of profile layout
 function setupPaintings(likes, bids) {
     for(let paintingName of likes) {
-        fetch(`http://${domainName}:${port}/getPainting/${paintingName}`)
+        fetch(`/getPainting/${paintingName}`)
         .then((response) => response.json())
         .then(data => {
             console.log('Response:', data);
