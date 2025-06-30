@@ -10,7 +10,6 @@
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
-
     fetch(`http://${domainName}:${port}/getPaintings`)
         .then(response => response.json())
         .then(data => {

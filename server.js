@@ -7,7 +7,9 @@
   server for handling get opperations and talking to the database
 */
 
-const express = require('express')
+const express = require('express');
+const bcrypt = require('bcrypt');
+
 const app = express();
 
 const domainName = '127.0.0.1';
@@ -49,6 +51,7 @@ async function startServer()
 
     const UserSchema = new mongoose.Schema({
         username: String,
+        password: String,
         my_likes: { type: [String], default: [] }
     });
 
@@ -61,29 +64,44 @@ async function startServer()
 
     // login routes
 
-    app.get("/login/:someUsername", async (req,res) => {
+    app.get("/login/:someUsername/:somePassword", async (req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
 
         let someUsername = req.params.someUsername;
         someUsername = someUsername.replaceAll("%20", " ");
+
+        let somePassword = req.params.somePassword;
+        somePassword = somePassword.replaceAll("%20", " ");
         
-        let user = await User.findOne({username:someUsername})
-        if(user != null){
-            // set up the username cookie when you login successfully
-            res.cookie("username", someUsername);
-            res.send(true);
+        let user = await User.findOne({username:someUsername});
+
+        if(user != null) {
+            let isMatch = await bcrypt.compare(somePassword, user.password);
+            if(isMatch) {
+                // set up the username cookie when you login successfully
+                res.cookie("username", someUsername);
+                res.send(true); 
+            }
+            else {
+                res.send(false);
+            }
         }
-        else
+        else {
             res.send(false);
+        }
     });
 
-    app.get("/signup/:someUsername", async(req,res) => {
+    app.get("/signup/:someUsername/:somePassword", async(req,res) => {
         console.log("Request received on URL:", req.url);
         res.statusCode = 200;
 
         let someUsername = req.params.someUsername;
         someUsername = someUsername.replaceAll("%20", " ");
+
+        let somePassword = req.params.somePassword;
+        somePassword = somePassword.replaceAll("%20", " ");
+        somePassword = await hashPassword(somePassword);
 
         let user = await User.findOne({username:someUsername})
 
@@ -94,7 +112,8 @@ async function startServer()
         }
         else{
             const newUser = new User({
-                username: someUsername
+                username: someUsername,
+                password: somePassword
             });
     
             await newUser.save();
@@ -142,7 +161,6 @@ async function startServer()
         paintingName = paintingName.replaceAll("%20", " ");
 
         let painting = await Painting.findOne({name:paintingName});
-        console.log(painting);
         res.send(painting);
     });
 
@@ -187,6 +205,18 @@ async function startServer()
     });
 }
 
+
+
+async function hashPassword(password) {
+    const saltRounds = 10; // Number of salt rounds (higher is more secure but slower)
+    
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(password, salt);
+    return hash;
+}
+
+
+
 async function setupPaintings() {
     let template = new Painting({
         name: "Example",
@@ -198,7 +228,7 @@ async function setupPaintings() {
     let painting1 = new Painting({
         name: "Beyond The Limit",
         image: "BeyondTheLimit.jpg",
-        desc: "24x24 x 3\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
+        desc: "3 x 24x24\n2015\nOil Paint\nWood Canvas\nExpoxy Coating"
     });
 
     await painting1.save();
@@ -214,7 +244,7 @@ async function setupPaintings() {
     let painting3 = new Painting({
         name: "Chasing Blues",
         image: "ChasingBlues.jpg",
-        desc: "16x24\n2015\nOil Paint\n_ Canvas\n_ Finish"
+        desc: "16x24\n2021\nOil Paint\nWood Canvas\n_ Finish"
     });
 
     await painting3.save();
@@ -298,7 +328,7 @@ async function setupPaintings() {
     let painting13 = new Painting({
         name: "Flowing Essence",
         image: "FlowingEssence.jpg",
-        desc: "6x6 x 3\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating",
+        desc: "3 x 6x6\n2015\nAcrylic Paint\nWood Canvas\nEpoxy Coating",
         sold: true
     });
 
@@ -332,7 +362,7 @@ async function setupPaintings() {
     let painting17 = new Painting({
         name: "Oribits In Motion",
         image: "OribitsInMotion.jpg",
-        desc: "8x8 x 4\n2015\n_ Paint\nWood Canvas\n_ Finish"
+        desc: "4 x 8x8\n2015\n_ Paint\nWood Canvas\n_ Finish"
     });
 
     await painting17.save();
@@ -380,5 +410,128 @@ async function setupPaintings() {
     });
 
     await painting22.save();
+
+    // To name:
+
+    let painting23 = new Painting({
+        name: "_",
+        image: "P23.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting23.save();
+
+    let painting24 = new Painting({
+        name: "_",
+        image: "P24.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting24.save();
+
+    let painting25 = new Painting({
+        name: "_",
+        image: "P25.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting25.save();
+
+    let painting26 = new Painting({
+        name: "_",
+        image: "P26.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting26.save();
+
+    let painting27 = new Painting({
+        name: "_",
+        image: "P27.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_",
+        sold: true
+    });
+
+    await painting27.save();
+
+    let painting28 = new Painting({
+        name: "_",
+        image: "P28.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting28.save();
+
+    let painting29 = new Painting({
+        name: "_",
+        image: "P29.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting29.save();
+
+    let painting30 = new Painting({
+        name: "_",
+        image: "P30.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting30.save();
+
+    let painting31 = new Painting({
+        name: "_",
+        image: "P31.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting31.save();
+
+    let painting32 = new Painting({
+        name: "_",
+        image: "P32.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting32.save();
+
+    let painting33 = new Painting({
+        name: "_",
+        image: "P33.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting33.save();
+
+    let painting34 = new Painting({
+        name: "_",
+        image: "P34.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting34.save();
+
+    let painting35 = new Painting({
+        name: "_",
+        image: "P35.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting35.save();
+
+    let painting36 = new Painting({
+        name: "_",
+        image: "P36.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting36.save();
+
+    let painting37 = new Painting({
+        name: "_",
+        image: "P37.jpg",
+        desc: "_x_\n2025\n_ Paint\n_ Canvas\n_\n_"
+    });
+
+    await painting37.save();
 }
 startServer();
