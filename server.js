@@ -135,9 +135,11 @@ async function startServer() {
 
     // logout route
 
-    app.get("/clearCookies", (req, res) => {
-        console.log("cleared cookies");
-        res.clearCookie("username");
+    app.get("/clearCookies/:cookieName", (req, res) => {
+        let cookieName = req.params.cookieName.replaceAll("%20", " ");
+
+        console.log("cleared cookies for " + cookieName);
+        res.clearCookie(cookieName);
         res.send("Cookie Cleared");
     });
 
@@ -185,9 +187,13 @@ async function startServer() {
 
         // get current cookie
         let curPaintings = req.cookies.paintings;
-        if (curPainting == undefined) {
+        if (curPaintings == undefined) {
+            // create the new cookie with the painting name
+            res.cookie("paintings", paintingName, { httpOnly: true });
+            res.send("Cookie set!");
+        } else {
             curPaintings = curPaintings.replaceAll("%20", " ");
-            let splitPaintings = curPaintings.split(" ");
+            let splitPaintings = curPaintings.split(",");
             let foundPainting = false;
 
             for (let painting of splitPaintings) {
@@ -199,28 +205,27 @@ async function startServer() {
 
             if (foundPainting) {
                 //remove the painting from likes
-                const index = splitPaintings.indexOf(paintingName);
+                let index = splitPaintings.indexOf(paintingName);
                 splitPaintings.splice(index, 1);
 
+                //convert back to a string
                 let newCurPaintings = "";
-
                 for (let painting of splitPaintings) {
-                    newCurPaintings += painting + " ";
+                    newCurPaintings += painting + ",";
                 }
-                newCurPaintings = newCurPaintings.trim();
+                //remove trailing comma if it exists
+                let trimmed = newCurPaintings.endsWith(",")
+                    ? newCurPaintings.slice(0, -1)
+                    : newCurPaintings;
 
-                res.cookie("paintings", newCurPaintings, { httpOnly: true });
+                res.cookie("paintings", trimmed, { httpOnly: true });
             } else {
                 // add the painting to the end
-                res.cookie("paintings", curPaintings + " " + paintingName, {
+                res.cookie("paintings", curPaintings + "," + paintingName, {
                     httpOnly: true,
                 });
                 res.send("Cookie set!");
             }
-        } else {
-            // add the painting to the end
-            res.cookie("paintings", paintingName, { httpOnly: true });
-            res.send("Cookie set!");
         }
     });
 
@@ -228,11 +233,12 @@ async function startServer() {
     app.get("/getGuestPaintings", (req, res) => {
         // get current cookie
         let curPaintings = req.cookies.paintings;
-        if (curPainting != undefined) {
+        if (curPaintings != undefined) {
             curPaintings = curPaintings.replaceAll("%20", " ");
+            res.send(curPaintings);
+        } else {
+            res.send("");
         }
-
-        res.send(curPaintings);
     });
 
     app.use(express.static("public_html"));

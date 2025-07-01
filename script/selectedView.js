@@ -70,7 +70,7 @@ async function addPainting(imgList, titleList, painting) {
         description += "\n" + localPainting.canvas;
         description += "\n" + localPainting.finish;
         if (localPainting.framed) {
-            decription += "\nFramed";
+            description += "\nFramed";
         } else {
             description += "\nUnframed";
         }
