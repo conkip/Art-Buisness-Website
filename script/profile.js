@@ -20,6 +20,7 @@ function afterStartup() {
 
             if(data == null){
                 document.getElementById("profileGreeting").innerText = "Hello, Guest";
+                setupGuestPaintings()
             }
             else {
                 document.getElementById("profileGreeting").innerText = `Hello, ${data.username}!`;
@@ -30,6 +31,31 @@ function afterStartup() {
 }
 
 afterStartup();
+
+//
+function setupGuestPaintings() {
+    fetch(`/getGuestPaintings`)
+        .then((response) => response.json())
+        .then(data => {
+            console.log('Response:', data);
+
+            let guestPaintings = data.split(" ");
+            for(let paintingName of guestPaintings) {
+                fetch(`/getPainting/${paintingName}`)
+                .then((response) => response.json())
+                .then(data => {
+                    console.log('Response:', data);
+                    let list = document.getElementById("yourLikes");
+                    addPainting(list.rows[0],list.rows[1], data);
+                })
+                .catch(error => console.error('Error:', error));
+            }
+
+            let list = document.getElementById("yourLikes");
+            addPainting(list.rows[0],list.rows[1], data);
+        })
+        .catch(error => console.error('Error:', error));
+}
 
 // example of profile layout
 function setupPaintings(likes, bids) {
