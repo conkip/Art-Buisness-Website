@@ -10,24 +10,26 @@
 function afterStartup() {
     fetch(`/getCurUser`)
         .then((response) => {
-            if (response.headers.get('Content-Length') === '0') {
+            if (response.headers.get("Content-Length") === "0") {
                 return null;
             }
             return response.json();
         })
-        .then(data => {
-            console.log('Response:', data);
+        .then((data) => {
+            console.log("Response:", data);
 
-            if(data == null){
-                document.getElementById("profileGreeting").innerText = "Hello, Guest";
-                setupGuestPaintings()
-            }
-            else {
-                document.getElementById("profileGreeting").innerText = `Hello, ${data.username}!`;
+            if (data == null) {
+                document.getElementById("profileGreeting").innerText =
+                    "Hello, Guest";
+                setupGuestPaintings();
+            } else {
+                document.getElementById(
+                    "profileGreeting"
+                ).innerText = `Hello, ${data.username}!`;
                 setupPaintings(data.my_likes, data.my_bids);
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch((error) => console.error("Error:", error));
 }
 
 afterStartup();
@@ -35,38 +37,38 @@ afterStartup();
 //
 function setupGuestPaintings() {
     fetch(`/getGuestPaintings`)
-        .then((response) => response.json())
-        .then(data => {
-            console.log('Response:', data);
+        .then((response) => response.text())
+        .then((data) => {
+            console.log("Response:", data);
 
             let guestPaintings = data.split(" ");
-            for(let paintingName of guestPaintings) {
+            for (let paintingName of guestPaintings) {
                 fetch(`/getPainting/${paintingName}`)
-                .then((response) => response.json())
-                .then(data => {
-                    console.log('Response:', data);
-                    let list = document.getElementById("yourLikes");
-                    addPainting(list.rows[0],list.rows[1], data);
-                })
-                .catch(error => console.error('Error:', error));
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Response:", data);
+                        let list = document.getElementById("yourLikes");
+                        addPainting(list.rows[0], list.rows[1], data);
+                    })
+                    .catch((error) => console.error("Error:", error));
             }
 
             let list = document.getElementById("yourLikes");
-            addPainting(list.rows[0],list.rows[1], data);
+            addPainting(list.rows[0], list.rows[1], data);
         })
-        .catch(error => console.error('Error:', error));
+        .catch((error) => console.error("Error:", error));
 }
 
 // example of profile layout
 function setupPaintings(likes, bids) {
-    for(let paintingName of likes) {
+    for (let paintingName of likes) {
         fetch(`/getPainting/${paintingName}`)
-        .then((response) => response.json())
-        .then(data => {
-            console.log('Response:', data);
-            let list = document.getElementById("yourLikes");
-            addPainting(list.rows[0],list.rows[1], data);
-        })
-        .catch(error => console.error('Error:', error));
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Response:", data);
+                let list = document.getElementById("yourLikes");
+                addPainting(list.rows[0], list.rows[1], data);
+            })
+            .catch((error) => console.error("Error:", error));
     }
 }
