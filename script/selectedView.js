@@ -1,9 +1,9 @@
 /*
   Connor Kippes
 
-  Javascript for extendedGallery.js
+  Javascript for selectedView.js
   handles setting up the gallery with all the paintings in the database and
-  when a user clicks on a painting to open the extended view
+  when a user clicks on a painting to open the details of the selected painting
 */
 
 let curUser = null;
@@ -29,21 +29,20 @@ async function onStartup() {
 
 onStartup();
 
-// addPainting puts the given painting in the gallery with its img and title
-// adds the onclick function to both the img and the title and set class to match style
+// addPainting puts the given painting in the gallery with its image and title
+// adds the onclick function to both the image and the title
 async function addPainting(imgList, titleList, painting) {
 
-    // onclick function displays the clicked on image in the gallery extended view
+    // onclick function displays the clicked on image in the detailed view
     // and hides the rest of the gallery from view
-    // with the correct bid info and heart status
     async function onPaintingClick(localPainting) {
         curPainting = localPainting;
         updateHeart(localPainting);
 
         document.getElementById("gallery-section").style.display = "none"; //visibility = "collapse";
-        let extendedGallery = document.getElementById("selected-view");
-        extendedGallery.style.visibility = "visible";
-        extendedGallery.style.marginTop = "70px";
+        let selectedView = document.getElementById("selected-view");
+        selectedView.style.visibility = "visible";
+        selectedView.style.marginTop = "70px";
         document.getElementById("selected-image").src = `../paintings/${localPainting.image}`;
         document.getElementById("selected-image1").src = `../paintings/${localPainting.image}`;
         document.getElementById("selected-image2").src = `../paintings/${localPainting.image}`;
@@ -52,8 +51,23 @@ async function addPainting(imgList, titleList, painting) {
         document.getElementById("selected-title").innerText = localPainting.name;
 
         let description = "";
+        description += formatDimensions(localPainting.dimensions);
+        if(localPainting.mult) {
+            description += " Each";
+        }
+        description += "\n" + localPainting.date;
+        description += "\n" + localPainting.paint + " Paint";
+        description += "\n" + localPainting.canvas;
+        description += "\n" + localPainting.finish;
+        if(localPainting.framed){
+            decription += "\nFramed";
+        }
+        else {
+            description += "\nUnframed";
+        }
+        description += "\n\n" + localPainting.desc;
         
-        document.getElementById("selected-description").innerText = formatDescription(localPainting.desc);
+        document.getElementById("selected-description").innerText = description;
         document.getElementById("selected-description").classList.add('subtitle');
     }
 
@@ -74,19 +88,14 @@ async function addPainting(imgList, titleList, painting) {
     newTitle.appendChild(text);
 }
 
-function formatDescription(desc) {
-    let stuff = desc.split("\n");
+function formatDimensions(dim) {
+    let dimensions = dim.split("x");
 
-    let newString = "";
-    newString += "Size: " + stuff[0] + " in\n";
-    newString += "Date: " + stuff[1] + "\n";
-    newString += "Artist: Kasey Kurowsky\n\n"
+    let length = dimensions[0] + "\" L x ";
+    let width = dimensions[1] + "\" W x ";
+    let depth = dimensions[2] + "\" D";
 
-    newString += stuff[2] + "\n";
-    newString += stuff[3] + "\n";
-    newString += stuff[4] + "\n";
-
-    return newString;
+    return length + width + depth;
 }
 
 // updates the heart image based on if the user has the painting favorited or not

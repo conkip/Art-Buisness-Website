@@ -43,12 +43,12 @@ body {
   margin-right: 7%;
 }
 
-.centerNonBlock {
+.center-non-block {
   margin-left: auto;
   margin-right: auto;
 }
 
-.centerText {
+.center-text {
   text-align: center;
 }
 .noWrap {

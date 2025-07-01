@@ -50,6 +50,7 @@ async function startServer()
         canvas: String,
         finish: String,
         desc: String,
+        mult: { type: Boolean, default: false },
         framed: { type: Boolean, default: false },
         sold: { type: Boolean, default: false },
     });
@@ -72,14 +73,10 @@ async function startServer()
     // login routes
 
     app.get("/login/:someUsername/:somePassword", async (req,res) => {
-        console.log("Request received on URL:", req.url);
-        res.statusCode = 200;
+        //console.log("Request to login received on URL:", req.url);
 
-        let someUsername = req.params.someUsername;
-        someUsername = someUsername.replaceAll("%20", " ");
-
-        let somePassword = req.params.somePassword;
-        somePassword = somePassword.replaceAll("%20", " ");
+        let someUsername = req.params.someUsername.replaceAll("%20", " ");
+        let somePassword = req.params.somePassword.replaceAll("%20", " ");
         
         let user = await User.findOne({username:someUsername});
 
@@ -87,7 +84,7 @@ async function startServer()
             let isMatch = await bcrypt.compare(somePassword, user.password);
             if(isMatch) {
                 // set up the username cookie when you login successfully
-                res.cookie("username", someUsername);
+                res.cookie("username", someUsername, { httpOnly: true });
                 res.send(true); 
             }
             else {
@@ -100,14 +97,11 @@ async function startServer()
     });
 
     app.get("/signup/:someUsername/:somePassword", async(req,res) => {
-        console.log("Request received on URL:", req.url);
-        res.statusCode = 200;
+        //console.log("Request to signup received on URL:", req.url);
 
-        let someUsername = req.params.someUsername;
-        someUsername = someUsername.replaceAll("%20", " ");
+        let someUsername = req.params.someUsername.replaceAll("%20", " ");
 
-        let somePassword = req.params.somePassword;
-        somePassword = somePassword.replaceAll("%20", " ");
+        let somePassword = req.params.somePassword.replaceAll("%20", " ");
         somePassword = await hashPassword(somePassword);
 
         let user = await User.findOne({username:someUsername})
@@ -130,8 +124,7 @@ async function startServer()
     });
 
     app.get("/getCurUser", async (req,res) => {
-        console.log("Request received on URL:", req.url);
-        res.statusCode = 200;
+        //console.log("Request to get the current user received on URL:", req.url);
 
         // get current cookie
         let curUsername = req.cookies.username;
@@ -150,6 +143,7 @@ async function startServer()
     // logout route
 
     app.get("/clearCookies", (req, res) => {
+        console.log("cleared cookies");
         res.clearCookie("username");
         res.send("Cookie Cleared");
     });
@@ -159,26 +153,23 @@ async function startServer()
     // db routes
 
     app.get('/getPaintings', async (req, res) => {
+        //console.log("got paintings");
         const paintings = await Painting.find();
         res.send(paintings);
     });
 
     app.get('/getPainting/:paintingName', async (req, res) => {
-        let paintingName = req.params.paintingName;
-        paintingName = paintingName.replaceAll("%20", " ");
+        let paintingName = req.params.paintingName.replaceAll("%20", " ");
 
         let painting = await Painting.findOne({name:paintingName});
         res.send(painting);
     });
 
     app.get("/updateLike/:curUsername/:paintingName/:isLiked", async (req,res) => {
-        console.log("Request received on URL:", req.url);
-        res.statusCode = 200;
+        //console.log("Request to update a like received on URL:", req.url);
 
-        let curUsername = req.params.curUsername;
-        curUsername = curUsername.replaceAll("%20", " ");
-        let paintingName = req.params.paintingName;
-        paintingName = paintingName.replaceAll("%20", " ");
+        let curUsername = req.params.curUsername.replaceAll("%20", " ");
+        let paintingName = req.params.paintingName.replaceAll("%20", " ");
         let isLiked = req.params.isLiked;
 
         let theUser = await User.findOne({username:curUsername});
@@ -194,6 +185,34 @@ async function startServer()
         theUser.save();
         res.send("Updated like successfully");
     });
+
+    // this route is for if a guest likes any paintings to save them as cookies
+    app.get("/guestLike/:paintingName", (req, res) => {
+        let paintingName = req.params.paintingName.replaceAll("%20", " ");
+
+        // get current cookie
+        let curPaintings = req.cookies.paintings;
+        if(curPainting != undefined) {
+            curPaintings = curPaintings.replaceAll("%20", " ");
+        }
+
+        // add the painting to the end
+        res.cookie("paintings", curPaintings + " " + paintingName, { httpOnly: true });
+        res.send("Cookie set!");
+    });
+
+    // this route is used for filling up the guest's profile with their likes
+    app.get("/getGuestPaintings", (req, res) => {
+
+        // get current cookie
+        let curPaintings = req.cookies.paintings;
+        if(curPainting != undefined) {
+            curPaintings = curPaintings.replaceAll("%20", " ");
+        }
+
+        res.send(curPaintings);
+    });
+
 
     app.use(express.static("public_html"));
     app.use("/img", express.static("img"));
