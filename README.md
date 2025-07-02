@@ -7,4 +7,8 @@ Link: https://kaseycreativecanvas.com
 
 ![image](https://github.com/user-attachments/assets/9333463b-0ce9-4890-a06a-63b6955621c8)
 
+Front-End: HTML, CSS, Javascript
+Back-End: Node.js, Express.js, MongoDB for DB
+Hosted on Digital Ocean with nginx and https
+
 It has a fade in effect for scrolling and you can click to see different pictures of the paintings.
