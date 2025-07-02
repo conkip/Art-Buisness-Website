@@ -1,6 +1,5 @@
 # Art-Buisness-Website
-Visit the website with the link: 
-https://kaseycreativecanvas.com
+Link: https://kaseycreativecanvas.com
 <br><br>
 ![image](https://github.com/user-attachments/assets/441af73f-730a-4dd6-a3d5-25162dba95ce)
 
