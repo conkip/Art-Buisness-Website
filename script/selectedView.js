@@ -1,3 +1,4 @@
+
 /*
   Connor Kippes
 
@@ -42,21 +43,22 @@ async function addPainting(imgList, titleList, painting) {
         let selectedView = document.getElementById("selected-view");
         selectedView.style.visibility = "visible";
         selectedView.style.marginTop = "70px";
+
+        // adds the big image
         document.getElementById(
             "selected-image"
         ).src = `../paintings/${localPainting.image}`;
+
+        // adds the first mini image which is of the big image
         document.getElementById(
             "selected-image1"
         ).src = `../paintings/${localPainting.image}`;
-        document.getElementById(
-            "selected-image2"
-        ).src = `../paintings/${localPainting.image}`;
-        document.getElementById(
-            "selected-image3"
-        ).src = `../paintings/${localPainting.image}`;
-        document.getElementById(
-            "selected-image4"
-        ).src = `../paintings/${localPainting.image}`;
+
+        addMiniPainting(localPainting.image, 2);
+        addMiniPainting(localPainting.image, 3);
+        addMiniPainting(localPainting.image, 4);
+        addMiniPainting(localPainting.image, 5);
+
         document.getElementById("selected-title").innerText =
             localPainting.name;
 
@@ -66,8 +68,7 @@ async function addPainting(imgList, titleList, painting) {
             description += " Each";
         }
         description += "\n" + localPainting.date;
-        description += "\n" + localPainting.paint + " Paint";
-        description += "\n" + localPainting.canvas;
+        description += "\n" + localPainting.paint + " Paint on " + localPainting.canvas;
         description += "\n" + localPainting.finish;
         if (localPainting.framed) {
             description += "\nFramed";
@@ -88,8 +89,8 @@ async function addPainting(imgList, titleList, painting) {
     const text = document.createElement("p");
     newPainting.className = "gallery-cell";
     newTitle.className = "gallery-cell";
-    image.className = "gallery-image";
-    text.className = "gallery-title";
+    image.className = "gallery-image hidden";
+    text.className = "gallery-title hidden";
     image.onclick = () => onPaintingClick(painting);
     text.onclick = () => onPaintingClick(painting);
     image.src = `../paintings/${painting.image}`;
@@ -99,6 +100,7 @@ async function addPainting(imgList, titleList, painting) {
     newTitle.appendChild(text);
 }
 
+// 24x24x1 --> 24" L x 24" W x 1" D
 function formatDimensions(dim) {
     let dimensions = dim.split("x");
 
@@ -109,6 +111,26 @@ function formatDimensions(dim) {
     return length + width + depth;
 }
 
+// adds a painting to the
+function addMiniPainting(fileName, number) {
+    //first at the number to the image name
+    let fileNameSplit = fileName.split(".");
+    let newFileName = fileNameSplit[0] + number + "." + fileNameSplit[1];
+    
+    fetch(`../paintings/${newFileName}`)
+        .then(response => {
+            if (response.ok) {
+                document.getElementById("selected-image" + number).src = `../paintings/${newFileName}`;
+            } else {
+                console.log("File " + newFileName + " not found");
+            }
+        })
+        .catch(error => {
+            console.error("Error checking file:", error);
+        });
+}
+
+
 // updates the heart image based on if the user has the painting favorited or not
 function updateHeart(localPainting) {
     if (curUser == null) {
@@ -117,7 +139,7 @@ function updateHeart(localPainting) {
         fetch(`/getGuestPaintings`)
             .then((response) => response.text())
             .then((data) => {
-                let guestPaintings = data.split(" ");
+                let guestPaintings = data.split(",");
                 for (let paintingName of guestPaintings) {
                     if (paintingName == localPainting.name) {
                         //change heart back to red

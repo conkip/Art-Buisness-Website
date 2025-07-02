@@ -1,7 +1,5 @@
 /*
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
+  Connor Kippes
 
   Javascript for testServer.js
   server for handling get opperations and talking to the database
@@ -73,8 +71,8 @@ async function startServer() {
     app.get("/login/:someUsername/:somePassword", async (req, res) => {
         //console.log("Request to login received on URL:", req.url);
 
-        let someUsername = req.params.someUsername.replaceAll("%20", " ");
-        let somePassword = req.params.somePassword.replaceAll("%20", " ");
+        let someUsername = decodeURIComponent(req.params.someUsername);
+        let somePassword = decodeURIComponent(req.params.somePassword);
 
         let user = await User.findOne({ username: someUsername });
 
@@ -95,9 +93,9 @@ async function startServer() {
     app.get("/signup/:someUsername/:somePassword", async (req, res) => {
         //console.log("Request to signup received on URL:", req.url);
 
-        let someUsername = req.params.someUsername.replaceAll("%20", " ");
+        let someUsername = decodeURIComponent(req.params.someUsername);
 
-        let somePassword = req.params.somePassword.replaceAll("%20", " ");
+        let somePassword = decodeURIComponent(req.params.somePassword);
         somePassword = await hashPassword(somePassword);
 
         let user = await User.findOne({ username: someUsername });
@@ -124,7 +122,7 @@ async function startServer() {
         // get current cookie
         let curUsername = req.cookies.username;
         if (curUsername != undefined) {
-            curUsername = curUsername.replaceAll("%20", " ");
+            curUsername = decodeURIComponent(curUsername);
         }
 
         // search db for it
@@ -136,7 +134,7 @@ async function startServer() {
     // logout route
 
     app.get("/clearCookies/:cookieName", (req, res) => {
-        let cookieName = req.params.cookieName.replaceAll("%20", " ");
+        let cookieName = decodeURIComponent(req.params.cookieName);
 
         console.log("cleared cookies for " + cookieName);
         res.clearCookie(cookieName);
@@ -152,7 +150,7 @@ async function startServer() {
     });
 
     app.get("/getPainting/:paintingName", async (req, res) => {
-        let paintingName = req.params.paintingName.replaceAll("%20", " ");
+        let paintingName = decodeURIComponent(req.params.paintingName);
 
         let painting = await Painting.findOne({ name: paintingName });
         res.send(painting);
@@ -163,8 +161,8 @@ async function startServer() {
         async (req, res) => {
             //console.log("Request to update a like received on URL:", req.url);
 
-            let curUsername = req.params.curUsername.replaceAll("%20", " ");
-            let paintingName = req.params.paintingName.replaceAll("%20", " ");
+            let curUsername = decodeURIComponent(req.params.curUsername);
+            let paintingName = decodeURIComponent(req.params.paintingName);
             let isLiked = req.params.isLiked;
 
             let theUser = await User.findOne({ username: curUsername });
@@ -183,7 +181,7 @@ async function startServer() {
 
     // this route is for if a guest likes any paintings to save them as cookies
     app.get("/updateGuestLike/:paintingName", (req, res) => {
-        let paintingName = req.params.paintingName.replaceAll("%20", " ");
+        let paintingName = decodeURIComponent(req.params.paintingName);
 
         // get current cookie
         let curPaintings = req.cookies.paintings;
@@ -192,7 +190,7 @@ async function startServer() {
             res.cookie("paintings", paintingName, { httpOnly: true });
             res.send("Cookie set!");
         } else {
-            curPaintings = curPaintings.replaceAll("%20", " ");
+            curPaintings = decodeURIComponent(curPaintings);
             let splitPaintings = curPaintings.split(",");
             let foundPainting = false;
 
@@ -219,11 +217,18 @@ async function startServer() {
                     : newCurPaintings;
 
                 res.cookie("paintings", trimmed, { httpOnly: true });
+                res.send("Cookie set!");
             } else {
-                // add the painting to the end
-                res.cookie("paintings", curPaintings + "," + paintingName, {
-                    httpOnly: true,
-                });
+                if(curPaintings == "")
+                {
+                    res.cookie("paintings", paintingName, {httpOnly: true,});
+                }
+                else {
+                    // add the painting to the end if theres already one
+                    res.cookie("paintings", curPaintings + "," + paintingName, {
+                        httpOnly: true,
+                    });
+                }
                 res.send("Cookie set!");
             }
         }
@@ -234,7 +239,7 @@ async function startServer() {
         // get current cookie
         let curPaintings = req.cookies.paintings;
         if (curPaintings != undefined) {
-            curPaintings = curPaintings.replaceAll("%20", " ");
+            curPaintings = decodeURIComponent(curPaintings);
             res.send(curPaintings);
         } else {
             res.send("");

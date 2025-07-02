@@ -38,9 +38,9 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-.sideMargins {
-  margin-left: 7%;
-  margin-right: 7%;
+.side-margins {
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .center-non-block {
@@ -51,11 +51,11 @@ body {
 .center-text {
   text-align: center;
 }
-.noWrap {
+.no-wrap {
   white-space: nowrap;
 }
 
-.someButton {
+.some-button {
   font-size: 25px;
   width: 275px;
   height: 50px;
@@ -65,16 +65,33 @@ body {
   border: none;
 }
 
-.sepiaFilter {
+.sepia-filter {
   filter: sepia(1) brightness(0.35) contrast(1);
 }
 p {
-  font-size: 25px;
   margin-left: 7%;
   margin-right: 7%;
+  line-height: 1.8;
+  font-size: 25px;
 }
 h2 {
   font-size: 25px;
+}
+.blue {
+  color: rgb(17, 178, 184);
+}
+
+/* -----------OBSERVER STUFF---------*/
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .85s ease-out, transform .85s ease-out;
+}
+
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* -----------MENU SECTION----------- */
@@ -115,23 +132,23 @@ a {
 
 /* ----------------------PROFILE---------------------- */
 
-#yourLikes {
+#your-likes {
   width: 80%;
   overflow-x: scroll;
   display: block;
 }
 
-.paintingImg {
+.painting-image {
   height: 150px;
   width: 150px;
   margin-left: 25px;
   margin-right: 25px;
 }
-.paintingTitle {
+.painting-title {
   text-align: center;
   font-size: 15px;
 }
-.listCell {
+.list-cell {
   width: 200px;
 }
 
@@ -211,11 +228,11 @@ a {
 /* ----------------------ABOUT---------------------- */
 
 /* ----------------------CONTACT---------------------- */
-#imgsCont {
+#contact-images {
   display: flex;
   justify-content: space-evenly;
 }
-.imgCont {
+.contact-image {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -224,17 +241,17 @@ a {
 /* ----------------------HELP---------------------- */
 
 /* ----------------------LOGIN---------------------- */
-#allLoginStuff {
+#all-login-stuff {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.formStuff {
+.form-stuff {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
-.someInput {
+.some-input {
   font-size: 20px;
   width: 200px;
   height: 30px;
@@ -242,10 +259,10 @@ a {
   margin-top: 10px;
 }
 
-#invalidLoginText {
+#invalid-login-text {
   color: red;
 }
 
-#invalidSignupText {
+#invalid-signup-text {
   color: red;
 }

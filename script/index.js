@@ -7,8 +7,8 @@
   handles directing to the login page
 */
 
-let loginSignupButton = document.getElementById("loginSignupButton");
-let logoutButton = document.getElementById("logoutButton");
+let loginSignupButton = document.getElementById("login-signup-button");
+let logoutButton = document.getElementById("logout-button");
 
 function clickLoginSignup() {
     window.location.href = "/login.html";
@@ -19,7 +19,7 @@ async function onStartup() {
     await setTimeout(() => {
         console.log("waited for a sec");
     }, 500);
-    fetch(`/getCurUser`)
+    return fetch(`/getCurUser`)
         .then((response) => {
             if (response.headers.get("Content-Length") === "0") {
                 return null;
@@ -45,7 +45,14 @@ async function onStartup() {
         .catch((error) => console.error("Error:", error));
 }
 
-onStartup();
+// wait for login button to be loaded and then apply observer
+onStartup().then(() => {
+    let hiddenElements = document.getElementsByClassName("hidden");
+
+    for (let i = 0; i < hiddenElements.length; i++) {
+        window.observer.observe(hiddenElements[i]);
+    }
+});
 
 function clickLogout() {
     fetch(`/clearCookies/username`)

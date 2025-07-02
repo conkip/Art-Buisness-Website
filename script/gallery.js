@@ -10,7 +10,7 @@
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
-    fetch(`/getPaintings`)
+    return fetch(`/getPaintings`)
         .then(response => response.json())
         .then(data => {
             console.log('Response:', data);
@@ -35,5 +35,18 @@ function addAllPaintings() {
         .catch(error => console.error('Error:', error));
 }
 
-// fills up the gallery for testing
-addAllPaintings();
+document.getElementById("sold-title").style.visibility = "hidden";
+
+// wait until all paintings are loaded in and then apply observer
+addAllPaintings().then(() => {
+    const hiddenElements = document.getElementsByClassName('hidden');
+
+    for (let i = 0; i < hiddenElements.length; i++) {
+        window.observer.observe(hiddenElements[i]);
+    }
+});
+
+// make sold invisible for a second so it doesnt apear on top when loading
+setTimeout(() => {
+  document.getElementById("sold-title").style.visibility = "visible";
+}, 300);

@@ -7,10 +7,10 @@
   handles loging in or creating a new account
 */
 
-let invaldLoginText = document.getElementById("invalidLoginText");
+let invaldLoginText = document.getElementById("invalid-login-text");
 invalidLoginText.style.display = 'none';
 
-let invalidSignupText = document.getElementById("invalidSignupText");
+let invalidSignupText = document.getElementById("invalid-signup-text");
 invalidSignupText.style.display = 'none';
 
 async function clickLoginButton() {
