@@ -1,10 +1,7 @@
 /*
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
+    Author: Connor Kippes
 
-  Javascript for login.js
-  handles loging in or creating a new account
+    Handles loging in or creating a new account.
 */
 
 let invaldLoginText = document.getElementById("invalid-login-text");

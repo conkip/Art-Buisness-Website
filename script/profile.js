@@ -1,8 +1,8 @@
 /*
-  Author: Connor Kippes
+    Author: Connor Kippes
 
-  Fills up liked paintings based on the current user.
-  Restructured to await for observer.
+    Fills up liked paintings based on the current user.
+    Restructured to await for observer.
 */
 
 async function afterStartup() {

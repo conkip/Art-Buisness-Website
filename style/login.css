@@ -1,0 +1,31 @@
+/* 
+    Author: Connor Kippes
+
+    CSS for the login page.
+*/
+
+#all-login-stuff {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.form-stuff {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.some-input {
+  font-size: 20px;
+  width: 200px;
+  height: 30px;
+  margin: 20px;
+  margin-top: 10px;
+}
+
+#invalid-login-text {
+  color: red;
+}
+
+#invalid-signup-text {
+  color: red;
+}

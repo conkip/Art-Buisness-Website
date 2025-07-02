@@ -1,10 +1,8 @@
-
 /*
-  Connor Kippes
+    Author: Connor Kippes
 
-  Javascript for selectedView.js
-  handles setting up the gallery with all the paintings in the database and
-  when a user clicks on a painting to open the details of the selected painting
+    Handles setting up the gallery with all the paintings in the database and
+    when a user clicks on a painting to open the details of the selected painting.
 */
 
 let curUser = null;

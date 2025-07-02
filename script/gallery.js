@@ -1,11 +1,7 @@
 /*
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
+    Author: Connor Kippes
 
-  Javascript for gallery.js
-  handles setting up the gallery with all the paintings in the database and
-  when a user clicks on a painting to open the extended view
+    Handles setting up the gallery with all the paintings
 */
 
 // adds all the painting in the list to the gallery in rows of 4

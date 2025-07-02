@@ -1,10 +1,7 @@
 /*
-  Connor Kippes, Leah Knodel, Blue Garrabrant
-  CSC337
-  Final Project - Creative Canvas Art Website
+    Author: Connor Kippes
 
-  Javascript for index.js
-  handles directing to the login page
+    Handles directing to the login page and displaying the correct login button.
 */
 
 let loginSignupButton = document.getElementById("login-signup-button");

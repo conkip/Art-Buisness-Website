@@ -1,7 +1,7 @@
 /*
     Author: Connor Kippes
 
-    function to initialize an observer to make elements fade in and out
+    Function to initialize an observer to make elements fade in and out.
 */
 
 window.observer = new IntersectionObserver((entries) => {

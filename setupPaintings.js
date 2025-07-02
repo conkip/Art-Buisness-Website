@@ -1,3 +1,9 @@
+/*
+    Author: Connor Kippes
+
+    Adds all paintings to the database.
+*/
+
 async function setupPaintings(Painting) {
     let template = new Painting({
         name: "Example",
@@ -5,9 +11,9 @@ async function setupPaintings(Painting) {
         dimensions: "Length x Width x Depth x (Optional) Number- ex- 24x24x2",
         date: "2025",
         paint: "Acrylic",
-        canvas: "Wood",
-        finish: "Glossy",
-        desc: "This is some example text",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "This is some example text.",
         mult: false,
         framed: true,
         sold: true,

@@ -1,0 +1,124 @@
+/* 
+    Author: Connor Kippes
+
+    General CSS for all pages.
+*/
+
+/* -----------MENU SECTION----------- */
+#menu-section {
+  min-height: 50px;
+  min-width: 100%;
+  background-color: #fff3bb;
+  font-size: 25px;
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+  padding-top: 10px;
+}
+#menu-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+.menu {
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+a {
+  /* remove underline and color */
+  text-decoration: none;
+  color: #585953;
+}
+
+/* -----------GENERAL STUFF----------- */
+body {
+  background-color: #fffbe6 /*#f4f0e0/*#ebe8e2 /*#f5f5f5 /*#f4f0e0 /*#f2f0ef*/;
+  /*overflow-x: hidden;*/
+}
+.section {
+  position: relative;
+  top: 80px;
+  left: 0px;
+  z-index: 1;
+  overflow: auto;
+  color: #585953;
+}
+
+.title {
+  font-size: 3em;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.flex-container-center {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-elem {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.side-margins {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.center-non-block {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-text {
+  text-align: center;
+}
+.no-wrap {
+  white-space: nowrap;
+}
+
+.some-button {
+  font-size: 25px;
+  width: 275px;
+  height: 50px;
+  color: #ffffff;
+  background-color: #585953;
+  border-radius: 15px;
+  border: none;
+}
+
+.sepia-filter {
+  filter: sepia(1) brightness(0.35) contrast(1);
+}
+p {
+  margin-left: 7%;
+  margin-right: 7%;
+  line-height: 1.8;
+  font-size: 25px;
+}
+h2 {
+  font-size: 25px;
+}
+.blue {
+  color: rgb(17, 178, 184);
+}
+
+/* -----------OBSERVER STUFF---------*/
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .85s ease-out, transform .85s ease-out;
+}
+
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}

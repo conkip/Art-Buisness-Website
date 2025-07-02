@@ -1,8 +1,10 @@
 /*
-  Connor Kippes
+    Author: Connor Kippes
 
-  Javascript for testServer.js
-  server for handling get opperations and talking to the database
+    Handles get opperations and talking to the database.
+    includes setting and getting cookies,
+    getting the current user,
+    getting paintings,
 */
 const setupPaintings = require("./setupPaintings");
 
