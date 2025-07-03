@@ -55,6 +55,7 @@ async function setupPaintings(Painting) {
         canvas: "Fabric Canvas",
         finish: "Textured Finish",
         desc: "",
+        sold: true,
     });
 
     await painting2.save();
@@ -121,6 +122,7 @@ async function setupPaintings(Painting) {
         canvas: "",
         finish: "",
         desc: "",
+        sold: true
     });
 
     await painting6.save();
@@ -174,6 +176,7 @@ async function setupPaintings(Painting) {
         canvas: "",
         finish: "",
         desc: "",
+        sold: true
     });
 
     await painting9.save();
@@ -316,15 +319,16 @@ async function setupPaintings(Painting) {
     await painting26.save();
 
     let painting17 = new Painting({
-        name: "Oribits In Motion",
-        image: "OribitsInMotion.jpg",
+        name: "Orbits In Motion",
+        image: "OrbitsInMotion.jpg",
         dimensions: "8x8x1",
         date: "",
         paint: "",
         canvas: "Wood Canvas",
         finish: "",
         desc: "",
-        mult: true,
+        sold: true,
+        mult: true
     });
 
     await painting17.save();
@@ -338,7 +342,7 @@ async function setupPaintings(Painting) {
         canvas: "",
         finish: "",
         desc: "",
-        sold: true,
+        sold: true
     });
 
     await painting18.save();

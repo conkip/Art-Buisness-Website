@@ -46,3 +46,7 @@ addAllPaintings().then(() => {
 setTimeout(() => {
   document.getElementById("sold-title").style.visibility = "visible";
 }, 300);
+
+//scrolls to the top on load to avoid loading into empty space
+window.onbeforeunload = () => window.scrollTo(0, 0);
+window.addEventListener('load', () => window.scrollTo(0, 0));
