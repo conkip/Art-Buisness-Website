@@ -31,56 +31,6 @@ onStartup();
 // addPainting puts the given painting in the gallery with its image and title
 // adds the onclick function to both the image and the title
 async function addPainting(imgList, titleList, painting) {
-    // onclick function displays the clicked on image in the detailed view
-    // and hides the rest of the gallery from view
-    async function onPaintingClick(localPainting) {
-        curPainting = localPainting;
-        updateHeart(localPainting);
-
-        document.getElementById("gallery-section").style.display = "none"; //visibility = "collapse";
-        let selectedView = document.getElementById("selected-view");
-        selectedView.style.visibility = "visible";
-        selectedView.style.marginTop = "70px";
-
-        // adds the big image
-        document.getElementById(
-            "selected-image"
-        ).src = `../paintings/${localPainting.image}`;
-
-        // adds the first mini image which is of the big image
-        document.getElementById(
-            "selected-image1"
-        ).src = `../paintings/${localPainting.image}`;
-
-        addMiniPainting(localPainting.image, 2);
-        addMiniPainting(localPainting.image, 3);
-        addMiniPainting(localPainting.image, 4);
-        addMiniPainting(localPainting.image, 5);
-
-        document.getElementById("selected-title").innerText =
-            localPainting.name;
-
-        let description = "";
-        description += formatDimensions(localPainting.dimensions);
-        if (localPainting.mult) {
-            description += " Each";
-        }
-        description += "\n" + localPainting.date;
-        description += "\n" + localPainting.paint + " Paint on " + localPainting.canvas;
-        description += "\n" + localPainting.finish;
-        if (localPainting.framed) {
-            description += "\nFramed";
-        } else {
-            description += "\nUnframed";
-        }
-        description += "\n\n" + localPainting.desc;
-
-        document.getElementById("selected-description").innerText = description;
-        document
-            .getElementById("selected-description")
-            .classList.add("subtitle");
-    }
-
     const newPainting = imgList.insertCell(-1);
     const newTitle = titleList.insertCell(-1);
     const image = document.createElement("img");
@@ -109,6 +59,56 @@ function formatDimensions(dim) {
     return length + width + depth;
 }
 
+// onclick function displays the clicked on image in the detailed view
+// and hides the rest of the gallery from view
+async function onPaintingClick(localPainting) {
+    curPainting = localPainting;
+    updateHeart(localPainting);
+
+    document.getElementById("gallery-section").style.display = "none"; //visibility = "collapse";
+    let selectedView = document.getElementById("selected-view");
+    selectedView.style.visibility = "visible";
+    selectedView.style.marginTop = "70px";
+
+    // adds the big image
+    document.getElementById(
+        "selected-image"
+    ).src = `../paintings/${localPainting.image}`;
+
+    // adds the first mini image which is of the big image
+    let miniPainting1 = document.getElementById("selected-image1")
+    miniPainting1.src = `../paintings/${localPainting.image}`;
+    miniPainting1.onclick = () => onMiniPaintingClick(localPainting.image)
+
+    addMiniPainting(localPainting.image, 2);
+    addMiniPainting(localPainting.image, 3);
+    addMiniPainting(localPainting.image, 4);
+    addMiniPainting(localPainting.image, 5);
+
+    document.getElementById("selected-title").innerText =
+        localPainting.name;
+
+    let description = "";
+    description += formatDimensions(localPainting.dimensions);
+    if (localPainting.mult) {
+        description += " Each";
+    }
+    description += "\n" + localPainting.date;
+    description += "\n" + localPainting.paint + " Paint on " + localPainting.canvas;
+    description += "\n" + localPainting.finish;
+    if (localPainting.framed) {
+        description += "\nFramed";
+    } else {
+        description += "\nUnframed";
+    }
+    description += "\n\n" + localPainting.desc;
+
+    document.getElementById("selected-description").innerText = description;
+    document
+        .getElementById("selected-description")
+        .classList.add("subtitle");
+}
+
 // adds a painting to the
 function addMiniPainting(fileName, number) {
     //first at the number to the image name
@@ -118,7 +118,9 @@ function addMiniPainting(fileName, number) {
     fetch(`../paintings/${newFileName}`)
         .then(response => {
             if (response.ok) {
-                document.getElementById("selected-image" + number).src = `../paintings/${newFileName}`;
+                let miniPainting = document.getElementById("selected-image" + number)
+                miniPainting.src = `../paintings/${newFileName}`;
+                miniPainting.onclick = () => onMiniPaintingClick(newFileName);
             } else {
                 console.log("File " + newFileName + " not found");
             }
@@ -126,6 +128,23 @@ function addMiniPainting(fileName, number) {
         .catch(error => {
             console.error("Error checking file:", error);
         });
+}
+
+// onclick function to put a mini painting into the main view
+async function onMiniPaintingClick(newFileName) {
+    let mainPainting = document.getElementById("selected-image");
+
+    // start fade out
+    mainPainting.style.opacity = 0;
+
+    // fade out and then in in effect
+    setTimeout(() => {
+        mainPainting.src = `../paintings/${newFileName}`;
+
+        mainPainting.onload = () => {
+            mainPainting.style.opacity = 1;
+        };
+    }, 300);
 }
 
 
