@@ -122,7 +122,7 @@ async function setupPaintings(Painting) {
         canvas: "",
         finish: "",
         desc: "",
-        sold: true
+        sold: true,
     });
 
     await painting6.save();
@@ -176,7 +176,7 @@ async function setupPaintings(Painting) {
         canvas: "",
         finish: "",
         desc: "",
-        sold: true
+        sold: true,
     });
 
     await painting9.save();
@@ -222,6 +222,21 @@ async function setupPaintings(Painting) {
     });
 
     await painting11.save();
+
+    let painting39 = new Painting({
+        name: "Electric Waves",
+        image: "ElectricWaves.jpeg",
+        dimensions: "48x24x1",
+        date: "",
+        paint: "",
+        canvas: "Canvas",
+        finish: "",
+        desc: "",
+        mult: true,
+        sold: true,
+    });
+
+    await painting39.save();
 
     let painting12 = new Painting({
         name: "Eternal Sunshine",
@@ -318,6 +333,20 @@ async function setupPaintings(Painting) {
 
     await painting26.save();
 
+    let painting40 = new Painting({
+        name: "Meeples",
+        image: "Meeples.jpeg",
+        dimensions: "12x12x1",
+        date: "",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        sold: true,
+    });
+
+    await painting40.save();
+
     let painting17 = new Painting({
         name: "Orbits In Motion",
         image: "OrbitsInMotion.jpg",
@@ -328,7 +357,7 @@ async function setupPaintings(Painting) {
         finish: "",
         desc: "",
         sold: true,
-        mult: true
+        mult: true,
     });
 
     await painting17.save();
@@ -342,7 +371,7 @@ async function setupPaintings(Painting) {
         canvas: "",
         finish: "",
         desc: "",
-        sold: true
+        sold: true,
     });
 
     await painting18.save();
@@ -375,6 +404,21 @@ async function setupPaintings(Painting) {
     });
 
     await painting20.save();
+
+    let painting41 = new Painting({
+        name: "Spiral",
+        image: "Spiral.jpeg",
+        dimensions: "12x6x1",
+        date: "",
+        paint: "",
+        canvas: "Canvas",
+        finish: "",
+        desc: "",
+        mult: true,
+        sold: true,
+    });
+
+    await painting41.save();
 
     let painting21 = new Painting({
         name: "Strokes Of Light",
