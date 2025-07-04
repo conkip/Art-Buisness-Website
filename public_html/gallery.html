@@ -5,91 +5,89 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
-    <meta charset="utf-8">
-    <title>Creative Canvas</title>
-    <link rel="stylesheet" type="text/css" href="../style/all.css">
-    <link rel="stylesheet" type="text/css" href="../style/gallery.css">
-  </head>
-  
-  <body>
-    <!-- Menu in the same on every page. Do not change. -->
-    <div id="menu-section">
-      <table id="menu-table">
-        <tr>
-          <td class="menu">
-            <a href="index.html">Home</a>
-          </td>
-          <td class="menu">
-            <a href="profile.html">Profile</a>
-          </td>
-          <td class="menu">
-            <a href="gallery.html">Gallery</a>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <head>
+        <meta charset="utf-8" />
+        <title>Creative Canvas</title>
+        <link rel="stylesheet" type="text/css" href="../style/all.css" />
+        <link rel="stylesheet" type="text/css" href="../style/gallery.css" />
+    </head>
 
-
-    <div id="gallery-section" class="section center-text">
-      <h1 class ="title">Gallery</h1>
-      <table id = "gallery-table" class = "center-non-block">
-        <tr></tr>
-        <tr></tr>
-      </table>
-      <br><br><br>
-      <h1 id = "sold-title" class ="title">Sold</h1>
-      <table id = "sold-table" class = "center-non-block">
-        <tr>
-        </tr>
-        <tr>
-        </tr>
-      </table>
-
-    </div>
-
-
-    <div id="selected-view" style="visibility: collapse;">
-      <div class = "flex-container-center">
-        <div>
-          <!-- main image -->
-          <div class = "selected-image-container">
-            <img id="selected-image" alt="Selected Image">
-          </div>
-
-          <!-- mini previews under the image -->
-          <div>
-            <div class = "preview-image-container">
-              <img id="preview-image1" alt="Preview Image 1">
-            </div>
-            <div class = "preview-image-container">
-              <img id="preview-image2" alt="Preview Image 2">
-            </div>
-            <div class = "preview-image-container">
-              <img id="preview-image3" alt="Preview Image 3">
-            </div>
-            <div class = "preview-image-container">
-              <img id="preview-image4" alt="Preview Image 4">
-            </div>
-            <div class = "preview-image-container">
-              <img id="preview-image5" alt="Preview Image 5">
-            </div>
-          </div>
+    <body>
+        <!-- Menu in the same on every page. Do not change. -->
+        <div id="menu-section">
+            <table id="menu-table">
+                <tr>
+                    <td class="menu">
+                        <a href="index.html">Home</a>
+                    </td>
+                    <td class="menu">
+                        <a href="profile.html">Profile</a>
+                    </td>
+                    <td class="menu">
+                        <a href="gallery.html">Gallery</a>
+                    </td>
+                </tr>
+            </table>
         </div>
 
-        <div>
-          <div>
-            <img id="heart" alt="Heart Icon" src="../img/heart.png">
-            <p id="selected-title"></p>
-            <p id="selected-description"></p>
-          </div>
+        <div id="gallery-section" class="section center-text">
+            <h1 class="title">Gallery</h1>
+            <table id="gallery-table" class="center-non-block">
+                <tr></tr>
+                <tr></tr>
+            </table>
+            <br /><br /><br />
+            <h1 id="sold-title" class="title">Sold</h1>
+            <table id="sold-table" class="center-non-block">
+                <tr></tr>
+                <tr></tr>
+            </table>
         </div>
-      </div>
-    </div>
 
-    <script src = "../script/observer.js"></script>
-    <script src="../script/selectedView.js"></script>
-    <script src="../script/gallery.js"></script>
-  </body>
+        <div id="selected-view" style="visibility: collapse">
+            <div class="flex-container-center">
+                <div>
+                    <!-- main image -->
+                    <div class="selected-image-container">
+                        <img id="selected-image" alt="Selected Image" />
+                    </div>
+
+                    <!-- mini previews under the image -->
+                    <div>
+                        <div class="preview-image-container">
+                            <img id="preview-image1" alt="Preview Image 1" />
+                        </div>
+                        <div class="preview-image-container">
+                            <img id="preview-image2" />
+                        </div>
+                        <div class="preview-image-container">
+                            <img id="preview-image3" />
+                        </div>
+                        <div class="preview-image-container">
+                            <img id="preview-image4" />
+                        </div>
+                        <div class="preview-image-container">
+                            <img id="preview-image5" />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <img
+                            id="heart"
+                            alt="Heart Icon"
+                            src="../img/heart.png"
+                        />
+                        <p id="selected-title"></p>
+                        <p id="selected-description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../script/observer.js"></script>
+        <script src="../script/selectedView.js"></script>
+        <script src="../script/gallery.js"></script>
+    </body>
 </html>
