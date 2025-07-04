@@ -76,14 +76,14 @@ async function onPaintingClick(localPainting) {
     ).src = `../paintings/${localPainting.image}`;
 
     // adds the first mini image which is of the big image
-    let miniPainting1 = document.getElementById("selected-image1")
-    miniPainting1.src = `../paintings/${localPainting.image}`;
-    miniPainting1.onclick = () => onMiniPaintingClick(localPainting.image)
+    let previewPainting1 = document.getElementById("preview-image1")
+    previewPainting1.src = `../paintings/${localPainting.image}`;
+    previewPainting1.onclick = () => onMiniPaintingClick(localPainting.image)
 
-    addMiniPainting(localPainting.image, 2);
-    addMiniPainting(localPainting.image, 3);
-    addMiniPainting(localPainting.image, 4);
-    addMiniPainting(localPainting.image, 5);
+    addPreviewPainting(localPainting.image, 2);
+    addPreviewPainting(localPainting.image, 3);
+    addPreviewPainting(localPainting.image, 4);
+    addPreviewPainting(localPainting.image, 5);
 
     document.getElementById("selected-title").innerText =
         localPainting.name;
@@ -109,8 +109,8 @@ async function onPaintingClick(localPainting) {
         .classList.add("subtitle");
 }
 
-// adds a painting to the
-function addMiniPainting(fileName, number) {
+// adds an image to under the main painting in the selected view if it exists
+function addPreviewPainting(fileName, number) {
     //first at the number to the image name
     let fileNameSplit = fileName.split(".");
     let newFileName = fileNameSplit[0] + number + "." + fileNameSplit[1];
@@ -118,9 +118,9 @@ function addMiniPainting(fileName, number) {
     fetch(`../paintings/${newFileName}`)
         .then(response => {
             if (response.ok) {
-                let miniPainting = document.getElementById("selected-image" + number)
-                miniPainting.src = `../paintings/${newFileName}`;
-                miniPainting.onclick = () => onMiniPaintingClick(newFileName);
+                let previewPainting = document.getElementById("preview-image" + number)
+                previewPainting.src = `../paintings/${newFileName}`;
+                previewPainting.onclick = () => onMiniPaintingClick(newFileName);
             } else {
                 console.log("File " + newFileName + " not found");
             }

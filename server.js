@@ -9,9 +9,8 @@
 const setupPaintings = require("./setupPaintings");
 
 const express = require("express");
-const bcrypt = require("bcrypt");
-
 const app = express();
+const bcrypt = require("bcrypt");
 
 const domainName = "127.0.0.1";
 const port = 3000;
@@ -29,8 +28,6 @@ const URL = `mongodb://${databaseName}/projdb`;
 
 let User = null;
 let Painting = null;
-
-let username = null;
 
 /**
  * startServer contains all of the information for creating the http server and

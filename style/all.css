@@ -84,6 +84,18 @@ body {
   white-space: nowrap;
 }
 
+.flex-container-space-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.flex-container-space-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 .some-button {
   font-size: 25px;
   width: 275px;

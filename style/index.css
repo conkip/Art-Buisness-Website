@@ -7,20 +7,8 @@
 /* ----------------------HOME---------------------- */
 #logo {
   height: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0px;
 }
 
 /* ----------------------ABOUT---------------------- */
 
 /* ----------------------CONTACT---------------------- */
-#contact-images {
-  display: flex;
-  justify-content: space-evenly;
-}
-.contact-image {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}

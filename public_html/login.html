@@ -7,7 +7,7 @@
 <html lang="en">
   
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8">
     <title>Creative Canvas</title>
     <link rel="stylesheet" type="text/css" href="../style/all.css">
     <link rel="stylesheet" type="text/css" href="../style/login.css">
@@ -32,20 +32,16 @@
     </div>
     <!-- change this part to work as home page -->
     <div class="section">
-        <div id = "all-login-stuff">
-            <div class = "form-stuff">
-                <h1 class = "title center-text">Welcome</h1>
+        <div id = "flex-container-space-row">
+            <div class = "flex-container-space-column">
+                <h1 id = "login-title" class = "title center-text">Welcome</h1>
                 <form class="center-text" action="javascript:doNothing()">
-                    <p id= "invalid-login-text" class = "subtitle centerText noWrap" 
-                    style="display: none;">Username or password is incorrect.</p>
-
-                    <p id= "invalid-signup-text" class = "subtitle centerText noWrap" 
-                    style="display: none;">Username is already taken.</p>
+                    <p id= "invalid-text" class = "subtitle center-text no-wrap">Text Here</p>
 
                     <label class = "subtitle" for="username">Username:</label>
-                    <input class = "some-input" type="text" id="username" name="loginUsername" required><br>
+                    <input id="username" class = "some-input" type="text" name="loginUsername" required><br>
                     <label class = "subtitle" for="password">Password:</label>
-                    <input class = "some-input" type="password" id="password" name="loginUsername" required><br>
+                    <input id="password" class = "some-input" type="password" name="loginUsername" required><br>
                     <br>
                     <input class = "some-button" type="button" onclick= "clickLoginButton()" value = "Login">
                     <br><br>
