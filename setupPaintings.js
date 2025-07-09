@@ -142,8 +142,8 @@ async function setupPaintings(Painting) {
 
     let painting8 = new Painting({
         name: "Cosmic Tides",
-        image: "CosmicTides.jpg",
-        dimensions: "12x18x1",
+        image: "CosmicTides.jpeg",
+        dimensions: "16x20x1",
         date: "",
         paint: "Acrylic",
         canvas: "",
@@ -347,6 +347,35 @@ async function setupPaintings(Painting) {
 
     await painting40.save();
 
+    let painting43 = new Painting({
+        name: "Mini Motion",
+        image: "MiniMotion.jpeg",
+        dimensions: "11x14x1 1/2",
+        date: "",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        sold: true
+    });
+
+    await painting43.save();
+
+    let painting27 = new Painting({
+        name: "Ocean Clearing",
+        image: "OceanClearing.jpeg",
+        dimensions: "16x23 3/4x2",
+        date: "2025",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        framed: true,
+        sold: true
+    });
+
+    await painting27.save();
+
     let painting17 = new Painting({
         name: "Orbits In Motion",
         image: "OrbitsInMotion.jpg",
@@ -389,6 +418,21 @@ async function setupPaintings(Painting) {
     });
 
     await painting19.save();
+
+    let painting42 = new Painting({
+        name: "Setting Sun",
+        image: "SettingSun.jpeg",
+        dimensions: "26x32x1 1/2",
+        date: "",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        framed: true,
+        sold: true,
+    });
+
+    await painting42.save();
 
     let painting20 = new Painting({
         name: "Spectrum Of The Sea",
@@ -516,20 +560,6 @@ async function setupPaintings(Painting) {
     });
 
     await painting25.save();
-
-    let painting27 = new Painting({
-        name: "",
-        image: "P27.jpg",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-        sold: true
-    });
-
-    await painting27.save();
 
     let painting28 = new Painting({
         name: "",
