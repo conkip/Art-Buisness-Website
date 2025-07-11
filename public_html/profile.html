@@ -7,7 +7,7 @@
 <html lang="en">
   
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8">
     <title>Creative Canvas</title>
     <link rel="stylesheet" type="text/css" href="../style/all.css">
     <link rel="stylesheet" type="text/css" href="../style/gallery.css">
@@ -30,11 +30,15 @@
         </tr>
       </table>
     </div>
+  
     <!-- change this part to work as profile page -->
     <div id="gallery-section" class="section">
       <h1 id="profile-greeting" class = "title center-text">,</h1>
+
+      <p class="center-text">Your liked paintings will appear here.</p>
+
       <h2 class= "side-margins"> Your Likes </h2>
-      <table class= "side-margins", id="your-likes">
+      <table id="your-likes" class= "side-margins">
         <tr>
 
         </tr>
@@ -49,29 +53,32 @@
         <div>
           <!-- main image -->
           <div class = "selected-image-container">
-            <img id="selected-image">
+            <img id="selected-image" alt="Selected Image">
           </div>
 
           <!-- mini previews under the image -->
           <div>
-            <div class = "mini-image-container">
-              <img id="selected-image1">
+            <div class = "preview-image-container">
+              <img id="preview-image1" alt="Preview Image 1">
             </div>
-            <div class = "mini-image-container">
-              <img id="selected-image2">
+            <div class = "preview-image-container">
+              <img id="preview-image2">
             </div>
-            <div class = "mini-image-container">
-              <img id="selected-image3">
+            <div class = "preview-image-container">
+              <img id="preview-image3">
             </div>
-            <div class = "mini-image-container">
-              <img id="selected-image4">
+            <div class = "preview-image-container">
+              <img id="preview-image4">
+            </div>
+            <div class = "preview-image-container">
+              <img id="preview-image5">
             </div>
           </div>
         </div>
 
         <div>
           <div>
-            <img id="heart" src="../img/heart-icon.png">
+            <img id="heart" alt="Heart Icon" src="../img/heart.png">
             <p id="selected-title"></p>
             <p id="selected-description"></p>
           </div>

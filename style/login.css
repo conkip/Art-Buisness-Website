@@ -4,28 +4,18 @@
     CSS for the login page.
 */
 
-#all-login-stuff {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+#login-title {
+  margin-bottom: 0px;
 }
-.form-stuff {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
+
 .some-input {
-  font-size: 20px;
+  margin-left: 20px;
+  margin-bottom: 30px;
   width: 200px;
   height: 30px;
-  margin: 20px;
-  margin-top: 10px;
+  font-size: 20px;
 }
 
-#invalid-login-text {
-  color: red;
-}
-
-#invalid-signup-text {
+#invalid-text {
   color: red;
 }

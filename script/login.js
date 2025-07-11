@@ -4,11 +4,8 @@
     Handles loging in or creating a new account.
 */
 
-let invaldLoginText = document.getElementById("invalid-login-text");
-invalidLoginText.style.display = 'none';
-
-let invalidSignupText = document.getElementById("invalid-signup-text");
-invalidSignupText.style.display = 'none';
+let invalidText = document.getElementById("invalid-text");
+invalidText.style.visibility = 'hidden';
 
 async function clickLoginButton() {
     let usernameTextbox = document.getElementById("username");
@@ -24,9 +21,11 @@ async function clickLoginButton() {
             if(!data){
                 // no user found or password is incorrect
                 // so display no user found of that name
-                invalidLoginText.style.display = 'block';
+
+                invalidText.innerText = "Username or password is incorrect.";
+                invalidText.style.visibility = 'visible';
                 setTimeout(() => {
-                    invalidLoginText.style.display = 'none';
+                    invalidText.style.visibility = 'hidden';
                 }, 2000);
             }
             else{
@@ -58,9 +57,10 @@ async function clickSignupButton() {
             }
             else {
                 // username taken
-                invalidSignupText.style.display = "block";
+                invalidText.innerText ="Username is already taken.";
+                invalidText.style.visibility = "visible";
                 setTimeout(() => {
-                    invalidSignupText.style.display = 'none';
+                    invalidText.style.visibility = 'hidden';
                 }, 2000);
             }
         })

@@ -13,5 +13,3 @@ window.observer = new IntersectionObserver((entries) => {
         }
     });
 });
-
-//test
