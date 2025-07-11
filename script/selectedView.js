@@ -87,7 +87,7 @@ async function addPainting(imgList, titleList, painting) {
     const text = document.createElement("p");
     newPainting.className = "gallery-cell";
     newTitle.className = "gallery-cell";
-    image.className = "gallery-image hidden";
+    image.className = "gallery-image hidden hover-shadow";
     text.className = "gallery-title hidden";
     image.onclick = () => onPaintingClick(painting);
     text.onclick = () => onPaintingClick(painting);
