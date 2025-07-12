@@ -68,7 +68,6 @@ async function startServer() {
     // login routes
 
     app.get("/login/:someUsername/:somePassword", async (req, res) => {
-        //console.log("Request to login received on URL:", req.url);
 
         let someUsername = decodeURIComponent(req.params.someUsername);
         let somePassword = decodeURIComponent(req.params.somePassword);
@@ -90,7 +89,6 @@ async function startServer() {
     });
 
     app.get("/signup/:someUsername/:somePassword", async (req, res) => {
-        //console.log("Request to signup received on URL:", req.url);
 
         let someUsername = decodeURIComponent(req.params.someUsername);
 
@@ -116,7 +114,6 @@ async function startServer() {
     });
 
     app.get("/getCurUser", async (req, res) => {
-        //console.log("Request to get the current user received on URL:", req.url);
 
         // get current cookie
         let curUsername = req.cookies.username;
@@ -135,7 +132,6 @@ async function startServer() {
     app.get("/clearCookies/:cookieName", (req, res) => {
         let cookieName = decodeURIComponent(req.params.cookieName);
 
-        console.log("cleared cookies for " + cookieName);
         res.clearCookie(cookieName);
         res.send("Cookie Cleared");
     });
@@ -143,7 +139,6 @@ async function startServer() {
     // db routes
 
     app.get("/getPaintings", async (req, res) => {
-        //console.log("got paintings");
         const paintings = await Painting.find();
         res.send(paintings);
     });
@@ -158,7 +153,6 @@ async function startServer() {
     app.get(
         "/updateLike/:curUsername/:paintingName/:isLiked",
         async (req, res) => {
-            //console.log("Request to update a like received on URL:", req.url);
 
             let curUsername = decodeURIComponent(req.params.curUsername);
             let paintingName = decodeURIComponent(req.params.paintingName);
@@ -247,7 +241,7 @@ async function startServer() {
 
     app.use(express.static("public_html"));
     app.use("/img", express.static("img"));
-    app.use("/paintings", express.static("paintings"));
+    app.use("/paintings_webp", express.static("paintings_webp"));
     app.use("/script", express.static("script"));
     app.use("/style", express.static("style"));
 

@@ -37,13 +37,22 @@ async function addPainting(imgList, titleList, painting) {
     const text = document.createElement("p");
     newPainting.className = "gallery-cell";
     newTitle.className = "gallery-cell";
+
+    // adds class names to fade in and cause a shadow over hover
     image.className = "gallery-image hidden hover-shadow";
+    // only loads images as you scroll near them
+    image.loading="lazy";
+    image.src = `../paintings_webp/${painting.image}`;
+    image.alt = painting.name;
+
     text.className = "gallery-title hidden";
+    text.innerText = painting.name;
+
+    // clicking the text or the painting pulls up the selected view
     image.onclick = () => onPaintingClick(painting);
     text.onclick = () => onPaintingClick(painting);
-    image.src = `../paintings/${painting.image}`;
-    image.alt = painting.name;
-    text.innerText = painting.name;
+
+    // add paintings and text to the gallery list
     newPainting.appendChild(image);
     newTitle.appendChild(text);
 }
@@ -73,7 +82,7 @@ async function onPaintingClick(localPainting) {
     // adds the big image
     document.getElementById(
         "selected-image"
-    ).src = `../paintings/${localPainting.image}`;
+    ).src = `../paintings_webp/${localPainting.image}`;
 
     // adds all the mini images underneath it if able
 
@@ -115,13 +124,13 @@ function addPreviewPainting(fileName, number) {
         newFileName = fileName;
     }
 
-    fetch(`../paintings/${newFileName}`)
+    fetch(`../paintings_webp/${newFileName}`)
         .then((response) => {
             if (response.ok) {
                 let previewPainting = document.getElementById(
                     "preview-image" + number
                 );
-                previewPainting.src = `../paintings/${newFileName}`;
+                previewPainting.src = `../paintings_webp/${newFileName}`;
                 previewPainting.className = "hover-shadow";
                 previewPainting.onclick = () =>
                     onMiniPaintingClick(newFileName);
@@ -147,7 +156,7 @@ async function onMiniPaintingClick(newFileName) {
 
     // fade out and then in in effect
     setTimeout(() => {
-        mainPainting.src = `../paintings/${newFileName}`;
+        mainPainting.src = `../paintings_webp/${newFileName}`;
 
         mainPainting.onload = () => {
             mainPainting.style.opacity = 1;

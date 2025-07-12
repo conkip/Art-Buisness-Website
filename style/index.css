@@ -7,7 +7,7 @@
 /* ----------------------HOME---------------------- */
 .title-color-mask {
   height: 200px;
-  background-color: #D6FFC7;
+  background-color: #baf8a0;
   -webkit-mask: url('../img/titleLogo.png') no-repeat center;
   -webkit-mask-size: contain;
   mask: url('../img/titleLogo.png') no-repeat center;
@@ -28,7 +28,7 @@
 .email-color-mask {
   width: 200px;
   height: 200px;
-  background-color: #154851;
+  background-color: #baf8a0;
   -webkit-mask: url('../img/email.png') no-repeat center;
   -webkit-mask-size: contain;
   mask: url('../img/email.png') no-repeat center;
@@ -38,7 +38,7 @@
 .phone-color-mask {
   width: 200px;
   height: 200px;
-  background-color: #154851;
+  background-color: #baf8a0;
   -webkit-mask: url('../img/phone.png') no-repeat center;
   -webkit-mask-size: contain;
   mask: url('../img/phone.png') no-repeat center;
