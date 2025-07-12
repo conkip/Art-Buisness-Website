@@ -1,16 +1,27 @@
 /* 
-    Author: Connor Kippes
+  Author: Connor Kippes
 
-    General CSS for all pages.
+  General CSS for all pages.
+
+  color scheme-
+
+  dark blue:      #154851
+  medium blue:    #237A85
+  light-green:    #E0FFD6
+
+  calm, colorful, nature, flow
 */
-/* ----------IMPORTS-------------- */
+
+
+/* import for roboto font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 
 /* -----------MENU SECTION----------- */
 #menu-section {
   min-height: 50px;
   min-width: 100%;
-  background-color: #fff3bb;
+  background-color: #154851;
   font-size: 25px;
 
   position: fixed;
@@ -31,22 +42,33 @@
 a {
   /* remove underline and color */
   text-decoration: none;
-  color: #585953;
+  color: #E0FFD2;
 }
 
 /* -----------GENERAL STUFF----------- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2vw;
+}
+
 body {
-  background-color: #fffbe6 /*#f4f0e0/*#ebe8e2 /*#f5f5f5 /*#f4f0e0 /*#f2f0ef*/;
+  background-color: #237A85; /*#4FC0D0; /*#f4f0e0/*#ebe8e2 /*#f5f5f5 /*#f4f0e0 /*#f2f0ef*/;
   font-family: 'Roboto';
   font-weight:300;
 }
 .section {
+  color: #E0FFD6;
   position: relative;
   top: 80px;
-  left: 0px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2vw;
   z-index: 1;
-  overflow: auto;
-  color: #585953;
+  /*overflow: auto;
+  left: 0px;*/
 }
 
 .title {
@@ -100,13 +122,15 @@ body {
 }
 
 .button {
-  background-color: #585953;
+  background-color: #D1FFBD;
   width: 275px;
   height: 50px;
   border: none;
-  color: #ffffff;
+  border-radius: 15px;
+  color: #1B6B93;
   margin-bottom: 60px;
   font-size: 25px;
+  box-shadow: 7px 7px 11px rgba(0, 0, 0, 0.3);
 }
 
 .top-button {
@@ -118,7 +142,7 @@ body {
 }
 
 .hover-shadow:hover {
-  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 11px 11px 16px rgba(0, 0, 0, 0.3);
 }
 
 
