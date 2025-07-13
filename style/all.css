@@ -1,59 +1,117 @@
 /* 
-    Author: Connor Kippes
+  Author: Connor Kippes
 
-    General CSS for all pages.
+  General CSS for all pages.
+
+  color scheme-
+
+  dark-blue:      #154851
+  medium-blue:    #237A85
+  dark-green:     #7afd42
+  medium-green:   #baf8a0
+  light-green:    #E0FFD6
+
+  calm, colorful, nature, flow
 */
 
-/* -----------MENU SECTION----------- */
-#menu-section {
-  min-height: 50px;
-  min-width: 100%;
-  background-color: #fff3bb;
-  font-size: 25px;
 
+/* import for roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;600&display=swap');
+
+
+
+
+/* -----------NAV BAR----------- */
+#nav-bar {
   position: fixed;
   top: 0px;
-  left: 0px;
   z-index: 3;
+  height: 50px;
+  width: 100%;
   padding-top: 10px;
-}
-#menu-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-.menu {
-  text-align: center;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-a {
-  /* remove underline and color */
-  text-decoration: none;
-  color: #585953;
+  background-color: #154851;
+  font-size: 25px;
 }
 
+.nav-item {
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
+}
+
+a {
+  color: #E0FFD6;
+  text-decoration: none;
+}
+
+
+
+/* -----------FOOTER----------- */
+#footer {
+  bottom:0px;
+  z-index: 3;
+  height: 400px;
+  width: 100%;
+  background-color: #154851;
+}
+
+
+
+
+
 /* -----------GENERAL STUFF----------- */
+.dark-green {
+  color: #75fa3b;
+}
+
+b {
+  font-weight: 700;
+}
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2vw;
+}
+
+
 body {
-  background-color: #fffbe6 /*#f4f0e0/*#ebe8e2 /*#f5f5f5 /*#f4f0e0 /*#f2f0ef*/;
-  /*overflow-x: hidden;*/
+  margin: 0;
+  padding: 0;
+  background-color: #237A85;
+  font-family: 'Roboto';
+  font-weight:300;
 }
 .section {
   position: relative;
   top: 80px;
-  left: 0px;
+  margin: 0 auto;
   z-index: 1;
-  overflow: auto;
-  color: #585953;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 2vw;
+  color: #E0FFD6;
+}
+
+/* vertical spacer */
+.spacer {
+  height: 200px;
 }
 
 .title {
+  color: #baf8a0;
   font-size: 3em;
-  font-weight: bold;
 }
 .subtitle {
+  color: #baf8a0;
   font-size: 25px;
   font-weight: bold;
 }
+
+input[type="text"] {
+  color: #154851;
+}
+
 
 .flex-container-center {
   display: flex;
@@ -96,30 +154,39 @@ body {
   justify-content: space-evenly;
 }
 
-.some-button {
-  font-size: 25px;
+.button {
+  margin-bottom: 60px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 7px 7px 11px rgba(0, 0, 0, 0.3);
   width: 275px;
   height: 50px;
-  color: #ffffff;
-  background-color: #585953;
-  border-radius: 15px;
-  border: none;
+  background-color: #baf8a0;
+  color: #154851;
+  font-size: 25px;
 }
 
-.sepia-filter {
-  filter: sepia(1) brightness(0.35) contrast(1);
+.top-button {
+  margin: 20px;
 }
+
+.hover-shadow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-shadow:hover {
+  box-shadow: 14px 14px 22px rgba(0, 0, 0, 0.3);
+}
+
 p {
   margin-left: 7%;
   margin-right: 7%;
   line-height: 1.8;
   font-size: 25px;
 }
+
 h2 {
   font-size: 25px;
-}
-.blue {
-  color: rgb(17, 178, 184);
 }
 
 /* -----------OBSERVER STUFF---------*/

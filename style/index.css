@@ -5,10 +5,42 @@
 */
 
 /* ----------------------HOME---------------------- */
-#logo {
+.title-color-mask {
   height: 200px;
+  background-color: #baf8a0;
+  -webkit-mask: url('../img/titleLogo.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('../img/titleLogo.png') no-repeat center;
+  mask-size: contain;
 }
 
 /* ----------------------ABOUT---------------------- */
-
+.about-image {
+  max-width: 500px;
+  max-height: 400px;
+  height: auto;
+  width: auto;
+  display: block;
+}
 /* ----------------------CONTACT---------------------- */
+
+
+.email-color-mask {
+  width: 200px;
+  height: 200px;
+  background-color: #baf8a0;
+  -webkit-mask: url('../img/email.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('../img/email.png') no-repeat center;
+  mask-size: contain;
+}
+
+.phone-color-mask {
+  width: 200px;
+  height: 200px;
+  background-color: #baf8a0;
+  -webkit-mask: url('../img/phone.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('../img/phone.png') no-repeat center;
+  mask-size: contain;
+}

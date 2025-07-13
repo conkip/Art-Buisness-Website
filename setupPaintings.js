@@ -7,8 +7,8 @@
 async function setupPaintings(Painting) {
     let template = new Painting({
         name: "Example",
-        image: "Example.jpg",
-        dimensions: "Length x Width x Depth x (Optional) Number- ex- 24x24x2",
+        image: "Example.webp",
+        dimensions: "Length x Width x Depth - ex- 24x24x2",
         date: "2025",
         paint: "Acrylic",
         canvas: "Wood Panel",
@@ -19,22 +19,9 @@ async function setupPaintings(Painting) {
         sold: true,
     });
 
-    let blankTemplate = new Painting({
-        name: "",
-        image: "",
-        dimensions: "",
-        date: "",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-        framed: true,
-        sold: true,
-    });
-
     let painting1 = new Painting({
-        name: "Beyond The Limit",
-        image: "BeyondTheLimit.jpeg",
+        name: "Beyond the Limit",
+        image: "BeyondTheLimit.webp",
         dimensions: "24x24x1 1/2",
         date: "",
         paint: "Oil",
@@ -48,7 +35,7 @@ async function setupPaintings(Painting) {
 
     let painting2 = new Painting({
         name: "Blue Pallete",
-        image: "BluePallete.jpg",
+        image: "BluePallete.webp",
         dimensions: "36x36x1",
         date: "",
         paint: "Oil",
@@ -62,7 +49,7 @@ async function setupPaintings(Painting) {
 
     let painting35 = new Painting({
         name: "Butterflies",
-        image: "Butterflies.jpeg",
+        image: "Butterflies.webp",
         dimensions: "10x10x1/2",
         date: "2025",
         paint: "Acrylic",
@@ -76,7 +63,7 @@ async function setupPaintings(Painting) {
 
     let painting3 = new Painting({
         name: "Chasing Blues",
-        image: "ChasingBlues.jpg",
+        image: "ChasingBlues.webp",
         dimensions: "16x24x1",
         date: "2021",
         paint: "Oil",
@@ -89,7 +76,7 @@ async function setupPaintings(Painting) {
 
     let painting4 = new Painting({
         name: "Circular Echo",
-        image: "CircularEcho.jpeg",
+        image: "CircularEcho.webp",
         dimensions: "30x30x1 1/2",
         date: "",
         paint: "Oil",
@@ -101,8 +88,8 @@ async function setupPaintings(Painting) {
     await painting4.save();
 
     let painting5 = new Painting({
-        name: "Colors In Motion",
-        image: "ColorsInMotion.jpg",
+        name: "Colors in Motion",
+        image: "ColorsInMotion.webp",
         dimensions: "30x36x1",
         date: "",
         paint: "Acrylic",
@@ -114,8 +101,8 @@ async function setupPaintings(Painting) {
     await painting5.save();
 
     let painting6 = new Painting({
-        name: "Colors Of Liberty",
-        image: "ColorsOfLiberty.jpg",
+        name: "Colors of Liberty",
+        image: "ColorsOfLiberty.webp",
         dimensions: "24x30x1",
         date: "",
         paint: "",
@@ -129,12 +116,12 @@ async function setupPaintings(Painting) {
 
     let painting7 = new Painting({
         name: "Color Spectrum",
-        image: "ColorSpectrum.jpg",
+        image: "ColorSpectrum.webp",
         dimensions: "36x48x1",
         date: "",
         paint: "Acrylic",
         canvas: "Wood Canvas",
-        finish: "Epopxy Coating",
+        finish: "Epoxy Coating",
         desc: "",
     });
 
@@ -142,7 +129,7 @@ async function setupPaintings(Painting) {
 
     let painting8 = new Painting({
         name: "Cosmic Tides",
-        image: "CosmicTides.jpeg",
+        image: "CosmicTides.webp",
         dimensions: "16x20x1",
         date: "",
         paint: "Acrylic",
@@ -156,7 +143,7 @@ async function setupPaintings(Painting) {
 
     let painting30 = new Painting({
         name: "Discovery",
-        image: "Discovery.jpeg",
+        image: "Discovery.webp",
         dimensions: "24x24x1 1/2",
         date: "2025",
         paint: "Acrylic",
@@ -169,7 +156,7 @@ async function setupPaintings(Painting) {
 
     let painting9 = new Painting({
         name: "Dot Fusion",
-        image: "DotFusion.jpg",
+        image: "DotFusion.webp",
         dimensions: "48x48x1",
         date: "",
         paint: "",
@@ -183,7 +170,7 @@ async function setupPaintings(Painting) {
 
     let painting10 = new Painting({
         name: "Dot Symphony",
-        image: "DotSymphony.jpg",
+        image: "DotSymphony.webp",
         dimensions: "",
         date: "",
         paint: "",
@@ -197,7 +184,7 @@ async function setupPaintings(Painting) {
 
     let painting29 = new Painting({
         name: "Dream",
-        image: "Dream.jpeg",
+        image: "Dream.webp",
         dimensions: "24x24x1 1/2",
         date: "2025",
         paint: "Acrylic",
@@ -210,7 +197,7 @@ async function setupPaintings(Painting) {
 
     let painting11 = new Painting({
         name: "Eternal Light",
-        image: "EternalLight.jpg",
+        image: "EternalLight.webp",
         dimensions: "36x48x1",
         date: "",
         paint: "Oil",
@@ -225,7 +212,7 @@ async function setupPaintings(Painting) {
 
     let painting39 = new Painting({
         name: "Electric Waves",
-        image: "ElectricWaves.jpeg",
+        image: "ElectricWaves.webp",
         dimensions: "48x24x1",
         date: "",
         paint: "",
@@ -240,7 +227,7 @@ async function setupPaintings(Painting) {
 
     let painting12 = new Painting({
         name: "Eternal Sunshine",
-        image: "EternalSunshine.jpg",
+        image: "EternalSunshine.webp",
         dimensions: "36x48x1",
         date: "",
         paint: "Acrylic",
@@ -254,7 +241,7 @@ async function setupPaintings(Painting) {
 
     let painting13 = new Painting({
         name: "Flowing Essence",
-        image: "FlowingEssence.jpg",
+        image: "FlowingEssence.webp",
         dimensions: "6x6x1",
         date: "",
         paint: "Acrylic",
@@ -269,7 +256,7 @@ async function setupPaintings(Painting) {
 
     let painting38 = new Painting({
         name: "GoldenGiants",
-        image: "GoldenGiants.jpeg",
+        image: "GoldenGiants.webp",
         dimensions: "30x18x1 1/4",
         date: "2025",
         paint: "Acrylic",
@@ -282,7 +269,7 @@ async function setupPaintings(Painting) {
 
     let painting14 = new Painting({
         name: "Hazy Drift",
-        image: "HazyDrift.jpeg",
+        image: "HazyDrift.webp",
         dimensions: "60x36x1 1/4",
         date: "2015",
         paint: "Acrylic",
@@ -295,7 +282,7 @@ async function setupPaintings(Painting) {
 
     let painting15 = new Painting({
         name: "Liquid Dreamscapes",
-        image: "LiquidDreamscapes.jpg",
+        image: "LiquidDreamscapes.webp",
         dimensions: "",
         date: "",
         paint: "",
@@ -309,12 +296,12 @@ async function setupPaintings(Painting) {
 
     let painting16 = new Painting({
         name: "Liquid Horizons",
-        image: "LiquidHorizons.jpg",
+        image: "LiquidHorizons.webp",
         dimensions: "48x60x1",
-        date: "",
-        paint: "",
-        canvas: "",
-        finish: "",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Canvas",
+        finish: "Varnish Coating",
         desc: "",
     });
 
@@ -322,7 +309,7 @@ async function setupPaintings(Painting) {
 
     let painting26 = new Painting({
         name: "Line of Sight",
-        image: "LineOfSight.jpeg",
+        image: "LineOfSight.webp",
         dimensions: "40x16x1/2",
         date: "2025",
         paint: "Acrylic",
@@ -335,7 +322,7 @@ async function setupPaintings(Painting) {
 
     let painting40 = new Painting({
         name: "Meeples",
-        image: "Meeples.jpeg",
+        image: "Meeples.webp",
         dimensions: "12x12x1",
         date: "",
         paint: "",
@@ -347,13 +334,26 @@ async function setupPaintings(Painting) {
 
     await painting40.save();
 
+    let painting37 = new Painting({
+        name: "Mid Century Sputnik",
+        image: "MidCenturySputnik.webp",
+        dimensions: "24x24x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting37.save();
+
     let painting43 = new Painting({
         name: "Mini Motion",
-        image: "MiniMotion.jpeg",
+        image: "MiniMotion.webp",
         dimensions: "11x14x1 1/2",
         date: "",
         paint: "",
-        canvas: "",
+        canvas: "Canvas",
         finish: "",
         desc: "",
         sold: true
@@ -361,24 +361,24 @@ async function setupPaintings(Painting) {
 
     await painting43.save();
 
-    let painting27 = new Painting({
+    let painting44 = new Painting({
         name: "Ocean Clearing",
-        image: "OceanClearing.jpeg",
-        dimensions: "16x23 3/4x2",
-        date: "2025",
+        image: "OceanClearing.webp",
+        dimensions: "11x14x1 1/2",
+        date: "",
         paint: "",
-        canvas: "",
+        canvas: "Wood Panel",
         finish: "",
         desc: "",
-        framed: true,
-        sold: true
+        sold: true,
+        framed: true
     });
 
-    await painting27.save();
+    await painting44.save();
 
     let painting17 = new Painting({
-        name: "Orbits In Motion",
-        image: "OrbitsInMotion.jpg",
+        name: "Orbits in Motion",
+        image: "OrbitsInMotion.webp",
         dimensions: "8x8x1",
         date: "",
         paint: "",
@@ -391,9 +391,22 @@ async function setupPaintings(Painting) {
 
     await painting17.save();
 
+    let painting27 = new Painting({
+        name: "Painted Ladies",
+        image: "PaintedLadies.webp",
+        dimensions: "36x36x1 1/2",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Deep Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art of butterflies on a journey.",
+    });
+
+    await painting27.save();
+
     let painting18 = new Painting({
         name: "Pinwheel",
-        image: "Pinwheel.jpg",
+        image: "Pinwheel.webp",
         dimensions: "36x48x1",
         date: "",
         paint: "Acrylic",
@@ -407,7 +420,7 @@ async function setupPaintings(Painting) {
 
     let painting19 = new Painting({
         name: "Retro Vibe",
-        image: "RetroVibe.jpg",
+        image: "RetroVibe.webp",
         dimensions: "36x48x1",
         date: "",
         paint: "Acrylic",
@@ -421,11 +434,11 @@ async function setupPaintings(Painting) {
 
     let painting42 = new Painting({
         name: "Setting Sun",
-        image: "SettingSun.jpeg",
+        image: "SettingSun.webp",
         dimensions: "26x32x1 1/2",
         date: "",
         paint: "",
-        canvas: "",
+        canvas: "Canvas",
         finish: "",
         desc: "",
         framed: true,
@@ -435,8 +448,8 @@ async function setupPaintings(Painting) {
     await painting42.save();
 
     let painting20 = new Painting({
-        name: "Spectrum Of The Sea",
-        image: "SpectrumOfTheSea.jpg",
+        name: "Spectrum of the Sea",
+        image: "SpectrumOfTheSea.webp",
         dimensions: "18x24x1",
         date: "",
         paint: "Acrylic",
@@ -451,7 +464,7 @@ async function setupPaintings(Painting) {
 
     let painting41 = new Painting({
         name: "Spiral",
-        image: "Spiral.jpeg",
+        image: "Spiral.webp",
         dimensions: "12x6x1",
         date: "",
         paint: "",
@@ -464,9 +477,23 @@ async function setupPaintings(Painting) {
 
     await painting41.save();
 
+    let painting25 = new Painting({
+        name: "Starburst Spheres",
+        image: "StarburstSpheres.webp",
+        dimensions: "16x16x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+        mult: true
+    });
+
+    await painting25.save();
+
     let painting21 = new Painting({
-        name: "Strokes Of Light",
-        image: "StrokesOfLight.jpg",
+        name: "Strokes of Light",
+        image: "StrokesOfLight.webp",
         dimensions: "18x24x1",
         date: "",
         paint: "Oil",
@@ -481,7 +508,7 @@ async function setupPaintings(Painting) {
 
     let painting22 = new Painting({
         name: "Sun's Awakening",
-        image: "SunsAwakening.jpg",
+        image: "SunsAwakening.webp",
         dimensions: "18x24",
         date: "",
         paint: "Acrylic",
@@ -493,9 +520,22 @@ async function setupPaintings(Painting) {
 
     await painting22.save();
 
+    let painting32 = new Painting({
+        name: "Swallowtail in flight",
+        image: "SwallowtailInflight.webp",
+        dimensions: "24x24x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art of a yellow swallowtail butterfly.",
+    });
+
+    await painting32.save();
+
     let painting34 = new Painting({
         name: "The Longest Journey",
-        image: "TheLongestJourney.jpeg",
+        image: "TheLongestJourney.webp",
         dimensions: "39 1/18x31 1/2x1 3/8",
         date: "2025",
         paint: "Acrylic",
@@ -508,7 +548,7 @@ async function setupPaintings(Painting) {
 
     let painting36 = new Painting({
         name: "Tigers Forever",
-        image: "TigersForever.jpeg",
+        image: "TigersForever.webp",
         dimensions: "39 1/18x31 1/2x1 3/8",
         date: "2025",
         paint: "Acrylic",
@@ -521,7 +561,7 @@ async function setupPaintings(Painting) {
 
     let painting23 = new Painting({
         name: "Transformation",
-        image: "Transformation.jpeg",
+        image: "Transformation.webp",
         dimensions: "49x25x1 3/4",
         date: "2025",
         paint: "Oil",
@@ -537,7 +577,7 @@ async function setupPaintings(Painting) {
 
     let painting24 = new Painting({
         name: "",
-        image: "P24.jpg",
+        image: "P24.webp",
         dimensions: "",
         date: "2025",
         paint: "",
@@ -548,22 +588,9 @@ async function setupPaintings(Painting) {
 
     await painting24.save();
 
-    let painting25 = new Painting({
-        name: "",
-        image: "P25.jpg",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-    });
-
-    await painting25.save();
-
     let painting28 = new Painting({
         name: "",
-        image: "P28.jpg",
+        image: "P28.webp",
         dimensions: "",
         date: "2025",
         paint: "",
@@ -576,7 +603,7 @@ async function setupPaintings(Painting) {
 
     let painting31 = new Painting({
         name: "",
-        image: "P31.jpg",
+        image: "P31.webp",
         dimensions: "",
         date: "2025",
         paint: "",
@@ -587,22 +614,9 @@ async function setupPaintings(Painting) {
 
     await painting31.save();
 
-    let painting32 = new Painting({
-        name: "",
-        image: "P32.jpg",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-    });
-
-    await painting32.save();
-
     let painting33 = new Painting({
         name: "",
-        image: "P33.jpg",
+        image: "P33.webp",
         dimensions: "",
         date: "2025",
         paint: "",
@@ -612,19 +626,6 @@ async function setupPaintings(Painting) {
     });
 
     await painting33.save();
-
-    let painting37 = new Painting({
-        name: "",
-        image: "P37.jpg",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-    });
-
-    await painting37.save();
     */
 }
 

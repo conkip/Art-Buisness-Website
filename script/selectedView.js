@@ -37,13 +37,22 @@ async function addPainting(imgList, titleList, painting) {
     const text = document.createElement("p");
     newPainting.className = "gallery-cell";
     newTitle.className = "gallery-cell";
-    image.className = "gallery-image hidden";
+
+    // adds class names to fade in and cause a shadow over hover
+    image.className = "gallery-image hidden hover-shadow";
+    // only loads images as you scroll near them
+    image.loading="lazy";
+    image.src = `../paintings_webp/${painting.image}`;
+    image.alt = painting.name;
+
     text.className = "gallery-title hidden";
+    text.innerText = painting.name;
+
+    // clicking the text or the painting pulls up the selected view
     image.onclick = () => onPaintingClick(painting);
     text.onclick = () => onPaintingClick(painting);
-    image.src = `../paintings/${painting.image}`;
-    image.alt = painting.name;
-    text.innerText = painting.name;
+
+    // add paintings and text to the gallery list
     newPainting.appendChild(image);
     newTitle.appendChild(text);
 }
@@ -73,20 +82,17 @@ async function onPaintingClick(localPainting) {
     // adds the big image
     document.getElementById(
         "selected-image"
-    ).src = `../paintings/${localPainting.image}`;
+    ).src = `../paintings_webp/${localPainting.image}`;
 
-    // adds the first mini image which is of the big image
-    let previewPainting1 = document.getElementById("preview-image1")
-    previewPainting1.src = `../paintings/${localPainting.image}`;
-    previewPainting1.onclick = () => onMiniPaintingClick(localPainting.image)
+    // adds all the mini images underneath it if able
 
+    addPreviewPainting(localPainting.image, 1);
     addPreviewPainting(localPainting.image, 2);
     addPreviewPainting(localPainting.image, 3);
     addPreviewPainting(localPainting.image, 4);
     addPreviewPainting(localPainting.image, 5);
 
-    document.getElementById("selected-title").innerText =
-        localPainting.name;
+    document.getElementById("selected-title").innerText = localPainting.name;
 
     let description = "";
     description += formatDimensions(localPainting.dimensions);
@@ -94,7 +100,8 @@ async function onPaintingClick(localPainting) {
         description += " Each";
     }
     description += "\n" + localPainting.date;
-    description += "\n" + localPainting.paint + " Paint on " + localPainting.canvas;
+    description +=
+        "\n" + localPainting.paint + " Paint on " + localPainting.canvas;
     description += "\n" + localPainting.finish;
     if (localPainting.framed) {
         description += "\nFramed";
@@ -104,28 +111,38 @@ async function onPaintingClick(localPainting) {
     description += "\n\n" + localPainting.desc;
 
     document.getElementById("selected-description").innerText = description;
-    document
-        .getElementById("selected-description")
-        .classList.add("subtitle");
+    document.getElementById("selected-description").classList.add("subtitle");
 }
 
-// adds an image to under the main painting in the selected view if it exists
+// adds an image to under the main painting in the selected view if they exist
 function addPreviewPainting(fileName, number) {
     //first at the number to the image name
     let fileNameSplit = fileName.split(".");
     let newFileName = fileNameSplit[0] + number + "." + fileNameSplit[1];
-    
-    fetch(`../paintings/${newFileName}`)
-        .then(response => {
+
+    if (number == 1) {
+        newFileName = fileName;
+    }
+
+    fetch(`../paintings_webp/${newFileName}`)
+        .then((response) => {
             if (response.ok) {
-                let previewPainting = document.getElementById("preview-image" + number)
-                previewPainting.src = `../paintings/${newFileName}`;
-                previewPainting.onclick = () => onMiniPaintingClick(newFileName);
+                let previewPainting = document.getElementById(
+                    "preview-image" + number
+                );
+                previewPainting.src = `../paintings_webp/${newFileName}`;
+                previewPainting.className = "hover-shadow";
+                previewPainting.onclick = () =>
+                    onMiniPaintingClick(newFileName);
             } else {
                 console.log("File " + newFileName + " not found");
+                let previewPainting = document.getElementById(
+                    "preview-image" + number
+                );
+                previewPainting.remove();
             }
         })
-        .catch(error => {
+        .catch((error) => {
             console.error("Error checking file:", error);
         });
 }
@@ -139,14 +156,13 @@ async function onMiniPaintingClick(newFileName) {
 
     // fade out and then in in effect
     setTimeout(() => {
-        mainPainting.src = `../paintings/${newFileName}`;
+        mainPainting.src = `../paintings_webp/${newFileName}`;
 
         mainPainting.onload = () => {
             mainPainting.style.opacity = 1;
         };
     }, 300);
 }
-
 
 // updates the heart image based on if the user has the painting favorited or not
 function updateHeart(localPainting) {

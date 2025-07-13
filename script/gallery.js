@@ -3,6 +3,7 @@
 
     Handles setting up the gallery with all the paintings
 */
+document.getElementById("sold-title").style.visibility = "hidden";
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
@@ -31,7 +32,6 @@ function addAllPaintings() {
         .catch(error => console.error('Error:', error));
 }
 
-document.getElementById("sold-title").style.visibility = "hidden";
 
 // wait until all paintings are loaded in and then apply observer
 addAllPaintings().then(() => {
@@ -45,7 +45,7 @@ addAllPaintings().then(() => {
 // make sold invisible for a second so it doesnt apear on top when loading
 setTimeout(() => {
   document.getElementById("sold-title").style.visibility = "visible";
-}, 300);
+}, 2000);
 
 //scrolls to the top on load to avoid loading into empty space
 window.onbeforeunload = () => window.scrollTo(0, 0);
