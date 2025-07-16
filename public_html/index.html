@@ -40,11 +40,11 @@
                             alt="Title Logo"
                         />
 
-                        <p class="center-text">
+                        <h3 class="center-text">
                             Welcome! Feel free to browse our
                             <a href="gallery.html">gallery</a>. If you see one
                             you like contact us below!
-                        </p>
+                        </h3>
 
                         <div class="rainbow-gallery">
                             <img
@@ -69,35 +69,29 @@
                             />
                         </div>
 
-                        <p class="center-text top-margin">
+                        <h3 class="center-text top-margin">
                             Click on a painting to see more details!
-                        </p>
+                        </h3>
+
+                        <h3 class="center-text">Also, login to like paintings and see them in your profile!</h3>
+
+                        <button
+                            id="login-signup-button"
+                            onclick="clickLoginSignup()"
+                            class="center-elem button top-button hover-shadow"
+                            style="display: none"
+                        >
+                            Login/Sign Up
+                        </button>
+                        <button
+                            id="logout-button"
+                            onclick="clickLogout()"
+                            class="center-elem button top-button hover-shadow"
+                            style="display: none"
+                        >
+                            Logout
+                        </button>
                     </div>
-                </div>
-
-                <!-- Section 1: Login and Profile Preview -->
-                <div class="section">
-
-                    <p class="center-text">Login to like paintings and see them in your profile!</p>
-
-                    <!--PROFILE PREVIEW HERE-->
-
-                    <button
-                        id="login-signup-button"
-                        onclick="clickLoginSignup()"
-                        class="center-elem button top-button hover-shadow"
-                        style="display: none"
-                    >
-                        Login/Sign Up
-                    </button>
-                    <button
-                        id="logout-button"
-                        onclick="clickLogout()"
-                        class="center-elem button top-button hover-shadow"
-                        style="display: none"
-                    >
-                        Logout
-                    </button>
                 </div>
 
                 <!-- description -->

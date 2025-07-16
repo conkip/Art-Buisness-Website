@@ -17,7 +17,7 @@
     /*--h1: bold max(36px, 4vw) / max(48px, 5vw) var(--ff);*/
     --h1: bold 54px/64px var(--ff);
     --h2: bold 36px/45px var(--ff);
-    --h3: bold 24px/30px var(--ff);
+    --h3: 24px/30px var(--ff);
     --links: bold 18px/18px var(--ff);
     --p: 18px/30px var(--ff);
     --subtext: 12px/20px var(--ff);
@@ -39,7 +39,7 @@ h2 {
 }
 h3 {
     font: var(--h3);
-    color: var(--green);
+    color: var(--light-green);
 }
 p {
     font: var(--p);
