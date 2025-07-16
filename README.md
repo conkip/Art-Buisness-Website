@@ -11,6 +11,4 @@
 
 **Front-End:** HTML, CSS, Javascript<br>
 **Back-End:** Node.js, Express.js, MongoDB for DB<br>
-Hosted on Digital Ocean with nginx and https<br>
-
-It has a fade in effect for scrolling and you can click to see different pictures of the paintings.
+Hosted on Digital Ocean with https through nginx<br>
