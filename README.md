@@ -1,6 +1,8 @@
 # Art-Buisness-Website
 **Link:** https://kaseycreativecanvas.com
 <br><br>
+<img width="2542" height="1230" alt="image" src="https://github.com/user-attachments/assets/7dae8511-c3cf-4532-be29-59aabc4c18ab" />
+
 ![image](https://github.com/user-attachments/assets/441af73f-730a-4dd6-a3d5-25162dba95ce)
 
 ![image](https://github.com/user-attachments/assets/9a935b2e-291e-4344-8a70-2c719d0d0206)
