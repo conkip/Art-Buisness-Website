@@ -17,10 +17,13 @@ async function afterStartup() {
         console.log("Response:", data);
 
         if (data == null) {
-            document.getElementById("profile-greeting").innerText = "Hello, Guest";
+            document.getElementById("profile-greeting").innerText =
+                "Hello, Guest";
             await setupGuestPaintings();
         } else {
-            document.getElementById("profile-greeting").innerText = `Hello, ${data.username}!`;
+            document.getElementById(
+                "profile-greeting"
+            ).innerText = `Hello, ${data.username}!`;
             await setupPaintings(data.my_likes, data.my_bids);
         }
     } catch (error) {
@@ -31,7 +34,7 @@ async function afterStartup() {
 async function setupGuestPaintings() {
     try {
         const response = await fetch("/getGuestPaintings");
-        let data = await response.text()
+        let data = await response.text();
         data = data.trim();
 
         //makes it an empty array if there is no data
@@ -49,7 +52,6 @@ async function setupGuestPaintings() {
     }
 }
 
-
 async function setupPaintings(likes) {
     try {
         for (let paintingName of likes) {
@@ -64,9 +66,8 @@ async function setupPaintings(likes) {
     }
 }
 
-
 afterStartup().then(() => {
-    const hiddenElements = document.getElementsByClassName('hidden');
+    const hiddenElements = document.getElementsByClassName("hidden");
 
     for (let i = 0; i < hiddenElements.length; i++) {
         window.observer.observe(hiddenElements[i]);

@@ -1,7 +1,7 @@
 <!-- 
   Author: Connor Kippes
   
-  Gallery page showing off clickable artwork.
+  About page with two pictures of Kasey and her story.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
         <meta charset="utf-8" />
         <title>Creative Canvas</title>
         <link rel="stylesheet" type="text/css" href="../style/all.css" />
-        <link rel="stylesheet" type="text/css" href="../style/gallery.css" />
+        <link rel="stylesheet" type="text/css" href="../style/about.css" />
     </head>
 
     <body>
@@ -31,74 +31,79 @@
             </nav>
 
             <main>
-                <div id="gallery-section" class="solo-section center-text">
-                    <h1>Gallery</h1>
-                    <table id="gallery-table" class="center-non-block">
-                        <tr></tr>
-                        <tr></tr>
-                    </table>
-                    <br /><br /><br />
-                    <h1 id="sold-title" class="title">Sold</h1>
-                    <table id="sold-table" class="center-non-block">
-                        <tr></tr>
-                        <tr></tr>
-                    </table>
-                </div>
-
-                <div
-                    id="selected-view"
-                    class="solo-section"
-                    style="visibility: collapse"
-                >
-                    <div class="flex-center">
-                        <div>
-                            <!-- main image -->
-                            <div class="selected-image-container">
-                                <img id="selected-image" alt="Selected Image" />
-                            </div>
-
-                            <!-- mini previews under the image -->
-                            <div>
-                                <div class="preview-image-container">
-                                    <img
-                                        id="preview-image1"
-                                        alt="Preview Image 1"
-                                    />
-                                </div>
-                                <div class="preview-image-container">
-                                    <img id="preview-image2" />
-                                </div>
-                                <div class="preview-image-container">
-                                    <img id="preview-image3" />
-                                </div>
-                                <div class="preview-image-container">
-                                    <img id="preview-image4" />
-                                </div>
-                                <div class="preview-image-container">
-                                    <img id="preview-image5" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <svg
-                                id="heart"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 512 512"
-                            >
-                                <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                <path
-                                    d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 
-                300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 
-                51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 
-                185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
-                                />
-                            </svg>
-
-                            <p id="selected-title"></p>
-                            <p id="selected-description"></p>
-                        </div>
+                <div class="solo-section">
+                    <!-- About Kasey -->
+                    <h1 class="center-text title hidden green">
+                        About the Artist
+                    </h1>
+                    <div class="flex-space-row">
+                        <img
+                            class="about-image hidden"
+                            src="../images/about.jpeg"
+                            alt="Picture of Kasey with butterfly wall"
+                        />
+                        <img
+                            class="about-image hidden"
+                            src="../images/about2.jpeg"
+                            alt="Picture of Kasey with butterfly painting"
+                        />
                     </div>
+                    <br />
+                    <p class="side-margins hidden">
+                        &emsp; As a child, I always loved coloring in coloring
+                        books. My grandmother set aside a special spot for me to
+                        color, and it became a place where I could escape and
+                        let my mind wander to a happy place. My journey into
+                        painting on canvas, however, didn't begin until I moved
+                        to Lake Havasu due to my husband's job.
+
+                        <br /><br />
+
+                        &emsp; Being a military spouse often means you're
+                        constantly on the move, making it difficult to build a
+                        stable career. My main profession had been as a massage
+                        therapist, and I’ve always seen myself as a healer, with
+                        the goal of helping those around me. When we relocated
+                        for my husband’s job, I had to start my business from
+                        scratch, which made it challenging to make new friends
+                        and find stability. It was during this time that I met
+                        my friend Jackie, who encouraged me to start painting
+                        while I was still trying to establish my massage therapy
+                        practice.
+
+                        <br /><br />
+
+                        &emsp; I quickly realized that painting brought me a
+                        sense of calm and relief from the anxiety that came with
+                        moving and starting over in a new place. Painting became
+                        a way for me to heal, providing a creative outlet that
+                        helped ease my worries and lifted me out of the
+                        depression and stress of constant transitions. It took
+                        me back to that happy place I had as a child, and I
+                        realized that painting, for me, is a form of healing.
+
+                        <br /><br />
+
+                        &emsp; My first paintings were two 4x5-foot canvases.
+                        Both my husband and Jackie were a bit puzzled as to why
+                        I’d start with such large canvases, but I needed a piece
+                        for the expansive wall above the stairs in our home, so
+                        I didn’t even consider painting something smaller. My
+                        husband encouraged me to buy more canvas after
+                        completing my first painting. This decision led me to
+                        start creating art for every wall in our home.
+
+                        <br /><br />
+
+                        &emsp; My massage clients began to notice and compliment
+                        my paintings, and my family members also expressed their
+                        appreciation, I gained more confidence in my work. I
+                        sold a few pieces and gave many away to friends and
+                        family. When we moved cross-country from Lake Havasu,
+                        the couple who bought our home purchased several of my
+                        paintings, which were still hanging on the walls. This
+                        was the start of my confidence in my artwork.
+                    </p>
                 </div>
             </main>
 
@@ -179,7 +184,6 @@
         </div>
 
         <script src="../script/observer.js"></script>
-        <script src="../script/selectedView.js"></script>
-        <script src="../script/gallery.js"></script>
+        <script src="../script/index.js"></script>
     </body>
 </html>

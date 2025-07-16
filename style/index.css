@@ -4,43 +4,71 @@
     CSS for the index page.
 */
 
-/* ----------------------HOME---------------------- */
-.title-color-mask {
-  height: 200px;
-  background-color: #baf8a0;
-  -webkit-mask: url('../img/titleLogo.png') no-repeat center;
-  -webkit-mask-size: contain;
-  mask: url('../img/titleLogo.png') no-repeat center;
-  mask-size: contain;
+/* ----------- SECTION 1 ----------- */
+#section-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
-/* ----------------------ABOUT---------------------- */
-.about-image {
-  max-width: 500px;
-  max-height: 400px;
-  height: auto;
-  width: auto;
-  display: block;
-}
-/* ----------------------CONTACT---------------------- */
-
-
-.email-color-mask {
-  width: 200px;
-  height: 200px;
-  background-color: #baf8a0;
-  -webkit-mask: url('../img/email.png') no-repeat center;
-  -webkit-mask-size: contain;
-  mask: url('../img/email.png') no-repeat center;
-  mask-size: contain;
+#title-logo {
+    fill: var(--green);
 }
 
-.phone-color-mask {
-  width: 200px;
-  height: 200px;
-  background-color: #baf8a0;
-  -webkit-mask: url('../img/phone.png') no-repeat center;
-  -webkit-mask-size: contain;
-  mask: url('../img/phone.png') no-repeat center;
-  mask-size: contain;
+.top-margin {
+    margin-top: 80px;
 }
+
+#arrow-logo {
+    fill: var(--green);
+    width: 50px;
+    height: 50px;
+}
+
+.rainbow-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: 50px;
+    perspective: 1000px;
+    transition: transform 0.4s ease;
+}
+
+.rainbow-gallery:hover {
+    transform: translateY(-10px); /* Arc lifts slightly */
+}
+
+.rainbow-gallery img {
+    margin: 0px 20px;
+    width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.rainbow-gallery img:nth-child(1) {
+    transform: rotate(-20deg) translateY(20px);
+}
+.rainbow-gallery img:nth-child(2) {
+    transform: rotate(-10deg) translateY(10px);
+}
+.rainbow-gallery img:nth-child(3) {
+    transform: rotate(0deg) translateY(0px);
+}
+.rainbow-gallery img:nth-child(4) {
+    transform: rotate(10deg) translateY(10px);
+}
+.rainbow-gallery img:nth-child(5) {
+    transform: rotate(20deg) translateY(20px);
+}
+
+.rainbow-gallery img:hover {
+    transform: scale(1.25);
+}
+
+/* ----------- SECTION 2 ----------- */
+
+/* ----------- SECTION 3 ----------- */

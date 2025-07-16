@@ -41,7 +41,7 @@ async function addPainting(imgList, titleList, painting) {
     // adds class names to fade in and cause a shadow over hover
     image.className = "gallery-image hidden hover-shadow";
     // only loads images as you scroll near them
-    image.loading="lazy";
+    image.loading = "lazy";
     image.src = `../paintings_webp/${painting.image}`;
     image.alt = painting.name;
 
@@ -176,15 +176,14 @@ function updateHeart(localPainting) {
                 for (let paintingName of guestPaintings) {
                     if (paintingName == localPainting.name) {
                         //change heart back to red
-                        document.getElementById("heart").style.filter =
-                            "grayscale(0%)";
+                        document.getElementById("heart").style.fill = "red";
                         foundPainting = true;
                         break;
                     }
                 }
                 if (!foundPainting) {
-                    document.getElementById("heart").style.filter =
-                        "grayscale(100%)";
+                    document.getElementById("heart").style.fill =
+                        "rgb(75, 75, 75)";
                 }
             })
             .catch((error) => console.error("Error:", error));
@@ -193,13 +192,13 @@ function updateHeart(localPainting) {
         for (let paintingName of curUser.my_likes) {
             if (paintingName == localPainting.name) {
                 //change heart back to red
-                document.getElementById("heart").style.filter = "grayscale(0%)";
+                document.getElementById("heart").style.fill = "red";
                 foundPainting = true;
                 break;
             }
         }
         if (!foundPainting) {
-            document.getElementById("heart").style.filter = "grayscale(100%)";
+            document.getElementById("heart").style.fill = "rgb(75, 75, 75)";
         }
     }
 }
@@ -208,20 +207,20 @@ function updateHeart(localPainting) {
 async function heartClicked() {
     if (curUser == null) {
         heart = document.getElementById("heart");
-        if (heart.style.filter == "grayscale(100%)") {
-            document.getElementById("heart").style.filter = "grayscale(0%)";
+        if (heart.style.fill == "rgb(75, 75, 75)") {
+            document.getElementById("heart").style.fill = "red";
             fetch(`/updateGuestLike/${curPainting.name}`);
         } else {
-            document.getElementById("heart").style.filter = "grayscale(100%)";
+            document.getElementById("heart").style.fill = "rgb(75, 75, 75)";
             fetch(`/updateGuestLike/${curPainting.name}`);
         }
     } else {
         heart = document.getElementById("heart");
-        if (heart.style.filter == "grayscale(100%)") {
-            document.getElementById("heart").style.filter = "grayscale(0%)";
+        if (heart.style.fill == "rgb(75, 75, 75)") {
+            document.getElementById("heart").style.fill = "red";
             fetch(`/updateLike/${curUser.username}/${curPainting.name}/false`);
         } else {
-            document.getElementById("heart").style.filter = "grayscale(100%)";
+            document.getElementById("heart").style.fill = "rgb(75, 75, 75)";
             fetch(`/updateLike/${curUser.username}/${curPainting.name}/true`);
         }
     }

@@ -5,156 +5,209 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
-    <meta charset="utf-8">
-    <title>Creative Canvas</title>
-    <link rel="stylesheet" type="text/css" href="../style/all.css">
-    <link rel="stylesheet" type="text/css" href="../style/index.css">
-  </head>
-  
-  <body>
-    <div id="nav-bar">
-      <table class = "center-non-block">
-        <tr>
-          <td class="nav-item">
-            <a href="index.html">Home</a>
-          </td>
-          <td class="nav-item">
-            <a href="profile.html">Profile</a>
-          </td>
-          <td class="nav-item">
-            <a href="gallery.html">Gallery</a>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <head>
+        <meta charset="utf-8" />
+        <title>Creative Canvas</title>
+        <link rel="stylesheet" type="text/css" href="../style/all.css" />
+        <link rel="stylesheet" type="text/css" href="../style/index.css" />
+    </head>
 
+    <body>
+        <div class="page-wrapper">
+            <nav>
+                <table class="center-non-block">
+                    <tr>
+                        <td class="nav-item">
+                            <a href="index.html">Home</a>
+                        </td>
+                        <td class="nav-item">
+                            <a href="gallery.html">Gallery</a>
+                        </td>
+                        <td class="nav-item">
+                            <a href="profile.html">Profile</a>
+                        </td>
+                    </tr>
+                </table>
+            </nav>
 
-    <!-- change this part to work as home page -->
-    <div class="section">
-      <!-- <h1 id="title"> Creative Canvas </h1>  -->
-      <div class="title-color-mask center-elem"></div>
-      <p class = "center-text">Welcome! Feel free to browse our <a href="gallery.html" class = "dark-green"><em>gallery</em></a>
-      and click on a painting to see more details. <br><br>
-      Also, you may login to like paintings and see them in your profile!</p> <br>
+            <main>
+                <!-- Section 1: Title and Gallery Preview -->
+                <div class="section">
+                    <div id="section-1">
+                        <img
+                            id="title-logo"
+                            src="../images/title-logo.svg"
+                            alt="Title Logo"
+                        />
 
-      <button id = "login-signup-button" onclick="clickLoginSignup()" class = "center-elem button top-button hover-shadow" style = "display:none;">Login/Sign Up</button>
-      <button id = "logout-button" onclick="clickLogout()" class = "center-elem button top-button hover-shadow" style = "display:none;">Logout</button>
-      <br><br>
-      <!-- Browse our gallery and bid on your favorite pieces. <br> -->
-      <p class="center-text side-margins">
-        <b>Kasey </b>Kurowsky is the creative force behind Creative Canvas, 
-        a studio specializing in one-of-a-kind abstract art.
-        <br><br><br>
-        A self-taught artist, Kasey draws inspiration from the vibrant 
-        colors and textures found in everyday life, transforming them 
-        into compelling visual stories through acrylic and oil mediums.
-        <br><br><br>
-        With a deep passion for art and a commitment to originality, 
-        Kasey’s work captures the essence of emotion and movement, 
-        offering collectors unique pieces that resonate on a personal 
-        level.
-        <br><br><br>
-        Creative Canvas by Kasey is not just a studio - it’s a 
-        space where creativity flourishes, and each artwork tells a 
-        story as distinctive as its creator.
-        <br><br><br>
-        Explore the artistry of Creative Canvas by Kasey and discover 
-        how bold colors and thoughtful design can elevate any space.
-      </p>
+                        <p class="center-text">
+                            Welcome! Feel free to browse our
+                            <a href="gallery.html">gallery</a>. If you see one
+                            you like contact us below!
+                        </p>
 
+                        <div class="rainbow-gallery">
+                            <img
+                                src="../paintings_webp/Discovery.webp"
+                                alt="Discovery Painting"
+                            />
+                            <img
+                                src="../paintings_webp/GoldenGiants.webp"
+                                alt="Golden Giants Painting"
+                            />
+                            <img
+                                src="../paintings_webp/MidCenturySputnik.webp"
+                                alt="Mid Century Sputnik Painting"
+                            />
+                            <img
+                                src="../paintings_webp/ColorsOfLiberty.webp"
+                                alt="Colors of Liberty Painting"
+                            />
+                            <img
+                                src="../paintings_webp/TigersForever.webp"
+                                alt="Tigers Forever Painting"
+                            />
+                        </div>
 
-      <div class="spacer"></div>
+                        <p class="center-text top-margin">
+                            Click on a painting to see more details!
+                        </p>
+                    </div>
+                </div>
 
+                <div class="section">
+                    <!-- gallery tutorial -->
+                    <p>Click on a painting to see more details!</p>
+                    <p>CLICK PICTURE OR GIF HERE</p>
 
-      <!-- Contact -->
-      <h1 class = "center-text title hidden green"> Contact </h1>
-      <p class = "center-text hidden">Please, contact us if you would like to make a purchase.</p>
-      <div class = "flex-container-space-row">
-        <div class = "flex-container-space-column">
-          <div class="phone-color-mask center-elem hidden"></div>
-          <p class = "center-text hidden">(928) 453-4930</p>
+                    <!-- profile and login tutorial -->
+                    <p>Login to like paintings and see them in your profile!</p>
+
+                    <p>PROFILE PREVIEW HERE</p>
+
+                    <button
+                        id="login-signup-button"
+                        onclick="clickLoginSignup()"
+                        class="center-elem button top-button hover-shadow"
+                        style="display: none"
+                    >
+                        Login/Sign Up
+                    </button>
+                    <button
+                        id="logout-button"
+                        onclick="clickLogout()"
+                        class="center-elem button top-button hover-shadow"
+                        style="display: none"
+                    >
+                        Logout
+                    </button>
+                </div>
+
+                <!-- description -->
+                <div class="section">
+                    <p class="center-text side-margins">
+                        Kasey Kurowsky is the creative force behind Creative
+                        Canvas, a studio specializing in one-of-a-kind abstract
+                        art.
+                        <br /><br /><br />
+                        A self-taught artist, Kasey draws inspiration from the
+                        vibrant colors and textures found in everyday life,
+                        transforming them into compelling visual stories through
+                        acrylic and oil mediums.
+                        <br /><br /><br />
+                        With a deep passion for art and a commitment to
+                        originality, Kasey’s work captures the essence of
+                        emotion and movement, offering collectors unique pieces
+                        that resonate on a personal level.
+                        <br /><br /><br />
+                        Creative Canvas by Kasey is not just a studio - it’s a
+                        space where creativity flourishes, and each artwork
+                        tells a story as distinctive as its creator.
+                        <br /><br /><br />
+                        Explore the artistry of Creative Canvas by Kasey and
+                        discover how bold colors and thoughtful design can
+                        elevate any space.
+                    </p>
+                </div>
+            </main>
+
+            <footer id="footer">
+                <div class="flex-space-row">
+                    <!-- Contact -->
+                    <div class="flex-space-column">
+                        <h2 class="center-text">Contact</h2>
+
+                        <hr class="divider" />
+
+                        <!-- Email -->
+                        <div class="contact-row">
+                            <p>
+                                <a href="tel:+1-928-453-4930">
+                                    <!-- Phone Icon -->
+                                    <svg
+                                        class="contact-logo"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512"
+                                    >
+                                        <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path
+                                            d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 
+                  200.6 512 448 512c18 0 33.8-12.1 
+                  38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 
+                  368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"
+                                        />
+                                    </svg>
+                                </a>
+                            </p>
+
+                            <p>
+                                <a href="tel:+1-928-453-4930">(928) 453-4930</a>
+                            </p>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="contact-row">
+                            <p>
+                                <a href="mailto:kaseykurowsky@gmail.com">
+                                    <!-- Email Icon -->
+                                    <svg
+                                        class="contact-logo"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512"
+                                    >
+                                        <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                        <path
+                                            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4
+                  8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 
+                  64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 
+                  339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
+                                        />
+                                    </svg>
+                                </a>
+                            </p>
+
+                            <p>
+                                <a href="mailto:kaseykurowsky@gmail.com"
+                                    >kaseykurowsky@gmail.com</a
+                                >
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- About -->
+                    <div class="flex-space-column">
+                        <h2 class="center-text">About</h2>
+
+                        <hr class="divider" />
+
+                        <p><a href="about.html">My Story</a></p>
+                        <p><br /></p>
+                    </div>
+                </div>
+            </footer>
         </div>
-        <div class = "flex-container-space-column">
-          <div class="email-color-mask center-elem hidden"></div>
-          <p class = "center-text hidden">kaseykurowsky@gmail.com</p>
-        </div>
-      </div>
 
-
-      <div class="spacer"></div>
-
-
-      <!-- About Kasey -->
-      <h1 class = "center-text title hidden green">About the Artist</h1>
-      <div class = "flex-container-space-row">
-        <img class = "about-image hidden" src="../img/about.jpeg" alt="Picture of Kasey with butterfly wall">
-        <img class = "about-image hidden" src="../img/about2.jpeg" alt="Picture of Kasey with butterfly painting">
-      </div>
-      <br>
-      <p class="side-margins hidden">
-        &emsp; As a child, I always loved coloring in coloring books. My 
-        grandmother set aside a special spot for me to color, and 
-        it became a place where I could escape and let my mind wander 
-        to a happy place. My journey into painting on canvas, however, 
-        didn't begin until I moved to Lake Havasu due to my husband's 
-        job. 
-        
-        <br><br>
-
-        &emsp; Being a military spouse often means you're constantly on 
-        the move, making it difficult to build a stable career. My main 
-        profession had been as a massage therapist, and I’ve always seen 
-        myself as a healer, with the goal of helping those around me. 
-        When we relocated for my husband’s job, I had to start my business 
-        from scratch, which made it challenging to make new friends and 
-        find stability. It was during this time that I met my friend 
-        Jackie, who encouraged me to start painting while I was still 
-        trying to establish my massage therapy practice. 
-
-        <br><br>
-        
-        &emsp; I quickly realized 
-        that painting brought me a sense of calm and relief from the 
-        anxiety that came with moving and starting over in a new place. 
-        Painting became a way for me to heal, providing a creative outlet 
-        that helped ease my worries and lifted me out of the depression 
-        and stress of constant transitions. It took me back to that 
-        happy place I had as a child, and I realized that painting, 
-        for me, is a form of healing. 
-        
-        <br><br>
-        
-        &emsp; My first paintings were two 4x5-foot canvases. Both my husband and 
-        Jackie were a bit puzzled as to why I’d start with such large 
-        canvases, but I needed a piece for the expansive wall above the 
-        stairs in our home, so I didn’t even consider painting something smaller. 
-        My husband encouraged me to buy more canvas after completing my first 
-        painting. This decision led me to start creating art for every wall 
-        in our home. 
-
-        <br><br>
-        
-        &emsp; My massage clients began to notice and compliment my 
-        paintings, and my family members also expressed their appreciation, 
-        I gained more confidence in my work. I sold a few pieces and gave 
-        many away to friends and family. When we moved cross-country from 
-        Lake Havasu, the couple who bought our home purchased several of 
-        my paintings, which were still hanging on the walls. This was the 
-        start of my confidence in my artwork.
-      </p>
-
-    </div>
-
-    <div class="spacer"></div>
-
-    <div id="footer">
-      <p>hi</p>
-    </div>
-    
-    <script src = "../script/observer.js"></script>
-    <script src = "../script/index.js"></script>
-  </body>
+        <script src="../script/observer.js"></script>
+        <script src="../script/index.js"></script>
+    </body>
 </html>
-

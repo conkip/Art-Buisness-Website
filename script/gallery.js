@@ -8,13 +8,13 @@ document.getElementById("sold-title").style.visibility = "hidden";
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
     return fetch(`/getPaintings`)
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response:', data);
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Response:", data);
             for (let painting of data) {
                 // adds to propper section of the gallery if it is sold or not
                 let list = document.getElementById("gallery-table");
-                if(painting.sold){
+                if (painting.sold) {
                     list = document.getElementById("sold-table");
                 }
 
@@ -24,18 +24,21 @@ function addAllPaintings() {
                     list.insertRow(-1);
                     list.insertRow(-1);
                 }
-                addPainting(list.rows[list.rows.length - 2],list.rows[list.rows.length - 1], painting);
+                addPainting(
+                    list.rows[list.rows.length - 2],
+                    list.rows[list.rows.length - 1],
+                    painting
+                );
             }
 
             list = document.getElementById("sold-table");
         })
-        .catch(error => console.error('Error:', error));
+        .catch((error) => console.error("Error:", error));
 }
-
 
 // wait until all paintings are loaded in and then apply observer
 addAllPaintings().then(() => {
-    const hiddenElements = document.getElementsByClassName('hidden');
+    const hiddenElements = document.getElementsByClassName("hidden");
 
     for (let i = 0; i < hiddenElements.length; i++) {
         window.observer.observe(hiddenElements[i]);
@@ -44,9 +47,9 @@ addAllPaintings().then(() => {
 
 // make sold invisible for a second so it doesnt apear on top when loading
 setTimeout(() => {
-  document.getElementById("sold-title").style.visibility = "visible";
+    document.getElementById("sold-title").style.visibility = "visible";
 }, 2000);
 
 //scrolls to the top on load to avoid loading into empty space
 window.onbeforeunload = () => window.scrollTo(0, 0);
-window.addEventListener('load', () => window.scrollTo(0, 0));
+window.addEventListener("load", () => window.scrollTo(0, 0));

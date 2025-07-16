@@ -2,202 +2,246 @@
   Author: Connor Kippes
 
   General CSS for all pages.
-
-  color scheme-
-
-  dark-blue:      #154851
-  medium-blue:    #237A85
-  dark-green:     #7afd42
-  medium-green:   #baf8a0
-  light-green:    #E0FFD6
-
-  calm, colorful, nature, flow
 */
 
-
 /* import for roboto font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;600&display=swap");
 
+/* going for a clean, calming, nature theme */
+:root {
+    --nav-bg-color: #154851;
+    --main-bg-color: #164b60;
+    --light-green: #e0ffd6;
+    --green: #baf8a0;
+    --ff: "Roboto";
+    /*--h1: bold max(36px, 4vw) / max(48px, 5vw) var(--ff);*/
+    --h1: bold 54px/64px var(--ff);
+    --h2: bold 36px/45px var(--ff);
+    --h3: bold 24px/30px var(--ff);
+    --links: bold 18px/18px var(--ff);
+    --p: 18px/30px var(--ff);
+    --subtext: 12px/20px var(--ff);
+    --transition: transform 0.3 ease;
+}
 
+/*-------GENERAL--------*/
+img {
+    border-radius: 8px;
+}
 
+h1 {
+    font: var(--h1);
+    color: var(--green);
+}
+h2 {
+    font: var(--h2);
+    color: var(--green);
+}
+h3 {
+    font: var(--h3);
+    color: var(--green);
+}
+p {
+    font: var(--p);
+    color: var(--light-green);
+}
 
 /* -----------NAV BAR----------- */
-#nav-bar {
-  position: fixed;
-  top: 0px;
-  z-index: 3;
-  height: 50px;
-  width: 100%;
-  padding-top: 10px;
-  background-color: #154851;
-  font-size: 25px;
+nav {
+    position: fixed;
+    top: 0px;
+    z-index: 3;
+    height: 50px;
+    width: 100%;
+    padding-top: 10px;
+    background-color: var(--nav-bg-color);
+    font-size: 25px;
 }
 
 .nav-item {
-  padding-left: 40px;
-  padding-right: 40px;
-  text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
 }
 
 a {
-  color: #E0FFD6;
-  text-decoration: none;
+    color: var(--light-green);
+    text-decoration: none;
 }
-
-
 
 /* -----------FOOTER----------- */
-#footer {
-  bottom:0px;
-  z-index: 3;
-  height: 400px;
-  width: 100%;
-  background-color: #154851;
+footer {
+    bottom: 0px;
+    z-index: 3;
+    height: 350px;
+    width: 100%;
+    padding: 20px;
+    background-color: var(--nav-bg-color);
+    text-align: center;
 }
 
+.contact-logo {
+    fill: var(--green);
+    width: 25px;
+    height: 25px;
+}
 
+.contact-logo:hover {
+    scale: 1.15;
+}
 
+.divider {
+    border: none;
+    height: 1px;
+    background-color: var(--green);
+    width: 240px;
+}
 
+.contact-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.about-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 /* -----------GENERAL STUFF----------- */
-.dark-green {
-  color: #75fa3b;
+html {
+    scroll-snap-type: y mandatory;
+}
+
+.section {
+    margin: 150px auto 0px auto;
+    padding: 0 2vw;
+    max-width: 1080px;
+    height: 75vh;
+    /*scroll-snap-align:start;*/
+}
+
+.solo-section {
+    margin: 150px auto 0px auto;
+    padding: 0 2vw;
+    max-width: 1080px;
 }
 
 b {
-  font-weight: 700;
+    font-weight: 700;
 }
 .container {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 2vw;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2vw;
 }
-
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #237A85;
-  font-family: 'Roboto';
-  font-weight:300;
-}
-.section {
-  position: relative;
-  top: 80px;
-  margin: 0 auto;
-  z-index: 1;
-  width: 100%;
-  max-width: 1300px;
-  padding: 0 2vw;
-  color: #E0FFD6;
+    margin: 0;
+    padding: 0;
+    background-color: #237a85;
+    color: var(--light-green);
+    font-family: "Roboto";
+    font-weight: 300;
 }
 
 /* vertical spacer */
 .spacer {
-  height: 200px;
-}
-
-.title {
-  color: #baf8a0;
-  font-size: 3em;
-}
-.subtitle {
-  color: #baf8a0;
-  font-size: 25px;
-  font-weight: bold;
+    height: 200px;
 }
 
 input[type="text"] {
-  color: #154851;
+    color: #154851;
 }
 
+.flex-center {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
 
-.flex-container-center {
-  display: flex;
-  gap: 50px;
-  justify-content: center;
-  align-items: center;
+.flex-space-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.flex-space-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .center-elem {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.side-margins {
-  margin-left: 10%;
-  margin-right: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .center-non-block {
-  margin-left: auto;
-  margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .center-text {
-  text-align: center;
+    text-align: center;
 }
 .no-wrap {
-  white-space: nowrap;
-}
-
-.flex-container-space-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.flex-container-space-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+    white-space: nowrap;
 }
 
 .button {
-  margin-bottom: 60px;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 7px 7px 11px rgba(0, 0, 0, 0.3);
-  width: 275px;
-  height: 50px;
-  background-color: #baf8a0;
-  color: #154851;
-  font-size: 25px;
+    margin-bottom: 60px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 7px 7px 11px rgba(0, 0, 0, 0.3);
+    width: 275px;
+    height: 50px;
+    background-color: var(--green);
+    color: #154851;
+    font-size: 25px;
 }
 
 .top-button {
-  margin: 20px;
+    margin: 20px;
 }
 
 .hover-shadow {
-  transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .hover-shadow:hover {
-  box-shadow: 14px 14px 22px rgba(0, 0, 0, 0.3);
-}
-
-p {
-  margin-left: 7%;
-  margin-right: 7%;
-  line-height: 1.8;
-  font-size: 25px;
-}
-
-h2 {
-  font-size: 25px;
+    box-shadow: 14px 14px 22px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 /* -----------OBSERVER STUFF---------*/
 .hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .85s ease-out, transform .85s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.85s ease-out, transform 0.85s ease-out;
 }
 
-
 .show {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }

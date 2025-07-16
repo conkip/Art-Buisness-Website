@@ -240,7 +240,7 @@ async function startServer() {
     });
 
     app.use(express.static("public_html"));
-    app.use("/img", express.static("img"));
+    app.use("/images", express.static("images"));
     app.use("/paintings_webp", express.static("paintings_webp"));
     app.use("/script", express.static("script"));
     app.use("/style", express.static("style"));
