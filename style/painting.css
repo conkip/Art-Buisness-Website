@@ -1,0 +1,64 @@
+/* 
+  Author: Connor Kippes
+
+  CSS for the detailed view of a painting.
+*/
+
+#big-painting {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.big-painting-container {
+    height: 500px;
+    width: 500px;
+    overflow: hidden;
+}
+
+.big-painting-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.mini-painting-container {
+    display: inline-block;
+    height: 70px;
+    width: 70px;
+    margin-top: 20px;
+    margin-right: 7px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.mini-painting-container:hover {
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.mini-painting-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#title {
+    margin-left: 0px;
+    margin-top: 0px;
+    white-space: nowrap;
+    font-size: 40px;
+}
+#description {
+    margin-top: 0px;
+    margin-left: 0px;
+    white-space: nowrap;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+#heart {
+    fill: rgb(75, 75, 75);
+    width: 40px;
+    height: 40px;
+    transition: transform 0.15s ease;
+}

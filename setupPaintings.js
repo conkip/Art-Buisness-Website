@@ -2,6 +2,7 @@
     Author: Connor Kippes
 
     Adds all paintings to the database.
+    All paintings have unique name so no need for an id as pk.
 */
 
 async function setupPaintings(Painting) {

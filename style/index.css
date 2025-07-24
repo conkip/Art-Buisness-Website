@@ -4,15 +4,9 @@
     CSS for the index page.
 */
 
-/* ----------- SECTION 1 ----------- */
-#section-1 {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
 #title-logo {
     fill: var(--green);
+    max-width: 1080px;
 }
 
 .top-margin {
@@ -68,7 +62,3 @@
 .rainbow-gallery img:hover {
     transform: scale(1.25);
 }
-
-/* ----------- SECTION 2 ----------- */
-
-/* ----------- SECTION 3 ----------- */
