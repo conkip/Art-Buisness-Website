@@ -28,8 +28,8 @@ async function onStartup() {
 
 onStartup();
 
-// onclick function to put a mini painting into the main view
-async function onMiniPaintingClick(newFileName) {
+// on mouse hover function to put a mini painting into the main view
+async function onMiniPaintingHover(newFileName) {
     let mainPainting = document.getElementById("big-painting");
 
     // start fade out
@@ -62,7 +62,10 @@ function addMiniPainting(fileName, number) {
                     "mini-painting" + number
                 );
                 miniPainting.src = `../paintings_webp/${newFileName}`;
-                miniPainting.onclick = () => onMiniPaintingClick(newFileName);
+
+                miniPainting.addEventListener("mouseenter", () => {
+                    onMiniPaintingHover(newFileName);
+                });
             } else {
                 console.log("File " + newFileName + " not found");
                 let miniPainting = document.getElementById(
@@ -181,7 +184,7 @@ async function heartClicked() {
         if (heart.style.fill == "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
-            heart.style.transform = "scale(1.2)";
+            heart.style.transform = "scale(1.4)";
             setTimeout(() => {
                 heart.style.transform = "scale(1)";
             }, 200);
@@ -195,7 +198,7 @@ async function heartClicked() {
         if (heart.style.fill == "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
-            heart.style.transform = "scale(1.2)";
+            heart.style.transform = "scale(1.4)";
             setTimeout(() => {
                 heart.style.transform = "scale(1)";
             }, 200);
