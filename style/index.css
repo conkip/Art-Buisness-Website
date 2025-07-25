@@ -6,6 +6,7 @@
 
 #title-logo {
     fill: var(--green);
+    width:100%;
     max-width: 1080px;
 }
 
@@ -28,12 +29,11 @@
     perspective: 1000px;
     transition: transform 0.4s ease;
 }
-
 .rainbow-gallery:hover {
     transform: translateY(-10px); /* Arc lifts slightly */
 }
 
-.rainbow-gallery img {
+.rainbow-gallery-painting {
     margin: 0px 20px;
     width: 150px;
     height: auto;
@@ -43,22 +43,43 @@
     cursor: pointer;
 }
 
-.rainbow-gallery img:nth-child(1) {
+
+#rainbow-gallery-painting1{
     transform: rotate(-20deg) translateY(20px);
 }
-.rainbow-gallery img:nth-child(2) {
-    transform: rotate(-10deg) translateY(10px);
-}
-.rainbow-gallery img:nth-child(3) {
-    transform: rotate(0deg) translateY(0px);
-}
-.rainbow-gallery img:nth-child(4) {
-    transform: rotate(10deg) translateY(10px);
-}
-.rainbow-gallery img:nth-child(5) {
-    transform: rotate(20deg) translateY(20px);
-}
-
-.rainbow-gallery img:hover {
+#rainbow-gallery-painting1:hover{
     transform: scale(1.25);
 }
+
+
+#rainbow-gallery-painting2 {
+    transform: rotate(-10deg) translateY(10px);
+}
+#rainbow-gallery-painting2:hover {
+    transform: scale(1.25);
+}
+
+
+#rainbow-gallery-painting3 {
+    transform: rotate(0deg) translateY(0px);
+}
+#rainbow-gallery-painting3:hover {
+    transform: scale(1.25);
+}
+
+
+#rainbow-gallery-painting4 {
+    transform: rotate(10deg) translateY(10px);
+}
+#rainbow-gallery-painting4:hover {
+    transform: scale(1.25);
+}
+
+
+#rainbow-gallery-painting5 {
+    transform: rotate(20deg) translateY(20px);
+}
+#rainbow-gallery-painting5:hover {
+    transform: scale(1.25);
+}
+

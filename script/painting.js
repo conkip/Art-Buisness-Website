@@ -62,8 +62,7 @@ function addMiniPainting(fileName, number) {
                     "mini-painting" + number
                 );
                 miniPainting.src = `../paintings_webp/${newFileName}`;
-                miniPainting.onclick = () =>
-                    onMiniPaintingClick(newFileName);
+                miniPainting.onclick = () => onMiniPaintingClick(newFileName);
             } else {
                 console.log("File " + newFileName + " not found");
                 let miniPainting = document.getElementById(
@@ -88,10 +87,9 @@ function formatDimensions(dim) {
     return length + width + depth;
 }
 
-
 async function setupPainting() {
     const params = new URLSearchParams(window.location.search);
-    const paintingName = params.get('name');
+    const paintingName = params.get("name");
 
     const response = await fetch(`/getPainting/${paintingName}`);
     const painting = await response.json();
@@ -122,9 +120,8 @@ async function setupPainting() {
     }
     description += "\n" + painting.date;
 
-    if(painting.paint != ""){
-        description +=
-            "\n" + painting.paint + " Paint on " + painting.canvas;
+    if (painting.paint != "") {
+        description += "\n" + painting.paint + " Paint on " + painting.canvas;
         description += "\n" + painting.finish;
     }
 
@@ -158,8 +155,7 @@ function updateHeart(painting) {
                     }
                 }
                 if (!foundPainting) {
-                    heart.style.fill =
-                        "rgb(75, 75, 75)";
+                    heart.style.fill = "rgb(75, 75, 75)";
                 }
             })
             .catch((error) => console.error("Error:", error));
@@ -184,11 +180,11 @@ async function heartClicked() {
     if (curUser == null) {
         if (heart.style.fill == "rgb(75, 75, 75)") {
             heart.style.fill = "red";
-            
-            heart.style.transform = 'scale(1.15)';
+
+            heart.style.transform = "scale(1.2)";
             setTimeout(() => {
-                heart.style.transform = 'scale(1)';
-            }, 150);
+                heart.style.transform = "scale(1)";
+            }, 200);
 
             fetch(`/updateGuestLike/${curPainting.name}`);
         } else {
@@ -199,10 +195,10 @@ async function heartClicked() {
         if (heart.style.fill == "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
-            heart.style.transform = 'scale(1.15)';
+            heart.style.transform = "scale(1.2)";
             setTimeout(() => {
-                heart.style.transform = 'scale(1)';
-            }, 150);
+                heart.style.transform = "scale(1)";
+            }, 200);
 
             fetch(`/updateLike/${curUser.username}/${curPainting.name}/false`);
         } else {

@@ -1,10 +1,8 @@
 /* 
     Author: Connor Kippes
 
-    CSS for the gallery and profile page.
+    CSS for the gallery and profile page (profile uses the same).
 */
-
-/* -----------GALLERY----------- */
 
 .gallery-painting {
     max-height: 200px;
@@ -35,37 +33,4 @@
 #gallery-text {
   justify-self: center;
   align-self: end;
-}
-
-
-/* -----------PROFILE----------- */
-
-#your-likes {
-    overflow-x: scroll;
-    display: block;
-}
-
-.painting-image {
-    height: 150px;
-    width: 150px;
-    margin-left: 25px;
-    margin-right: 25px;
-}
-.painting-title {
-    text-align: center;
-    font-size: 15px;
-}
-.list-cell {
-    width: 200px;
-}
-
-.scroll-container {
-  overflow-x: scroll;
-  display: block;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer/Edge */
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
 }

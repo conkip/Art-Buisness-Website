@@ -4,6 +4,13 @@
   CSS for the detailed view of a painting.
 */
 
+#painting-container {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
 #big-painting {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
@@ -42,23 +49,9 @@
     object-fit: contain;
 }
 
-#title {
-    margin-left: 0px;
-    margin-top: 0px;
-    white-space: nowrap;
-    font-size: 40px;
-}
-#description {
-    margin-top: 0px;
-    margin-left: 0px;
-    white-space: nowrap;
-    font-size: 25px;
-    font-weight: normal;
-}
-
 #heart {
     fill: rgb(75, 75, 75);
     width: 40px;
     height: 40px;
-    transition: transform 0.15s ease;
+    transition: transform 0.2s ease;
 }

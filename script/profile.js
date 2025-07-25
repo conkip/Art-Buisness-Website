@@ -44,8 +44,8 @@ async function setupGuestPaintings() {
             const response2 = await fetch(`/getPainting/${paintingName}`);
             const data2 = await response2.json();
 
-            let likes = document.getElementById("your-likes");
-            addPainting(likes.rows[0], likes.rows[1], data2);
+            const grid = document.getElementById("profile-grid")
+            addPainting(grid, data2);
         }
     } catch (error) {
         console.error("Error:", error);
@@ -58,8 +58,8 @@ async function setupPaintings(likes) {
             const response = await fetch(`/getPainting/${paintingName}`);
             const data = await response.json();
 
-            let list = document.getElementById("your-likes");
-            addPainting(list.rows[0], list.rows[1], data);
+            const grid = document.getElementById("profile-grid")
+            addPainting(grid, data);
         }
     } catch (error) {
         console.error("Error:", error);

@@ -31,59 +31,48 @@
             </nav>
 
             <main>
-                <div class="solo-section">
-                    <div id="flex-space-row">
-                        <div class="flex-space-column">
-                            <h1 id="login-title" class="title center-text">
-                                Welcome
-                            </h1>
-                            <form
-                                class="center-text"
-                                action="javascript:doNothing()"
-                            >
-                                <p
-                                    id="invalid-text"
-                                    class="subtitle center-text no-wrap"
-                                >
-                                    Text Here
-                                </p>
+                <div id="flex-space-row">
+                    <div class="flex-space-column">
+                        <h1 id="login-title" class="center-text">Welcome</h1>
+                        <form
+                            class="center-text"
+                            action="javascript:doNothing()"
+                        >
+                            <p id="invalid-text" class="center-text dark-green">
+                                .
+                            </p>
 
-                                <label class="subtitle" for="username"
-                                    >Username:</label
-                                >
-                                <input
-                                    id="username"
-                                    class="some-input"
-                                    type="text"
-                                    name="loginUsername"
-                                    required
-                                /><br />
-                                <label class="subtitle" for="password"
-                                    >Password:</label
-                                >
-                                <input
-                                    id="password"
-                                    class="some-input"
-                                    type="password"
-                                    name="loginUsername"
-                                    required
-                                /><br />
-                                <br />
-                                <input
-                                    class="button top-button hover-shadow"
-                                    type="button"
-                                    onclick="clickLoginButton()"
-                                    value="Login"
-                                />
-                                <br /><br />
-                                <input
-                                    class="button hover-shadow"
-                                    type="button"
-                                    onclick="clickSignupButton()"
-                                    value="Signup"
-                                />
-                            </form>
-                        </div>
+                            <label for="username">Username:</label>
+                            <input
+                                id="username"
+                                class="some-input"
+                                type="text"
+                                name="loginUsername"
+                                required
+                            /><br />
+                            <label for="password">Password:</label>
+                            <input
+                                id="password"
+                                class="some-input"
+                                type="password"
+                                name="loginUsername"
+                                required
+                            /><br />
+                            <br />
+                            <input
+                                class="button top-button hover-shadow"
+                                type="button"
+                                onclick="clickLoginButton()"
+                                value="Login"
+                            />
+                            <br /><br />
+                            <input
+                                class="button hover-shadow"
+                                type="button"
+                                onclick="clickSignupButton()"
+                                value="Signup"
+                            />
+                        </form>
                     </div>
                 </div>
             </main>
