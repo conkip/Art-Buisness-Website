@@ -10,13 +10,15 @@ invalidText.style.visibility = "hidden";
 let clickedButton = null;
 
 // have to do this so it doesnt choose the wrong button when the form is submitted
-document.querySelectorAll('#login-form button[type="submit"]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        clickedButton = e.target;
+document
+    .querySelectorAll('#login-form button[type="submit"]')
+    .forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            clickedButton = e.target;
+        });
     });
-});
 
-document.getElementById('login-form').addEventListener('submit', async (e) => {
+document.getElementById("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const form = e.target;
@@ -26,10 +28,10 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     }
     const data = Object.fromEntries(formData.entries());
 
-    const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+    const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
     });
 
     const result = await res.text();
@@ -44,15 +46,13 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         setTimeout(() => {
             invalidText.style.visibility = "hidden";
         }, 2000);
-
-    } else if(result === "signup error") {
+    } else if (result === "signup error") {
         // username taken
         invalidText.innerText = "Username is already taken.";
         invalidText.style.visibility = "visible";
         setTimeout(() => {
             invalidText.style.visibility = "hidden";
         }, 2000);
-
     } else {
         window.location.href = "/index.html";
     }

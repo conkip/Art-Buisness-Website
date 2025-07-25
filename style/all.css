@@ -13,7 +13,7 @@
     --main-bg-color: #164b60;
     --light-green: #e0ffd6;
     --green: #baf8a0;
-    --dark-green:#60fc1d;
+    --dark-green: #60fc1d;
     --ff: "Roboto";
     /*--h1: bold max(36px, 4vw) / max(48px, 5vw) var(--ff);*/
     --h1: bold 54px/64px var(--ff);
@@ -85,7 +85,7 @@ main {
 }
 
 .dark-green {
-    color:var(--dark-green);
+    color: var(--dark-green);
 }
 
 /*------TEXT-STUFF---*/
@@ -115,7 +115,6 @@ a:hover {
     text-decoration: underline;
 }
 
-
 /*---OTHER THINGS----*/
 button {
     margin-bottom: 60px;
@@ -137,8 +136,6 @@ button {
 img {
     border-radius: 8px;
 }
-
-
 
 /* -----------NAV BAR----------- */
 nav {
@@ -185,8 +182,8 @@ footer {
     background-color: var(--green);
     width: 240px;
 }
-#small-divider{
-    height:.5px;
+#small-divider {
+    height: 0.5px;
 }
 
 .contact-row {
@@ -201,7 +198,6 @@ footer {
     gap: 20px;
 }
 
-
 /* -----------OBSERVER STUFF---------*/
 .hidden {
     opacity: 0;
@@ -213,7 +209,6 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
-
 
 .flex-column {
     display: flex;

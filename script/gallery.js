@@ -5,7 +5,6 @@
 */
 document.getElementById("sold-title").style.visibility = "hidden";
 
-
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
     return fetch(`/getPaintings`)
@@ -19,10 +18,7 @@ function addAllPaintings() {
                     grid = document.getElementById("sold-grid");
                 }
 
-                addPainting(
-                    grid,
-                    painting
-                );
+                addPainting(grid, painting);
             }
 
             list = document.getElementById("sold-table");

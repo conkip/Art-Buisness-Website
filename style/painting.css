@@ -39,8 +39,8 @@
 }
 
 .mini-painting-container:hover {
-  opacity: 0.75;
-  transition: opacity 0.15s ease;
+    opacity: 0.75;
+    transition: opacity 0.15s ease;
 }
 
 .mini-painting-container img {

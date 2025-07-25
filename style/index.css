@@ -6,7 +6,7 @@
 
 #title-logo {
     fill: var(--green);
-    width:100%;
+    width: 100%;
     max-width: 1080px;
 }
 
@@ -43,14 +43,12 @@
     cursor: pointer;
 }
 
-
-#rainbow-gallery-painting1{
+#rainbow-gallery-painting1 {
     transform: rotate(-20deg) translateY(20px);
 }
-#rainbow-gallery-painting1:hover{
+#rainbow-gallery-painting1:hover {
     transform: scale(1.25);
 }
-
 
 #rainbow-gallery-painting2 {
     transform: rotate(-10deg) translateY(10px);
@@ -59,14 +57,12 @@
     transform: scale(1.25);
 }
 
-
 #rainbow-gallery-painting3 {
     transform: rotate(0deg) translateY(0px);
 }
 #rainbow-gallery-painting3:hover {
     transform: scale(1.25);
 }
-
 
 #rainbow-gallery-painting4 {
     transform: rotate(10deg) translateY(10px);
@@ -75,11 +71,9 @@
     transform: scale(1.25);
 }
 
-
 #rainbow-gallery-painting5 {
     transform: rotate(20deg) translateY(20px);
 }
 #rainbow-gallery-painting5:hover {
     transform: scale(1.25);
 }
-

@@ -4,8 +4,8 @@
     Handles directing to the login page and displaying the correct login button.
 */
 
-let loginSignupButton = document.getElementById("login-signup-button");
-let logoutButton = document.getElementById("logout-button");
+const loginSignupButton = document.getElementById("login-signup-button");
+const logoutButton = document.getElementById("logout-button");
 
 function clickLoginSignup() {
     window.location.href = "/login.html";
@@ -44,7 +44,7 @@ async function onStartup() {
 
 // wait for login button to be loaded and then apply observer
 onStartup().then(() => {
-    let hiddenElements = document.getElementsByClassName("hidden");
+    const hiddenElements = document.getElementsByClassName("hidden");
 
     for (let i = 0; i < hiddenElements.length; i++) {
         window.observer.observe(hiddenElements[i]);

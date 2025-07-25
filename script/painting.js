@@ -51,7 +51,7 @@ function addMiniPainting(fileName, number) {
     let fileNameSplit = fileName.split(".");
     let newFileName = fileNameSplit[0] + number + "." + fileNameSplit[1];
 
-    if (number == 1) {
+    if (number === 1) {
         newFileName = fileName;
     }
 
@@ -150,7 +150,7 @@ function updateHeart(painting) {
             .then((data) => {
                 let guestPaintings = data.split(",");
                 for (let paintingName of guestPaintings) {
-                    if (paintingName == painting.name) {
+                    if (paintingName === painting.name) {
                         //change heart back to red
                         heart.style.fill = "red";
                         foundPainting = true;
@@ -165,7 +165,7 @@ function updateHeart(painting) {
     } else {
         let foundPainting = false;
         for (let paintingName of curUser.my_likes) {
-            if (paintingName == painting.name) {
+            if ((paintingName = painting.name)) {
                 //change heart back to red
                 heart.style.fill = "red";
                 foundPainting = true;
@@ -181,7 +181,7 @@ function updateHeart(painting) {
 // when the heart is clicked add or remove it from the users favorites list
 async function heartClicked() {
     if (curUser == null) {
-        if (heart.style.fill == "rgb(75, 75, 75)") {
+        if (heart.style.fill === "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
             heart.style.transform = "scale(1.4)";
@@ -195,7 +195,7 @@ async function heartClicked() {
             fetch(`/updateGuestLike/${curPainting.name}`);
         }
     } else {
-        if (heart.style.fill == "rgb(75, 75, 75)") {
+        if (heart.style.fill === "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
             heart.style.transform = "scale(1.4)";

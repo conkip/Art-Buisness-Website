@@ -4,10 +4,8 @@
     Function to add paintings to the gallery and profile section.
 */
 
-
 // addPainting puts the given painting in the gallery with its image and title
 async function addPainting(grid, painting) {
-
     const img = document.createElement("img");
     const imgLink = document.createElement("a");
 
@@ -27,7 +25,6 @@ async function addPainting(grid, painting) {
 
     imgLink.appendChild(img);
 
-
     const textLink = document.createElement("a");
     textLink.href = `painting.html?name=${painting.name}`;
 
@@ -38,7 +35,7 @@ async function addPainting(grid, painting) {
     div.appendChild(imgLink);
     div.appendChild(textLink);
     div.id = "gallery-entry";
-    div.className = "hidden"
+    div.className = "hidden";
 
     grid.appendChild(div);
 }
