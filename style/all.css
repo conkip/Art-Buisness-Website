@@ -191,6 +191,9 @@ footer {
     background-color: var(--green);
     width: 240px;
 }
+#small-divider{
+    height:.5px;
+}
 
 .contact-row {
     display: flex;
