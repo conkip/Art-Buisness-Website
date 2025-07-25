@@ -6,7 +6,7 @@
     getting the current user,
     getting paintings,
 */
-const setupPaintings = require("./setupPaintings");
+const setupPaintings = require("./setup-paintings");
 
 const express = require("express");
 const app = express();
