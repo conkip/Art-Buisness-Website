@@ -106,13 +106,6 @@ p {
     font: var(--p);
     color: var(--light-green);
 }
-label {
-    font: var(--h3);
-    color: var(--light-green);
-}
-input[type="text"] {
-    color: var(--nav-bg-color);
-}
 
 a {
     color: var(--light-green);
@@ -124,7 +117,7 @@ a:hover {
 
 
 /*---OTHER THINGS----*/
-.button {
+button {
     margin-bottom: 60px;
     border: none;
     border-radius: 15px;
@@ -134,6 +127,7 @@ a:hover {
     background-color: var(--green);
     color: #154851;
     font-size: 25px;
+    text-align: center;
 }
 
 .top-button {

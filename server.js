@@ -29,6 +29,9 @@ const URL = `mongodb://${databaseName}/projdb`;
 let User = null;
 let Painting = null;
 
+app.use(express.urlencoded({ extended: true })); // for form data
+app.use(express.json());
+
 /**
  * startServer contains all of the information for creating the http server and
  * listening to it.
@@ -67,49 +70,47 @@ async function startServer() {
 
     // login routes
 
-    app.get("/login/:someUsername/:somePassword", async (req, res) => {
-
-        let someUsername = decodeURIComponent(req.params.someUsername);
-        let somePassword = decodeURIComponent(req.params.somePassword);
-
-        let user = await User.findOne({ username: someUsername });
+    // this function is so signup can call this and the user auto logs in after signing up
+    async function login(username, password, res){
+        const user = await User.findOne({ username: username });
 
         if (user != null) {
-            let isMatch = await bcrypt.compare(somePassword, user.password);
+            let isMatch = await bcrypt.compare(password, user.password);
             if (isMatch) {
                 // set up the username cookie when you login successfully
-                res.cookie("username", someUsername, { httpOnly: true });
-                res.send(true);
+                res.cookie("username", username, { httpOnly: true });
+                res.send();
             } else {
-                res.send(false);
+                res.send("login error");
             }
         } else {
-            res.send(false);
+            res.send("login error");
         }
-    });
+    }
 
-    app.get("/signup/:someUsername/:somePassword", async (req, res) => {
+    app.post("/login", async (req, res) => {
+        const { username, password, action } = req.body;
 
-        let someUsername = decodeURIComponent(req.params.someUsername);
+        if (action === "login") {
+            await login(username, password, res);
+        } else if (action === "signup") {
+            const user = await User.findOne({ username: username });
+            if (user != null) {
+                res.send("signup error");
+            } else {
+                const saltRounds = 10;
+                const hashedPassword = await bcrypt.hash(password, saltRounds);
+                const newUser = new User({
+                    username: username,
+                    password: hashedPassword,
+                });
 
-        let somePassword = decodeURIComponent(req.params.somePassword);
-        somePassword = await hashPassword(somePassword);
+                await newUser.save();
 
-        let user = await User.findOne({ username: someUsername });
-
-        // user exists
-        if (user != null) {
-            // sends t/f if successful or not
-            res.send(false);
+                await login(username, password, res);
+            }
         } else {
-            const newUser = new User({
-                username: someUsername,
-                password: somePassword,
-            });
-
-            await newUser.save();
-
-            res.send(true);
+            res.status(400).send("Unknown action");
         }
     });
 
@@ -244,6 +245,7 @@ async function startServer() {
     app.use("/paintings_webp", express.static("paintings_webp"));
     app.use("/script", express.static("script"));
     app.use("/style", express.static("style"));
+
 
     // error for undefined routes
     app.use((req, res, next) => {

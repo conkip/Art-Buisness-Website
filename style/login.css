@@ -15,3 +15,11 @@
     height: 30px;
     font-size: 20px;
 }
+
+label {
+    font: var(--h3);
+    color: var(--light-green);
+}
+input[type="text"] {
+    color: var(--nav-bg-color);
+}

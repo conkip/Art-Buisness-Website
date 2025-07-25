@@ -35,8 +35,8 @@
                     <div class="flex-space-column">
                         <h1 id="login-title" class="center-text">Welcome</h1>
                         <form
-                            class="center-text"
-                            action="javascript:doNothing()"
+                            id = "login-form"
+                            class="center-text" 
                         >
                             <p id="invalid-text" class="center-text dark-green">
                                 .
@@ -47,7 +47,7 @@
                                 id="username"
                                 class="some-input"
                                 type="text"
-                                name="loginUsername"
+                                name="username" 
                                 required
                             /><br />
                             <label for="password">Password:</label>
@@ -55,23 +55,23 @@
                                 id="password"
                                 class="some-input"
                                 type="password"
-                                name="loginUsername"
+                                name="password" 
                                 required
                             /><br />
                             <br />
-                            <input
-                                class="button top-button hover-shadow"
-                                type="button"
-                                onclick="clickLoginButton()"
-                                value="Login"
-                            />
+                            <button
+                                class="top-button hover-shadow"
+                                type="submit"
+                                name="action"
+                                value="login"
+                            >Login</button>
                             <br /><br />
-                            <input
-                                class="button hover-shadow"
-                                type="button"
-                                onclick="clickSignupButton()"
-                                value="Signup"
-                            />
+                            <button
+                                class="hover-shadow"
+                                type="submit"
+                                name="action"
+                                value="signup"
+                            >Signup</button>
                         </form>
                     </div>
                 </div>

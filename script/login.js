@@ -4,63 +4,57 @@
     Handles loging in or creating a new account.
 */
 
-let invalidText = document.getElementById("invalid-text");
+const invalidText = document.getElementById("invalid-text");
 invalidText.style.visibility = "hidden";
 
-async function clickLoginButton() {
-    let usernameTextbox = document.getElementById("username");
-    let username = usernameTextbox.value;
+let clickedButton = null;
 
-    let passwordTextbox = document.getElementById("password");
-    let password = passwordTextbox.value;
+// have to do this so it doesnt choose the wrong button when the form is submitted
+document.querySelectorAll('#login-form button[type="submit"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        clickedButton = e.target;
+    });
+});
 
-    fetch(`/login/${username}/${password}`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("Response:", data);
-            if (!data) {
-                // no user found or password is incorrect
-                // so display no user found of that name
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-                invalidText.innerText = "Username or password is incorrect.";
-                invalidText.style.visibility = "visible";
-                setTimeout(() => {
-                    invalidText.style.visibility = "hidden";
-                }, 2000);
-            } else {
-                window.location.href = "/index.html";
-            }
-        })
-        .catch((error) => console.error("Error:", error));
-}
+    const form = e.target;
+    const formData = new FormData(form);
+    if (clickedButton?.name && clickedButton?.value) {
+        formData.set(clickedButton.name, clickedButton.value);
+    }
+    const data = Object.fromEntries(formData.entries());
 
-async function clickSignupButton() {
-    let usernameTextbox = document.getElementById("username");
-    let username = usernameTextbox.value;
+    const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
 
-    let passwordTextbox = document.getElementById("password");
-    let password = passwordTextbox.value;
+    const result = await res.text();
+    console.log(result);
 
-    fetch(`/signup/${username}/${password}`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("Response:", data);
-            if (data) {
-                fetch(`/login/${username}/${password}`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log("Response:", data);
-                    })
-                    .catch((error) => console.error("Error:", error));
-                window.location.href = "/index.html";
-            } else {
-                // username taken
-                invalidText.innerText = "Username is already taken.";
-                invalidText.style.visibility = "visible";
-                setTimeout(() => {
-                    invalidText.style.visibility = "hidden";
-                }, 2000);
-            }
-        })
-        .catch((error) => console.error("Error:", error));
-}
+    if (result === "login error") {
+        // no user found or password is incorrect
+        // so display no user found of that name
+
+        invalidText.innerText = "Username or password is incorrect.";
+        invalidText.style.visibility = "visible";
+        setTimeout(() => {
+            invalidText.style.visibility = "hidden";
+        }, 2000);
+
+    } else if(result === "signup error") {
+        // username taken
+        invalidText.innerText = "Username is already taken.";
+        invalidText.style.visibility = "visible";
+        setTimeout(() => {
+            invalidText.style.visibility = "hidden";
+        }, 2000);
+
+    } else {
+        window.location.href = "/index.html";
+    }
+    clickedButton = null;
+});
