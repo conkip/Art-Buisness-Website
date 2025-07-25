@@ -13,9 +13,7 @@ function clickLoginSignup() {
 
 async function onStartup() {
     // need this so that logout button updates
-    await setTimeout(() => {
-        console.log("waited for a sec");
-    }, 500);
+    await setTimeout(() => {}, 500);
     return fetch(`/getCurUser`)
         .then((response) => {
             if (response.headers.get("Content-Length") === "0") {
@@ -24,8 +22,6 @@ async function onStartup() {
             return response.json();
         })
         .then((data) => {
-            console.log("Response:", data);
-
             // no user logged in
             if (data == null) {
                 loginSignupButton.style.display = "block";
@@ -54,7 +50,6 @@ onStartup().then(() => {
 function clickLogout() {
     fetch(`/clearCookies/username`)
         .then((data) => {
-            console.log("Response:", data);
             //hide buttons
             loginSignupButton.style.display = "block";
             loginSignupButton.style.marginLeft = "auto";

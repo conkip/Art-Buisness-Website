@@ -35,7 +35,6 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     });
 
     const result = await res.text();
-    console.log(result);
 
     if (result === "login error") {
         // no user found or password is incorrect

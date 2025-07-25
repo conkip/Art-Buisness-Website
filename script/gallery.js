@@ -10,7 +10,6 @@ function addAllPaintings() {
     return fetch(`/getPaintings`)
         .then((response) => response.json())
         .then((data) => {
-            console.log("Response:", data);
             for (let painting of data) {
                 // adds to propper section of the gallery if it is sold or not
                 let grid = document.getElementById("gallery-grid");

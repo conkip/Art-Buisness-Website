@@ -12,7 +12,8 @@ const heart = document.getElementById("heart");
 const main = document.querySelector('main');
 
 async function onStartup() {
-    await fetch(`/getCurUser`)
+    try{
+        await fetch(`/getCurUser`)
         .then((response) => {
             if (response.headers.get("Content-Length") === "0") {
                 return null;
@@ -20,13 +21,15 @@ async function onStartup() {
             return response.json();
         })
         .then((data) => {
-            console.log("Response:", data);
             // no user logged in
             if (data != null) {
                 curUser = data;
             }
         })
         .catch((error) => console.error("Error:", error));
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }
 
 onStartup();
@@ -58,28 +61,32 @@ function addMiniPainting(fileName, number) {
         newFileName = fileName;
     }
 
-    fetch(`../paintings_webp/${newFileName}`)
-        .then((response) => {
-            if (response.ok) {
-                let miniPainting = document.getElementById(
-                    "mini-painting" + number
-                );
-                miniPainting.src = `../paintings_webp/${newFileName}`;
+    try {
+        fetch(`../paintings_webp/${newFileName}`)
+            .then((response) => {
+                if (response.ok) {
+                    let miniPainting = document.getElementById(
+                        "mini-painting" + number
+                    );
+                    miniPainting.src = `../paintings_webp/${newFileName}`;
 
-                miniPainting.addEventListener("mouseenter", () => {
-                    onMiniPaintingHover(newFileName);
-                });
-            } else {
-                console.log("File " + newFileName + " not found");
-                let miniPainting = document.getElementById(
-                    "mini-painting" + number
-                );
-                miniPainting.remove();
-            }
-        })
-        .catch((error) => {
-            console.error("Error checking file:", error);
-        });
+                    miniPainting.addEventListener("mouseenter", () => {
+                        onMiniPaintingHover(newFileName);
+                    });
+                } else {
+                    console.log("File " + newFileName + " not found");
+                    let miniPainting = document.getElementById(
+                        "mini-painting" + number
+                    );
+                    miniPainting.remove();
+                }
+            })
+            .catch((error) => {
+                console.error("Error checking file:", error);
+            });
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }
 
 // 24x24x1 --> 24" L x 24" W x 1" D
@@ -140,7 +147,9 @@ async function setupPainting() {
 
     document.getElementById("description").innerText = description;
 
-    main.style.visibility = "visible";
+    setTimeout(() => {
+        main.style.visibility = "visible";
+    }, 100);
 }
 
 setupPainting();
@@ -170,7 +179,7 @@ function updateHeart(painting) {
     } else {
         let foundPainting = false;
         for (let paintingName of curUser.my_likes) {
-            if ((paintingName = painting.name)) {
+            if (paintingName === painting.name) {
                 //change heart back to red
                 heart.style.fill = "red";
                 foundPainting = true;

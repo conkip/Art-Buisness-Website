@@ -80,12 +80,13 @@ async function startServer() {
                 // set up the username cookie when you login successfully
                 res.cookie("username", username, { httpOnly: true });
                 res.send();
-            } else {
-                res.send("login error");
+                return;
             }
-        } else {
+
             res.send("login error");
+            return;
         }
+        res.send("login error");
     }
 
     app.post("/login", async (req, res) => {
@@ -97,18 +98,20 @@ async function startServer() {
             const user = await User.findOne({ username: username });
             if (user != null) {
                 res.send("signup error");
-            } else {
-                const saltRounds = 10;
-                const hashedPassword = await bcrypt.hash(password, saltRounds);
-                const newUser = new User({
-                    username: username,
-                    password: hashedPassword,
-                });
-
-                await newUser.save();
-
-                await login(username, password, res);
+                return;
             }
+
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            const newUser = new User({
+                username: username,
+                password: hashedPassword,
+            });
+
+            await newUser.save();
+
+            await login(username, password, res);
+
         } else {
             res.status(400).send("Unknown action");
         }
@@ -148,6 +151,7 @@ async function startServer() {
         let paintingName = decodeURIComponent(req.params.paintingName);
 
         let painting = await Painting.findOne({ name: paintingName });
+        
         res.send(painting);
     });
 
@@ -168,7 +172,7 @@ async function startServer() {
                 theUser.my_likes.splice(index, 1);
             }
 
-            theUser.save();
+            await theUser.save();
             res.send("Updated like successfully");
         }
     );
@@ -235,9 +239,9 @@ async function startServer() {
         if (curPaintings != undefined) {
             curPaintings = decodeURIComponent(curPaintings);
             res.send(curPaintings);
-        } else {
-            res.send("");
+            return;
         }
+        res.send("");
     });
 
     app.use(express.static("public_html"));

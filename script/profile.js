@@ -14,8 +14,6 @@ async function afterStartup() {
             data = await response.json();
         }
 
-        console.log("Response:", data);
-
         if (data == null) {
             document.getElementById("profile-greeting").innerText =
                 "Hello, Guest";
@@ -24,7 +22,7 @@ async function afterStartup() {
             document.getElementById(
                 "profile-greeting"
             ).innerText = `Hello, ${data.username}!`;
-            await setupPaintings(data.my_likes, data.my_bids);
+            await setupPaintings(data.my_likes);
         }
     } catch (error) {
         console.error("Error:", error);
