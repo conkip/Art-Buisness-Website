@@ -8,6 +8,9 @@ let curUser = null;
 let curPainting = null;
 const heart = document.getElementById("heart");
 
+// this is to make it visible after everything loads up so it doesn't look buggy
+const main = document.querySelector('main');
+
 async function onStartup() {
     await fetch(`/getCurUser`)
         .then((response) => {
@@ -136,6 +139,8 @@ async function setupPainting() {
     description += "\n\n" + painting.desc;
 
     document.getElementById("description").innerText = description;
+
+    main.style.visibility = "visible";
 }
 
 setupPainting();
