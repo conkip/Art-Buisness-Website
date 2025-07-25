@@ -256,7 +256,7 @@ async function setupPaintings(Painting) {
     await painting13.save();
 
     let painting38 = new Painting({
-        name: "GoldenGiants",
+        name: "Golden Giants",
         image: "GoldenGiants.webp",
         dimensions: "30x18x1 1/4",
         date: "2025",
