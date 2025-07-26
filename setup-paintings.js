@@ -510,7 +510,7 @@ async function setupPaintings(Painting) {
     let painting22 = new Painting({
         name: "Sun's Awakening",
         image: "SunsAwakening.webp",
-        dimensions: "18x24",
+        dimensions: "18x24x1",
         date: "",
         paint: "Acrylic",
         canvas: "Wood Canvas",

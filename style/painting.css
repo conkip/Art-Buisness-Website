@@ -40,7 +40,7 @@
 
 .mini-painting-container:hover {
     opacity: 0.75;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.1s ease;
 }
 
 .mini-painting-container img {
@@ -50,8 +50,8 @@
 }
 
 #heart {
-    fill: rgb(75, 75, 75);
     width: 40px;
     height: 40px;
+    fill: rgb(75, 75, 75);
     transition: transform 0.2s ease;
 }

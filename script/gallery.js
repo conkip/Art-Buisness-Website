@@ -3,6 +3,7 @@
 
     Handles setting up the gallery with all the paintings
 */
+
 document.getElementById("sold-title").style.visibility = "hidden";
 
 // adds all the painting in the list to the gallery in rows of 4

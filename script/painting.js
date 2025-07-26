@@ -34,24 +34,25 @@ async function onStartup() {
 
 onStartup();
 
-// on mouse hover function to put a mini painting into the main view
-async function onMiniPaintingHover(newFileName) {
-    let mainPainting = document.getElementById("big-painting");
+// on mouse hover or click of a mini painting- put it into the main view
+async function changeBigPainting(newFileName) {
+    let bigPainting = document.getElementById("big-painting");
 
     // start fade out
-    mainPainting.style.opacity = 0;
+    bigPainting.style.opacity = 0;
 
-    // fade out and then in in effect
+    // fade out and then in effect
     setTimeout(() => {
-        mainPainting.src = `../paintings_webp/${newFileName}`;
+        bigPainting.src = `../paintings_webp/${newFileName}`;
 
-        mainPainting.onload = () => {
-            mainPainting.style.opacity = 1;
+        bigPainting.onload = () => {
+            bigPainting.style.opacity = 1;
         };
     }, 300);
+
 }
 
-// adds an alternate image under the main painting in the if it exists in the folder
+// adds an alternate image under the big painting in the if it exists in the folder
 function addMiniPainting(fileName, number) {
     //first at the number to the image name
     let fileNameSplit = fileName.split(".");
@@ -70,8 +71,20 @@ function addMiniPainting(fileName, number) {
                     );
                     miniPainting.src = `../paintings_webp/${newFileName}`;
 
+                    miniPainting.onclick = () => changeBigPainting(newFileName);
+
+                    let hoverTimeout;
+
+                    // change the big painging if the user hovers over a mini painting
                     miniPainting.addEventListener("mouseenter", () => {
-                        onMiniPaintingHover(newFileName);
+                        hoverTimeout = setTimeout(() => {
+                            changeBigPainting(newFileName);
+                        }, 300);
+                    });
+
+                    // cancel change if they dont hover for long enough
+                    miniPainting.addEventListener("mouseleave", () => {
+                        clearTimeout(hoverTimeout);
                     });
                 } else {
                     console.log("File " + newFileName + " not found");
@@ -110,7 +123,7 @@ async function setupPainting() {
 
     updateHeart(painting);
 
-    // add the big image
+    // add the big painting
     document.getElementById(
         "big-painting"
     ).src = `../paintings_webp/${painting.image}`;
@@ -135,6 +148,8 @@ async function setupPainting() {
 
     if (painting.paint != "") {
         description += "\n" + painting.paint + " Paint on " + painting.canvas;
+    }
+    if (painting.finish != "") {
         description += "\n" + painting.finish;
     }
 

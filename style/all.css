@@ -7,30 +7,38 @@
 /* import for roboto font */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;600&display=swap");
 
-/* going for a clean, calming, nature theme */
+/* Colors- calm, earthly, modern, creativity*/
 :root {
+    --footer-bg-color: rgb(240, 240, 240);
+    --main-bg-color: white;                 /* white background to not take away from art and for a clean, modern look */
+    --text-color: rgb(100, 100, 100);       /* medium gray for text to not be easy to read and not harsh on the eyes */
+    --accent-color: #5EAAA8;                /* Teal - calm, creative, modern */      /* Alternate Color: #8FAE92; /* Sage Green*/
+
+    /* old theme- blue, green */
+    /*
     --nav-bg-color: #154851;
-    --main-bg-color: #164b60;
-    --light-green: #e0ffd6;
-    --green: #baf8a0;
-    --dark-green: #60fc1d;
+    --main-bg-color: #237a85; 
+    --text-color: #e0ffd6;
+    --header-color: #baf8a0;
+    */
+
     --ff: "Roboto";
     /*--h1: bold max(36px, 4vw) / max(48px, 5vw) var(--ff);*/
     --h1: bold 54px/64px var(--ff);
     --h2: bold 36px/45px var(--ff);
-    --h3: 22px/32px var(--ff);
+    --h3: 21px/30px var(--ff);
     --links: bold 18px/18px var(--ff);
     --p: 18px/30px var(--ff);
-    --subtext: 12px/20px var(--ff);
-    --transition: transform 0.3 ease;
+    --button-text: 24px/24px var(--ff);
+    --subtext: 13.5px/20px var(--ff);
 }
 
 /*-------GENERAL--------*/
 body {
     margin: 0;
     padding: 0;
-    background-color: #237a85;
-    color: var(--light-green);
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
     font-family: "Roboto";
     font-weight: 300;
     overflow-x: hidden;
@@ -43,7 +51,7 @@ body {
 }
 
 main {
-    margin: 150px auto;
+    margin: 125px auto;
     max-width: 1080px;
     flex: 1;
 }
@@ -80,35 +88,35 @@ main {
 }
 
 .hover-shadow:hover {
-    box-shadow: 14px 14px 22px rgba(0, 0, 0, 0.3);
+    box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-}
-
-.dark-green {
-    color: var(--dark-green);
 }
 
 /*------TEXT-STUFF---*/
 
 h1 {
     font: var(--h1);
-    color: var(--green);
+    color: var(--accent-color);
 }
 h2 {
     font: var(--h2);
-    color: var(--green);
+    color: var(--accent-color);
 }
 h3 {
     font: var(--h3);
-    color: var(--light-green);
+    color: var(--text-color);
 }
 p {
     font: var(--p);
-    color: var(--light-green);
+    color: var(--text-color);
+}
+.subtext {
+    font: var(--subtext);
+    color: var(--text-color);
 }
 
 a {
-    color: var(--light-green);
+    color: var(--text-color);
     text-decoration: none;
 }
 a:hover {
@@ -120,12 +128,12 @@ button {
     margin-bottom: 60px;
     border: none;
     border-radius: 15px;
-    box-shadow: 7px 7px 11px rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3);
     width: 275px;
     height: 50px;
-    background-color: var(--green);
-    color: #154851;
-    font-size: 25px;
+    background-color: var(--accent-color);
+    color: var(--main-bg-color);
+    font: var(--button-text);
     text-align: center;
 }
 
@@ -136,7 +144,12 @@ button {
 img {
     border-radius: 8px;
 }
-
+.spacer {
+    height: 15px;
+}
+.no-wrap {
+    white-space: nowrap;
+}
 /* -----------NAV BAR----------- */
 nav {
     position: fixed;
@@ -145,8 +158,9 @@ nav {
     height: 50px;
     width: 100%;
     padding-top: 10px;
-    background-color: var(--nav-bg-color);
+    background-color: var(--main-bg-color);
     font-size: 25px;
+    opacity: 90%;
 }
 
 .nav-item {
@@ -159,15 +173,15 @@ nav {
 footer {
     bottom: 0px;
     z-index: 3;
-    height: 350px;
+    height: 400px;
     width: 100%;
     padding: 20px;
-    background-color: var(--nav-bg-color);
+    background-color: var(--footer-bg-color);
     text-align: center;
 }
 
 .contact-logo {
-    fill: var(--green);
+    fill: var(--accent-color);
     width: 25px;
     height: 25px;
 }
@@ -179,8 +193,8 @@ footer {
 .divider {
     border: none;
     height: 1px;
-    background-color: var(--green);
-    width: 240px;
+    background-color: var(--text-color);
+    width: 255px;
 }
 #small-divider {
     height: 0.5px;
@@ -230,12 +244,5 @@ html {
     max-width: 1080px;
     height: 100vh;
     /*scroll-snap-align:start;
-}
-*/
-
-/* vertical spacer */
-/*
-.spacer {
-    height: 100px;
 }
 */

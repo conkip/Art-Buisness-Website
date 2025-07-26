@@ -18,8 +18,12 @@
 
 label {
     font: var(--h3);
-    color: var(--light-green);
+    color: var(--text-color);
 }
 input[type="text"] {
     color: var(--nav-bg-color);
+}
+#invalid-text {
+    color:red;
+    font-weight:bold;
 }

@@ -14,21 +14,7 @@
 
     <body>
         <div id="page-wrapper">
-            <nav>
-                <table class="center-non-block">
-                    <tr>
-                        <td class="nav-item">
-                            <a href="index.html">Home</a>
-                        </td>
-                        <td class="nav-item">
-                            <a href="gallery.html">Gallery</a>
-                        </td>
-                        <td class="nav-item">
-                            <a href="profile.html">Profile</a>
-                        </td>
-                    </tr>
-                </table>
-            </nav>
+            <div id="nav-container"></div>
 
             <main>
                 <h1 id="profile-greeting" class="center-text">,</h1>
@@ -37,125 +23,16 @@
                     Your liked paintings will appear here.
                 </h3>
 
-                <br />
+                <div class="spacer"></div>
+                <div class="spacer"></div>
 
                 <div id="profile-grid" class="grid-container"></div>
             </main>
 
-            <footer id="footer">
-                <div class="flex-space-row">
-                    <!-- Contact -->
-                    <div class="flex-space-column">
-                        <h2 class="center-text">Contact</h2>
-
-                        <hr id="small-divider" class="divider" />
-
-                        <!-- Phone -->
-                        <div class="contact-row">
-                            <p>
-                                <a href="tel:+1-928-453-4930">
-                                    <!-- Phone Icon -->
-                                    <svg
-                                        class="contact-logo"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512"
-                                    >
-                                        <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                        <path
-                                            d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 
-                  200.6 512 448 512c18 0 33.8-12.1 
-                  38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 
-                  368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"
-                                        />
-                                    </svg>
-                                </a>
-                            </p>
-
-                            <p>
-                                <a href="tel:+1-928-453-4930">(928) 453-4930</a>
-                            </p>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="contact-row">
-                            <p>
-                                <a href="mailto:kaseykurowsky@gmail.com">
-                                    <!-- Email Icon -->
-                                    <svg
-                                        class="contact-logo"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512"
-                                    >
-                                        <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                        <path
-                                            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4
-                  8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 
-                  64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 
-                  339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
-                                        />
-                                    </svg>
-                                </a>
-                            </p>
-
-                            <p>
-                                <a href="mailto:kaseykurowsky@gmail.com"
-                                    >kaseykurowsky@gmail.com</a
-                                >
-                            </p>
-                        </div>
-
-                        <!-- Website Creator email -->
-                        <div class="contact-row">
-                            <p>
-                                <a href="mailto:connorkippes1@gmail.com">
-                                    <svg
-                                        class="contact-logo"
-                                        ;
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 640 640"
-                                    >
-                                        <!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                        <path
-                                            d="M392.8 65.2C375.8 60.3 358.1 70.2 353.2 87.2L225.2 535.2C220.3 552.2 
-                                        230.2 569.9 247.2 574.8C264.2 579.7 281.9 569.8 286.8 552.8L414.8 104.8C419.7 
-                                        87.8 409.8 70.1 392.8 65.2zM457.4 201.3C444.9 213.8 444.9 234.1 457.4 246.6L530.8 
-                                        320L457.4 393.4C444.9 405.9 444.9 426.2 457.4 438.7C469.9 451.2 490.2 451.2 502.7 
-                                        438.7L598.7 342.7C611.2 330.2 611.2 309.9 598.7 297.4L502.7 201.4C490.2 188.9 
-                                        469.9 188.9 457.4 201.4zM182.7 201.3C170.2 188.8 149.9 188.8 137.4 201.3L41.4 
-                                        297.3C28.9 309.8 28.9 330.1 41.4 342.6L137.4 438.6C149.9 451.1 170.2 451.1 182.7 
-                                        438.6C195.2 426.1 195.2 405.8 182.7 393.3L109.3 320L182.6 246.6C195.1 234.1 195.1 
-                                        213.8 182.6 201.3z"
-                                        />
-                                    </svg>
-                                </a>
-                            </p>
-
-                            <p>
-                                <a href="mailto:connorkippes1@gmail.com"
-                                    >connorkippes1@gmail.com</a
-                                >
-                                &nbsp;&nbsp;-&nbsp;&nbsp; contact me to build
-                                your website!
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- About -->
-                    <div class="flex-space-column">
-                        <h2 class="center-text">About</h2>
-
-                        <hr class="divider" />
-
-                        <p><a href="about.html">My Story</a></p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                    </div>
-                </div>
-            </footer>
+            <div id="footer-container"></div>
         </div>
 
+        <script src="../script/all.js"></script>
         <script src="../script/observer.js"></script>
         <script src="../script/add-painting.js"></script>
         <script src="../script/profile.js"></script>
