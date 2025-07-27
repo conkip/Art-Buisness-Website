@@ -33,10 +33,26 @@
     --subtext: 13.5px/20px var(--ff);
 }
 
+/*-------DEBUGGING--------*/
+
+/*
+* {
+  outline: 1px solid red;
+}
+*/
+
 /*-------GENERAL--------*/
-body {
+body, html {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
     background-color: var(--main-bg-color);
     color: var(--text-color);
     font-family: "Roboto";
@@ -47,11 +63,13 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width:100%;
 }
 
 main {
     margin: 125px auto;
     max-width: 1080px;
+    width: 100%;
     flex: 1;
 }
 
@@ -130,6 +148,7 @@ button {
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3);
     width: 275px;
     height: 50px;
+    max-width: 100%;
     background-color: var(--accent-color);
     color: var(--main-bg-color);
     font: var(--button-text);
@@ -142,17 +161,14 @@ button {
 
 img {
     border-radius: 8px;
+    max-width: 100%;
 }
 .spacer {
     height: 15px;
 }
-.no-wrap {
-    white-space: nowrap;
-}
 /* -----------NAV BAR----------- */
 nav {
     position: fixed;
-    top: 0px;
     z-index: 4;
     height: 50px;
     width: 100%;
@@ -174,17 +190,20 @@ nav {
 
 /* -----------FOOTER----------- */
 footer {
-    bottom: 0px;
     z-index: 3;
-    height: 400px;
+    min-height: 400px;
     width: 100%;
+    box-sizing: border-box;
+    padding-top:20px;
     background-color: var(--footer-bg-color);
     text-align: center;
 }
 
 #footer-container {
-    margin:0px;
-    padding:0px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .contact-logo {
@@ -217,6 +236,10 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+#copyright {
+    margin-top: auto;
 }
 
 /* -----------OBSERVER STUFF---------*/
