@@ -23,7 +23,6 @@
     */
 
     --ff: "Roboto";
-    /*--h1: bold max(36px, 4vw) / max(48px, 5vw) var(--ff);*/
     --h1: bold 54px/64px var(--ff);
     --h2: bold 36px/45px var(--ff);
     --h3: 21px/30px var(--ff);
@@ -55,7 +54,7 @@ body, html {
 body {
     background-color: var(--main-bg-color);
     color: var(--text-color);
-    font-family: "Roboto";
+    font-family: var(--ff);
     font-weight: 300;
 }
 
