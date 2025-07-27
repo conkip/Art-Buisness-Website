@@ -41,7 +41,6 @@ body {
     color: var(--text-color);
     font-family: "Roboto";
     font-weight: 300;
-    overflow-x: hidden;
 }
 
 #page-wrapper {
@@ -162,6 +161,10 @@ nav {
     font-size: 25px;
     opacity: 90%;
 }
+#nav-container {
+    margin:0px;
+    padding:0px;
+}
 
 .nav-item {
     padding-left: 40px;
@@ -175,9 +178,15 @@ footer {
     z-index: 3;
     height: 400px;
     width: 100%;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom:20px;
     background-color: var(--footer-bg-color);
     text-align: center;
+}
+
+#footer-container {
+    margin:0px;
+    padding:0px;
 }
 
 .contact-logo {
