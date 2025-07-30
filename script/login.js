@@ -28,32 +28,34 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     }
     const data = Object.fromEntries(formData.entries());
 
-    const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-    });
-
-    const result = await res.text();
-
-    if (result === "login error") {
-        // no user found or password is incorrect
-        // so display no user found of that name
-
-        invalidText.innerText = "Username or password is incorrect.";
-        invalidText.style.visibility = "visible";
-        setTimeout(() => {
-            invalidText.style.visibility = "hidden";
-        }, 2000);
-    } else if (result === "signup error") {
-        // username taken
-        invalidText.innerText = "Username is already taken.";
-        invalidText.style.visibility = "visible";
-        setTimeout(() => {
-            invalidText.style.visibility = "hidden";
-        }, 2000);
-    } else {
-        window.location.href = "/index.html";
+    const buttonName = e.submitter.value;
+    let res = null;
+    if(buttonName === "login") {
+        res = await fetch("/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+    } else if(buttonName === "signup") {
+        res = await fetch("/auth/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
     }
+
+    if (res.ok) {
+        const { token } = await res.json();
+        localStorage.setItem("token", token);
+        window.location.href = "/index.html";
+    } else {
+        const errorMsg = await res.text();
+        invalidText.innerText = errorMsg;
+        invalidText.style.visibility = "visible";
+        setTimeout(() => {
+            invalidText.style.visibility = "hidden";
+        }, 2000);
+    }
+
     clickedButton = null;
 });

@@ -1,44 +1,54 @@
 /*
     Author: Connor Kippes
 
-    Handles get opperations and talking to the database.
-    includes setting and getting cookies,
-    getting the current user,
-    getting paintings,
+    Includes GET, POST, and DELETE enpoints for the server.
+    Follows RESTful API principles.
+
+    Handles:
+        - User authentication
+        - User GET and DELETE from the database
+        - Painting GET from the database
+        - User likes GET, POST, and DELETE
+        - Guest likes GET, POST, and DELETE
 */
-const setupPaintings = require("./setup-paintings");
 
 const express = require("express");
-const app = express();
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-
-const domainName = "127.0.0.1";
-const port = 3000;
-
-// let domainName = 'kaseycreativecanvas.com';
-// let port = 443;
-
-let databaseName = "localhost:27017";
-
+const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const setupPaintings = require("./setup-paintings");
+require("dotenv").config();
+
+const app = express();
+
+const port = process.env.PORT || 3000;
+const domainName = process.env.DOMAIN || "127.0.0.1";
+const dbURL = process.env.MONGODB_URL;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 
-const mongoose = require("mongoose");
-const URL = `mongodb://${databaseName}/projdb`;
+let User, Painting;
 
-let User = null;
-let Painting = null;
+/** authenticates the user with JWT */
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token) return res.status(401).send("Access token missing");
 
-app.use(express.urlencoded({ extended: true })); // for form data
-app.use(express.json());
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).send("Invalid token");
+        req.user = user; // { username }
+        next();
+    });
+}
 
-/**
- * startServer contains all of the information for creating the http server and
- * listening to it.
- */
+/* ========== SERVER SETUP ========== */
 async function startServer() {
-    // database stuff
-    await mongoose.connect(URL);
+    await mongoose.connect(dbURL);
 
     const PaintingSchema = new mongoose.Schema({
         name: String,
@@ -54,187 +64,88 @@ async function startServer() {
         sold: { type: Boolean, default: false },
     });
 
-    Painting = mongoose.model("Painting", PaintingSchema);
-
     const UserSchema = new mongoose.Schema({
         username: String,
         password: String,
         my_likes: { type: [String], default: [] },
     });
 
+    Painting = mongoose.model("Painting", PaintingSchema);
     User = mongoose.model("User", UserSchema);
 
-    //delete first and then add paintings to db when running the server
+    // delete first and then add paintings to db when running the server
     await mongoose.connection.db.collection("paintings").deleteMany({});
     await setupPaintings(Painting);
 
-    // login routes
+    /** ========== AUTH ROUTES ========== */
+    app.post("/auth/signup", async (req, res) => {
+        const { username, password } = req.body;
+        if (await User.findOne({ username: username })) {
+            return res.status(409).send("User already exists");
+        }
 
-    // this function is so signup can call this and the user auto logs in after signing up
-    async function login(username, password, res){
+        const hashed = await bcrypt.hash(password, 10);
+        await new User({ username, password: hashed }).save();
+
+        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1d" });
+        res.json({ token });
+    });
+
+    app.post("/auth/login", async (req, res) => {
+        const { username, password } = req.body;
         const user = await User.findOne({ username: username });
-
-        if (user != null) {
-            let isMatch = await bcrypt.compare(password, user.password);
-            if (isMatch) {
-                // set up the username cookie when you login successfully
-                res.cookie("username", username, { httpOnly: true });
-                res.send();
-                return;
-            }
-
-            res.send("login error");
-            return;
-        }
-        res.send("login error");
-    }
-
-    app.post("/login", async (req, res) => {
-        const { username, password, action } = req.body;
-
-        if (action === "login") {
-            await login(username, password, res);
-        } else if (action === "signup") {
-            const user = await User.findOne({ username: username });
-            if (user != null) {
-                res.send("signup error");
-                return;
-            }
-
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
-            const newUser = new User({
-                username: username,
-                password: hashedPassword,
-            });
-
-            await newUser.save();
-
-            await login(username, password, res);
-
-        } else {
-            res.status(400).send("Unknown action");
-        }
-    });
-
-    app.get("/getCurUser", async (req, res) => {
-
-        // get current cookie
-        let curUsername = req.cookies.username;
-        if (curUsername != undefined) {
-            curUsername = decodeURIComponent(curUsername);
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).send("Invalid username or password");
         }
 
-        // search db for it
-        let user = await User.findOne({ username: curUsername });
-
-        res.send(user);
+        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1d" });
+        res.json({ token });
     });
 
-    // logout route
 
-    app.get("/clearCookies/:cookieName", (req, res) => {
-        let cookieName = decodeURIComponent(req.params.cookieName);
-
-        res.clearCookie(cookieName);
-        res.send("Cookie Cleared");
-    });
-
-    // db routes
-
-    app.get("/getPaintings", async (req, res) => {
-        const paintings = await Painting.find();
-        res.send(paintings);
-    });
-
-    app.get("/getPainting/:paintingName", async (req, res) => {
-        let paintingName = decodeURIComponent(req.params.paintingName);
-
-        let painting = await Painting.findOne({ name: paintingName });
-        
-        res.send(painting);
-    });
-
-    app.get(
-        "/updateLike/:curUsername/:paintingName/:isLiked",
-        async (req, res) => {
-
-            let curUsername = decodeURIComponent(req.params.curUsername);
-            let paintingName = decodeURIComponent(req.params.paintingName);
-            let isLiked = req.params.isLiked;
-
-            let theUser = await User.findOne({ username: curUsername });
-
-            if (isLiked == "false") {
-                theUser.my_likes.push(paintingName);
-            } else {
-                const index = theUser.my_likes.indexOf(paintingName);
-                theUser.my_likes.splice(index, 1);
-            }
-
-            await theUser.save();
-            res.send("Updated like successfully");
+    app.delete("/auth/delete", authenticateToken, async (req, res) => {
+        const deleted = await User.deleteOne({ username: req.user.username });
+        if (deleted.deletedCount === 0) {
+            return res.status(404).send("User not found");
         }
-    );
 
-    // this route is for if a guest likes any paintings to save them as cookies
-    app.get("/updateGuestLike/:paintingName", (req, res) => {
-        let paintingName = decodeURIComponent(req.params.paintingName);
-
-        // get current cookie
-        let curPaintings = req.cookies.paintings;
-        if (curPaintings == undefined) {
-            // create the new cookie with the painting name
-            res.cookie("paintings", paintingName, { httpOnly: true });
-            res.send("Cookie set!");
-        } else {
-            curPaintings = decodeURIComponent(curPaintings);
-            let splitPaintings = curPaintings.split(",");
-            let foundPainting = false;
-
-            for (let painting of splitPaintings) {
-                if (painting == paintingName) {
-                    foundPainting = true;
-                    break;
-                }
-            }
-
-            if (foundPainting) {
-                //remove the painting from likes
-                let index = splitPaintings.indexOf(paintingName);
-                splitPaintings.splice(index, 1);
-
-                //convert back to a string
-                let newCurPaintings = "";
-                for (let painting of splitPaintings) {
-                    newCurPaintings += painting + ",";
-                }
-                //remove trailing comma if it exists
-                let trimmed = newCurPaintings.endsWith(",")
-                    ? newCurPaintings.slice(0, -1)
-                    : newCurPaintings;
-
-                res.cookie("paintings", trimmed, { httpOnly: true });
-                res.send("Cookie set!");
-            } else {
-                if(curPaintings == "")
-                {
-                    res.cookie("paintings", paintingName, {httpOnly: true,});
-                }
-                else {
-                    // add the painting to the end if theres already one
-                    res.cookie("paintings", curPaintings + "," + paintingName, {
-                        httpOnly: true,
-                    });
-                }
-                res.send("Cookie set!");
-            }
-        }
+        res.sendStatus(200);
     });
 
-    // this route is used for filling up the guest's profile with their likes
-    app.get("/getGuestPaintings", (req, res) => {
-        // get current cookie
+    /* ========== USER ROUTES ========== */
+    app.get("/users/me", authenticateToken, async (req, res) => {
+        const user = await User.findOne({ username: req.user.username });
+        if (!user) {
+            return res.send(null);
+        }
+
+        res.json(user);
+    });
+
+    app.post("/users/me/likes/:name", authenticateToken, async (req, res) => {
+        const painting = decodeURIComponent(req.params.name);
+        const user = await User.findOne({ username: req.user.username });
+
+        if (!user.my_likes.includes(painting)) {
+            user.my_likes.push(painting);
+            await user.save();
+        }
+
+        res.send("Like added");
+    });
+
+    app.delete("/users/me/likes/:name", authenticateToken, async (req, res) => {
+        const painting = decodeURIComponent(req.params.name);
+        const user = await User.findOne({ username: req.user.username });
+
+        user.my_likes = user.my_likes.filter(p => p !== painting);
+        await user.save();
+
+        res.send("Like removed");
+    });
+
+    /* ========== GUEST ROUTES ========== */
+    app.get("/user/guest/likes", (req, res) => {
         let curPaintings = req.cookies.paintings;
         if (curPaintings != undefined) {
             curPaintings = decodeURIComponent(curPaintings);
@@ -244,29 +155,86 @@ async function startServer() {
         res.send("");
     });
 
+    app.post("/users/guest/likes/:name", (req, res) => {
+        const painting = decodeURIComponent(req.params.name);
+
+        let paintings = req.cookies.paintings;
+
+        if (paintings === undefined) {
+            res.cookie("paintings", painting, { httpOnly: true });
+            res.send("Cookie set!");
+            return;
+        }
+
+        paintings = decodeURIComponent(paintings);
+        paintings = paintings.split(",");
+
+        if(paintings == ""){
+            res.cookie("paintings", painting, {httpOnly: true,});
+        }
+        else {
+            // add the painting to the end if theres already one
+            res.cookie("paintings", paintings + "," + painting, {
+                httpOnly: true,
+            });
+        }
+        res.send("Cookie set!");
+    });
+
+    app.delete("/users/guest/likes/:name", (req, res) => {
+        const painting = decodeURIComponent(req.params.name);
+
+        let paintings = req.cookies.paintings;
+        if (paintings != undefined) {
+            paintings = decodeURIComponent(paintings);
+            paintings = paintings.split(",");
+        }
+
+        // remove the painting from likes
+        const index = paintings.indexOf(painting);
+        paintings.splice(index, 1);
+
+        // convert back to a string
+        let newPaintings = "";
+        for (let painting of paintings) {
+            newPaintings += painting + ",";
+        }
+
+        // remove trailing comma if there were multiple paintings
+        newPaintings = newPaintings.endsWith(",")
+            ? newPaintings.slice(0, -1)
+            : newPaintings;
+
+        res.cookie("paintings", newPaintings, { httpOnly: true });
+        res.send("Cookie set!");
+    });
+
+    /* ========== PAINTING ROUTES ========== */
+    app.get("/paintings", async (req, res) => {
+        const paintings = await Painting.find();
+        res.json(paintings);
+    });
+
+    app.get("/paintings/:name", async (req, res) => {
+        const name = decodeURIComponent(req.params.name);
+        const painting = await Painting.findOne({ name: name });
+        res.json(painting);
+    });
+
+    /** ========== STATIC + 404 ========== */
     app.use(express.static("public_html"));
     app.use("/images", express.static("images"));
     app.use("/paintings_webp", express.static("paintings_webp"));
     app.use("/script", express.static("script"));
     app.use("/style", express.static("style"));
 
-
-    // error for undefined routes
     app.use((req, res, next) => {
-        res.status(404).send("<h1>404 - Page Not Found</h1>");
+        res.status(404).send("<h1>404 - Not Found</h1>");
     });
 
     app.listen(port, domainName, () => {
-        console.log(`Server running at https://${domainName}:${port}/`);
+        console.log(`Server running at http://${domainName}:${port}/`);
     });
-}
-
-async function hashPassword(password) {
-    const saltRounds = 10; // Number of salt rounds (higher is more secure but slower)
-
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hash = await bcrypt.hash(password, salt);
-    return hash;
 }
 
 startServer();

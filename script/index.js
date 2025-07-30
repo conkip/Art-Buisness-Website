@@ -6,6 +6,7 @@
 
 const loginSignupButton = document.getElementById("login-signup-button");
 const logoutButton = document.getElementById("logout-button");
+const deleteButton = document.getElementById("delete-account-button");
 
 function clickLoginSignup() {
     window.location.href = "/login.html";
@@ -14,25 +15,32 @@ function clickLoginSignup() {
 async function onStartup() {
     // need this so that logout button updates
     await setTimeout(() => {}, 500);
-    return fetch(`/getCurUser`)
+    return fetch(`/users/me`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json"
+        }
+        })
         .then((response) => {
-            if (response.headers.get("Content-Length") === "0") {
+            const contentType = response.headers.get("Content-Type");
+
+            if (contentType && contentType.includes("application/json")) {
+                return response.json();
+            } else {
                 return null;
             }
-            return response.json();
         })
         .then((data) => {
             // no user logged in
             if (data == null) {
-                loginSignupButton.style.display = "block";
-                loginSignupButton.style.marginLeft = "auto";
-                loginSignupButton.style.marginRight = "auto";
-                logoutButton.style.display = "none";
+                loginSignupButton.classList.remove("none");
+                logoutButton.classList.add("none");
+                deleteButton.classList.add("none");
             } else {
-                loginSignupButton.style.display = "none";
-                logoutButton.style.display = "block";
-                logoutButton.style.marginLeft = "auto";
-                logoutButton.style.marginRight = "auto";
+                loginSignupButton.classList.add("none");
+                logoutButton.classList.remove("none");
+                deleteButton.classList.remove("none");
             }
         })
         .catch((error) => console.error("Error:", error));
@@ -48,15 +56,26 @@ onStartup().then(() => {
 });
 
 function clickLogout() {
-    fetch(`/clearCookies/username`)
-        .then((data) => {
-            //hide buttons
-            loginSignupButton.style.display = "block";
-            loginSignupButton.style.marginLeft = "auto";
-            loginSignupButton.style.marginRight = "auto";
-            logoutButton.style.display = "none";
-        })
-        .catch((error) => console.error("Error:", error));
+    localStorage.removeItem("token");
+
+    loginSignupButton.classList.remove("none");
+    logoutButton.classList.add("none");
+    deleteButton.classList.add("none");
+}
+
+async function clickDelete() {
+    await fetch("/auth/delete", {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    });
+
+    localStorage.removeItem("token");
+
+    loginSignupButton.classList.remove("none");
+    logoutButton.classList.add("none");
+    deleteButton.classList.add("none");
 }
 
 //check if theres a user logged in, if there is then show logout button only, but change visibility where orig button doesnt take up space in the scene

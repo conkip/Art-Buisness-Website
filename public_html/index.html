@@ -17,16 +17,15 @@
         <div id="page-wrapper">
             <div id="nav-container"></div>
 
-            <main>
+            <main id = "home-content">
                 <div id="title-logo"></div>
 
-                <h3 class="center-text">
+                <h3>
                     Welcome! Feel free to browse our
                     <a href="gallery.html">gallery</a>. If
                     you see one you like contact us below!
                 </h3>
 
-                <div class="spacer"></div>
                 <div class="spacer"></div>
 
                 <div class="rainbow-gallery">
@@ -76,29 +75,36 @@
                     </a>
                 </div>
 
-                <h3 class="center-text top-margin">
+                <h3 class="top-margin">
                     Click on a painting to see more details!
                 </h3>
 
-                <h3 class="center-text">
+                <h3>
                     Also, login to like paintings and see them in your profile!
                 </h3>
 
                 <button
                     id="login-signup-button"
                     onclick="clickLoginSignup()"
-                    class="center-elem top-button hover-shadow"
-                    style="display: none"
+                    class="top-button hover-shadow none"
                 >
                     Login/Sign Up
                 </button>
+
                 <button
                     id="logout-button"
                     onclick="clickLogout()"
-                    class="center-elem top-button hover-shadow"
-                    style="display: none"
+                    class="top-button hover-shadow none"
                 >
                     Logout
+                </button>
+
+                <button
+                    id="delete-account-button"
+                    onclick="clickDelete()"
+                    class="top-button hover-shadow none"
+                >
+                    Delete Account
                 </button>
 
                 <!-- description -->
@@ -130,6 +136,13 @@
             </main>
 
             <div id="footer-container"></div>
+        </div>
+        <div id="overlay" class="overlay none">
+            <div class="modal">
+                <p>Are you sure you want to delete your account?</p>
+                <button id="confirmDelete">Yes, delete</button>
+                <button id="cancelDelete">Cancel</button>
+            </div>
         </div>
 
         <script src="../script/all.js"></script>

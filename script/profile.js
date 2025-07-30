@@ -7,10 +7,18 @@
 
 async function afterStartup() {
     try {
-        const response = await fetch(`/getCurUser`);
+        const response = await fetch(`/users/me`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        const contentType = response.headers.get("Content-Type");
         let data = null;
 
-        if (response.headers.get("Content-Length") !== "0") {
+        if (contentType && contentType.includes("application/json")) {
             data = await response.json();
         }
 
@@ -31,15 +39,15 @@ async function afterStartup() {
 
 async function setupGuestPaintings() {
     try {
-        const response = await fetch("/getGuestPaintings");
+        const response = await fetch("/user/guest/likes");
         let data = await response.text();
         data = data.trim();
 
         //makes it an empty array if there is no data
         let guestPaintings = data ? data.split(",") : [];
 
-        for (let paintingName of guestPaintings) {
-            const response2 = await fetch(`/getPainting/${paintingName}`);
+        for (let painting of guestPaintings) {
+            const response2 = await fetch(`/paintings/${painting}`);
             const data2 = await response2.json();
 
             const grid = document.getElementById("profile-grid");
@@ -52,8 +60,8 @@ async function setupGuestPaintings() {
 
 async function setupPaintings(likes) {
     try {
-        for (let paintingName of likes) {
-            const response = await fetch(`/getPainting/${paintingName}`);
+        for (let painting of likes) {
+            const response = await fetch(`/paintings/${painting}`);
             const data = await response.json();
 
             const grid = document.getElementById("profile-grid");

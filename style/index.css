@@ -3,6 +3,12 @@
 
     CSS for the index page.
 */
+#home-content{
+    display: flex;
+    gap:10px;
+    flex-direction: column;
+    align-items: center; 
+}
 
 #title-logo {
     width: 100%;
@@ -74,4 +80,30 @@
 }
 #rainbow-gallery-painting5:hover {
     transform: scale(1.25);
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.none {
+    display: none;
 }

@@ -8,7 +8,7 @@ document.getElementById("sold-title").style.visibility = "hidden";
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
-    return fetch(`/getPaintings`)
+    return fetch(`/paintings`)
         .then((response) => response.json())
         .then((data) => {
             for (let painting of data) {
@@ -40,6 +40,5 @@ setTimeout(() => {
     document.getElementById("sold-title").style.visibility = "visible";
 }, 2000);
 
-//scrolls to the top on load to avoid loading into empty space
-window.onbeforeunload = () => window.scrollTo(0, 0);
+// scrolls to the top on load
 window.addEventListener("load", () => window.scrollTo(0, 0));

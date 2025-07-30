@@ -13,18 +13,24 @@ const main = document.querySelector('main');
 
 async function onStartup() {
     try{
-        await fetch(`/getCurUser`)
+        await fetch(`/users/me`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Content-Type": "application/json"
+            }
+        })
         .then((response) => {
-            if (response.headers.get("Content-Length") === "0") {
+            const contentType = response.headers.get("Content-Type");
+
+            if (contentType && contentType.includes("application/json")) {
+                return response.json();
+            } else {
                 return null;
             }
-            return response.json();
         })
         .then((data) => {
-            // no user logged in
-            if (data != null) {
-                curUser = data;
-            }
+            curUser = data;
         })
         .catch((error) => console.error("Error:", error));
     } catch (error) {
@@ -117,7 +123,7 @@ async function setupPainting() {
     const params = new URLSearchParams(window.location.search);
     const paintingName = params.get("name");
 
-    const response = await fetch(`/getPainting/${paintingName}`);
+    const response = await fetch(`/paintings/${paintingName}`);
     const painting = await response.json();
     curPainting = painting;
 
@@ -140,16 +146,21 @@ async function setupPainting() {
 
     // add the description
     let description = "";
-    description += formatDimensions(painting.dimensions);
-    if (painting.mult) {
-        description += " Each";
+    if(painting.dimensions != "") {
+         description += "\n" + formatDimensions(painting.dimensions);
+         if (painting.mult) {
+            description += " Each";
+        }
     }
-    description += "\n" + painting.date;
 
-    if (painting.paint != "") {
+    if (painting.date !== "") {
+        description += "\n" + painting.date;
+    }
+
+    if (painting.paint !== "") {
         description += "\n" + painting.paint + " Paint on " + painting.canvas;
     }
-    if (painting.finish != "") {
+    if (painting.finish !== "") {
         description += "\n" + painting.finish;
     }
 
@@ -158,7 +169,10 @@ async function setupPainting() {
     } else {
         description += "\nUnframed";
     }
-    description += "\n\n" + painting.desc;
+
+    if (painting.date !== "") {
+        description += "\n\n" + painting.desc;
+    }
 
     document.getElementById("description").innerText = description;
 
@@ -174,7 +188,7 @@ function updateHeart(painting) {
     if (curUser == null) {
         let foundPainting = false;
 
-        fetch(`/getGuestPaintings`)
+        fetch("/user/guest/likes")
             .then((response) => response.text())
             .then((data) => {
                 let guestPaintings = data.split(",");
@@ -218,10 +232,20 @@ async function heartClicked() {
                 heart.style.transform = "scale(1)";
             }, 200);
 
-            fetch(`/updateGuestLike/${curPainting.name}`);
+            fetch(`/users/guest/likes/${curPainting.name}`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
-            fetch(`/updateGuestLike/${curPainting.name}`);
+            fetch(`/users/guest/likes/${curPainting.name}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
         }
     } else {
         if (heart.style.fill === "rgb(75, 75, 75)") {
@@ -232,10 +256,21 @@ async function heartClicked() {
                 heart.style.transform = "scale(1)";
             }, 200);
 
-            fetch(`/updateLike/${curUser.username}/${curPainting.name}/false`);
+            fetch(`/users/me/likes/${curPainting.name}`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
-            fetch(`/updateLike/${curUser.username}/${curPainting.name}/true`);
+
+            fetch(`/users/me/likes/${curPainting.name}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
         }
     }
 }
