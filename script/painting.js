@@ -147,31 +147,32 @@ async function setupPainting() {
     // add the description
     let description = "";
     if(painting.dimensions != "") {
-         description += "\n" + formatDimensions(painting.dimensions);
+         description += formatDimensions(painting.dimensions);
          if (painting.mult) {
             description += " Each";
         }
+        description += "\n";
     }
 
     if (painting.date !== "") {
-        description += "\n" + painting.date;
+        description += painting.date + "\n";
     }
 
     if (painting.paint !== "") {
-        description += "\n" + painting.paint + " Paint on " + painting.canvas;
+        description += painting.paint + " Paint on " + painting.canvas + "\n";
     }
     if (painting.finish !== "") {
-        description += "\n" + painting.finish;
+        description += painting.finish + "\n";
     }
 
     if (painting.framed) {
-        description += "\nFramed";
+        description += "Framed\n";
     } else {
-        description += "\nUnframed";
+        description += "Unframed\n";
     }
 
     if (painting.date !== "") {
-        description += "\n\n" + painting.desc;
+        description += "\n" + painting.desc;
     }
 
     document.getElementById("description").innerText = description;
