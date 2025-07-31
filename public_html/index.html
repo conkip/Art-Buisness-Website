@@ -101,8 +101,8 @@
 
                 <button
                     id="delete-account-button"
-                    onclick="clickDelete()"
-                    class="top-button hover-shadow none"
+                    onclick= "showDeleteConfirm()"
+                    class="hover-shadow none"
                 >
                     Delete Account
                 </button>
@@ -137,13 +137,16 @@
 
             <div id="footer-container"></div>
         </div>
-        <div id="overlay" class="overlay none">
+
+        <div id="overlay" class="none">
             <div class="modal">
                 <p>Are you sure you want to delete your account?</p>
-                <button id="confirmDelete">Yes, delete</button>
-                <button id="cancelDelete">Cancel</button>
+                <button id="confirm-delete" class="hover-shadow top-button">Yes, delete</button>
+                <button id="cancel-delete" class="hover-shadow">Cancel</button>
             </div>
         </div>
+
+        <div id="toast-container"></div>
 
         <script src="../script/all.js"></script>
         <script src="../script/observer.js"></script>

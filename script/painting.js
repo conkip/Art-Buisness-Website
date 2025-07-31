@@ -239,6 +239,8 @@ async function heartClicked() {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             });
+
+            showToast("Like added");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
             fetch(`/users/guest/likes/${curPainting.name}`, {
@@ -247,6 +249,8 @@ async function heartClicked() {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             });
+
+            showToast("Like removed");
         }
     } else {
         if (heart.style.fill === "rgb(75, 75, 75)") {
@@ -263,6 +267,8 @@ async function heartClicked() {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             });
+
+            showToast("Like added");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
 
@@ -272,6 +278,8 @@ async function heartClicked() {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             });
+
+            showToast("Like removed");
         }
     }
 }

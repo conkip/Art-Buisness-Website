@@ -17,3 +17,15 @@ fetch('/footer.html')
     .then(html => {
         document.getElementById('footer-container').innerHTML = html;
     });
+
+function showToast(message) {
+    const toastContainer = document.getElementById("toast-container");
+    let toast = document.createElement("div");
+    toast.classList.add("toast");
+    toast.textContent = message;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2000);
+}

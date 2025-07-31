@@ -78,4 +78,19 @@ async function clickDelete() {
     deleteButton.classList.add("none");
 }
 
-//check if theres a user logged in, if there is then show logout button only, but change visibility where orig button doesnt take up space in the scene
+// show the modal
+function showDeleteConfirm() {
+    document.getElementById("overlay").classList.remove("none");
+}
+
+// hook up yes and no buttons
+document.getElementById("confirm-delete").addEventListener("click", () => {
+    clickDelete();
+    showToast("Account deleted");
+    document.getElementById("overlay").classList.add("none");
+});
+
+document.getElementById("cancel-delete").addEventListener("click", () => {
+    console.log("hello?");
+    document.getElementById("overlay").classList.add("none");
+});

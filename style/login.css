@@ -3,6 +3,13 @@
 
     CSS for the login page.
 */
+#login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 80px; /* Adjust as needed */
+}
 
 #login-title {
     margin-bottom: 0px;
