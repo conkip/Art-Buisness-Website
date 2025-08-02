@@ -263,7 +263,7 @@ async function setupPaintings(Painting) {
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Decorative High Gloss Coating",
-        desc: "A beautiful sunflower painting made with pattette knife.",
+        desc: "A sunflower painting made with pattette knife.",
     });
 
     await painting38.save();

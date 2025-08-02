@@ -176,13 +176,15 @@ async function setupPainting() {
     }
 
     document.getElementById("description").innerText = description;
-
-    setTimeout(() => {
-        main.style.visibility = "visible";
-    }, 100);
 }
 
 setupPainting();
+
+// wait until everything is loaded to make more seamless
+window.addEventListener('load', () => {
+    main.style.visibility = "visible";
+    console.log('Page and all resources are fully loaded.');
+});
 
 // updates the heart image based on if the user has the painting favorited or not
 function updateHeart(painting) {
