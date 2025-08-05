@@ -5,7 +5,7 @@
     Restructured to await for observer.
 */
 
-async function afterStartup() {
+async function onStartup() {
     try {
         const response = await fetch(`/users/me`, {
             method: "GET",
@@ -72,7 +72,7 @@ async function setupPaintings(likes) {
     }
 }
 
-afterStartup().then(() => {
+onStartup().then(() => {
     const hiddenElements = document.getElementsByClassName("hidden");
 
     for (let i = 0; i < hiddenElements.length; i++) {
