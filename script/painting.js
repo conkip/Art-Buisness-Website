@@ -39,7 +39,10 @@ async function onStartup() {
     }
 }
 
-onStartup();
+(async () => {
+    await onStartup();
+    await setupPainting();
+})();
 
 // on mouse hover or click of a mini painting- put it into the main view
 async function changeBigPainting(newFileName) {
@@ -178,8 +181,6 @@ async function setupPainting() {
 
     document.getElementById("description").innerText = description;
 }
-
-setupPainting();
 
 // wait until everything is loaded to make more seamless
 window.addEventListener('load', () => {
