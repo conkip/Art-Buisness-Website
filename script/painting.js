@@ -30,6 +30,7 @@ async function onStartup() {
             }
         })
         .then((data) => {
+            console.log("User Data: " + data);
             curUser = data;
         })
         .catch((error) => console.error("Error:", error));
