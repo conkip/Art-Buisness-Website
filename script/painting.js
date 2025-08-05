@@ -127,7 +127,7 @@ async function setupPainting() {
     const painting = await response.json();
     curPainting = painting;
 
-    updateHeart(painting);
+    updateHeart();
 
     // add the big painting
     document.getElementById(
@@ -187,8 +187,8 @@ window.addEventListener('load', () => {
 });
 
 // updates the heart image based on if the user has the painting favorited or not
-function updateHeart(painting) {
-    if (curUser == null) {
+function updateHeart() {
+    if (curUser === null) {
         let foundPainting = false;
 
         fetch("/user/guest/likes")
@@ -196,7 +196,7 @@ function updateHeart(painting) {
             .then((data) => {
                 let guestPaintings = data.split(",");
                 for (let paintingName of guestPaintings) {
-                    if (paintingName === painting.name) {
+                    if (paintingName === curPainting.name) {
                         //change heart back to red
                         heart.style.fill = "red";
                         foundPainting = true;
@@ -211,7 +211,7 @@ function updateHeart(painting) {
     } else {
         let foundPainting = false;
         for (let paintingName of curUser.my_likes) {
-            if (paintingName === painting.name) {
+            if (paintingName === curPainting.name) {
                 //change heart back to red
                 heart.style.fill = "red";
                 foundPainting = true;
@@ -226,7 +226,7 @@ function updateHeart(painting) {
 
 // when the heart is clicked add or remove it from the users favorites list
 async function heartClicked() {
-    if (curUser == null) {
+    if (curUser === null) {
         if (heart.style.fill === "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
