@@ -107,3 +107,8 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
+
+.margined-text {
+    max-width:900px;
+    font-weight:500;
+}

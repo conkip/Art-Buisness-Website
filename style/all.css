@@ -273,7 +273,7 @@ footer {
     transition: opacity 0.85s ease-in, transform 0.85s ease-in;
 }
 
-.show {
+.hidden.show {
     opacity: 1;
     transform: translateY(0);
 }
@@ -300,3 +300,25 @@ html {
     /*scroll-snap-align:start;
 }
 */
+
+.hidden-left.hidden {
+    opacity: 0;
+    transform: translateX(-50%);
+}
+
+.hidden-right.hidden {
+    opacity: 0;
+    transform: translateX(50%);
+}
+
+
+.hidden-left.show-side{
+    transition: opacity 1.75s ease-in, transform 1s ease-in;
+    opacity: 1;
+    transform: translateX(0);
+}
+.hidden-right.show-side{
+    transition: opacity 1.75s ease-in, transform 1s ease-in;
+    opacity: 1;
+    transform: translateX(0);
+}

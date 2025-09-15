@@ -94,7 +94,7 @@ async function setupPaintings(Painting) {
         dimensions: "30x36x1",
         date: "",
         paint: "Acrylic",
-        canvas: "",
+        canvas: "Stretched Canvas",
         finish: "",
         desc: "",
     });
@@ -118,10 +118,10 @@ async function setupPaintings(Painting) {
     let painting7 = new Painting({
         name: "Color Spectrum",
         image: "ColorSpectrum.webp",
-        dimensions: "36x48x1",
+        dimensions: "36x48x1 1/2",
         date: "",
         paint: "Acrylic",
-        canvas: "Wood Canvas",
+        canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "",
     });
@@ -433,6 +433,19 @@ async function setupPaintings(Painting) {
 
     await painting19.save();
 
+    let painting24 = new Painting({
+        name: "Secrets of Elephants",
+        image: "SecretsOfElephants.webp",
+        dimensions: "24x24x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy",
+        desc: "Mixed media art.",
+    });
+
+    await painting24.save();
+
     let painting42 = new Painting({
         name: "Setting Sun",
         image: "SettingSun.webp",
@@ -575,20 +588,6 @@ async function setupPaintings(Painting) {
     await painting23.save();
 
     /*
-
-    let painting24 = new Painting({
-        name: "",
-        image: "P24.webp",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-    });
-
-    await painting24.save();
-
     let painting28 = new Painting({
         name: "",
         image: "P28.webp",

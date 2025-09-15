@@ -171,8 +171,6 @@ async function setupPainting() {
 
     if (painting.framed) {
         description += "Framed\n";
-    } else {
-        description += "Unframed\n";
     }
 
     if (painting.date !== "") {
