@@ -76,17 +76,23 @@ function addMiniPainting(fileName, number) {
         fetch(`../paintings_webp/${newFileName}`)
             .then((response) => {
                 if (response.ok) {
-                    let miniPainting = document.getElementById(
-                        "mini-painting" + number
-                    );
-                    miniPainting.src = `../paintings_webp/${newFileName}`;
+                    let miniPaintings = document.getElementById("mini-paintings");
 
-                    miniPainting.onclick = () => changeBigPainting(newFileName);
+                    let newDiv = document.createElement("div");
+                    newDiv.classList.add("mini-painting-container");
+                    miniPaintings.appendChild(newDiv);
+
+                    let newImg = document.createElement("img");
+                    newDiv.appendChild(newImg);
+                    newImg.id = `mini-painting${number}`
+                    newImg.alt = `Mini Painting ${number}`
+                    newImg.src = `../paintings_webp/${newFileName}`;
+                    newImg.onclick = () => changeBigPainting(newFileName);
 
                     let hoverTimeout;
 
                     // change the big painging if the user hovers over a mini painting
-                    miniPainting.addEventListener("mouseenter", () => {
+                    newImg.addEventListener("mouseenter", () => {
                         hoverTimeout = setTimeout(() => {
                             changeBigPainting(newFileName);
                         }, 300);
@@ -96,12 +102,9 @@ function addMiniPainting(fileName, number) {
                     miniPainting.addEventListener("mouseleave", () => {
                         clearTimeout(hoverTimeout);
                     });
+
                 } else {
                     console.log("File " + newFileName + " not found");
-                    let miniPainting = document.getElementById(
-                        "mini-painting" + number
-                    );
-                    miniPainting.remove();
                 }
             })
             .catch((error) => {
@@ -139,11 +142,9 @@ async function setupPainting() {
     ).src = `../paintings_webp/${painting.image}`;
 
     // add all the mini images underneath it if able
-    addMiniPainting(painting.image, 1);
-    addMiniPainting(painting.image, 2);
-    addMiniPainting(painting.image, 3);
-    addMiniPainting(painting.image, 4);
-    addMiniPainting(painting.image, 5);
+    for(let i = 1; i < 6; i++) {
+        addMiniPainting(painting.image, i);
+    }
 
     // add the title
     document.getElementById("title").innerText = painting.name;
@@ -171,8 +172,6 @@ async function setupPainting() {
 
     if (painting.framed) {
         description += "Framed\n";
-    } else {
-        description += "Unframed\n";
     }
 
     if (painting.date !== "") {

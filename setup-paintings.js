@@ -20,6 +20,20 @@ async function setupPaintings(Painting) {
         sold: true,
     });
 
+    let painting48 = new Painting({
+        name: "3D Dot Fusion",
+        image: "3DDotFusion.webp",
+        dimensions: "12x12x7/8",
+        date: "",
+        paint: "Oil",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+        mult: true,
+    });
+
+    await painting48.save();
+
     let painting1 = new Painting({
         name: "Beyond the Limit",
         image: "BeyondTheLimit.webp",
@@ -63,10 +77,10 @@ async function setupPaintings(Painting) {
     await painting35.save();
 
     let painting3 = new Painting({
-        name: "Chasing Blues",
-        image: "ChasingBlues.webp",
+        name: "Butterflies in Flight",
+        image: "ButterfliesInFlight.webp",
         dimensions: "16x24x1",
-        date: "2021",
+        date: "2025",
         paint: "Oil",
         canvas: "Wood Canvas",
         finish: "",
@@ -94,7 +108,7 @@ async function setupPaintings(Painting) {
         dimensions: "30x36x1",
         date: "",
         paint: "Acrylic",
-        canvas: "",
+        canvas: "Stretched Canvas",
         finish: "",
         desc: "",
     });
@@ -118,15 +132,29 @@ async function setupPaintings(Painting) {
     let painting7 = new Painting({
         name: "Color Spectrum",
         image: "ColorSpectrum.webp",
-        dimensions: "36x48x1",
+        dimensions: "36x48x1 1/2",
         date: "",
         paint: "Acrylic",
-        canvas: "Wood Canvas",
+        canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "",
     });
 
     await painting7.save();
+
+    let painting49 = new Painting({
+        name: "Cosmic Dust",
+        image: "CosmicDust.webp",
+        dimensions: "20x20x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+        sold: true,
+    });
+
+    await painting49.save();
 
     let painting8 = new Painting({
         name: "Cosmic Tides",
@@ -281,6 +309,19 @@ async function setupPaintings(Painting) {
 
     await painting14.save();
 
+    let painting28 = new Painting({
+        name: "Inspire",
+        image: "Inspire.webp",
+        dimensions: "20x20x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art.",
+    });
+
+    await painting28.save();
+
     let painting15 = new Painting({
         name: "Liquid Dreamscapes",
         image: "LiquidDreamscapes.webp",
@@ -302,15 +343,15 @@ async function setupPaintings(Painting) {
         date: "2025",
         paint: "Acrylic",
         canvas: "Canvas",
-        finish: "Varnish Coating",
+        finish: "Varnish",
         desc: "",
     });
 
     await painting16.save();
 
     let painting26 = new Painting({
-        name: "Line of Sight",
-        image: "LineOfSight.webp",
+        name: "Lines of Sight",
+        image: "LinesOfSight.webp",
         dimensions: "40x16x1/2",
         date: "2025",
         paint: "Acrylic",
@@ -361,6 +402,19 @@ async function setupPaintings(Painting) {
     });
 
     await painting43.save();
+
+    let painting24 = new Painting({
+        name: "Monarchs Journey",
+        image: "MonarchsJourney.webp",
+        dimensions: "24x24x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art.",
+    });
+
+    await painting24.save();
 
     let painting44 = new Painting({
         name: "Ocean Clearing",
@@ -479,18 +533,30 @@ async function setupPaintings(Painting) {
     await painting41.save();
 
     let painting25 = new Painting({
-        name: "Starburst Spheres",
-        image: "StarburstSpheres.webp",
+        name: "Starburst Sphere (blue)",
+        image: "StarburstSphereBlue.webp",
         dimensions: "16x16x7/8",
         date: "2025",
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "",
-        mult: true
     });
 
     await painting25.save();
+
+    let painting31 = new Painting({
+        name: "Starburst Sphere (green)",
+        image: "StarburstSphereGreen.webp",
+        dimensions: "16x16x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting31.save();
 
     let painting21 = new Painting({
         name: "Strokes of Light",
@@ -574,60 +640,75 @@ async function setupPaintings(Painting) {
 
     await painting23.save();
 
-    /*
-
-    let painting24 = new Painting({
-        name: "",
-        image: "P24.webp",
-        dimensions: "",
+    let painting50 = new Painting({
+        name: "Twilights Glow",
+        image: "TwilightsGlow.webp",
+        dimensions: "18x24x1 1/2",
         date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
         desc: "",
+        framed: true,
     });
 
-    await painting24.save();
-
-    let painting28 = new Painting({
-        name: "",
-        image: "P28.webp",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-    });
-
-    await painting28.save();
-
-    let painting31 = new Painting({
-        name: "",
-        image: "P31.webp",
-        dimensions: "",
-        date: "2025",
-        paint: "",
-        canvas: "",
-        finish: "",
-        desc: "",
-    });
-
-    await painting31.save();
+    await painting50.save();
 
     let painting33 = new Painting({
-        name: "",
-        image: "P33.webp",
+        name: "Untitled",
+        image: "Untitled1.webp",
         dimensions: "",
         date: "2025",
         paint: "",
         canvas: "",
         finish: "",
         desc: "",
+        sold:true,
     });
 
     await painting33.save();
-    */
+
+    let painting45 = new Painting({
+        name: "Untitled",
+        image: "Untitled2.webp",
+        dimensions: "",
+        date: "2025",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        sold: true,
+    });
+
+    await painting45.save();
+
+    let painting46 = new Painting({
+        name: "Untitled",
+        image: "Untitled3.webp",
+        dimensions: "",
+        date: "2025",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        sold: true,
+    });
+
+    await painting46.save();
+
+    let painting47 = new Painting({
+        name: "Untitled",
+        image: "Untitled4.webp",
+        dimensions: "",
+        date: "2025",
+        paint: "",
+        canvas: "",
+        finish: "",
+        desc: "",
+        sold: true,
+    });
+
+    await painting47.save();
 }
 
 module.exports = setupPaintings;

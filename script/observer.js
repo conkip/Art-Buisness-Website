@@ -8,8 +8,10 @@ window.observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add("show"); //fade in
+            entry.target.classList.add("show-side"); //fade in
         } else {
             entry.target.classList.remove("show"); //fade out
+            entry.target.classList.remove("show-side"); //fade in
         }
     });
 });
