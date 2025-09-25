@@ -16,13 +16,13 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-.big-painting-container {
+#big-painting-container {
     height: 500px;
     width: 500px;
     overflow: hidden;
 }
 
-.big-painting-container img {
+#big-painting-container img {
     width: 100%;
     height: 100%;
     object-fit: contain;

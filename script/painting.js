@@ -137,9 +137,15 @@ async function setupPainting() {
     updateHeart();
 
     // add the big painting
-    document.getElementById(
-        "big-painting"
-    ).src = `../paintings_webp/${painting.image}`;
+    let bigPaintingContainer = document.getElementById("big-painting-container");
+    let bigPainting = document.createElement("img");
+
+    bigPainting.alt = "Big Painting";
+    bigPainting.src = `../paintings_webp/${painting.image}`;
+
+    bigPaintingContainer.appendChild(bigPainting);
+
+
 
     // add all the mini images underneath it if able
     for(let i = 1; i < 6; i++) {
