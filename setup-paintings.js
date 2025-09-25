@@ -487,6 +487,19 @@ async function setupPaintings(Painting) {
 
     await painting19.save();
 
+    let painting51 = new Painting({
+        name: "Secrets of Elephants",
+        image: "SecretsOfElephants.webp",
+        dimensions: "24x24x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy",
+        desc: "Mixed media art.",
+    });
+
+    await painting51.save();
+
     let painting42 = new Painting({
         name: "Setting Sun",
         image: "SettingSun.webp",
