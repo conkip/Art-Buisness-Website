@@ -78,12 +78,12 @@ function addMiniPainting(fileName, number) {
                 if (response.ok) {
                     let miniPaintings = document.getElementById("mini-paintings");
 
-                    let newDiv = document.createElement("div");
-                    newDiv.classList.add("mini-painting-container");
-                    miniPaintings.appendChild(newDiv);
+                    let container = document.createElement("div");
+                    container.classList.add("mini-painting-container");
+                    miniPaintings.appendChild(container);
 
                     let newImg = document.createElement("img");
-                    newDiv.appendChild(newImg);
+                    container.appendChild(newImg);
                     newImg.id = `mini-painting${number}`
                     newImg.alt = `Mini Painting ${number}`
                     newImg.src = `../paintings_webp/${newFileName}`;
@@ -99,7 +99,7 @@ function addMiniPainting(fileName, number) {
                     });
 
                     // cancel change if they dont hover for long enough
-                    miniPainting.addEventListener("mouseleave", () => {
+                    newImg.addEventListener("mouseleave", () => {
                         clearTimeout(hoverTimeout);
                     });
 
@@ -140,6 +140,7 @@ async function setupPainting() {
     let bigPaintingContainer = document.getElementById("big-painting-container");
     let bigPainting = document.createElement("img");
 
+    bigPainting.id = "big-painting";
     bigPainting.alt = "Big Painting";
     bigPainting.src = `../paintings_webp/${painting.image}`;
 
