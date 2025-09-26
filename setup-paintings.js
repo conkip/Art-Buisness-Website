@@ -25,7 +25,7 @@ async function setupPaintings(Painting) {
         image: "3DDotFusion.webp",
         dimensions: "12x12x7/8",
         date: "",
-        paint: "Oil",
+        paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "",
@@ -151,7 +151,6 @@ async function setupPaintings(Painting) {
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "",
-        sold: true,
     });
 
     await painting49.save();
@@ -282,6 +281,19 @@ async function setupPaintings(Painting) {
     });
 
     await painting13.save();
+
+    let painting52 = new Painting({
+        name: "Focus",
+        image: "Focus.webp",
+        dimensions: "20x20x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting52.save();
 
     let painting38 = new Painting({
         name: "Golden Giants",
