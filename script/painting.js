@@ -63,7 +63,7 @@ async function changeBigPainting(newFileName) {
 }
 
 // adds an alternate image under the big painting in the if it exists in the folder
-function addMiniPainting(fileName, number) {
+async function addMiniPainting(fileName, number) {
     //first at the number to the image name
     let fileNameSplit = fileName.split(".");
     let newFileName = fileNameSplit[0] + number + "." + fileNameSplit[1];
@@ -73,7 +73,7 @@ function addMiniPainting(fileName, number) {
     }
 
     try {
-        fetch(`../paintings_webp/${newFileName}`)
+        await fetch(`../paintings_webp/${newFileName}`)
             .then((response) => {
                 if (response.ok) {
                     let miniPaintings = document.getElementById("mini-paintings");
