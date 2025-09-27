@@ -59,3 +59,7 @@
     fill: rgb(75, 75, 75);
     transition: transform 0.2s ease;
 }
+
+img{
+    border-radius:0;
+}

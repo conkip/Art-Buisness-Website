@@ -361,6 +361,19 @@ async function setupPaintings(Painting) {
 
     await painting16.save();
 
+    let painting54 = new Painting({
+        name: "Lines Ascending",
+        image: "LinesAscending.webp",
+        dimensions: "24x24x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting54.save();
+
     let painting26 = new Painting({
         name: "Lines of Sight",
         image: "LinesOfSight.webp",
@@ -484,6 +497,19 @@ async function setupPaintings(Painting) {
     });
 
     await painting18.save();
+
+    let painting55 = new Painting({
+        name: "Point of View",
+        image: "PointOfView.webp",
+        dimensions: "20x20x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting55.save();
 
     let painting19 = new Painting({
         name: "Retro Vibe",
@@ -678,6 +704,19 @@ async function setupPaintings(Painting) {
     });
 
     await painting50.save();
+
+    let painting53 = new Painting({
+        name: "Vertical Hues",
+        image: "VerticalHues.webp",
+        dimensions: "20x20x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting53.save();
 
     let painting33 = new Painting({
         name: "Untitled",
