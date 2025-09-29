@@ -6,7 +6,7 @@
 
 #painting-container {
     display: flex;
-    gap: 50px;
+    gap: 3rem;
     justify-content: center;
     align-items: center;
 }
@@ -62,4 +62,10 @@
 
 img{
     border-radius:0;
+}
+
+#title-container{
+    display:flex;
+    gap:2rem;
+    align-items:center;
 }
