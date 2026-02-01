@@ -828,6 +828,19 @@ async function setupPaintings(Painting) {
     });
 
     await painting53.save();
+
+    let painting53 = new Painting({
+        name: "Vertical Hues",
+        image: "VerticalHues.webp",
+        dimensions: "20x20x7/8",
+        date: "2025",
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "",
+    });
+
+    await painting53.save();
 }
 
 module.exports = setupPaintings;
