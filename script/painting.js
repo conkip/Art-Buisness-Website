@@ -116,12 +116,11 @@ async function addMiniPainting(fileName, number) {
 }
 
 // 24x24x1 --> 24" L x 24" W x 1" D
-function formatDimensions(dim) {
-    let dimensions = dim.split("x");
+function formatDimensions(dimensions) {
 
-    let length = dimensions[0] + '" L x ';
-    let width = dimensions[1] + '" W x ';
-    let depth = dimensions[2] + '" D';
+    let length = dimensions.length + '" L x ';
+    let width = dimensions.width + '" W x ';
+    let depth = dimensions.depth + '" D';
 
     return length + width + depth;
 }
@@ -158,22 +157,27 @@ async function setupPainting() {
 
     // add the description
     let description = "";
-    if(painting.dimensions != "") {
-         description += formatDimensions(painting.dimensions);
-         if (painting.mult) {
+    if(painting.dimensions !== undefined) {
+        description += formatDimensions(painting.dimensions);
+        if (painting.mult) {
             description += " Each";
         }
         description += "\n";
     }
 
-    if (painting.date !== "") {
-        description += painting.date + "\n";
+    if (painting.date !== undefined) {
+        description += String(painting.date) + "\n";
     }
 
-    if (painting.paint !== "") {
-        description += painting.paint + " Paint on " + painting.canvas + "\n";
+    if (painting.paint !== undefined) {
+        description += painting.paint + " Paint"
+        if(painting.canvas !== undefined){
+            description += " on " + painting.canvas
+        } 
+        description += "\n";
     }
-    if (painting.finish !== "") {
+    
+    if (painting.finish !== undefined) {
         description += painting.finish + "\n";
     }
 
@@ -181,7 +185,7 @@ async function setupPainting() {
         description += "Framed\n";
     }
 
-    if (painting.date !== "") {
+    if (painting.desc !== undefined) {
         description += "\n" + painting.desc;
     }
 
