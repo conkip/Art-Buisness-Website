@@ -166,7 +166,7 @@ async function setupPainting() {
     }
 
     if (painting.date !== undefined) {
-        description += String(painting.date) + "\n";
+        description += painting.date + "\n";
     }
 
     if (painting.paint !== undefined) {
@@ -183,6 +183,9 @@ async function setupPainting() {
 
     if (painting.framed) {
         description += "Framed\n";
+    }
+    if(painting.price !== undefined) {
+        description += "\n$" + painting.price + "\n"
     }
 
     if (painting.desc !== undefined) {
