@@ -87,6 +87,7 @@ async function setupPaintings(Painting) {
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a blue dragonfly.",
+        sold:true
     });
 
     await painting58.save();
@@ -248,6 +249,23 @@ async function setupPaintings(Painting) {
     });
 
     await painting49.save();
+
+    let painting68 = new Painting({
+        name: "Cosmic Drift",
+        image: "CosmicDrift.webp",
+        dimensions: {
+            length:30,
+            width:30,
+            depth:2.5
+        },
+        date: 2025,
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        sold:true
+    });
+
+    await painting68.save();
 
     let painting8 = new Painting({
         name: "Cosmic Tides",
@@ -703,6 +721,22 @@ async function setupPaintings(Painting) {
 
     await painting44.save();
 
+    let painting69 = new Painting({
+        name: "Oceanic Depth",
+        image: "OceanicDepth.webp",
+        dimensions: {
+            length:10,
+            width:10,
+            depth:1.5
+        },
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        mult:true
+    });
+
+    await painting69.save();
+
     let painting17 = new Painting({
         name: "Orbits in Motion",
         image: "OrbitsInMotion.webp",
@@ -803,6 +837,7 @@ async function setupPaintings(Painting) {
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a scarlet dragonfly.",
+        sold:true
     });
 
     await painting59.save();
@@ -888,7 +923,7 @@ async function setupPaintings(Painting) {
     await painting41.save();
 
     let painting25 = new Painting({
-        name: "Starburst Sphere (blue)",
+        name: "Starburst Sphere (Blue)",
         image: "StarburstSphereBlue.webp",
         dimensions: {
             length:16,
@@ -904,7 +939,7 @@ async function setupPaintings(Painting) {
     await painting25.save();
 
     let painting31 = new Painting({
-        name: "Starburst Sphere (green)",
+        name: "Starburst Sphere (Green)",
         image: "StarburstSphereGreen.webp",
         dimensions: {
             length:16,
@@ -1048,9 +1083,6 @@ async function setupPaintings(Painting) {
     });
 
     await painting53.save();
-
-    let painting68 = new Painting({
-    });
 }
 
 module.exports = setupPaintings;
