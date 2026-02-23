@@ -9,31 +9,31 @@ let curPainting = null;
 const heart = document.getElementById("heart");
 
 // this is to make it visible after everything loads up so it doesn't look buggy
-const main = document.querySelector('main');
+const main = document.querySelector("main");
 
 async function onStartup() {
-    try{
+    try {
         await fetch(`/users/me`, {
             method: "GET",
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token"),
-                "Content-Type": "application/json"
-            }
+                Authorization: "Bearer " + localStorage.getItem("token"),
+                "Content-Type": "application/json",
+            },
         })
-        .then((response) => {
-            const contentType = response.headers.get("Content-Type");
+            .then((response) => {
+                const contentType = response.headers.get("Content-Type");
 
-            if (contentType && contentType.includes("application/json")) {
-                return response.json();
-            } else {
-                return null;
-            }
-        })
-        .then((data) => {
-            console.log("User Data: " + data);
-            curUser = data;
-        })
-        .catch((error) => console.error("Error:", error));
+                if (contentType && contentType.includes("application/json")) {
+                    return response.json();
+                } else {
+                    return null;
+                }
+            })
+            .then((data) => {
+                console.log("User Data: " + data);
+                curUser = data;
+            })
+            .catch((error) => console.error("Error:", error));
     } catch (error) {
         console.error("Error:", error);
     }
@@ -59,7 +59,6 @@ async function changeBigPainting(newFileName) {
             bigPainting.style.opacity = 1;
         };
     }, 300);
-
 }
 
 // adds an alternate image under the big painting in the if it exists in the folder
@@ -76,7 +75,8 @@ async function addMiniPainting(fileName, number) {
         await fetch(`../paintings_webp/${newFileName}`)
             .then((response) => {
                 if (response.ok) {
-                    let miniPaintings = document.getElementById("mini-paintings");
+                    let miniPaintings =
+                        document.getElementById("mini-paintings");
 
                     let container = document.createElement("div");
                     container.classList.add("mini-painting-container");
@@ -84,8 +84,8 @@ async function addMiniPainting(fileName, number) {
 
                     let newImg = document.createElement("img");
                     container.appendChild(newImg);
-                    newImg.id = `mini-painting${number}`
-                    newImg.alt = `Mini Painting ${number}`
+                    newImg.id = `mini-painting${number}`;
+                    newImg.alt = `Mini Painting ${number}`;
                     newImg.src = `../paintings_webp/${newFileName}`;
                     newImg.onclick = () => changeBigPainting(newFileName);
 
@@ -102,7 +102,6 @@ async function addMiniPainting(fileName, number) {
                     newImg.addEventListener("mouseleave", () => {
                         clearTimeout(hoverTimeout);
                     });
-
                 } else {
                     console.log("File " + newFileName + " not found");
                 }
@@ -117,7 +116,6 @@ async function addMiniPainting(fileName, number) {
 
 // 24x24x1 --> 24" L x 24" W x 1" D
 function formatDimensions(dimensions) {
-
     let length = dimensions.length + '" L x ';
     let width = dimensions.width + '" W x ';
     let depth = dimensions.depth + '" D';
@@ -136,7 +134,9 @@ async function setupPainting() {
     updateHeart();
 
     // add the big painting
-    let bigPaintingContainer = document.getElementById("big-painting-container");
+    let bigPaintingContainer = document.getElementById(
+        "big-painting-container",
+    );
     let bigPainting = document.createElement("img");
 
     bigPainting.id = "big-painting";
@@ -145,60 +145,80 @@ async function setupPainting() {
 
     bigPaintingContainer.appendChild(bigPainting);
 
-
-
     // add all the mini images underneath it if able
-    for(let i = 1; i < 6; i++) {
+    for (let i = 1; i < 6; i++) {
         addMiniPainting(painting.image, i);
     }
 
     // add the title
     document.getElementById("title").innerText = painting.name;
 
-    // add the description
-    let description = "";
-    if(painting.dimensions !== undefined) {
-        description += formatDimensions(painting.dimensions);
+    // add the painting details
+
+    const dimensionsElem = document.getElementById("dimensions");
+    if (painting.dimensions !== undefined) {
+        let dimensions = "";
+        dimensions += formatDimensions(painting.dimensions);
         if (painting.mult) {
-            description += " Each";
+            dimensions += " Each";
         }
-        description += "\n";
+        dimensionsElem.innerText = dimensions;
+    } else {
+        dimensionsElem.classList.add("display-none");
     }
 
+    const dateElem = document.getElementById("date");
     if (painting.date !== undefined) {
-        description += painting.date + "\n";
+        dateElem.innerText = painting.date;
+    } else {
+        dateElem.classList.add("display-none");
     }
 
+    const paintAndCanvasElem = document.getElementById("paint-and-canvas");
     if (painting.paint !== undefined) {
-        description += painting.paint + " Paint"
-        if(painting.canvas !== undefined){
-            description += " on " + painting.canvas
-        } 
-        description += "\n";
+        let paintAndCanvas = "";
+        paintAndCanvas += painting.paint + " Paint";
+        if (painting.canvas !== undefined) {
+            paintAndCanvas += " on " + painting.canvas;
+        }
+        paintAndCanvasElem.innerText = paintAndCanvas;
+    } else {
+        paintAndCanvasElem.classList.add("display-none");
     }
-    
+
+    const finishElem = document.getElementById("finish");
     if (painting.finish !== undefined) {
-        description += painting.finish + "\n";
+        finishElem.innerText = painting.finish;
+    } else {
+        finishElem.classList.add("display-none");
     }
 
+    const framedStatusElem = document.getElementById("framed-status");
     if (painting.framed) {
-        description += "Framed\n";
-    }
-    if(painting.price !== undefined) {
-        description += "\n$" + painting.price + "\n"
+        framedStatusElem.innerText = "Framed";
+    } else {
+        framedStatusElem.classList.add("display-none");
     }
 
+    const priceElem = document.getElementById("price");
+    if (painting.price !== undefined) {
+        priceElem.innerText = "$" + painting.price;
+    } else {
+        priceElem.classList.add("display-none");
+    }
+
+    const descriptionElem = document.getElementById("description");
     if (painting.desc !== undefined) {
-        description += "\n" + painting.desc;
+        descriptionElem.innerText = painting.desc;
+    } else {
+        descriptionElem.classList.add("display-none");
     }
-
-    document.getElementById("description").innerText = description;
 }
 
 // wait until everything is loaded to make more seamless
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
     main.style.visibility = "visible";
-    console.log('Page and all resources are fully loaded.');
+    console.log("Page and all resources are fully loaded.");
 });
 
 // updates the heart image based on if the user has the painting favorited or not
@@ -253,8 +273,8 @@ async function heartClicked() {
             fetch(`/users/guest/likes/${curPainting.name}`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
             });
 
             showToast("Like added");
@@ -263,8 +283,8 @@ async function heartClicked() {
             fetch(`/users/guest/likes/${curPainting.name}`, {
                 method: "DELETE",
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
             });
 
             showToast("Like removed");
@@ -281,8 +301,8 @@ async function heartClicked() {
             fetch(`/users/me/likes/${curPainting.name}`, {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
             });
 
             showToast("Like added");
@@ -292,8 +312,8 @@ async function heartClicked() {
             fetch(`/users/me/likes/${curPainting.name}`, {
                 method: "DELETE",
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
             });
 
             showToast("Like removed");

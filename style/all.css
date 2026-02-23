@@ -10,9 +10,13 @@
 /* Colors- calm, earthly, modern, creativity*/
 :root {
     --footer-bg-color: rgb(240, 240, 240);
-    --main-bg-color: white;                 /* white background to not take away from art and for a clean, modern look */
-    --text-color: rgb(100, 100, 100);       /* medium gray for text to not be easy to read and not harsh on the eyes */
-    --accent-color: #5EAAA8;                /* Teal - calm, creative, modern */      /* Alternate Color: #8FAE92; /* Sage Green*/
+    --main-bg-color: white; /* white background to not take away from art and for a clean, modern look */
+    --text-color: rgb(
+        100,
+        100,
+        100
+    ); /* medium gray for text to not be easy to read and not harsh on the eyes */
+    --accent-color: #5eaaa8; /* Teal - calm, creative, modern */ /* Alternate Color: #8FAE92; /* Sage Green*/
 
     /* dark theme */
     /*
@@ -49,13 +53,16 @@
 */
 
 /*-------GENERAL--------*/
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -70,8 +77,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    width:100%;
-    margin:0px;
+    width: 100%;
+    margin: 0px;
     padding: 0px;
 }
 
@@ -158,7 +165,7 @@ button {
 
 .top-button {
     margin-top: 20px;
-    margin-bottom:40px;
+    margin-bottom: 40px;
 }
 
 img {
@@ -172,7 +179,7 @@ img {
     display: none !important;
 }
 
-.toast {
+/* .toast {
     z-index: 6;
     position: fixed;
     bottom: 20px;
@@ -185,17 +192,47 @@ img {
     transform: translateX(100%);
     animation: moveup 0.1s linear forwards;
     text-wrap: nowrap;
+} */
+
+/* Container */
+#toast-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: min(10rem, 15rem);
+    display: flex;
+    flex-direction: column-reverse; /* newest at bottom */
+    gap: 1rem;
+    z-index: 9999;
 }
 
-@keyframes moveup {
-    100% {
-        transform: translateX(0);
+.toast {
+    position: relative;
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background-color: var(--text-color);
+    color: var(--main-bg-color);
+    text-align: center;
+
+    /* start below */
+    transform: translateY(100%);
+    opacity: 0;
+    animation: slideUp 0.35s ease forwards;
+}
+
+/* slide up animation */
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 0.95;
     }
 }
 
 /* -----------NAV BAR----------- */
 nav {
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -203,7 +240,7 @@ nav {
     z-index: 4;
     height: 50px;
     width: 100%;
-    gap:80px;
+    gap: 80px;
     padding-top: 10px;
     background-color: var(--main-bg-color);
     font-size: 25px;
@@ -216,7 +253,7 @@ footer {
     min-height: 400px;
     width: 100%;
     box-sizing: border-box;
-    padding-top:20px;
+    padding-top: 20px;
     background-color: var(--footer-bg-color);
     text-align: center;
 }
@@ -270,7 +307,9 @@ footer {
 .hidden {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.85s ease-in, transform 0.85s ease-in;
+    transition:
+        opacity 0.85s ease-in,
+        transform 0.85s ease-in;
 }
 
 .hidden.show {
@@ -311,14 +350,17 @@ html {
     transform: translateX(50%);
 }
 
-
-.hidden-left.show-side{
-    transition: opacity 1.75s ease-in, transform 1s ease-in;
+.hidden-left.show-side {
+    transition:
+        opacity 1.75s ease-in,
+        transform 1s ease-in;
     opacity: 1;
     transform: translateX(0);
 }
-.hidden-right.show-side{
-    transition: opacity 1.75s ease-in, transform 1s ease-in;
+.hidden-right.show-side {
+    transition:
+        opacity 1.75s ease-in,
+        transform 1s ease-in;
     opacity: 1;
     transform: translateX(0);
 }

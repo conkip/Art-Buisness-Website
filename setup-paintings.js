@@ -36,6 +36,7 @@ async function setupPaintings(Painting) {
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 250,
         mult: true,
     });
 
@@ -44,17 +45,17 @@ async function setupPaintings(Painting) {
     let painting62 = new Painting({
         name: "Angel of Dreams",
         image: "AngelOfDreams.webp",
-        dimensions: { 
-            length: 36, 
-            width: 48, 
-            depth: 1.5
+        dimensions: {
+            length: 36,
+            width: 48,
+            depth: 1.5,
         },
-        date: 2025,
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        desc:"Mixed media art.",
-        price:1728
+        desc: "Mixed media art.",
+        price: 1695,
     });
     await painting62.save();
 
@@ -69,6 +70,7 @@ async function setupPaintings(Painting) {
         paint: "Oil",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 750,
         mult: true,
     });
 
@@ -87,7 +89,7 @@ async function setupPaintings(Painting) {
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a blue dragonfly.",
-        sold:true
+        sold: true,
     });
 
     await painting58.save();
@@ -112,15 +114,16 @@ async function setupPaintings(Painting) {
         name: "Butterflies",
         image: "Butterflies.webp",
         dimensions: {
-            length:10,
-            width:10,
-            depth:0.5
+            length: 10,
+            width: 10,
+            depth: 0.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "3 panel butterflies.",
+        price: 150,
         mult: true,
     });
 
@@ -130,13 +133,14 @@ async function setupPaintings(Painting) {
         name: "Butterflies in Flight",
         image: "ButterfliesInFlight.webp",
         dimensions: {
-            length:16,
-            width:24,
-            depth:1
+            length: 16,
+            width: 24,
+            depth: 1,
         },
         date: 2025,
         paint: "Oil",
         canvas: "Wood Panel",
+        price: 175,
     });
 
     await painting3.save();
@@ -145,9 +149,9 @@ async function setupPaintings(Painting) {
         name: "Butterfly Effect",
         image: "ButterflyEffect.webp",
         dimensions: {
-            length:8,
-            width:10,
-            depth:1
+            length: 8,
+            width: 10,
+            depth: 1,
         },
         date: 2025,
         paint: "Acrylic",
@@ -156,6 +160,7 @@ async function setupPaintings(Painting) {
         desc: "Mixed media art of two butterflies in floating frames.",
         framed: true,
         mult: true,
+        price: 140,
     });
 
     await painting57.save();
@@ -164,12 +169,13 @@ async function setupPaintings(Painting) {
         name: "Circular Echo",
         image: "CircularEcho.webp",
         dimensions: {
-            length:30,
-            width:30,
-            depth:1.5
+            length: 30,
+            width: 30,
+            depth: 1.5,
         },
         paint: "Oil",
         canvas: "Canvas",
+        price: 200,
     });
 
     await painting4.save();
@@ -178,12 +184,13 @@ async function setupPaintings(Painting) {
         name: "Colors in Motion",
         image: "ColorsInMotion.webp",
         dimensions: {
-            length:30,
-            width:36,
-            depth:1
+            length: 30,
+            width: 36,
+            depth: 1,
         },
         paint: "Acrylic",
         canvas: "Canvas",
+        price: 400,
     });
 
     await painting5.save();
@@ -192,9 +199,9 @@ async function setupPaintings(Painting) {
         name: "Colors of Liberty",
         image: "ColorsOfLiberty.webp",
         dimensions: {
-            length:24,
-            width:30,
-            depth:1
+            length: 24,
+            width: 30,
+            depth: 1,
         },
         sold: true,
     });
@@ -205,13 +212,14 @@ async function setupPaintings(Painting) {
         name: "Color Spectrum",
         image: "ColorSpectrum.webp",
         dimensions: {
-            length:36,
-            width:48,
-            depth:1.5
+            length: 36,
+            width: 48,
+            depth: 1.5,
         },
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 1900,
     });
 
     await painting7.save();
@@ -220,15 +228,16 @@ async function setupPaintings(Painting) {
         name: "Colorful Flutter",
         image: "ColorfulFlutter.webp",
         dimensions: {
-            length:10,
-            width:10,
-            depth:1.5
+            length: 10,
+            width: 10,
+            depth: 1.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of white and green butterflies.",
+        price: 250,
         mult: true,
     });
 
@@ -238,14 +247,15 @@ async function setupPaintings(Painting) {
         name: "Cosmic Dust",
         image: "CosmicDust.webp",
         dimensions: {
-            length:20,
-            width:20,
-            depth:0.875
+            length: 20,
+            width: 20,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 250,
     });
 
     await painting49.save();
@@ -254,15 +264,15 @@ async function setupPaintings(Painting) {
         name: "Cosmic Drift",
         image: "CosmicDrift.webp",
         dimensions: {
-            length:30,
-            width:30,
-            depth:2.5
+            length: 30,
+            width: 30,
+            depth: 2.5,
         },
-        date: 2025,
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        sold:true
+        sold: true,
     });
 
     await painting68.save();
@@ -271,9 +281,9 @@ async function setupPaintings(Painting) {
         name: "Cosmic Tides",
         image: "CosmicTides.webp",
         dimensions: {
-            length:16,
-            width:20,
-            depth:1
+            length: 16,
+            width: 20,
+            depth: 1,
         },
         paint: "Acrylic",
         sold: true,
@@ -294,15 +304,16 @@ async function setupPaintings(Painting) {
         name: "Discovery",
         image: "Discovery.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:1.5
+            length: 24,
+            width: 24,
+            depth: 1.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a green butterfly.",
+        price: 300,
     });
 
     await painting30.save();
@@ -311,9 +322,9 @@ async function setupPaintings(Painting) {
         name: "Dot Fusion",
         image: "DotFusion.webp",
         dimensions: {
-            length:48,
-            width:48,
-            depth:1
+            length: 48,
+            width: 48,
+            depth: 1,
         },
         sold: true,
     });
@@ -331,14 +342,15 @@ async function setupPaintings(Painting) {
         name: "Double Lines",
         image: "DoubleLines.webp",
         dimensions: {
-            length:20,
-            width:20,
-            depth:0.875
+            length: 20,
+            width: 20,
+            depth: 0.875,
         },
-        date: 2025,
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 350,
     });
 
     await painting61.save();
@@ -347,15 +359,16 @@ async function setupPaintings(Painting) {
         name: "Dream",
         image: "Dream.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:1.5
+            length: 24,
+            width: 24,
+            depth: 1.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a monarch butterfly.",
+        price: 300,
     });
 
     await painting29.save();
@@ -363,17 +376,17 @@ async function setupPaintings(Painting) {
     let painting66 = new Painting({
         name: "Dreams",
         image: "Dreams.webp",
-        dimensions: { 
-            length: 10, 
-            width: 10, 
-            depth: 1
+        dimensions: {
+            length: 10,
+            width: 10,
+            depth: 1,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        desc:"Mixed media art.",
-        sold:true
+        desc: "Mixed media art.",
+        sold: true,
     });
     await painting66.save();
 
@@ -381,9 +394,9 @@ async function setupPaintings(Painting) {
         name: "Eternal Light",
         image: "EternalLight.webp",
         dimensions: {
-            length:36,
-            width:48,
-            depth:1
+            length: 36,
+            width: 48,
+            depth: 1,
         },
         paint: "Oil",
         framed: true,
@@ -396,9 +409,9 @@ async function setupPaintings(Painting) {
         name: "Electric Waves",
         image: "ElectricWaves.webp",
         dimensions: {
-            length:48,
-            width:24,
-            depth:1
+            length: 48,
+            width: 24,
+            depth: 1,
         },
         canvas: "Canvas",
         mult: true,
@@ -411,9 +424,9 @@ async function setupPaintings(Painting) {
         name: "Eternal Sunshine",
         image: "EternalSunshine.webp",
         dimensions: {
-            length:36,
-            width:48,
-            depth:1
+            length: 36,
+            width: 48,
+            depth: 1,
         },
         paint: "Acrylic",
         sold: true,
@@ -425,9 +438,9 @@ async function setupPaintings(Painting) {
         name: "Flowing Essence",
         image: "FlowingEssence.webp",
         dimensions: {
-            length:6,
-            width:6,
-            depth:1
+            length: 6,
+            width: 6,
+            depth: 1,
         },
         paint: "Acrylic",
         canvas: "Wood Panel",
@@ -442,14 +455,15 @@ async function setupPaintings(Painting) {
         name: "Focus",
         image: "Focus.webp",
         dimensions: {
-            length:20,
-            width:20,
-            depth:0.875
+            length: 20,
+            width: 20,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 175,
     });
 
     await painting52.save();
@@ -457,17 +471,17 @@ async function setupPaintings(Painting) {
     let painting65 = new Painting({
         name: "Free",
         image: "Free.webp",
-        dimensions: { 
-            length: 16, 
-            width: 16, 
-            depth: 1
+        dimensions: {
+            length: 16,
+            width: 16,
+            depth: 1,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        desc:"Mixed media art.",
-        sold:true
+        desc: "Mixed media art.",
+        sold: true,
     });
     await painting65.save();
 
@@ -475,15 +489,16 @@ async function setupPaintings(Painting) {
         name: "Golden Giants",
         image: "GoldenGiants.webp",
         dimensions: {
-            length:30,
-            width:18,
-            depth:1.25
+            length: 30,
+            width: 18,
+            depth: 1.25,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Decorative High Gloss Coating",
         desc: "A sunflower painting made with pattette knife.",
+        price: 175,
     });
 
     await painting38.save();
@@ -491,32 +506,33 @@ async function setupPaintings(Painting) {
     let painting14 = new Painting({
         name: "Hazy Drift",
         image: "HazyDrift.webp",
-        dimensions: { 
-            length: 60, 
-            width: 36, 
-            depth: 1.25 
+        dimensions: {
+            length: 60,
+            width: 36,
+            depth: 1.25,
         },
         date: 2015,
         paint: "Acrylic",
         canvas: "Canvas",
         finish: "Varnish",
+        price: 550,
     });
     await painting14.save();
 
     let painting64 = new Painting({
         name: "High Hopes",
         image: "HighHopes.webp",
-        dimensions: { 
-            length: 16, 
-            width: 16, 
-            depth: 1
+        dimensions: {
+            length: 16,
+            width: 16,
+            depth: 1,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        desc:"Mixed media art.",
-        sold:true
+        desc: "Mixed media art.",
+        sold: true,
     });
     await painting64.save();
 
@@ -524,15 +540,16 @@ async function setupPaintings(Painting) {
         name: "Inspire",
         image: "Inspire.webp",
         dimensions: {
-            length:20,
-            width:20,
-            depth:0.875
+            length: 20,
+            width: 20,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art.",
+        price: 200,
     });
 
     await painting28.save();
@@ -541,15 +558,16 @@ async function setupPaintings(Painting) {
         name: "Journey Butterfly",
         image: "JourneyButterfly.webp",
         dimensions: {
-            length:48,
-            width:36,
-            depth:1.5
+            length: 48,
+            width: 36,
+            depth: 1.5,
         },
-        date: 2025,
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art.",
+        price: 1250,
     });
 
     await painting60.save();
@@ -566,14 +584,15 @@ async function setupPaintings(Painting) {
         name: "Liquid Horizons",
         image: "LiquidHorizons.webp",
         dimensions: {
-            length:48,
-            width:60,
-            depth:1
+            length: 48,
+            width: 60,
+            depth: 1,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Canvas",
         finish: "Varnish",
+        price: 995,
     });
 
     await painting16.save();
@@ -582,14 +601,15 @@ async function setupPaintings(Painting) {
         name: "Lines Ascending",
         image: "LinesAscending.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:0.875,
+            length: 24,
+            width: 24,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 475,
     });
 
     await painting54.save();
@@ -598,15 +618,16 @@ async function setupPaintings(Painting) {
         name: "Lines of Sight",
         image: "LinesOfSight.webp",
         dimensions: {
-            length:40,
-            width:16,
-            depth:0.5
+            length: 40,
+            width: 16,
+            depth: 0.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Geometric design painting.",
+        price: 250,
     });
 
     await painting26.save();
@@ -624,9 +645,9 @@ async function setupPaintings(Painting) {
         name: "Meeples",
         image: "Meeples.webp",
         dimensions: {
-            length:12,
-            width:12,
-            depth:1
+            length: 12,
+            width: 12,
+            depth: 1,
         },
         sold: true,
     });
@@ -636,17 +657,17 @@ async function setupPaintings(Painting) {
     let painting67 = new Painting({
         name: "Metomorphos",
         image: "Metomorphos.webp",
-        dimensions: { 
-            length: 10, 
-            width: 10, 
-            depth: 1
+        dimensions: {
+            length: 10,
+            width: 10,
+            depth: 1,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        desc:"Mixed media art.",
-        sold:true
+        desc: "Mixed media art.",
+        sold: true,
     });
     await painting67.save();
 
@@ -654,14 +675,15 @@ async function setupPaintings(Painting) {
         name: "Mid Century Sputnik",
         image: "MidCenturySputnik.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:0.875
+            length: 24,
+            width: 24,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 525,
     });
 
     await painting37.save();
@@ -670,9 +692,9 @@ async function setupPaintings(Painting) {
         name: "Mini Motion",
         image: "MiniMotion.webp",
         dimensions: {
-            length:11,
-            width:14,
-            depth:1.5
+            length: 11,
+            width: 14,
+            depth: 1.5,
         },
         canvas: "Canvas",
         sold: true,
@@ -684,15 +706,16 @@ async function setupPaintings(Painting) {
         name: "Monarchs Journey",
         image: "MonarchsJourney.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:0.875
+            length: 24,
+            width: 24,
+            depth: 0.875,
         },
-        date: 2025,
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art.",
+        price: 275,
     });
 
     await painting24.save();
@@ -710,9 +733,9 @@ async function setupPaintings(Painting) {
         name: "Ocean Clearing",
         image: "OceanClearing.webp",
         dimensions: {
-            length:11,
-            width:14,
-            depth:1.5
+            length: 11,
+            width: 14,
+            depth: 1.5,
         },
         canvas: "Wood Panel",
         sold: true,
@@ -725,14 +748,16 @@ async function setupPaintings(Painting) {
         name: "Oceanic Depth",
         image: "OceanicDepth.webp",
         dimensions: {
-            length:10,
-            width:10,
-            depth:1.5
+            length: 10,
+            width: 10,
+            depth: 1.5,
         },
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        mult:true
+        price: 175,
+        mult: true,
     });
 
     await painting69.save();
@@ -741,9 +766,9 @@ async function setupPaintings(Painting) {
         name: "Orbits in Motion",
         image: "OrbitsInMotion.webp",
         dimensions: {
-            length:8,
-            width:8,
-            depth:1
+            length: 8,
+            width: 8,
+            depth: 1,
         },
         canvas: "Wood Panel",
         sold: true,
@@ -756,15 +781,16 @@ async function setupPaintings(Painting) {
         name: "Painted Ladies",
         image: "PaintedLadies.webp",
         dimensions: {
-            length:36,
-            width:36,
-            depth:1.5
+            length: 36,
+            width: 36,
+            depth: 1.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Deep Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of butterflies on a journey.",
+        price: 975,
     });
 
     await painting27.save();
@@ -782,9 +808,9 @@ async function setupPaintings(Painting) {
         name: "Pinwheel",
         image: "Pinwheel.webp",
         dimensions: {
-            length:36,
-            width:48,
-            depth:1
+            length: 36,
+            width: 48,
+            depth: 1,
         },
         paint: "Acrylic",
         sold: true,
@@ -796,14 +822,15 @@ async function setupPaintings(Painting) {
         name: "Point of View",
         image: "PointOfView.webp",
         dimensions: {
-            length:20,
-            width:20,
-            depth:0.875
+            length: 20,
+            width: 20,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 250,
     });
 
     await painting55.save();
@@ -812,9 +839,9 @@ async function setupPaintings(Painting) {
         name: "Retro Vibe",
         image: "RetroVibe.webp",
         dimensions: {
-            length:36,
-            width:48,
-            depth:1
+            length: 36,
+            width: 48,
+            depth: 1,
         },
         paint: "Acrylic",
         canvas: "Wood Panel",
@@ -828,16 +855,16 @@ async function setupPaintings(Painting) {
         name: "Scarlet Skimmer",
         image: "ScarletSkimmer.webp",
         dimensions: {
-            length:12,
-            width:12,
-            depth:0.875
+            length: 12,
+            width: 12,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a scarlet dragonfly.",
-        sold:true
+        sold: true,
     });
 
     await painting59.save();
@@ -846,15 +873,16 @@ async function setupPaintings(Painting) {
         name: "Secrets of Elephants",
         image: "SecretsOfElephants.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:0.875
+            length: 24,
+            width: 24,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy",
         desc: "Mixed media art.",
+        price: 300,
     });
 
     await painting51.save();
@@ -863,9 +891,9 @@ async function setupPaintings(Painting) {
         name: "Setting Sun",
         image: "SettingSun.webp",
         dimensions: {
-            length:26,
-            width:32,
-            depth:1.5
+            length: 26,
+            width: 32,
+            depth: 1.5,
         },
         canvas: "Canvas",
         framed: true,
@@ -877,17 +905,17 @@ async function setupPaintings(Painting) {
     let painting63 = new Painting({
         name: "Sky Full of Stars",
         image: "SkyFullOfStars.webp",
-        dimensions: { 
-            length: 36, 
-            width: 48, 
-            depth: 1.5
+        dimensions: {
+            length: 36,
+            width: 48,
+            depth: 1.5,
         },
-        date: 2025,
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
-        desc:"Mixed media art.",
-        price:1728
+        desc: "Mixed media art.",
+        price: 1695,
     });
     await painting63.save();
 
@@ -895,9 +923,9 @@ async function setupPaintings(Painting) {
         name: "Spectrum of the Sea",
         image: "SpectrumOfTheSea.webp",
         dimensions: {
-            length:18,
-            width:24,
-            depth:1
+            length: 18,
+            width: 24,
+            depth: 1,
         },
         paint: "Acrylic",
         desc: "Floating Frame",
@@ -911,9 +939,9 @@ async function setupPaintings(Painting) {
         name: "Spiral",
         image: "Spiral.webp",
         dimensions: {
-            length:12,
-            width:6,
-            depth:1
+            length: 12,
+            width: 6,
+            depth: 1,
         },
         canvas: "Canvas",
         mult: true,
@@ -926,14 +954,15 @@ async function setupPaintings(Painting) {
         name: "Starburst Sphere (Blue)",
         image: "StarburstSphereBlue.webp",
         dimensions: {
-            length:16,
-            width:16,
-            depth:0.875
+            length: 16,
+            width: 16,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 175,
     });
 
     await painting25.save();
@@ -942,14 +971,15 @@ async function setupPaintings(Painting) {
         name: "Starburst Sphere (Green)",
         image: "StarburstSphereGreen.webp",
         dimensions: {
-            length:16,
-            width:16,
-            depth:0.875
+            length: 16,
+            width: 16,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 175,
     });
 
     await painting31.save();
@@ -958,9 +988,9 @@ async function setupPaintings(Painting) {
         name: "Strokes of Light",
         image: "StrokesOfLight.webp",
         dimensions: {
-            length:18,
-            width:24,
-            depth:1
+            length: 18,
+            width: 24,
+            depth: 1,
         },
         paint: "Oil",
         framed: true,
@@ -973,13 +1003,14 @@ async function setupPaintings(Painting) {
         name: "Sun's Awakening",
         image: "SunsAwakening.webp",
         dimensions: {
-            length:18,
-            width:24,
-            depth:1
+            length: 18,
+            width: 24,
+            depth: 1,
         },
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 250,
         framed: true,
     });
 
@@ -989,15 +1020,16 @@ async function setupPaintings(Painting) {
         name: "Swallowtail in flight",
         image: "SwallowtailInflight.webp",
         dimensions: {
-            length:24,
-            width:24,
-            depth:0.875
+            length: 24,
+            width: 24,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art of a yellow swallowtail butterfly.",
+        price: 275,
     });
 
     await painting32.save();
@@ -1005,16 +1037,17 @@ async function setupPaintings(Painting) {
     let painting34 = new Painting({
         name: "The Longest Journey",
         image: "TheLongestJourney.webp",
-        dimensions: { 
-            length: 39.06, 
-            width: 31.5, 
-            depth: 1.375 
+        dimensions: {
+            length: 39.06,
+            width: 31.5,
+            depth: 1.375,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Canvas",
         finish: "Decorative High Gloss Coating",
         desc: "Mixed media art of birds migrating.",
+        price: 450,
     });
     await painting34.save();
 
@@ -1022,15 +1055,16 @@ async function setupPaintings(Painting) {
         name: "Tigers Forever",
         image: "TigersForever.webp",
         dimensions: {
-            length: 39.06, 
-            width: 31.5, 
-            depth: 1.375 
+            length: 39.06,
+            width: 31.5,
+            depth: 1.375,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Canvas",
         finish: "Decorative High Gloss Coating",
         desc: "Mixed media art of a stoic tiger with emerald eyes.",
+        price: 450,
     });
     await painting36.save();
 
@@ -1038,14 +1072,15 @@ async function setupPaintings(Painting) {
         name: "Transformation",
         image: "Transformation.webp",
         dimensions: {
-            length:49,
-            width:25,
-            depth:1.75
+            length: 49,
+            width: 25,
+            depth: 1.75,
         },
         date: 2025,
         paint: "Oil",
         canvas: "Canvas",
         finish: "Varnish",
+        price: 275,
         framed: true,
     });
 
@@ -1055,14 +1090,15 @@ async function setupPaintings(Painting) {
         name: "Twilights Glow",
         image: "TwilightsGlow.webp",
         dimensions: {
-            length:18,
-            width:24,
-            depth:1.5
+            length: 18,
+            width: 24,
+            depth: 1.5,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 395,
         framed: true,
     });
 
@@ -1072,14 +1108,15 @@ async function setupPaintings(Painting) {
         name: "Vertical Hues",
         image: "VerticalHues.webp",
         dimensions: {
-            length:20,
-            width:20,
-            depth:0.875
+            length: 20,
+            width: 20,
+            depth: 0.875,
         },
         date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
+        price: 350,
     });
 
     await painting53.save();
