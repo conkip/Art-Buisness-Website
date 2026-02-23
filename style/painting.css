@@ -64,10 +64,6 @@ img {
     border-radius: 0;
 }
 
-#right-of-painting-container {
-    min-height: 80vh;
-}
-
 #title-container {
     display: flex;
     gap: 2rem;
