@@ -179,22 +179,6 @@ img {
     display: none !important;
 }
 
-/* .toast {
-    z-index: 6;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    opacity: .9;
-    color: var(--main-bg-color);
-    background-color: var(--text-color);
-    transform: translateX(100%);
-    animation: moveup 0.1s linear forwards;
-    text-wrap: nowrap;
-} */
-
-/* Container */
 #toast-container {
     position: fixed;
     bottom: 1.5rem;
