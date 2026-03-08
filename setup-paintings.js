@@ -1119,7 +1119,24 @@ async function setupPaintings(Painting) {
         price: 350,
     });
 
-    await painting53.save();
+    let painting70 = new Painting({
+        name: "Wings of Hope",
+        image: "WingsOfHope.webp",
+        dimensions: {
+            length: 20,
+            width: 16,
+            depth: 1.5,
+        },
+        date: 2025,
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        price: 350,
+        desc: "Mixed media art.",
+        framed: true
+    });
+
+    await painting70.save();
 }
 
 module.exports = setupPaintings;
