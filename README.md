@@ -1,4 +1,4 @@
-# Art-Buisness-Website
+# kasey-creative-canvas
 **Link:** https://kaseycreativecanvas.com
 <br>
 **Demo:** https://www.youtube.com/watch?v=Q-4lL0wdbSs
