@@ -1,0 +1,44 @@
+<!-- 
+  Author: Connor Kippes
+  
+  Admin page- allow the admin user to add or remove paintings, as well as edit them.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Creative Canvas</title>
+        <link rel="stylesheet" type="text/css" href="./css/all.css" />
+        <link rel="stylesheet" type="text/css" href="./css/admin.css" />
+        <link rel="icon" type="image/png" href="./images/logo.png" />
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RL9DJJ4Y2V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RL9DJJ4Y2V');
+    </script>
+
+    <body>
+        <div id="page-wrapper">
+            <div id="nav-container"></div>
+
+            <main>
+                <h1 class="center-text">Admin</h1>
+                <button>Add Painting</button>
+                <h2 class="center-text">Edit Paintings:</h2>
+                <div id="edit-paintings-container"></div>
+            </main>
+
+            <div id="footer-container"></div>
+        </div>
+
+        <script src="./js/all.js"></script>
+        <script src="./js/observer.js"></script>
+        <script src="./js/admin.js"></script>
+    </body>
+</html>

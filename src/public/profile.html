@@ -1,0 +1,51 @@
+<!-- 
+  Author: Connor Kippes
+  
+  Profile page to show liked paintings.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Creative Canvas</title>
+        <link rel="stylesheet" type="text/css" href="./css/all.css" />
+        <link rel="stylesheet" type="text/css" href="./css/gallery.css" />
+        <link rel="icon" type="image/png" href="./images/logo.png" />
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RL9DJJ4Y2V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RL9DJJ4Y2V');
+    </script>
+
+    <body>
+        <div id="page-wrapper">
+            <div id="nav-container"></div>
+
+            <main>
+                <h1 id="profile-greeting" class="center-text">,</h1>
+
+                <h3 class="center-text">
+                    Your liked paintings will appear here.
+                </h3>
+
+                <div class="spacer"></div>
+                <div class="spacer"></div>
+
+                <div id="profile-grid" class="grid-container"></div>
+            </main>
+
+            <div id="footer-container"></div>
+        </div>
+
+        <script src="./js/all.js"></script>
+        <script src="./js/observer.js"></script>
+        <script src="./js/add-painting.js"></script>
+        <script src="./js/profile.js"></script>
+    </body>
+</html>
