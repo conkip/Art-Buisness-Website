@@ -44,74 +44,68 @@ async function onStartup() {
     await setupPainting();
 })();
 
-// on mouse hover or click of a mini painting- put it into the main view
-async function changeBigPainting(newFileName) {
-    let bigPainting = document.getElementById("big-painting");
+// on mouse hover or click of a mini painting - put it into the main view
+function changeBigPainting(newImageUrl) {
+    const bigPainting = document.getElementById("big-painting");
 
-    // start fade out
+    // fade out, swap src, then fade back in
     bigPainting.style.opacity = 0;
 
-    // fade out and then in effect
     setTimeout(() => {
-        bigPainting.src = `../paintings_webp/${newFileName}`;
-
+        bigPainting.src = newImageUrl;
         bigPainting.onload = () => {
             bigPainting.style.opacity = 1;
         };
     }, 300);
 }
 
-// adds an alternate image under the big painting in the if it exists in the folder
-async function addMiniPainting(fileName, number) {
-    //first at the number to the image name
-    let fileNameSplit = fileName.split(".");
-    let newFileName = fileNameSplit[0] + number + "." + fileNameSplit[1];
+/**
+ * Builds a variant URL by inserting a number before the file extension.
+ * Example: https://.../art.webp + 2 -> https://.../art2.webp
+ */
+function buildVariantImageUrl(baseUrl, number) {
+    const [path, query] = baseUrl.split("?");
+    const lastDot = path.lastIndexOf(".");
+    if (lastDot === -1) return baseUrl;
 
-    if (number === 1) {
-        newFileName = fileName;
-    }
+    const prefix = path.slice(0, lastDot);
+    const extension = path.slice(lastDot);
+    const variant = `${prefix}${number}${extension}`;
 
-    try {
-        await fetch(`../paintings_webp/${newFileName}`)
-            .then((response) => {
-                if (response.ok) {
-                    let miniPaintings =
-                        document.getElementById("mini-paintings");
+    return query ? `${variant}?${query}` : variant;
+}
 
-                    let container = document.createElement("div");
-                    container.classList.add("mini-painting-container");
-                    miniPaintings.appendChild(container);
+// adds alternate images underneath the big painting (if they exist)
+function addMiniPainting(baseImageUrl, number) {
+    const variantUrl = buildVariantImageUrl(baseImageUrl, number);
 
-                    let newImg = document.createElement("img");
-                    container.appendChild(newImg);
-                    newImg.id = `mini-painting${number}`;
-                    newImg.alt = `Mini Painting ${number}`;
-                    newImg.src = `../paintings_webp/${newFileName}`;
-                    newImg.onclick = () => changeBigPainting(newFileName);
+    const miniPaintings = document.getElementById("mini-paintings");
+    const container = document.createElement("div");
+    container.classList.add("mini-painting-container");
+    miniPaintings.appendChild(container);
 
-                    let hoverTimeout;
+    const newImg = document.createElement("img");
+    newImg.id = `mini-painting${number}`;
+    newImg.alt = `Mini Painting ${number}`;
+    newImg.src = variantUrl;
+    newImg.onclick = () => changeBigPainting(variantUrl);
 
-                    // change the big painging if the user hovers over a mini painting
-                    newImg.addEventListener("mouseenter", () => {
-                        hoverTimeout = setTimeout(() => {
-                            changeBigPainting(newFileName);
-                        }, 300);
-                    });
+    let hoverTimeout;
+    newImg.addEventListener("mouseenter", () => {
+        hoverTimeout = setTimeout(() => {
+            changeBigPainting(variantUrl);
+        }, 300);
+    });
+    newImg.addEventListener("mouseleave", () => {
+        clearTimeout(hoverTimeout);
+    });
 
-                    // cancel change if they dont hover for long enough
-                    newImg.addEventListener("mouseleave", () => {
-                        clearTimeout(hoverTimeout);
-                    });
-                } else {
-                    console.log("File " + newFileName + " not found");
-                }
-            })
-            .catch((error) => {
-                console.error("Error checking file:", error);
-            });
-    } catch (error) {
-        console.error("Error:", error);
-    }
+    // Remove container if image fails to load
+    newImg.addEventListener("error", () => {
+        container.remove();
+    });
+
+    container.appendChild(newImg);
 }
 
 // 24x24x1 --> 24" L x 24" W x 1" D
@@ -133,20 +127,20 @@ async function setupPainting() {
 
     updateHeart();
 
-    // add the big painting
-    let bigPaintingContainer = document.getElementById(
+    // add the big painting (image URL comes from the painting API)
+    const bigPaintingContainer = document.getElementById(
         "big-painting-container",
     );
-    let bigPainting = document.createElement("img");
+    const bigPainting = document.createElement("img");
 
     bigPainting.id = "big-painting";
     bigPainting.alt = "Big Painting";
-    bigPainting.src = `../paintings_webp/${painting.image}`;
+    bigPainting.src = painting.image;
 
     bigPaintingContainer.appendChild(bigPainting);
 
     // add all the mini images underneath it if able
-    for (let i = 1; i < 6; i++) {
+    for (let i = 2; i <= 6; i++) {
         addMiniPainting(painting.image, i);
     }
 

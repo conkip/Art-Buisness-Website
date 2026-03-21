@@ -1,0 +1,78 @@
+/* 
+  Author: Connor Kippes
+
+  CSS for the footer.
+*/
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 3;
+    min-height: 24rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding-top: 1.25rem;
+    padding-bottom:0.75rem;
+    background-color: var(--footer-bg-color);
+    text-align: center;
+}
+
+#footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.footer-content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-logo {
+    fill: var(--accent-color);
+    width: 1.563rem;
+    height: 1.563rem;
+}
+
+.contact-logo:hover {
+    scale: 1.15;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: var(--text-color);
+    width: 16rem;
+}
+
+.contact-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem;
+}
+
+.about-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    footer {
+        min-height: auto;
+        padding: 2rem 1rem;
+    }
+
+    #footer-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .divider {
+        width: 100%;
+    }
+}

@@ -35,13 +35,14 @@
     */
 
     --ff: "Roboto";
-    --h1: bold 48px/56px var(--ff);
-    --h2: bold 36px/45px var(--ff);
-    --h3: 21px/30px var(--ff);
-    --links: bold 18px/18px var(--ff);
-    --p: 18px/30px var(--ff);
-    --button-text: 24px/24px var(--ff);
-    --subtext: 13.5px/20px var(--ff);
+    --h1: bold 3rem/3.5rem var(--ff);
+    --h2: bold 2rem/2.5rem var(--ff);
+    --h3: bold 1.5rem/1.875rem var(--ff);
+    --big-p: 1.3125rem/1.875rem var(--ff);
+    --links: bold 1.125rem/1.125rem var(--ff);
+    --p: 1.125rem/1.875rem var(--ff);
+    --button-text: 1.5rem/1.5rem var(--ff);
+    --subtext: 0.84375rem/1.25rem var(--ff);
 }
 
 /*-------DEBUGGING--------*/
@@ -76,6 +77,7 @@ body {
 #page-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content:space-between;
     min-height: 100vh;
     width: 100%;
     margin: 0px;
@@ -83,8 +85,8 @@ body {
 }
 
 main {
-    margin: 125px auto;
-    max-width: 1080px;
+    margin: 7.8125rem auto;
+    max-width: 67.5rem;
     flex-grow: 1;
 }
 
@@ -118,7 +120,7 @@ main {
     cursor: pointer;
 }
 
-/*------TEXT-STUFF---*/
+/*------Typography---*/
 
 h1 {
     font: var(--h1);
@@ -136,14 +138,18 @@ p {
     font: var(--p);
     color: var(--text-color);
 }
+.big-p{
+    font: var(--big-p);
+    color: var(--text-color);
+}
 .subtext {
     font: var(--subtext);
     color: var(--text-color);
 }
-
 a {
     color: var(--text-color);
     text-decoration: none;
+    cursor: pointer;
 }
 a:hover {
     text-decoration: underline;
@@ -163,17 +169,12 @@ button {
     text-align: center;
 }
 
-.top-button {
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-
 img {
     border-radius: 8px;
     max-width: 100%;
 }
 .spacer {
-    height: 15px;
+    height: 2rem;
 }
 .none {
     display: none !important;
@@ -214,80 +215,7 @@ img {
     }
 }
 
-/* -----------NAV BAR----------- */
-nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 4;
-    height: 50px;
-    width: 100%;
-    gap: 80px;
-    padding-top: 10px;
-    background-color: var(--main-bg-color);
-    font-size: 25px;
-    opacity: 90%;
-}
-
-/* -----------FOOTER----------- */
-footer {
-    z-index: 3;
-    min-height: 400px;
-    width: 100%;
-    box-sizing: border-box;
-    padding-top: 20px;
-    background-color: var(--footer-bg-color);
-    text-align: center;
-}
-
-#footer-container {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.contact-logo {
-    fill: var(--accent-color);
-    width: 25px;
-    height: 25px;
-}
-
-.contact-logo:hover {
-    scale: 1.15;
-}
-
-.divider {
-    border: none;
-    height: 1px;
-    background-color: var(--text-color);
-    width: 255px;
-}
-
-.footer-section {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact-row {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-.about-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-#copyright {
-    margin-top: auto;
-}
-
-/* -----------OBSERVER STUFF---------*/
+/* -----------Obsverver---------*/
 .hidden {
     opacity: 0;
     transform: translateY(20px);
@@ -305,46 +233,4 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/*-----STUFF I COULD ADD------*/
-
-/* this makes the viewbox snap to the next section */
-/*
-html {
-    scroll-snap-type: y mandatory;
-}
-
-.section {
-    margin: 150px auto 0px auto;
-    padding: 0 2vw;
-    max-width: 1080px;
-    height: 100vh;
-    /*scroll-snap-align:start;
-}
-*/
-
-.hidden-left.hidden {
-    opacity: 0;
-    transform: translateX(-50%);
-}
-
-.hidden-right.hidden {
-    opacity: 0;
-    transform: translateX(50%);
-}
-
-.hidden-left.show-side {
-    transition:
-        opacity 1.75s ease-in,
-        transform 1s ease-in;
-    opacity: 1;
-    transform: translateX(0);
-}
-.hidden-right.show-side {
-    transition:
-        opacity 1.75s ease-in,
-        transform 1s ease-in;
-    opacity: 1;
-    transform: translateX(0);
 }

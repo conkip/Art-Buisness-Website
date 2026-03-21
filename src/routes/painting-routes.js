@@ -1,6 +1,6 @@
 import express from "express";
 import paintingController from "../controller/painting-controller.js";
-import { requireAdmin } from "../utils/auth.js";
+import { requireAdmin } from "../utils/auth-utils.js";
 
 const router = express.Router();
 

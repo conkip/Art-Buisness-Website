@@ -7,9 +7,11 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Creative Canvas</title>
         <link rel="stylesheet" type="text/css" href="./css/all.css" />
+        <link rel="stylesheet" type="text/css" href="./css/nav.css" />
+        <link rel="stylesheet" type="text/css" href="./css/footer.css" />
         <link rel="stylesheet" type="text/css" href="./css/index.css" />
         <link rel="icon" type="image/png" href="./images/logo.png" />
     </head>
@@ -36,14 +38,13 @@
             <main id="home-content">
                 <div id="title-logo"></div>
 
-                <h3 class="center-text">
-                    Welcome! Feel free to browse our
-                    <a href="gallery.html">gallery</a>.
-                </h3>
-                <h3 class="center-text">
+                <p class="big-p center-text">
+                    Welcome! Feel free to browse our gallery.
+                </p>
+                <p class="big-p center-text">
                     If you see one you like or have a request for a custom
                     painting contact me below!
-                </h3>
+                </p>
 
                 <div class="spacer"></div>
 
@@ -68,13 +69,13 @@
                         />
                     </a>
 
-                    <a href="painting.html?name=Mid Century Sputnik">
+                    <a href="painting.html?name=Journey Butterfly">
                         <img
                             src=""
-                            alt="Mid Century Sputnik Painting"
+                            alt="Journey Butterfly"
                             class="rainbow-gallery-painting"
                             id="rainbow-gallery-painting3"
-                            data-painting-name="Mid Century Sputnik"
+                            data-painting-name="Journey Butterfly"
                         />
                     </a>
 
@@ -99,88 +100,56 @@
                     </a>
                 </div>
 
-                <h3 class="top-margin">
-                    Click on a painting to see more details
-                </h3>
-
-                <h3>
-                    Also, login to like paintings and save them in your profile!
-                </h3>
-
-                <button
-                    id="login-signup-button"
-                    onclick="clickLoginSignup()"
-                    class="top-button hover-shadow none"
-                >
-                    Login/Sign Up
-                </button>
-
-                <button
-                    id="logout-button"
-                    onclick="clickLogout()"
-                    class="top-button hover-shadow none"
-                >
-                    Logout
-                </button>
-
-                <button
-                    id="delete-account-button"
-                    onclick="showDeleteConfirm()"
-                    class="hover-shadow none"
-                >
-                    Delete Account
-                </button>
+                <p class="big-p top-margin">
+                    Click on a painting to see more details.
+                </p>
 
                 <div class="spacer"></div>
 
-                <h3 class="margined-text center-text hidden hidden-right">
+                <p class="big-p margined-text center-text hidden hidden-right">
                     Kasey Kurowsky is the creative force behind Creative Canvas
                     by Kasey, a studio specializing in one-of-a-kind abstract
                     art.
-                </h3>
+                </p>
 
                 <div class="spacer"></div>
                 <div class="spacer"></div>
-                <div class="spacer"></div>
 
-                <h3 class="margined-text center-text hidden hidden-left">
+                <p class="big-p margined-text center-text hidden hidden-left">
                     A self-taught artist, Kasey draws inspiration from the
                     vibrant colors and textures found in everyday life,
                     transforming them into compelling visual stories through
                     mixed media, acrylic and oil mediums. Using wood panels and
                     epoxy in a majority of the paintings.
-                </h3>
+                </p>
 
                 <div class="spacer"></div>
                 <div class="spacer"></div>
-                <div class="spacer"></div>
 
-                <h3 class="margined-text center-text hidden hidden-right">
+                <p class="big-p margined-text center-text hidden hidden-right">
                     With a deep passion for art and a commitment to originality,
                     Kasey's work captures the essence of emotion and movement,
                     offering collectors unique pieces that resonate on a
                     personal level.
-                </h3>
+                </p>
 
                 <div class="spacer"></div>
                 <div class="spacer"></div>
-                <div class="spacer"></div>
 
-                <h3 class="margined-text center-text hidden hidden-left">
+                <p class="big-p margined-text center-text hidden hidden-left">
                     Creative Canvas by Kasey is not just a studio — it's a space
                     where creativity flourishes, and each artwork tells a story
                     as distinctive as its creator.
-                </h3>
+                </p>
 
                 <div class="spacer"></div>
                 <div class="spacer"></div>
-                <div class="spacer"></div>
 
-                <h3 class="margined-text center-text hidden hidden-right">
+                <p class="big-p margined-text center-text hidden hidden-right">
                     Explore the artistry of Creative Canvas by Kasey and
                     discover how bold colors and thoughtful design can elevate
                     any space.
-                </h3>
+                </p>
             </main>
 
             <div id="footer-container"></div>
@@ -188,7 +157,7 @@
 
         <div id="overlay" class="none">
             <div class="modal">
-                <p>Are you sure you want to delete your account?</p>
+                <p class="big-p">Are you sure you want to delete your account?</p>
                 <button id="confirm-delete" class="hover-shadow top-button">
                     Yes, delete
                 </button>

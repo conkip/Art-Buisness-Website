@@ -1,16 +1,8 @@
 /*
     Author: Connor Kippes
 
-    Handles directing to the login page and displaying the correct login button.
+    Handles index page rainbow gallery logic.
 */
-
-const loginSignupButton = document.getElementById("login-signup-button");
-const logoutButton = document.getElementById("logout-button");
-const deleteButton = document.getElementById("delete-account-button");
-
-function clickLoginSignup() {
-    window.location.href = "/login.html";
-}
 
 async function loadRainbowGalleryPainting(imgElem) {
     const paintingName = imgElem.dataset.paintingName;
@@ -86,44 +78,4 @@ onStartup().then(() => {
     for (let i = 0; i < hiddenElements.length; i++) {
         window.observer.observe(hiddenElements[i]);
     }
-});
-
-function clickLogout() {
-    localStorage.removeItem("token");
-
-    loginSignupButton.classList.remove("none");
-    logoutButton.classList.add("none");
-    deleteButton.classList.add("none");
-}
-
-async function clickDelete() {
-    await fetch("/auth/delete", {
-        method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
-
-    localStorage.removeItem("token");
-
-    loginSignupButton.classList.remove("none");
-    logoutButton.classList.add("none");
-    deleteButton.classList.add("none");
-}
-
-// show the modal
-function showDeleteConfirm() {
-    document.getElementById("overlay").classList.remove("none");
-}
-
-// hook up yes and no buttons
-document.getElementById("confirm-delete").addEventListener("click", () => {
-    clickDelete();
-    showToast("Account deleted");
-    document.getElementById("overlay").classList.add("none");
-});
-
-document.getElementById("cancel-delete").addEventListener("click", () => {
-    console.log("hello?");
-    document.getElementById("overlay").classList.add("none");
 });

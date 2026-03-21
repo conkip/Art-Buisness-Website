@@ -54,6 +54,43 @@ async function populateDb(Painting) {
         sold: true, //optional
     });
 
+    let painting72 = new Painting({
+        name: "Solo Flight",
+        image: "SoloFlight.webp",
+        dimensions: {
+            length: 12,
+            width: 12,
+            depth: 0.875,
+        },
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art.",
+        price: 250,
+        mult: true,
+    });
+
+    await painting72.save();
+
+    let painting71 = new Painting({
+        name: "Metamorphosis",
+        image: "Metamorphosis.webp",
+        dimensions: {
+            length: 12,
+            width: 12,
+            depth: 0.875,
+        },
+        date: 2026,
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art.",
+        price: 65,
+        mult: true,
+    });
+
+    await painting71.save();
+
     let painting48 = new Painting({
         name: "3D Dot Fusion",
         image: "3DDotFusion.webp",
@@ -62,6 +99,7 @@ async function populateDb(Painting) {
             width: 12,
             depth: 0.875,
         },
+        date:2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",

@@ -1,5 +1,5 @@
 import Painting from "../model/painting.js";
-import s3 from "../utils/s3.js";
+import s3 from "../utils/s3-utils.js";
 
 async function getAllPaintings() {
     const paintings = await Painting.find({})

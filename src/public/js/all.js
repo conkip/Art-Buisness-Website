@@ -9,6 +9,12 @@ fetch("/nav.html")
     .then((res) => res.text())
     .then((html) => {
         document.getElementById("nav-container").innerHTML = html;
+
+        // Load nav script after nav is injected (script tags in injected HTML won't execute)
+        const navScript = document.createElement("script");
+        navScript.src = "/js/nav.js";
+        navScript.defer = true;
+        document.body.appendChild(navScript);
     });
 
 // add footer

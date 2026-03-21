@@ -17,8 +17,8 @@
 }
 
 #big-painting-container {
-    height: 500px;
-    width: 500px;
+    height: 31.25rem;
+    width: 31.25rem;
     overflow: hidden;
 }
 
@@ -30,8 +30,8 @@
 
 .mini-painting-container {
     display: inline-block;
-    height: 90px;
-    width: 90px;
+    height: 5.625rem;
+    width: 5.625rem;
     overflow: hidden;
     cursor: pointer;
 }
@@ -54,8 +54,8 @@
 }
 
 #heart {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     fill: rgb(75, 75, 75);
     transition: transform 0.2s ease;
 }
@@ -88,7 +88,29 @@ img {
     padding-top: 2rem;
 }
 
-h3 {
+p {
     padding: 0;
     margin: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    #painting-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    #big-painting-container {
+        height: 25rem;
+        width: 25rem;
+    }
+
+    .mini-painting-container {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    #mini-paintings {
+        justify-content: center;
+    }
 }

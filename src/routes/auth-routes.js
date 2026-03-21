@@ -1,6 +1,6 @@
 import express from "express";
 import authController from "../controller/auth-controller.js";
-import { authenticateToken, requireAdmin } from "../utils/auth.js";
+import { authenticateToken, requireAdmin } from "../utils/auth-utils.js";
 
 const router = express.Router();
 
