@@ -7,14 +7,14 @@
 
 import mongoose from "mongoose";
 
-async function runDeleteOldDb() {
+async function runDeleteProjdb() {
     await mongoose.connect("mongodb://localhost:27017/projdb");
     await mongoose.connection.db.dropDatabase();
     console.log(`Dropped database: ${mongoose.connection.name}`);
     await mongoose.disconnect();
 }
 
-runDeleteOldDb().catch((err) => {
+runDeleteProjdb().catch((err) => {
     console.error("Delete old DB failed:", err);
     process.exit(1);
 });

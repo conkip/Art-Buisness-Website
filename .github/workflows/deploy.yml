@@ -22,5 +22,6 @@ jobs:
                       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
                       cd ~/kasey-creative-canvas
                       git pull origin main
+                      rm -rf node_modules package-lock.json
                       npm install --production
                       pm2 restart kasey-creative-canvas

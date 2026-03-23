@@ -1,7 +1,7 @@
 /*
     Author: Connor Kippes
 
-    Admin page JS: list all paintings for editing / deleting.
+    Admin page JS- add, edit, or delete paintings.
 */
 
 const editPaintingsContainer = document.getElementById("edit-paintings-container");
@@ -34,6 +34,11 @@ async function loadPaintingsForAdmin() {
     }
 }
 
+function getIcon(templateId) {
+    const template = document.getElementById(templateId);
+    return template.content.cloneNode(true);
+}
+
 function renderPaintingList(paintings) {
     // Paintings should already be sorted by name (server-side), but ensure it here too.
     paintings.sort((a, b) => a.name.localeCompare(b.name));
@@ -59,7 +64,11 @@ function renderPaintingList(paintings) {
         const editBtn = document.createElement("button");
         editBtn.className = "icon-btn";
         editBtn.title = "Edit";
-        editBtn.innerHTML = "<span class='icon' aria-hidden='true'>✏️</span>";
+        const editIcon = document.createElement("span");
+        editIcon.className = "icon";
+        editIcon.setAttribute("aria-hidden", "true");
+        editIcon.appendChild(getIcon("icon-edit"));
+        editBtn.appendChild(editIcon);
         editBtn.addEventListener("click", () => {
             window.location.href = `admin-edit.html?name=${encodeURIComponent(painting.name)}`;
         });
@@ -67,7 +76,11 @@ function renderPaintingList(paintings) {
         const deleteBtn = document.createElement("button");
         deleteBtn.className = "icon-btn";
         deleteBtn.title = "Delete";
-        deleteBtn.innerHTML = "<span class='icon' aria-hidden='true'>🗑️</span>";
+        const deleteIcon = document.createElement("span");
+        deleteIcon.className = "icon";
+        deleteIcon.setAttribute("aria-hidden", "true");
+        deleteIcon.appendChild(getIcon("icon-delete"));
+        deleteBtn.appendChild(deleteIcon);
         deleteBtn.addEventListener("click", () => {
             if (!confirm(`Delete \"${painting.name}\"?`)) return;
             deletePainting(painting._id, row);

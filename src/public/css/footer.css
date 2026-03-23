@@ -41,7 +41,7 @@ footer {
     scale: 1.15;
 }
 
-.divider {
+.footer-divider {
     border: none;
     height: 1px;
     background-color: var(--text-color);
@@ -72,7 +72,7 @@ footer {
         justify-content: space-evenly;
     }
 
-    .divider {
+    .footer-divider {
         width: 100%;
     }
 }

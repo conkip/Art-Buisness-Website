@@ -114,24 +114,27 @@
     opacity: 1;
     transform: translateX(0);
 }
+.index-divider{
+    border: none;
+    height: 1px;
+    background-color: var(--text-color);
+    width: 30rem;
+}
 
 /* Mobile responsive */
 @media (max-width: 768px) {
+    #title-logo {
+        height: 6rem;
+    }
     .rainbow-gallery {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
+        gap: 1.5rem;
     }
-
     .rainbow-gallery-painting {
-        max-width: 8rem;
+        width: 100%;
+        max-width: 7.5rem;
     }
-
     #rainbow-gallery-painting1,
-    #rainbow-gallery-painting2,
-    #rainbow-gallery-painting3,
-    #rainbow-gallery-painting4,
     #rainbow-gallery-painting5 {
-        transform: none;
+        display: none;
     }
 }

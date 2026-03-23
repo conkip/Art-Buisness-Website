@@ -15,7 +15,7 @@ dotenv.config();
 
 const { MONGODB_URL } = process.env;
 
-async function runInitialDbSetup() {
+async function runSetupDb() {
     await mongoose.connect(MONGODB_URL);
 
     // Clear existing painting documents
@@ -29,7 +29,7 @@ async function runInitialDbSetup() {
     await mongoose.disconnect();
 }
 
-runInitialDbSetup().catch((err) => {
+runSetupDb().catch((err) => {
     console.error("Initial DB setup failed:", err);
     process.exit(1);
 });
