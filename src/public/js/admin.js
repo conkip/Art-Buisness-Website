@@ -23,7 +23,7 @@ async function ensureAdmin() {
 
 async function loadPaintingsForAdmin() {
     try {
-        const res = await fetch("/paintings");
+        const res = await fetch("/painting");
         if (!res.ok) throw new Error("Failed to load paintings");
 
         const paintings = await res.json();
@@ -99,7 +99,7 @@ function renderPaintingList(paintings) {
 
 async function deletePainting(id, rowElem) {
     try {
-        const res = await fetch(`/paintings/${id}`, {
+        const res = await fetch(`/painting/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -7,6 +7,20 @@
 const invalidText = document.getElementById("invalid-text");
 invalidText.style.visibility = "hidden";
 
+const params = new URLSearchParams(window.location.search);
+const mode = params.get("mode");
+
+if (mode === "login") {
+    document.getElementById("auth-title").textContent = "Welcome Back";
+    document.querySelector("button[name='action']").textContent = "Login";
+    document.querySelector("button[name='action']").value = "login";
+}
+else if (mode === "signup") {
+    document.getElementById("auth-title").textContent = "Welcome";
+    document.querySelector("button[name='action']").textContent = "Signup";
+    document.querySelector("button[name='action']").value = "signup";
+}
+
 /**
  * Handles form submission for login or signup.
  * @param {Event} e - The submit event.
@@ -31,7 +45,7 @@ async function handleAuthSubmit(e) {
         if (res.ok) {
             const { token } = await res.json();
             localStorage.setItem("token", token);
-            window.location.href = "./index.html";
+            window.location.replace("./index.html");
         } else {
             const errorMsg = await res.text();
             showError(errorMsg);
@@ -40,6 +54,15 @@ async function handleAuthSubmit(e) {
         showError("An error occurred. Please try again.");
         console.error("Auth error:", error);
     }
+}
+
+function showPassword() {
+  let password = document.getElementById("password");
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
 }
 
 /**

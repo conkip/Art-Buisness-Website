@@ -26,8 +26,8 @@ async function startServer() {
     await mongoose.connect(dbURL);
 
     app.use("/auth", authRoutes);
-    app.use("/users", userRoutes);
-    app.use("/paintings", paintingRoutes);
+    app.use("/user", userRoutes);
+    app.use("/painting", paintingRoutes);
     app.use("/admin", adminRoutes);
 
     app.use(express.static(path.join(__dirname, "public")));

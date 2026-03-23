@@ -76,10 +76,6 @@ img {
     flex-direction: column;
 }
 
-.bold {
-    font-weight: bold;
-}
-
 .display-none {
     display: none;
 }

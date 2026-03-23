@@ -8,7 +8,7 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.post(
-    "/paintings",
+    "/painting",
     requireAdmin,
     upload.single("image"),
     adminController.uploadPainting,

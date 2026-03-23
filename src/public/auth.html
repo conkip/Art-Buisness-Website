@@ -1,7 +1,7 @@
 <!-- 
   Author: Connor Kippes
   
-  Login page.
+  Login or signup page.
 -->
 <!doctype html>
 <html lang="en">
@@ -36,7 +36,7 @@
             <div id="nav-container"></div>
 
             <main id="auth-content">
-                <h1 id="auth-title" class="center-text">Welcome Back</h1>
+                <h1 id="auth-title" class="center-text">Welcome</h1>
                 <form id="auth-form" class="center-text">
                     <p id="invalid-text" class="center-text" visibility="hidden">.</p>
                     <div>
@@ -50,25 +50,30 @@
                         />
                     </div>
 
-                    <div>
+                    <div class="small-spacer"></div>
+
+                    <div id="password-container">
                         <label for="password">Password:</label>
-                        <input
-                            id="password"
-                            class="auth-input"
-                            type="password"
-                            name="password"
-                            required
-                        />
+                        <div id="password-input-container">
+                            <input
+                                id="password"
+                                class="auth-input"
+                                type="password"
+                                name="password"
+                                required
+                            />
+                            <span class="subtext"><input type="checkbox" onclick="showPassword()"> Show Password</span>
+                        </div>
                     </div>
+
+                    <div class="small-spacer"></div>
 
                     <button
                         class="hover-shadow center-elem"
                         type="submit"
                         name="action"
-                        value="login"
-                    >
-                        Login
-                    </button>
+                        value=""
+                    ></button>
                 </form>
             </main>
 

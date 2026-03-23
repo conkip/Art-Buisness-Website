@@ -4,6 +4,7 @@ async function signup(req, res) {
     try {
         const { username, password } = req.body;
         const token = await authService.signup(username, password);
+        res.clearCookie('paintings');
         res.json({ token });
     } catch (err) {
         res.status(err.status || 500).send(err.message);
@@ -14,6 +15,7 @@ async function login(req, res) {
     try {
         const { username, password } = req.body;
         const token = await authService.login(username, password);
+        res.clearCookie('paintings');
         res.json({ token });
     } catch (err) {
         res.status(err.status || 500).send(err.message);

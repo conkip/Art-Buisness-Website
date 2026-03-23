@@ -4,6 +4,12 @@
   CSS for the about page.
 */
 
+#about-images {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .about-image {
     height: 21.875rem;
 }

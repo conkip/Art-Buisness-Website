@@ -13,7 +13,7 @@ hamburger.addEventListener("click", () => {
 // Check login status and toggle nav lists
 async function checkLoginStatus() {
     try {
-        const res = await fetch("/users/me", {
+        const res = await fetch("/user/me", {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -40,7 +40,7 @@ checkLoginStatus();
 // Logout function
 function logout() {
     localStorage.removeItem("token");
-    checkLoginStatus(); // Update nav
+    window.location.reload(true);
 }
 
 // Delete account function
@@ -53,7 +53,7 @@ async function deleteAccount() {
     });
 
     localStorage.removeItem("token");
-    checkLoginStatus(); // Update nav
+    window.location.reload(true);
     showToast("Account deleted");
 }
 
@@ -79,7 +79,7 @@ function showDeleteAccountModal() {
     // Add onclicks to buttons
     document.getElementById("cancel-delete").onclick = closeModal;
     document.getElementById("confirm-delete").onclick = () => {
-        console.log("Account deleted");
+        deleteAccount();
         closeModal();
     };
 
@@ -91,6 +91,7 @@ function showDeleteAccountModal() {
 }
 
 function closeModal() {
+    console.log("modal closed!");
     document.getElementById("modal-container")?.remove();
 }
 

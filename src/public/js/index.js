@@ -9,7 +9,7 @@ async function loadRainbowGalleryPainting(imgElem) {
 
     try {
         const res = await fetch(
-            `/paintings/${encodeURIComponent(paintingName)}`,
+            `/painting/${encodeURIComponent(paintingName)}`,
         );
         if (!res.ok) {
             console.warn(
@@ -31,6 +31,8 @@ async function loadRainbowGalleryPainting(imgElem) {
     }
 }
 
+
+
 async function onStartup() {
     // need this so that logout button updates
     await setTimeout(() => {}, 500);
@@ -40,7 +42,7 @@ async function onStartup() {
         loadRainbowGalleryPainting(img);
     });
 
-    return fetch(`/users/me`, {
+    return fetch(`/user/me`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

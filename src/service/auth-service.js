@@ -16,8 +16,11 @@ async function signup(username, password) {
 
 async function login(username, password) {
     const user = await User.findOne({ username });
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        throw { status: 401, message: "Invalid username or password" };
+    if (!user) {
+        throw { status: 401, message: "User does not exist" };
+    }
+    if(!(await bcrypt.compare(password, user.password))) {
+        throw { status: 401, message: "Wrong password" };
     }
 
     return jwt.sign({ username, isAdmin: user.isAdmin }, JWT_SECRET, {

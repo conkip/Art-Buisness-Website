@@ -13,7 +13,7 @@ const main = document.querySelector("main");
 
 async function onStartup() {
     try {
-        await fetch(`/users/me`, {
+        await fetch(`/user/me`, {
             method: "GET",
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
@@ -64,6 +64,9 @@ function changeBigPainting(newImageUrl) {
  * Example: https://.../art.webp + 2 -> https://.../art2.webp
  */
 function buildVariantImageUrl(baseUrl, number) {
+    if (number == 1) {
+        return baseUrl;
+    }
     const [path, query] = baseUrl.split("?");
     const lastDot = path.lastIndexOf(".");
     if (lastDot === -1) return baseUrl;
@@ -121,7 +124,7 @@ async function setupPainting() {
     const params = new URLSearchParams(window.location.search);
     const paintingName = params.get("name");
 
-    const response = await fetch(`/paintings/${paintingName}`);
+    const response = await fetch(`/painting/${paintingName}`);
     const painting = await response.json();
     curPainting = painting;
 
@@ -140,7 +143,7 @@ async function setupPainting() {
     bigPaintingContainer.appendChild(bigPainting);
 
     // add all the mini images underneath it if able
-    for (let i = 2; i <= 6; i++) {
+    for (let i = 1; i <= 5; i++) {
         addMiniPainting(painting.image, i);
     }
 
@@ -264,21 +267,23 @@ async function heartClicked() {
                 heart.style.transform = "scale(1)";
             }, 200);
 
-            fetch(`/users/guest/likes/${curPainting.name}`, {
+            fetch(`/user/guest/likes/${curPainting.name}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
+                credentials: "include"
             });
 
             showToast("Like added");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
-            fetch(`/users/guest/likes/${curPainting.name}`, {
+            fetch(`/user/guest/likes/${curPainting.name}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
+                credentials: "include"
             });
 
             showToast("Like removed");
@@ -292,7 +297,7 @@ async function heartClicked() {
                 heart.style.transform = "scale(1)";
             }, 200);
 
-            fetch(`/users/me/likes/${curPainting.name}`, {
+            fetch(`/user/me/likes/${curPainting.name}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -303,7 +308,7 @@ async function heartClicked() {
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
 
-            fetch(`/users/me/likes/${curPainting.name}`, {
+            fetch(`/user/me/likes/${curPainting.name}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,

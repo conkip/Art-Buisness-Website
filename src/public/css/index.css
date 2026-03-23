@@ -21,10 +21,6 @@
     mask-size: contain;
 }
 
-.top-margin {
-    margin-top: 5rem;
-}
-
 .rainbow-gallery {
     max-width: 100%;
     display: flex;

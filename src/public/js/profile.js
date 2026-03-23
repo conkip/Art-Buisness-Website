@@ -7,7 +7,7 @@
 
 async function onStartup() {
     try {
-        const response = await fetch(`/users/me`, {
+        const response = await fetch(`/user/me`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -47,7 +47,7 @@ async function setupGuestPaintings() {
         let guestPaintings = data ? data.split(",") : [];
 
         for (let painting of guestPaintings) {
-            const response2 = await fetch(`/paintings/${painting}`);
+            const response2 = await fetch(`/painting/${painting}`);
             const data2 = await response2.json();
 
             const grid = document.getElementById("profile-grid");
@@ -61,7 +61,7 @@ async function setupGuestPaintings() {
 async function setupPaintings(likes) {
     try {
         for (let painting of likes) {
-            const response = await fetch(`/paintings/${painting}`);
+            const response = await fetch(`/painting/${painting}`);
             const data = await response.json();
 
             const grid = document.getElementById("profile-grid");

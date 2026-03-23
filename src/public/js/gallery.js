@@ -8,7 +8,7 @@ document.getElementById("sold-title").style.visibility = "hidden";
 
 // adds all the painting in the list to the gallery in rows of 4
 function addAllPaintings() {
-    return fetch(`/paintings/`)
+    return fetch(`/painting/`)
         .then((response) => response.json())
         .then((data) => {
             for (let painting of data) {
