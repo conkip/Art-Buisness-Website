@@ -42,3 +42,18 @@ setTimeout(() => {
 
 // scrolls to the top on load
 window.addEventListener("load", () => window.scrollTo(0, 0));
+
+// Check admin status
+fetch("/auth/admin-status", {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+})
+    .then((response) => {
+        if (response.ok) {
+            //todo: add add painting text with a plus top right of gallery in red
+        }
+    })
+    .catch(() => {
+        // Not admin, add painting option stays hidden
+    });

@@ -321,3 +321,19 @@ async function heartClicked() {
 }
 
 heart.onclick = heartClicked;
+
+
+// Check admin status
+fetch("/auth/admin-status", {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+})
+    .then((response) => {
+        if (response.ok) {
+            //todo: add red option w svg icon to edit painting and href to edit-painitngs with query param
+        }
+    })
+    .catch(() => {
+        // Not admin, edit painting stays hidden
+    });
