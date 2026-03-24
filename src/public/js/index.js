@@ -41,43 +41,10 @@ async function onStartup() {
     document.querySelectorAll(".rainbow-gallery-painting").forEach((img) => {
         loadRainbowGalleryPainting(img);
     });
-
-    return fetch(`/user/me`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-        },
-    })
-        .then((response) => {
-            const contentType = response.headers.get("Content-Type");
-
-            if (contentType && contentType.includes("application/json")) {
-                return response.json();
-            } else {
-                return null;
-            }
-        })
-        .then((data) => {
-            // no user logged in
-            if (data == null) {
-                loginSignupButton.classList.remove("none");
-                logoutButton.classList.add("none");
-                deleteButton.classList.add("none");
-            } else {
-                loginSignupButton.classList.add("none");
-                logoutButton.classList.remove("none");
-                deleteButton.classList.remove("none");
-            }
-        })
-        .catch((error) => console.error("Error:", error));
-}
-
-// wait for login button to be loaded and then apply observer
-onStartup().then(() => {
     const hiddenElements = document.getElementsByClassName("hidden");
 
     for (let i = 0; i < hiddenElements.length; i++) {
         window.observer.observe(hiddenElements[i]);
     }
-});
+}
+onStartup()

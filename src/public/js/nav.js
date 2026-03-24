@@ -1,14 +1,6 @@
-const hamburger = document.getElementById("hamburger-menu");
-const navLinks = document.getElementById("nav-links");
-const navLoggedOut = document.getElementById("nav-logged-out");
-const navLoggedIn = document.getElementById("nav-logged-in");
-
-hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-    navLoggedOut.classList.toggle("active");
-    navLoggedIn.classList.toggle("active");
-    hamburger.classList.toggle("active");
-});
+const links = document.getElementById("nav-links");
+const loggedInElems = document.querySelectorAll(".nav-logged-in");
+const loggedOutElems = document.querySelectorAll(".nav-logged-out");
 
 // Check login status and toggle nav lists
 async function checkLoginStatus() {
@@ -19,19 +11,23 @@ async function checkLoginStatus() {
             },
         });
         if (res.ok) {
-            // logged in
-            navLoggedOut.style.display = "none";
-            navLoggedIn.style.display = "flex";
+            setLoggedIn(true);
         } else {
-            // not logged in
-            navLoggedOut.style.display = "flex";
-            navLoggedIn.style.display = "none";
+            setLoggedIn(false);
         }
     } catch (error) {
         console.error("Error checking login:", error);
         // assume not logged in
-        navLoggedOut.style.display = "flex";
-        navLoggedIn.style.display = "none";
+        setLoggedIn(false);
+    }
+}
+
+function setLoggedIn(loggedIn) {
+    for(const elem of loggedInElems) {
+        elem.style.display = loggedIn ? "flex" : "none";
+    }
+    for(const elem of loggedOutElems) {
+        elem.style.display = loggedIn ? "none": "flex";
     }
 }
 
@@ -63,8 +59,8 @@ function showDeleteAccountModal() {
     <div id="modal-container">
         <div id="modal-content">
             <p class="big-p">Are you sure you want to delete your account?</p>
-            <button id="confirm-delete" class="hover-shadow">Yes, delete</button>
-            <button id="cancel-delete" class="hover-shadow">Cancel</button>
+            <button id="modal-confirm-delete" class="hover-shadow">Yes, delete</button>
+            <button id="modal-cancel-delete" class="hover-shadow">Cancel</button>
         </div>
     </div>
     `;
@@ -77,8 +73,8 @@ function showDeleteAccountModal() {
     });
 
     // Add onclicks to buttons
-    document.getElementById("cancel-delete").onclick = closeModal;
-    document.getElementById("confirm-delete").onclick = () => {
+    document.getElementById("modal-cancel-delete").onclick = closeModal;
+    document.getElementById("modal-confirm-delete").onclick = () => {
         deleteAccount();
         closeModal();
     };
@@ -103,9 +99,34 @@ fetch("/auth/admin-status", {
 })
     .then((response) => {
         if (response.ok) {
-            document.getElementById("admin-link").style.display = "block";
+            document.querySelectorAll(".admin-link").forEach(elem => elem.style.display = "block");
         }
     })
     .catch(() => {
         // Not admin, link stays hidden
     });
+
+
+const menuIcon = document.getElementById('nav-menu-icon');
+const menu = document.getElementById('nav-mobile-menu');
+menu.style.display = 'none';
+
+menuIcon.addEventListener('click', openMenu);
+
+function openMenu() {
+    menuIcon.removeEventListener('click', openMenu);
+    menuIcon.addEventListener('click', closeMenu);
+    menu.style.display = 'flex';
+}
+
+function closeMenu(){
+    menuIcon.removeEventListener('click', closeMenu);
+    menuIcon.addEventListener('click', openMenu);
+    menu.style.display = 'none';
+}
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 940) {
+        menuIcon.click();
+    }
+});

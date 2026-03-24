@@ -16,7 +16,7 @@ nav {
     padding: 0rem 2rem;
     background-color: var(--accent-color);
     /* background-color: white; */
-    opacity: 90%;
+    opacity:95%;
 }
 
 #nav-website {
@@ -46,7 +46,6 @@ nav {
 }
 
 .nav-list li a {
-    text-decoration: none;
     color: white !important;
     /* color: var(--text-color); */
 }
@@ -98,40 +97,48 @@ nav {
 .ham7.active .bottom {
      stroke-dashoffset: -83px;
 }
+#nav-mobile-menu {
+    display:none;
+}
 
-@media (max-width: 768px) {
+@media (max-width: 940px) {
     nav {
         padding: 0 1rem;
+        opacity: 100%;
     }
 
     .ham {
         display: block;
     }
 
+    /*--hide nav elements */
     .nav-list {
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
         background-color: var(--accent-color);
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
+        flex-direction: row;
         transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
     }
 
-    .nav-links.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+    #nav-mobile-menu {
+        list-style: none;
+        position: fixed;
+        flex-direction: column;
+        z-index:1000;
+        top: 3.5rem;
+        left: 0;
+        width: 100%;
+        background-color: var(--accent-color);
+        gap: 1rem;
+        padding: 1rem 2rem 4rem 2rem; /*t r d l */
+        transition: all 0.3s ease;
     }
-
-    .nav-logged-in.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+    #nav-mobile-menu li a{
+        color: white !important;
     }
 }
