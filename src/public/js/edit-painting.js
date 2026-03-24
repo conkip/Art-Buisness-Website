@@ -1,6 +1,12 @@
 /*
     Author: Connor Kippes
 
+    Handles adding, editing, or deleting a painting.
+*/
+
+/*
+    Author: Connor Kippes
+
     Admin page JS- add, edit, or delete paintings.
 */
 
