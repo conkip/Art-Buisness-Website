@@ -43,7 +43,7 @@ async function populateDb(Painting) {
             width: 20,
             depth: 2,
         },
-        date: 2025, //optional
+        date: 2026, //optional
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
@@ -54,6 +54,58 @@ async function populateDb(Painting) {
         sold: true, //optional
     });
 
+    let painting75 = new Painting({
+        name: "Heatwave Butterfly",
+        image: "HeatwaveButterfly.webp",
+        dimensions: {
+            length: 36,
+            width: 24,
+            depth: 1.5,
+        },
+        date: 2026,
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Heatwave picture on a wood panel of a butterfly.",
+        price: 350,
+    });
+    
+    await painting75.save();
+
+    let painting74 = new Painting({
+        name: "Heated",
+        image: "Heated.webp",
+        dimensions: {
+            length: 6,
+            width: 6,
+            depth: 1.5,
+        },
+        date: 2026,
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Heatwave pictures on a wood panel.",
+        price: 75,
+        mult: true,
+        framed: true,
+    });
+    await painting74.save();
+
+    let painting73 = new Painting({
+        name: "Free as a Butterfly",
+        image: "FreeAsAButterfly.webp",
+        dimensions: {
+            length: 20,
+            width: 16,
+            depth: 1.5,
+        },
+        date: 2026,
+        paint: "Acrylic",
+        canvas: "Wood Panel",
+        finish: "Epoxy Coating",
+        desc: "Mixed media art.",
+        price: 175,
+    });
+    await painting73.save();
+
     let painting72 = new Painting({
         name: "Solo Flight",
         image: "SoloFlight.webp",
@@ -62,12 +114,12 @@ async function populateDb(Painting) {
             width: 12,
             depth: 0.875,
         },
+        date: 2026,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         desc: "Mixed media art.",
         price: 250,
-        mult: true,
     });
 
     await painting72.save();
@@ -86,7 +138,6 @@ async function populateDb(Painting) {
         finish: "Epoxy Coating",
         desc: "Mixed media art.",
         price: 65,
-        mult: true,
     });
 
     await painting71.save();
