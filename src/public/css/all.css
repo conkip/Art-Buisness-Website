@@ -151,7 +151,7 @@ a:hover {
     display: none !important;
 }
 .bold {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 /*--------Element changes----------*/

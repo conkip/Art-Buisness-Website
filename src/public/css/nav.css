@@ -55,27 +55,57 @@ nav {
     text-decoration: underline;
 }
 
-#hamburger-menu {
-    display: none;
-    flex-direction: column;
+/*----menu animation gotten from https://www.sliderrevolution.com/resources/css-hamburger-menu/ Author: Mikael Ainalem -----*/
+.ham {
+    display:none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-
-#hamburger-menu span {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 3px 0;
-    transition: 0.3s;
+.hamRotate.active {
+    transform: rotate(45deg);
+}
+.hamRotate180.active {
+    transform: rotate(180deg);
+}
+.line {
+    fill:none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke:white;
+    stroke-width:5.5;
+    stroke-linecap:round;
+}
+.ham7 .top {
+    stroke-dasharray: 40 82;
+}
+.ham7 .middle {
+    stroke-dasharray: 40 111;
+}
+.ham7 .bottom {
+     stroke-dasharray: 40 161;
+}
+.ham7.active .top {
+     stroke-dasharray: 17 82;
+      stroke-dashoffset: -62px;
+}
+.ham7.active .middle {
+     stroke-dashoffset: 23px;
+}
+.ham7.active .bottom {
+     stroke-dashoffset: -83px;
 }
 
 @media (max-width: 768px) {
     nav {
-        padding: 1rem;
+        padding: 0 1rem;
     }
 
-    #hamburger {
-        display: flex;
+    .ham {
+        display: block;
     }
 
     .nav-list {
@@ -103,17 +133,5 @@ nav {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 5px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -5px);
     }
 }
