@@ -44,7 +44,7 @@ setTimeout(() => {
 window.addEventListener("load", () => window.scrollTo(0, 0));
 
 
-const f = document.getElementById("add-painting-text").style.visibility = "hidden";
+const addPaintingLink = document.getElementById("add-painting-link");
 // Check admin status
 fetch("/auth/admin-status", {
     headers: {
@@ -53,9 +53,12 @@ fetch("/auth/admin-status", {
 })
     .then((response) => {
         if (response.ok) {
-            //todo: add add painting text with a plus top right of gallery in red
+            addPaintingLink.style.display = "block";
+        }
+        else {
+            addPaintingLink.style.display = "none";
         }
     })
     .catch(() => {
-        // Not admin, add painting option stays hidden
+        addPaintingLink.style.display = "none";
     });
