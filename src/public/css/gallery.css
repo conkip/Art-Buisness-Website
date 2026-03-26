@@ -35,6 +35,11 @@
     align-self: end;
 }
 
+.add-painting-text {
+    color:red;
+    text-align:end;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
     .grid-container {

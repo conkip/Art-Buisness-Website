@@ -6,7 +6,11 @@
 
 let curUser = null;
 let curPainting = null;
-const heart = document.getElementById("heart");
+const heart = document.getElementById("heart-icon");
+const editIcon = document.getElementById("edit-painting-icon");
+const params = new URLSearchParams(window.location.search);
+const paintingName = params.get("name");
+document.getElementById("edit-painting-link").href = `./edit-painting.html?name=${paintingName}`
 
 // this is to make it visible after everything loads up so it doesn't look buggy
 const main = document.querySelector("main");
@@ -34,6 +38,24 @@ async function onStartup() {
                 curUser = data;
             })
             .catch((error) => console.error("Error:", error));
+        
+        // Check admin status
+        await fetch("/auth/admin-status", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+            .then((response) => {
+                if (response.ok) {
+                    editIcon.style.display = "block";
+                }
+                else {
+                    editIcon.style.display = "none";
+                }
+            })
+            .catch(() => {
+                editIcon.style.display = "none";
+            });
     } catch (error) {
         console.error("Error:", error);
     }
@@ -121,9 +143,6 @@ function formatDimensions(dimensions) {
 }
 
 async function setupPainting() {
-    const params = new URLSearchParams(window.location.search);
-    const paintingName = params.get("name");
-
     const response = await fetch(`/painting/${paintingName}`);
     const painting = await response.json();
     curPainting = painting;
@@ -227,8 +246,8 @@ function updateHeart() {
             .then((response) => response.text())
             .then((data) => {
                 let guestPaintings = data.split(",");
-                for (let paintingName of guestPaintings) {
-                    if (paintingName === curPainting.name) {
+                for (let guestPaintingName of guestPaintings) {
+                    if (guestPaintingName === curPainting.name) {
                         //change heart back to red
                         heart.style.fill = "red";
                         foundPainting = true;
@@ -242,8 +261,8 @@ function updateHeart() {
             .catch((error) => console.error("Error:", error));
     } else {
         let foundPainting = false;
-        for (let paintingName of curUser.my_likes) {
-            if (paintingName === curPainting.name) {
+        for (let userPaintingName of curUser.my_likes) {
+            if (userPaintingName === curPainting.name) {
                 //change heart back to red
                 heart.style.fill = "red";
                 foundPainting = true;
@@ -321,19 +340,3 @@ async function heartClicked() {
 }
 
 heart.onclick = heartClicked;
-
-
-// Check admin status
-fetch("/auth/admin-status", {
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-})
-    .then((response) => {
-        if (response.ok) {
-            //todo: add red option w svg icon to edit painting and href to edit-painitngs with query param
-        }
-    })
-    .catch(() => {
-        // Not admin, edit painting stays hidden
-    });

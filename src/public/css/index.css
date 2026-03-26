@@ -35,8 +35,8 @@
 
 .rainbow-gallery-painting {
     width: 100%;
-    max-width: 9.375rem;
-    height: auto;
+    max-width: 10rem;
+    max-height: 9rem;
     transition: transform 0.3s ease;
     border-radius: 0.75rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -128,6 +128,7 @@
     .rainbow-gallery-painting {
         width: 100%;
         max-width: 7.5rem;
+        max-height: 7rem;
     }
     #rainbow-gallery-painting1,
     #rainbow-gallery-painting5 {

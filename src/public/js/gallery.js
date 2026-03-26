@@ -43,6 +43,8 @@ setTimeout(() => {
 // scrolls to the top on load
 window.addEventListener("load", () => window.scrollTo(0, 0));
 
+
+const f = document.getElementById("add-painting-text").style.visibility = "hidden";
 // Check admin status
 fetch("/auth/admin-status", {
     headers: {

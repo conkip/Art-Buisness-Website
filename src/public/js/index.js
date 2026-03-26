@@ -5,7 +5,7 @@
 */
 
 async function loadRainbowGalleryPainting(imgElem) {
-    const paintingName = imgElem.dataset.paintingName;
+    const paintingName = imgElem.alt;
 
     try {
         const res = await fetch(

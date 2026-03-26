@@ -11,6 +11,29 @@
     align-items: center;
 }
 
+#top-painting-container {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+#edit-painting-icon {
+    min-width: 2.5rem;
+    width: 2.5rem;
+    min-height: 2.5rem;
+    height:2.5rem;
+    fill:red;
+    transition: transform 0.2s ease;
+    cursor:pointer;
+}
+.edit-painting-text{
+    color:red
+}
+#gallery-text{
+    padding-left:1rem;
+}
+
+
 #big-painting {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
@@ -62,7 +85,7 @@ img {
     gap: 2rem;
     align-items: center;
 }
-#heart {
+#heart-icon {
     min-width: 2.5rem;
     width: 2.5rem;
     min-height: 2.5rem;
@@ -70,7 +93,6 @@ img {
     fill: rgb(75, 75, 75);
     transition: transform 0.2s ease;
 }
-
 #painting-details-container {
     display: flex;
     gap: 0.5rem;
@@ -85,10 +107,6 @@ img {
 p {
     padding: 0;
     margin: 0;
-}
-
-#gallery-text{
-    padding-left:1rem;
 }
 
 /* Mobile responsive */

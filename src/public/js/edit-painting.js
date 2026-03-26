@@ -12,6 +12,9 @@
 
 const editPaintingsContainer = document.getElementById("edit-paintings-container");
 
+const params = new URLSearchParams(window.location.search);
+const painting = params.get("painting");
+
 async function ensureAdmin() {
     const res = await fetch("/auth/admin-status", {
         headers: {

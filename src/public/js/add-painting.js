@@ -4,7 +4,7 @@
     Function to add paintings to the gallery and profile section.
 */
 
-// addPainting puts the given painting in the gallery with its image and title
+// addPainting puts the given painting in the gallery/ rainbow gallery with its image and title
 async function addPainting(grid, painting) {
     const img = document.createElement("img");
     const imgLink = document.createElement("a");
