@@ -1,0 +1,62 @@
+<!-- 
+  Author: Connor Kippes
+  
+  Admin page- allow the admin user to add or remove paintings, as well as edit them.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Creative Canvas</title>
+        <link rel="stylesheet" type="text/css" href="./css/all.css" />
+        <link rel="stylesheet" type="text/css" href="./css/nav.css" />
+        <link rel="stylesheet" type="text/css" href="./css/footer.css" />
+        <link rel="stylesheet" type="text/css" href="./css/admin.css" />
+        <link rel="icon" type="image/png" href="./images/logo.png" />
+    </head>
+ 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RL9DJJ4Y2V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+ 
+        gtag('config', 'G-RL9DJJ4Y2V');
+    </script>
+ 
+    <!-- SVG icon templates (hidden) — referenced by admin.js -->
+    <template id="icon-edit">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M535.6 85.7C513.7 63.8 478.3 63.8 456.4 85.7L432 110.1L529.9 208L554.3 183.6C576.2 161.7 576.2 126.3 554.3 104.4L535.6 85.7zM236.4 305.7C230.3 311.8 225.6 319.3 222.9 327.6L193.3 416.4C190.4 425 192.7 434.5 199.1 441C205.5 447.5 215 449.7 223.7 446.8L312.5 417.2C320.7 414.5 328.2 409.8 334.4 403.7L496 241.9L398.1 144L236.4 305.7zM160 128C107 128 64 171 64 224L64 480C64 533 107 576 160 576L416 576C469 576 512 533 512 480L512 384C512 366.3 497.7 352 480 352C462.3 352 448 366.3 448 384L448 480C448 497.7 433.7 512 416 512L160 512C142.3 512 128 497.7 128 480L128 224C128 206.3 142.3 192 160 192L256 192C273.7 192 288 177.7 288 160C288 142.3 273.7 128 256 128L160 128z"/></svg>
+    </template>
+    <template id="icon-delete">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M232.7 69.9L224 96L128 96C110.3 96 96 110.3 96 128C96 145.7 110.3 160 128 160L512 160C529.7 160 544 145.7 544 128C544 110.3 529.7 96 512 96L416 96L407.3 69.9C402.9 56.8 390.7 48 376.9 48L263.1 48C249.3 48 237.1 56.8 232.7 69.9zM512 208L128 208L149.1 531.1C150.7 556.4 171.7 576 197 576L443 576C468.3 576 489.3 556.4 490.9 531.1L512 208z"/></svg>
+    </template>
+ 
+    <body>
+        <div id="page-wrapper">
+            <div id="nav-container"></div>
+            
+            <main>
+                <h1 class="center-text">Admin</h1>
+                <div id="admin-content">
+                    <button class="bg-green">Add a new painting</button>
+                    <h3>or</h3>
+                    <div id="painting-list-panel">
+                        <h3>Edit or delete a painting:</h3>
+                        <input id="painting-search" class="search-input" type="search" placeholder="Search paintings by name" aria-label="Search paintings">
+                        <div id="edit-paintings-container"></div>
+                    </div>
+                </div>
+            </main>
+ 
+            <div id="footer-container"></div>
+        </div>
+ 
+        <script src="./js/all.js"></script>
+        <script src="./js/observer.js"></script>
+        <script src="./js/admin.js"></script>
+    </body>
+</html>

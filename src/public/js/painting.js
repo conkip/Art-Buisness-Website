@@ -7,10 +7,8 @@
 let curUser = null;
 let curPainting = null;
 const heart = document.getElementById("heart-icon");
-const editIcon = document.getElementById("edit-painting-icon");
 const params = new URLSearchParams(window.location.search);
 const paintingName = params.get("name");
-document.getElementById("edit-painting-link").href = `./edit-painting.html?name=${paintingName}`
 
 // this is to make it visible after everything loads up so it doesn't look buggy
 const main = document.querySelector("main");
@@ -38,24 +36,6 @@ async function onStartup() {
                 curUser = data;
             })
             .catch((error) => console.error("Error:", error));
-        
-        // Check admin status
-        await fetch("/auth/admin-status", {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        })
-            .then((response) => {
-                if (response.ok) {
-                    editIcon.style.display = "block";
-                }
-                else {
-                    editIcon.style.display = "none";
-                }
-            })
-            .catch(() => {
-                editIcon.style.display = "none";
-            });
     } catch (error) {
         console.error("Error:", error);
     }
@@ -281,7 +261,7 @@ async function heartClicked() {
         if (heart.style.fill === "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
-            heart.style.transform = "scale(1.4)";
+            heart.style.transform = "scale(1.5)";
             setTimeout(() => {
                 heart.style.transform = "scale(1)";
             }, 200);
@@ -291,7 +271,7 @@ async function heartClicked() {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include"
+                credentials: "include",
             });
 
             showToast("Like added");
@@ -302,7 +282,7 @@ async function heartClicked() {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include"
+                credentials: "include",
             });
 
             showToast("Like removed");
@@ -311,7 +291,7 @@ async function heartClicked() {
         if (heart.style.fill === "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
-            heart.style.transform = "scale(1.4)";
+            heart.style.transform = "scale(1.5)";
             setTimeout(() => {
                 heart.style.transform = "scale(1)";
             }, 200);

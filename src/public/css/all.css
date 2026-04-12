@@ -15,7 +15,11 @@
         100,
         100
     ); /* medium gray for text to not be easy to read and not harsh on the eyes */
-    --accent-color: #5eaaa8; /* Teal - calm, creative, modern */ /* Alternate Color: #8FAE92; /* Sage Green*/
+    --accent-color: #5faba8; /* Teal - calm, creative, modern */ /* Alternate Color: #8FAE92; /* Sage Green*/
+    --green: #5fa86a;
+    --yellow: #d4c42a;
+    --orange: #d4722a;
+    --red: #c43a3a;
 
     /* dark theme */
     /*
@@ -153,6 +157,45 @@ a:hover {
 .bold {
     font-weight: bold !important;
 }
+
+.bg-green{
+    background-color:var(--green) !important;
+}
+.bg-yellow{
+    background-color:var(--yellow) !important;
+}
+.bg-orange{
+    background-color:var(--orange) !important;
+}
+.bg-red{
+    background-color:var(--red) !important;
+}
+
+.text-green{
+    color:var(--green) !important;
+}
+.text-yellow{
+    color:var(--yellow) !important;
+}
+.text-orange{
+    color:var(--orange) !important;
+}
+.text-red{
+    color:var(--red) !important;
+}
+
+.icon {
+    min-width: 2.25rem;
+    width: 2.25rem;
+    min-height: 2.25rem;
+    height: 2.25rem;
+    fill: var(--text-color);
+    transition:
+        transform 0.2s ease,
+        fill 0.2s ease;
+    cursor: pointer;
+}
+
 
 /*--------Element changes----------*/
 button {

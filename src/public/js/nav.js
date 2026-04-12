@@ -91,6 +91,21 @@ function closeModal() {
     document.getElementById("modal-container")?.remove();
 }
 
+// Check admin status
+fetch("/auth/admin-status", {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+})
+    .then((response) => {
+        if (response.ok) {
+            document.querySelectorAll(".admin-link").forEach(elem => elem.style.display = "block");
+        }
+    })
+    .catch(() => {
+        // Not admin, link stays hidden
+    });
+
 const menuIcon = document.getElementById('nav-menu-icon');
 const menu = document.getElementById('nav-mobile-menu');
 menu.style.display = 'none';

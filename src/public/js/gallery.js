@@ -42,23 +42,3 @@ setTimeout(() => {
 
 // scrolls to the top on load
 window.addEventListener("load", () => window.scrollTo(0, 0));
-
-
-const addPaintingLink = document.getElementById("add-painting-link");
-// Check admin status
-fetch("/auth/admin-status", {
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-})
-    .then((response) => {
-        if (response.ok) {
-            addPaintingLink.style.display = "block";
-        }
-        else {
-            addPaintingLink.style.display = "none";
-        }
-    })
-    .catch(() => {
-        addPaintingLink.style.display = "none";
-    });

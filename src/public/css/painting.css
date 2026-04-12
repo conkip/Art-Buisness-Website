@@ -11,29 +11,6 @@
     align-items: center;
 }
 
-#top-painting-container {
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-}
-
-#edit-painting-icon {
-    min-width: 2.5rem;
-    width: 2.5rem;
-    min-height: 2.5rem;
-    height:2.5rem;
-    fill:red;
-    transition: transform 0.2s ease;
-    cursor:pointer;
-}
-.edit-painting-text{
-    color:red
-}
-#gallery-text{
-    padding-left:1rem;
-}
-
-
 #big-painting {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
@@ -85,16 +62,11 @@ img {
     gap: 2rem;
     align-items: center;
 }
-#heart-icon {
-    min-width: 2.5rem;
-    width: 2.5rem;
-    min-height: 2.5rem;
-    height:2.5rem;
-    fill: rgb(75, 75, 75);
-    transition: transform 0.2s ease;
+
+#heart-icon:hover {
+    filter: brightness(2);
 }
 #painting-details-container {
-    display: flex;
     gap: 0.5rem;
     flex-direction: column;
 }
@@ -102,7 +74,6 @@ img {
 .display-none {
     display: none;
 }
-
 
 p {
     padding: 0;
@@ -129,11 +100,11 @@ p {
     #mini-paintings {
         justify-content: center;
     }
-    #title-container{
+    #title-container {
         padding: 0 2rem;
     }
     #painting-details-container {
-        padding:0 2rem;
+        padding: 0 2rem;
     }
     #big-painting-container {
         height: 20.5rem;
