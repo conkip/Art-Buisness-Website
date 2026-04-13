@@ -27,8 +27,7 @@
 
 #painting-search {
     width: 100%;
-    padding: 0.95rem 1rem;
-    border: none;
+    padding: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.12);
     font-size: 1rem;
     color: #111;
