@@ -33,15 +33,26 @@ input[type="text"] {
     color: red;
     font-weight: bold;
 }
+.input-container{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    flex-direction:center;
+    gap:.5rem;
+}
 #password-container{
     display: flex;
     flex-direction: row;
     align-items:normal;
-    gap:.4rem;
+    gap:.5rem;
 }
 #password-input-container{
     display: flex;
     flex-direction: column;
     gap: .5rem;
     align-items:flex-start;
+}
+
+#auth-button{
+    align-self:center;
 }

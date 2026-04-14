@@ -27,7 +27,7 @@
     justify-content: center;
     align-items: flex-end;
     gap: 2.5rem;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
 }
 .rainbow-gallery:hover {
     transform: translateY(-0.625rem); /* arc lifts slightly */
@@ -38,13 +38,15 @@
     max-width: 10rem;
     max-height: 9rem;
     transition: transform 0.3s ease;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--box-shadow2);
     cursor: pointer;
     opacity: 0;
     transition:
         opacity 0.85s ease-in,
         transform 0.3s ease;
+}
+.rainbow-gallery-painting:hover {
+    box-shadow: var(--box-shadow);
 }
 
 #rainbow-gallery-painting1 {

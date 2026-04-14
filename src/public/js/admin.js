@@ -8,8 +8,8 @@ const editPaintingsContainer = document.getElementById(
     "edit-paintings-container",
 );
 const paintingSearchInput = document.getElementById("painting-search");
-const editIconTemplate = document.getElementById("icon-edit");
-const deleteIconTemplate = document.getElementById("icon-delete");
+const editIconTemplate = document.getElementById("edit-icon-template");
+const deleteIconTemplate = document.getElementById("delete-icon-template");
 let paintingsCache = [];
 
 async function ensureAdmin() {
