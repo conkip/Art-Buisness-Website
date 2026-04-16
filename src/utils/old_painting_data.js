@@ -67,6 +67,7 @@ async function populateDb(Painting) {
         finish: "Epoxy Coating",
         desc: "Heatwave picture on a wood panel of a butterfly.",
         price: 350,
+        sold: true,
     });
     
     await painting75.save();
@@ -617,6 +618,7 @@ async function populateDb(Painting) {
         finish: "Decorative High Gloss Coating",
         desc: "A sunflower painting made with pattette knife.",
         price: 175,
+        sold: true,
     });
 
     await painting38.save();
@@ -746,6 +748,7 @@ async function populateDb(Painting) {
         finish: "Epoxy Coating",
         desc: "Geometric design painting.",
         price: 250,
+        sold: true,
     });
 
     await painting26.save();
@@ -876,6 +879,7 @@ async function populateDb(Painting) {
         finish: "Epoxy Coating",
         price: 175,
         mult: true,
+        sold: true,
     });
 
     await painting69.save();
@@ -988,8 +992,8 @@ async function populateDb(Painting) {
     await painting59.save();
 
     let painting51 = new Painting({
-        name: "Secrets of Elephants",
-        image: "SecretsOfElephants.webp",
+        name: "Strength in Calm",
+        image: "StrengthInCalm.webp",
         dimensions: {
             length: 24,
             width: 24,
@@ -1000,7 +1004,7 @@ async function populateDb(Painting) {
         canvas: "Wood Panel",
         finish: "Epoxy",
         desc: "Mixed media art.",
-        price: 300,
+        price: 400,
     });
 
     await painting51.save();
@@ -1081,6 +1085,7 @@ async function populateDb(Painting) {
         canvas: "Wood Panel",
         finish: "Epoxy Coating",
         price: 175,
+        sold: true,
     });
 
     await painting25.save();
@@ -1148,6 +1153,7 @@ async function populateDb(Painting) {
         finish: "Epoxy Coating",
         desc: "Mixed media art of a yellow swallowtail butterfly.",
         price: 275,
+        sold: true,
     });
 
     await painting32.save();
@@ -1166,6 +1172,7 @@ async function populateDb(Painting) {
         finish: "Decorative High Gloss Coating",
         desc: "Mixed media art of birds migrating.",
         price: 450,
+        sold: true,
     });
     await painting34.save();
 
@@ -1251,7 +1258,8 @@ async function populateDb(Painting) {
         finish: "Epoxy Coating",
         price: 350,
         desc: "Mixed media art.",
-        framed: true
+        framed: true,
+        sold: true,
     });
 
     await painting70.save();
