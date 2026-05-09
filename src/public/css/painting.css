@@ -55,16 +55,13 @@
 
 #title-container {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
 }
 
-#heart-icon{
-    transition: transform .3s ease;
-}
-
 #heart-icon:hover {
-    transform:scale(1.15);
+    transform: scale(1.1);
+    filter: brightness(1.5);
 }
 
 #painting-details-container {

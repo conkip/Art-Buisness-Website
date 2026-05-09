@@ -59,8 +59,8 @@ function showDeleteAccountModal() {
     <div id="modal-container">
         <div id="modal-content">
             <p class="big-p">Are you sure you want to delete your account?</p>
-            <button id="modal-confirm-delete" class="hover-shadow">Yes, delete</button>
-            <button id="modal-cancel-delete" class="hover-shadow">Cancel</button>
+            <button id="modal-confirm-delete">Yes, delete</button>
+            <button id="modal-cancel-delete">Cancel</button>
         </div>
     </div>
     `;

@@ -26,9 +26,6 @@ label {
     font: var(--big-p);
     color: var(--text-color);
 }
-input[type="text"] {
-    color: var(--text-color);
-}
 #invalid-text {
     color: red;
     font-weight: bold;

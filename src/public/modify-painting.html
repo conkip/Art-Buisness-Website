@@ -36,49 +36,146 @@
         <div id="page-wrapper">
             <div id="nav-container"></div>
 
-            <main style="visibility: hidden">
-                <div class="small-spacer"></div>
-                <div id="painting-container">
-                    <div>
-                        <!-- main image -->
-                        <div id="big-painting-container"></div>
-
-                        <!-- mini previews under the image -->
-                        <div id="mini-paintings"></div>
+            <main>
+                <form id="modify-painting-form">
+                    <div class = "input-container">
+                        <label for="name">Name:</label>
+                        <input
+                            id="name"
+                            class="text-input"
+                            type="text"
+                            name="name"
+                            required
+                        />
+                    </div>
+                    <p>dimensions (in inches):</p>
+                    <div class = "input-container">
+                        <label for="length">Length (ex- 20):</label>
+                        <input
+                            id="length"
+                            class="text-input"
+                            type="text"
+                            name="length"
+                        />
+                    </div>
+                    <div class = "input-container">
+                        <label for="width">Width (ex- 20):</label>
+                        <input
+                            id="width"
+                            class="text-input"
+                            type="text"
+                            name="width"
+                        />
+                    </div>
+                    <div class = "input-container">
+                        <label for="depth">Depth (ex- 2):</label>
+                        <input
+                            id="depth"
+                            class="text-input"
+                            type="text"
+                            name="depth"
+                        />
+                    </div>
+                    
+                    <div class = "input-container">
+                        <label for="paint">Paint (ex- Acryclic):</label>
+                        <input
+                            id="depth"
+                            class="text-input"
+                            type="text"
+                            name="depth"
+                        />
                     </div>
 
-                    <div>
-                        <div id="title-container">
-                            <svg
-                                id="heart"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 512 512"
-                            >
-                                <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                <path
-                                    d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 
-                                    300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 
-                                    51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 
-                                    185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
-                                />
-                            </svg>
-
-                            <h1 id="title"></h1>
-                        </div>
-                        <div id="painting-details-container">
-                            <p class="big-p" id="dimensions"></p>
-                            <p class="big-p" id="date"></p>
-                            <p class="big-p" id="paint-and-canvas"></p>
-                            <p class="big-p" id="finish"></p>
-                            <p class="big-p" id="framed-status"></p>
-                            <p></p><p></p>
-                            <p class="big-p bold" id="price"></p>
-                            <p></p>
-                            <p class="big-p" id="description" class=""></p>
-                        </div>
-                        <p class="big-p" id="description"></p>
+                    <div class = "input-container">
+                        <label for="canvas">Canvas Type (ex- Wood Panel):</label>
+                        <input
+                            id="canvas"
+                            class="text-input"
+                            type="text"
+                            name="canvas"
+                        />
                     </div>
-                </div>
+
+                    <div class = "input-container">
+                        <label for="finish">Finish: (ex- Epoxy Coating):</label>
+                        <input
+                            id="finish"
+                            class="text-input"
+                            type="text"
+                            name="finish"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="price">Price: (ex- 100):</label>
+                        <input
+                            id="price"
+                            class="text-input"
+                            type="text"
+                            name="price"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="mult">Multi-painting?</label>
+                        <input
+                            id="mult"
+                            class="checkbox"
+                            type="checkbox"
+                            name="mult"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="framed">Framed?</label>
+                        <input
+                            id="framed"
+                            class="checkbox"
+                            type="checkbox"
+                            name="framed"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="sold">Sold?</label>
+                        <input
+                            id="sold"
+                            class="checkbox"
+                            type="checkbox"
+                            name="sold"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="desc">Description:</label>
+                        <textarea id="desc" class="text-input" name="desc" rows="5" cols="50"></textarea>
+                    </div>
+
+                    <div id = "upload-image-container">
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                    </div>
+
+                    <div id ="button-container">
+                        <button 
+                            id="cancel-button"
+                            type="button" 
+                            onclick="handleCancel()"
+                        >Cancel</button>
+
+                        <button
+                            id="save-button"
+                            type="submit"
+                            name="save"
+                            value=""
+                        >Save</button>
+                    </div>
+                </form>
             </main>
 
             <div id="footer-container"></div>

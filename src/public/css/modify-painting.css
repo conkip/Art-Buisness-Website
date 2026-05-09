@@ -1,128 +1,112 @@
 /* 
   Author: Connor Kippes
 
-  CSS for the detailed view of a painting.
+  CSS for the modifying/ adding a painting.
 */
-
-#painting-container {
-    display: flex;
-    gap: 3rem;
-    justify-content: center;
-    align-items: center;
-}
-
-#big-painting {
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-}
-
-#big-painting-container {
-    height: 31.25rem;
-    width: 31.25rem;
-    overflow: hidden;
-}
-
-#big-painting-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.mini-painting-container {
-    display: inline-block;
-    height: 5.625rem;
-    width: 5.625rem;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.mini-painting-container:hover {
-    opacity: 0.75;
-    transition: opacity 0.1s ease;
-}
-
-.mini-painting-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-#mini-paintings {
-    display: flex;
-    margin-top: 1rem;
-    gap: 1rem;
-}
-
-#title-container {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
-#heart {
-    min-width: 2.5rem;
-    width: 2.5rem;
-    min-height: 2.5rem;
-    height:2.5rem;
-    fill: rgb(75, 75, 75);
-    transition: transform 0.2s ease;
-}
-
-#painting-details-container {
-    display: flex;
-    gap: 0.5rem;
+#modify-painting-form{
+    display:flex;
     flex-direction: column;
+    gap:2rem;
+}
+.input-container{
+    display: flex;
+    flex-direction: row;
+    gap:1rem;
 }
 
-.display-none {
+label{
+    min-width:8rem;
+}
+
+.text-input{
+    max-width:30rem;
+}
+
+.checkbox{
+    height:1.5rem;
+    width:1.5rem;
+    border:var(--border);
+    border-radius: var(--border-radius);
+}
+
+#button-container{
+    display:flex;
+    align-self: center;
+    gap:1rem;
+}
+
+#save-button {
+    background-color:#5fa86a;
+}
+
+#cancel-button {
+    background-color:red;
+}
+
+#upload-image-container{
+    display:flex;
+    gap:1rem;
+}
+
+
+/* upload box- done with AI */
+
+/* ── Change --size to resize all boxes at once ── */
+.upload-box {
+    --size: 12.5rem;
+ 
+    width: var(--size);
+    height: var(--size);
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+ 
+.upload-box.dragover {
+    border-color: #555;
+    background: #f0f0f0;
+}
+ 
+.upload-box .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #aaa;
+    font-size: 13px;
+    pointer-events: none;
+}
+ 
+.upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+ 
+.upload-box .remove {
     display: none;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
 }
-
-
-p {
-    padding: 0;
-    margin: 0;
-}
-
-#gallery-text{
-    padding-left:1rem;
-}
-
-/* Mobile responsive */
-@media (max-width: 940px) {
-    #painting-container {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    #big-painting-container {
-        height: 25rem;
-        width: 25rem;
-    }
-
-    .mini-painting-container {
-        height: 4rem;
-        width: 4rem;
-    }
-
-    #mini-paintings {
-        justify-content: center;
-    }
-    #title-container{
-        padding: 0 2rem;
-    }
-    #painting-details-container {
-        padding:0 2rem;
-    }
-    #big-painting-container {
-        height: 20.5rem;
-        width: 20.5rem;
-    }
-
-    .mini-painting-container {
-        height: 3.75rem;
-        width: 3.75rem;
-    }
-    #mini-paintings {
-        gap: 0.5rem;
-    }
-}
+ 
+.upload-box:hover .remove { display: flex; }
+ 
+input[type="file"] { display: none; }

@@ -8,105 +8,80 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    max-width: 52rem;
+    width:40rem;
 }
 
-#painting-list-panel {
+#modify-painting-container {
+    display:flex;
+    flex-direction:column;
+    padding: 1rem;
+    gap:1rem;
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: var(--border);
+    border-radius:var(--border-radius);
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    padding: 0 1rem 1rem;
 }
 
 #painting-list-panel h2 {
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin: 0rem;
 }
 
-#edit-paintings-container {
-    min-width:40rem;
+
+#painting-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding-right:.5rem;
-    max-height: 30rem;
+    gap: 1rem;
+    padding-right: 0.5rem;
+    max-height: 32.5rem;
     overflow-y: auto;
-    scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-}
-
-#edit-paintings-container::-webkit-scrollbar {
-    width: .5rem;
-}
-
-#edit-paintings-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-#edit-paintings-container::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
 }
 
 .painting-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.25rem;
+    gap: 1rem;
     width: 100%;
-    padding: 0.85rem 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    padding: 1rem;
+    border: var(--border);
+    border-radius:var(--border-radius);
 }
 
 .painting-thumb {
     width: 7rem;
     height: 7rem;
     object-fit: cover;
-    flex-shrink: 0;
-    background: rgba(0, 0, 0, 0.05);
 }
 
 .painting-name {
     flex: 1;
+    font:var(--big-p);
     font-weight: 600;
-    font-size: 1.15rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.painting-actions {
+.button-container {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-#edit-icon:hover {
-    fill: var(--orange);
+.icon:hover {
+    fill: orange;
+}
+#delete-icon:hover{
+    fill: red;
 }
 
-#delete-icon:hover {
-    fill: var(--red);
+.icon-btn {
+    all: unset;
 }
 
-
-button{
-    width:fit-content;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:2rem;
-    padding:2rem;
-}
-
-#add-painting-text{
-    color:var(--main-bg-color) !important;
-}
-#add-painting-icon{
-    fill:var(--main-bg-color) !important;
+@media (max-width: 768px) {
+    #admin-content {
+        width:100%;
+    }
 }

@@ -7,13 +7,12 @@
 let curUser = null;
 let curPainting = null;
 const heart = document.getElementById("heart-icon");
-const params = new URLSearchParams(window.location.search);
-const paintingName = params.get("name");
+heart.onclick = heartClicked;
 
 // this is to make it visible after everything loads up so it doesn't look buggy
 const main = document.querySelector("main");
 
-async function onStartup() {
+async function verifyUser() {
     try {
         await fetch(`/user/me`, {
             method: "GET",
@@ -42,7 +41,7 @@ async function onStartup() {
 }
 
 (async () => {
-    await onStartup();
+    await verifyUser();
     await setupPainting();
 })();
 
@@ -123,6 +122,8 @@ function formatDimensions(dimensions) {
 }
 
 async function setupPainting() {
+    const params = new URLSearchParams(window.location.search);
+    const paintingName = params.get("name");
     const response = await fetch(`/painting/${paintingName}`);
     const painting = await response.json();
     curPainting = painting;
@@ -263,7 +264,7 @@ async function heartClicked() {
 
             heart.style.transform = "scale(1.5)";
             setTimeout(() => {
-                heart.style.transform = "scale(1)";
+                heart.style.transform = "";
             }, 200);
 
             fetch(`/user/guest/likes/${curPainting.name}`, {
@@ -291,9 +292,9 @@ async function heartClicked() {
         if (heart.style.fill === "rgb(75, 75, 75)") {
             heart.style.fill = "red";
 
-            heart.style.transform = "scale(1.5)";
+            heart.style.transform = "scale(1.4)";
             setTimeout(() => {
-                heart.style.transform = "scale(1)";
+                heart.style.transform = "";
             }, 200);
 
             fetch(`/user/me/likes/${curPainting.name}`, {
@@ -318,5 +319,3 @@ async function heartClicked() {
         }
     }
 }
-
-heart.onclick = heartClicked;
