@@ -53,7 +53,7 @@ function renderPaintingList(paintings) {
 
     if (sortedPaintings.length === 0) {
         editPaintingsContainer.innerHTML =
-            "<p class='empty'>No paintings found.</p>";
+            "<p class='center-text'>No paintings found.</p>";
         return;
     }
 
@@ -79,7 +79,7 @@ function renderPaintingList(paintings) {
         editBtn.setAttribute("aria-label", "Edit painting");
         editBtn.appendChild(cloneIcon(editIconTemplate));
         editBtn.addEventListener("click", () => {
-            window.location.href = `modify-painting.html?name=${encodeURIComponent(painting.name)}`;
+            window.location.href = `add-update-painting.html?name=${encodeURIComponent(painting.name)}`;
         });
 
         const deleteBtn = document.createElement("button");
@@ -115,13 +115,13 @@ async function deletePainting(id, rowElem) {
 
         if (!res.ok) throw new Error("Delete failed");
 
-        rowElem.remove();
+        showToast("Painting Deleted", 2000, "toast-error");
+        window.location.reload();
     } catch (err) {
         console.error(err);
-        showToast("Failed to delete painting.");
+        showToast("Failed Deleting Painting", 3000, "toast-error");
     }
 }
-
 
 /* search bar filter logic */
 
@@ -136,6 +136,13 @@ function filterPaintingsByName() {
 (async () => {
     if (paintingSearchInput) {
         paintingSearchInput.addEventListener("input", filterPaintingsByName);
+    }
+
+    const toastMessage = sessionStorage.getItem("toastMessage");
+    if (toastMessage) {
+        const { text, className } = JSON.parse(toastMessage);
+        showToast(text, 2000, className);
+        sessionStorage.removeItem("toastMessage");
     }
 
     if (await ensureAdmin()) {

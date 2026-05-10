@@ -32,9 +32,9 @@
             <main>
                 <h1 class="center-text">Admin</h1>
                 <div id="admin-content">
-                    <a href="./modify-painting.html"><button onClick>Add a new painting</button></a>
-                    <div id="modify-painting-container">
-                        <h2 class="center-text">Edit or delete a painting</h2>
+                    <a href="./add-update-painting.html"><button id="add-painting-button" class="green-bg">Add a new painting</button></a>
+                    <div id="update-delete-painting-container">
+                        <h2 class="center-text">Update or delete a painting</h2>
                         <input id="painting-search" class="search-input text-input" type="search" placeholder="Search paintings by name" aria-label="Search paintings">
                         <div id="painting-container"></div>
                     </div>
@@ -43,6 +43,8 @@
  
             <div id="footer-container"></div>
         </div>
+
+        <div id="toast-container"></div>
  
         <script src="./js/all.js"></script>
         <script src="./js/observer.js"></script>

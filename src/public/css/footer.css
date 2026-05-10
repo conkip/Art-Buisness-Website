@@ -39,7 +39,7 @@ footer {
 
 .contact-logo:hover {
     scale: 1.1;
-    filter: brightness(1.1);
+    filter: brightness(1.125);
 }
 
 .footer-divider {

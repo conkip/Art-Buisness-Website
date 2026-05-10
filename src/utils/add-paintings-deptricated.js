@@ -15,7 +15,7 @@ dotenv.config();
 
 const { MONGODB_URL } = process.env;
 
-async function runSetupDb() {
+async function setupDb() {
     await mongoose.connect(MONGODB_URL);
 
     // Clear existing painting documents
@@ -29,31 +29,12 @@ async function runSetupDb() {
     await mongoose.disconnect();
 }
 
-runSetupDb().catch((err) => {
+setupDb().catch((err) => {
     console.error("Initial DB setup failed:", err);
     process.exit(1);
 });
 
 async function populateDb(Painting) {
-    let template = new Painting({
-        name: "Example",
-        image: "Example.webp",
-        dimensions: {
-            length: 20,
-            width: 20,
-            depth: 2,
-        },
-        date: 2026, //optional
-        paint: "Acrylic",
-        canvas: "Wood Panel",
-        finish: "Epoxy Coating",
-        desc: "This is some example text.", //optional
-        price: 1000, //optional
-        mult: false, //optional
-        framed: true, //optional
-        sold: true, //optional
-    });
-
     let painting75 = new Painting({
         name: "Heatwave Butterfly",
         image: "HeatwaveButterfly.webp",

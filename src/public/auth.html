@@ -38,8 +38,8 @@
             <main id="auth-content">
                 <h1 id="auth-title" class="center-text">Welcome</h1>
                 <form id="auth-form" class="center-text">
-                    <p id="invalid-text" class="center-text" visibility="hidden">.</p>
-                    <div class = "input-container">
+                    <div></div>
+                    <div class="input-container">
                         <label for="username">Username:</label>
                         <input
                             id="username"
@@ -54,7 +54,7 @@
 
                     <div id="password-container">
                         <label for="password">Password:</label>
-                        <div id="password-input-container" >
+                        <div id="password-input-container">
                             <input
                                 id="password"
                                 class="text-input"
@@ -62,7 +62,13 @@
                                 name="password"
                                 required
                             />
-                            <span class="subtext"><input type="checkbox" onclick="showPassword()"> Show Password</span>
+                            <span class="subtext"
+                                ><input
+                                    type="checkbox"
+                                    onclick="showPassword()"
+                                />
+                                Show Password</span
+                            >
                         </div>
                     </div>
 
@@ -79,6 +85,8 @@
 
             <div id="footer-container"></div>
         </div>
+
+        <div id="toast-container"></div>
 
         <script src="./js/all.js"></script>
         <script src="./js/auth.js"></script>

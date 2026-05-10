@@ -8,24 +8,23 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    width:40rem;
+    width: 40rem;
 }
 
-#modify-painting-container {
-    display:flex;
-    flex-direction:column;
+#update-delete-painting-container {
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
-    gap:1rem;
+    gap: 1rem;
     width: 100%;
     border: var(--border);
-    border-radius:var(--border-radius);
+    border-radius: var(--border-radius);
     background: rgba(255, 255, 255, 0.95);
 }
 
 #painting-list-panel h2 {
     margin: 0rem;
 }
-
 
 #painting-container {
     width: 100%;
@@ -46,7 +45,7 @@
     width: 100%;
     padding: 1rem;
     border: var(--border);
-    border-radius:var(--border-radius);
+    border-radius: var(--border-radius);
 }
 
 .painting-thumb {
@@ -57,7 +56,7 @@
 
 .painting-name {
     flex: 1;
-    font:var(--big-p);
+    font: var(--big-p);
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -69,11 +68,11 @@
     gap: 1rem;
 }
 
-.icon:hover {
-    fill: orange;
+.icon {
+    fill: var(--orange);
 }
-#delete-icon:hover{
-    fill: red;
+#delete-icon {
+    fill: var(--red);
 }
 
 .icon-btn {
@@ -82,6 +81,6 @@
 
 @media (max-width: 768px) {
     #admin-content {
-        width:100%;
+        width: 100%;
     }
 }

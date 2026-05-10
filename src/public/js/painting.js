@@ -114,11 +114,11 @@ function addMiniPainting(baseImageUrl, number) {
 
 // 24x24x1 --> 24" L x 24" W x 1" D
 function formatDimensions(dimensions) {
-    let length = dimensions.length + '" L x ';
-    let width = dimensions.width + '" W x ';
-    let depth = dimensions.depth + '" D';
-
-    return length + width + depth;
+    const parts = [];
+    if (dimensions.length != null) parts.push(dimensions.length + '" L');
+    if (dimensions.width != null) parts.push(dimensions.width + '" W');
+    if (dimensions.depth != null) parts.push(dimensions.depth + '" D');
+    return parts.join(' x ');
 }
 
 async function setupPainting() {
@@ -153,9 +153,9 @@ async function setupPainting() {
     // add the painting details
 
     const dimensionsElem = document.getElementById("dimensions");
-    if (painting.dimensions !== undefined) {
-        let dimensions = "";
-        dimensions += formatDimensions(painting.dimensions);
+    const dimStr = painting.dimensions ? formatDimensions(painting.dimensions) : "";
+    if (dimStr) {
+        let dimensions = dimStr;
         if (painting.mult) {
             dimensions += " Each";
         }
@@ -223,14 +223,17 @@ function updateHeart() {
     if (curUser === null) {
         let foundPainting = false;
 
-        fetch("/user/guest/likes")
+        fetch("/user/guest/likes", {
+            credentials: "include",
+        })
             .then((response) => response.text())
             .then((data) => {
-                let guestPaintings = data.split(",");
+                data = data.trim();
+                let guestPaintings = data ? data.split(",") : [];
                 for (let guestPaintingName of guestPaintings) {
                     if (guestPaintingName === curPainting.name) {
                         //change heart back to red
-                        heart.style.fill = "red";
+                        heart.style.fill = "var(--red)";
                         foundPainting = true;
                         break;
                     }
@@ -245,7 +248,7 @@ function updateHeart() {
         for (let userPaintingName of curUser.my_likes) {
             if (userPaintingName === curPainting.name) {
                 //change heart back to red
-                heart.style.fill = "red";
+                heart.style.fill = "var(--red)";
                 foundPainting = true;
                 break;
             }
@@ -260,7 +263,7 @@ function updateHeart() {
 async function heartClicked() {
     if (curUser === null) {
         if (heart.style.fill === "rgb(75, 75, 75)") {
-            heart.style.fill = "red";
+            heart.style.fill = "var(--red)";
 
             heart.style.transform = "scale(1.5)";
             setTimeout(() => {
@@ -275,7 +278,7 @@ async function heartClicked() {
                 credentials: "include",
             });
 
-            showToast("Like added");
+            showToast("Like added", 2000, "toast-success");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
             fetch(`/user/guest/likes/${curPainting.name}`, {
@@ -286,11 +289,11 @@ async function heartClicked() {
                 credentials: "include",
             });
 
-            showToast("Like removed");
+            showToast("Like removed", 2000, "toast-error");
         }
     } else {
         if (heart.style.fill === "rgb(75, 75, 75)") {
-            heart.style.fill = "red";
+            heart.style.fill = "var(--red)";
 
             heart.style.transform = "scale(1.4)";
             setTimeout(() => {
@@ -304,7 +307,7 @@ async function heartClicked() {
                 },
             });
 
-            showToast("Like added");
+            showToast("Like added", 2000, "toast-success");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
 
@@ -315,7 +318,7 @@ async function heartClicked() {
                 },
             });
 
-            showToast("Like removed");
+            showToast("Like removed", 2000, "toast-error");
         }
     }
 }

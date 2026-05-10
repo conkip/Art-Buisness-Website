@@ -13,7 +13,7 @@ function addGuestLike(req, res) {
         list.push(painting);
     }
 
-    res.cookie("paintings", list.join(","), { httpOnly: true, encode: String });
+    res.cookie("paintings", list.join(","), { httpOnly: true });
     res.send("Cookie set!");
 }
 
@@ -22,9 +22,9 @@ function removeGuestLike(req, res) {
     let paintings = req.cookies.paintings;
 
     let list = paintings ? paintings.split(",") : [];
-    list = list.filter(p => p !== painting);  // cleaner than splice
+    list = list.filter((p) => p !== painting); // cleaner than splice
 
-    res.cookie("paintings", list.join(","), { httpOnly: true, encode: String });
+    res.cookie("paintings", list.join(","), { httpOnly: true });
     res.send("Cookie set!");
 }
 

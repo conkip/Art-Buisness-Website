@@ -26,10 +26,6 @@ label {
     font: var(--big-p);
     color: var(--text-color);
 }
-#invalid-text {
-    color: red;
-    font-weight: bold;
-}
 .input-container{
     display: flex;
     flex-direction: row;

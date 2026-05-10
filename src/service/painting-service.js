@@ -1,5 +1,39 @@
 import Painting from "../model/painting.js";
 import s3 from "../utils/s3-utils.js";
+import {
+    normalizePaintingName,
+    normalizeString,
+    normalizeImageBaseName,
+    buildImageFileName,
+    processImageBuffer,
+} from "../utils/reformat-paintings.js";
+
+const toBoolean = (val) => val === "true" || val === true;
+
+function getUrlList(baseFilename) {
+    if (!baseFilename) return [];
+    const baseUrl = `${s3.S3_BASE_URL}${baseFilename}`;
+    const urls = [baseUrl];
+    const [path, query] = baseUrl.split("?");
+    const lastDot = path.lastIndexOf(".");
+    if (lastDot === -1) return urls;
+    const prefix = path.slice(0, lastDot);
+    const extension = path.slice(lastDot);
+    for (let i = 2; i <= 5; i++) {
+        const variant = `${prefix}${i}${extension}`;
+        urls.push(query ? `${variant}?${query}` : variant);
+    }
+    return urls;
+}
+
+function imageResponse(painting) {
+    const urls = getUrlList(painting.image);
+    return {
+        ...painting,
+        image: urls[0] || null,
+        images: urls,
+    };
+}
 
 async function getAllPaintings() {
     const paintings = await Painting.find({})
@@ -7,19 +41,13 @@ async function getAllPaintings() {
         .sort({ name: 1 })
         .lean();
 
-    return paintings.map((p) => ({
-        ...p,
-        image: `${s3.S3_BASE_URL}${p.image}`,
-    }));
+    return paintings.map(imageResponse);
 }
 
 async function getPaintingByName(name) {
     const painting = await Painting.findOne({ name }).lean();
     if (!painting) return null;
-    return {
-        ...painting,
-        image: `${s3.S3_BASE_URL}${painting.image}`,
-    };
+    return imageResponse(painting);
 }
 
 async function deletePainting(id) {
@@ -27,7 +55,11 @@ async function deletePainting(id) {
     if (!painting) return;
 
     try {
-        await deleteFromS3(painting.image);
+        const baseName = normalizeImageBaseName(painting.name);
+        for (let i = 0; i < 5; i++) {
+            const filename = buildImageFileName(baseName, i);
+            await s3.deleteFromS3(filename);
+        }
     } catch (err) {
         console.warn("Unable to delete from S3", err);
     }
@@ -49,34 +81,140 @@ async function createPainting({
     mult,
     framed,
     sold,
-    file,
+    files,
 }) {
-    const imageUrl = await uploadToS3(
-        file.buffer,
-        file.originalname,
-        file.mimetype,
-    );
+    const normalizedName = normalizePaintingName(name);
+    const baseName = normalizeImageBaseName(normalizedName);
+    const baseFilename = buildImageFileName(baseName, 0); // e.g., "BlackCat.webp"
+
+    for (let i = 0; i < (files?.length || 0); i++) {
+        const file = files[i];
+        const processedBuffer = await processImageBuffer(file.buffer);
+        const filename = buildImageFileName(baseName, i);
+        await s3.uploadToS3(processedBuffer, filename, "image/webp");
+    }
 
     const painting = await Painting.create({
-        name,
-        image: imageUrl,
+        name: normalizedName,
+        image: baseFilename,
         dimensions: {
             length: length ? Number(length) : undefined,
             width: width ? Number(width) : undefined,
             depth: depth ? Number(depth) : undefined,
         },
+        date: date ? Number(date) : undefined,
+        paint: normalizeString(paint),
+        canvas: normalizeString(canvas),
+        finish: normalizeString(finish),
+        desc: desc ? desc.trim() : undefined,
+        price: price ? Number(price) : undefined,
+        mult: toBoolean(mult),
+        framed: toBoolean(framed),
+        sold: toBoolean(sold),
+    });
+
+    return imageResponse(painting.toObject());
+}
+
+async function updatePainting(
+    name,
+    {
+        newName,
+        length,
+        width,
+        depth,
         date,
         paint,
         canvas,
         finish,
         desc,
-        price: price ? Number(price) : undefined,
-        mult: mult !== undefined ? Boolean(mult) : false,
-        framed: framed !== undefined ? Boolean(framed) : false,
-        sold: sold !== undefined ? Boolean(sold) : false,
-    });
+        price,
+        mult,
+        framed,
+        sold,
+        files,
+        imageSlots = []
+    },
+) {
+    const painting = await Painting.findOne({ name });
+    if (!painting) return null;
 
-    return painting;
+    const normalizedNewName = newName
+        ? normalizePaintingName(newName)
+        : painting.name;
+    const normalizedPaint =
+        paint !== undefined ? normalizeString(paint) : painting.paint;
+    const normalizedCanvas =
+        canvas !== undefined ? normalizeString(canvas) : painting.canvas;
+    const normalizedFinish =
+        finish !== undefined ? normalizeString(finish) : painting.finish;
+    const normalizedDesc = desc !== undefined ? desc.trim() : painting.desc;
+    const normalizedLength = length
+        ? Number(length)
+        : painting.dimensions?.length;
+    const normalizedWidth = width ? Number(width) : painting.dimensions?.width;
+    const normalizedDepth = depth ? Number(depth) : painting.dimensions?.depth;
+    const normalizedPrice = price ? Number(price) : painting.price;
+    const normalizedDate = date ? Number(date) : painting.date;
+
+    const newBaseName = normalizeImageBaseName(normalizedNewName);
+    let baseFilename = painting.image;
+
+    if (files && files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+            const slot = imageSlots[i] ?? i;
+            const oldFilename = buildImageFileName(normalizeImageBaseName(painting.name), slot);
+            const newFilename = buildImageFileName(newBaseName, slot);
+
+            try {
+                await s3.deleteFromS3(oldFilename);
+            } catch (err) {
+                console.warn(`Unable to delete slot ${slot} from S3`, err);
+            }
+
+            const processedBuffer = await processImageBuffer(files[i].buffer);
+            await s3.uploadToS3(processedBuffer, newFilename, "image/webp");
+        }
+        baseFilename = buildImageFileName(newBaseName, 0);
+    } else if (normalizedNewName !== painting.name) {
+        // Rename existing images
+        const oldBaseName = normalizeImageBaseName(painting.name);
+        for (let i = 0; i < 5; i++) {
+            const oldFilename = buildImageFileName(oldBaseName, i);
+            const newFilename = buildImageFileName(newBaseName, i);
+            if (oldFilename !== newFilename) {
+                try {
+                    await s3.renameInS3(oldFilename, newFilename, "image/webp");
+                } catch (err) {
+                    console.warn(
+                        `Unable to rename S3 file from ${oldFilename} to ${newFilename}`,
+                        err,
+                    );
+                }
+            }
+        }
+        baseFilename = buildImageFileName(newBaseName, 0);
+    }
+
+    painting.name = normalizedNewName;
+    painting.image = baseFilename;
+    painting.dimensions = {
+        length: normalizedLength,
+        width: normalizedWidth,
+        depth: normalizedDepth,
+    };
+    painting.date = normalizedDate;
+    painting.paint = normalizedPaint;
+    painting.canvas = normalizedCanvas;
+    painting.finish = normalizedFinish;
+    painting.desc = normalizedDesc;
+    painting.price = normalizedPrice;
+    painting.mult = toBoolean(mult);
+    painting.framed = toBoolean(framed);
+    painting.sold = toBoolean(sold);
+
+    await painting.save();
+    return imageResponse(painting.toObject());
 }
 
 export default {
@@ -84,4 +222,5 @@ export default {
     getPaintingByName,
     deletePainting,
     createPainting,
+    updatePainting,
 };

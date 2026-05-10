@@ -11,12 +11,19 @@
     --footer-bg-color: rgb(240, 240, 240);
     --main-bg-color: white; /* white background to not take away from art and for a clean, modern look */
     --text-color: rgb(
-        100,
-        100,
-        100
+        50,
+        50,
+        50
     ); /* medium gray for text to not be easy to read and not harsh on the eyes */
     --accent-color: #5faba8; /* Teal - calm, creative, modern */ /* Alternate Color: #8FAE92; /* Sage Green*/
     --accent-color-faded: rgba(95, 171, 168, 0.5);
+
+    --green: #5fa86a;
+    /* --red: #f44336; */
+    --red: #f14848;
+    /* --orange: #ff9800; */
+    --orange: #d4722a;
+    --yellow: #d4c42a;
 
     /* dark theme */
     /*
@@ -44,7 +51,7 @@
     --subtext: 0.84375rem/1.25rem var(--ff);
 
     --box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
-    --box-shadow2: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);   /* less shadow */
+    --box-shadow2: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2); /* less shadow */
     --border: 1px solid rgba(0, 0, 0, 0.2);
     --border-radius: 0.5rem;
 }
@@ -138,7 +145,6 @@ a:hover {
 }
 .hover-shadow:hover {
     box-shadow: var(--box-shadow);
-    cursor: pointer;
 }
 .big-spacer {
     height: 3rem;
@@ -180,25 +186,35 @@ a:hover {
     border-color: var(--accent-color);
 }
 
-/*--------Element changes----------*/
+.green-bg{
+    background-color: var(--green);
+}
+.red-bg{
+    background-color: var(--red);
+}
+.orange-bg{
+    background-color: var(--orange);
+}
 
+/*--------Element changes----------*/
 
 button {
     border: none;
-    padding: .75rem 4.75rem;
+    padding: 0.75rem 4.75rem;
     max-width: 100%;
     background-color: var(--accent-color);
     color: var(--main-bg-color);
     font: var(--button-text) !important;
     text-align: center;
     border-radius: var(--border-radius);
+    cursor:pointer;
 }
 button:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.125);
 }
 img {
     max-width: 100%;
-    border-radius:var(--border-radius);
+    border-radius: var(--border-radius);
 }
 
 /* -----------Toast---------*/
@@ -206,7 +222,6 @@ img {
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
-    width: min(10rem, 15rem);
     display: flex;
     flex-direction: column-reverse; /* newest at bottom */
     gap: 1rem;
@@ -214,6 +229,7 @@ img {
 }
 
 .toast {
+    white-space: nowrap;
     position: relative;
     display: inline-block;
     padding: 1rem;
@@ -227,6 +243,18 @@ img {
     transform: translateY(100%);
     opacity: 0;
     animation: slideUp 0.35s ease forwards;
+}
+
+.toast-success {
+    background-color: var(--green);
+}
+
+.toast-error {
+    background-color: var(--red);
+}
+
+.toast-warning {
+    background-color: var(--orange);
 }
 
 /* --------Modal----------*/
