@@ -106,3 +106,36 @@ label {
 input[type="file"] {
     display: none;
 }
+
+main{
+    padding:1rem;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    #upload-image-container {
+        flex-direction: column;
+    }
+
+    label {
+        min-width: unset;
+    }
+
+    .text-input {
+        max-width: unset;
+    }
+
+    textarea.text-input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .upload-box {
+        --size: calc(80vw);
+    }
+
+    #button-container {
+        width: 100%;
+        justify-content: center;
+    }
+}
