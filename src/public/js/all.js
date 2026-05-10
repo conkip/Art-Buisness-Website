@@ -10,10 +10,8 @@ fetch("/nav.html")
     .then((html) => {
         document.getElementById("nav-container").innerHTML = html;
 
-        // Load nav script after nav is injected (script tags in injected HTML won't execute)
         const navScript = document.createElement("script");
-        navScript.src = "/js/nav.js";
-        navScript.defer = true;
+        navScript.src = "/js/nav.js?v=2";
         document.body.appendChild(navScript);
     });
 

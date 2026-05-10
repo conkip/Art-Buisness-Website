@@ -109,31 +109,28 @@ fetch("/auth/admin-status", {
         // Not admin, link stays hidden
     });
 
-// only do menu actions when it is non null
-document.addEventListener("DOMContentLoaded", () => {
-    const menuIcon = document.getElementById("nav-menu-icon");
-    const menu = document.getElementById("nav-mobile-menu");
 
-    if (menuIcon && menu) {
-        menu.style.display = "none";
-        menuIcon.addEventListener("click", openMenu);
+// Define these first
+function openMenu() {
+    menuIcon.removeEventListener('click', openMenu);
+    menuIcon.addEventListener('click', closeMenu);
+    menu.style.display = 'flex';
+}
 
-        function openMenu() {
-            menuIcon.removeEventListener("click", openMenu);
-            menuIcon.addEventListener("click", closeMenu);
-            menu.style.display = "flex";
-        }
+function closeMenu() {
+    menuIcon.removeEventListener('click', closeMenu);
+    menuIcon.addEventListener('click', openMenu);
+    menu.style.display = 'none';
+}
 
-        function closeMenu() {
-            menuIcon.removeEventListener("click", closeMenu);
-            menuIcon.addEventListener("click", openMenu);
-            menu.style.display = "none";
-        }
-    }
-});
+// Then the rest of your code that uses them
+const menuIcon = document.getElementById('nav-menu-icon');
+const menu = document.getElementById('nav-mobile-menu');
+menu.style.display = 'none';
+menuIcon.addEventListener('click', openMenu);
 
 window.addEventListener("resize", () => {
     if (window.innerWidth > 940) {
-        closeMenu();
+        menuIcon.click();
     }
 });
