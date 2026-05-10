@@ -28,7 +28,11 @@ function removeGuestLike(req, res) {
     let list = paintings ? paintings.split(",") : [];
     list = list.filter((p) => p !== painting); // cleaner than splice
 
-    res.cookie("paintings", list.join(","), { httpOnly: true });
+    if (list.length === 0) {
+        res.clearCookie("paintings");
+    } else {
+        res.cookie("paintings", list.join(","), { httpOnly: true });
+    }
     res.send("Cookie set!");
 }
 
