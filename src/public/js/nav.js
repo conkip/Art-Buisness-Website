@@ -126,6 +126,6 @@ function closeMenu(){
 
 window.addEventListener("resize", () => {
     if (window.innerWidth > 940) {
-        menuIcon.click();
+        closeMenu();
     }
 });
