@@ -23,11 +23,11 @@ async function checkLoginStatus() {
 }
 
 function setLoggedIn(loggedIn) {
-    for(const elem of loggedInElems) {
+    for (const elem of loggedInElems) {
         elem.style.display = loggedIn ? "flex" : "none";
     }
-    for(const elem of loggedOutElems) {
-        elem.style.display = loggedIn ? "none": "flex";
+    for (const elem of loggedOutElems) {
+        elem.style.display = loggedIn ? "none" : "flex";
     }
 }
 
@@ -49,8 +49,8 @@ async function deleteAccount() {
     });
 
     localStorage.removeItem("token");
+    showToast("Account deleted", 2000, "toast-success");
     window.location.reload(true);
-    showToast("Account deleted");
 }
 
 // Show delete confirmation modal
@@ -59,8 +59,8 @@ function showDeleteAccountModal() {
     <div id="modal-container">
         <div id="modal-content">
             <p class="big-p">Are you sure you want to delete your account?</p>
-            <button id="modal-confirm-delete" class="hover-shadow">Yes, delete</button>
-            <button id="modal-cancel-delete" class="hover-shadow">Cancel</button>
+            <button id="modal-confirm-delete">Yes, delete</button>
+            <button id="modal-cancel-delete">Cancel</button>
         </div>
     </div>
     `;
@@ -80,10 +80,11 @@ function showDeleteAccountModal() {
     };
 
     // Click outside closes
-    document.getElementById("modal-container").addEventListener("click", (e) => {
-        if (!e.target.closest("#modal-content")) closeModal();
-    });
-
+    document
+        .getElementById("modal-container")
+        .addEventListener("click", (e) => {
+            if (!e.target.closest("#modal-content")) closeModal();
+        });
 }
 
 function closeModal() {
@@ -99,30 +100,37 @@ fetch("/auth/admin-status", {
 })
     .then((response) => {
         if (response.ok) {
-            document.querySelectorAll(".admin-link").forEach(elem => elem.style.display = "block");
+            document
+                .querySelectorAll(".admin-link")
+                .forEach((elem) => (elem.style.display = "block"));
         }
     })
     .catch(() => {
         // Not admin, link stays hidden
     });
 
-const menuIcon = document.getElementById('nav-menu-icon');
-const menu = document.getElementById('nav-mobile-menu');
-menu.style.display = 'none';
+// only do menu actions when it is non null
+document.addEventListener("DOMContentLoaded", () => {
+    const menuIcon = document.getElementById("nav-menu-icon");
+    const menu = document.getElementById("nav-mobile-menu");
 
-menuIcon.addEventListener('click', openMenu);
+    if (menuIcon && menu) {
+        menu.style.display = "none";
+        menuIcon.addEventListener("click", openMenu);
 
-function openMenu() {
-    menuIcon.removeEventListener('click', openMenu);
-    menuIcon.addEventListener('click', closeMenu);
-    menu.style.display = 'flex';
-}
+        function openMenu() {
+            menuIcon.removeEventListener("click", openMenu);
+            menuIcon.addEventListener("click", closeMenu);
+            menu.style.display = "flex";
+        }
 
-function closeMenu(){
-    menuIcon.removeEventListener('click', closeMenu);
-    menuIcon.addEventListener('click', openMenu);
-    menu.style.display = 'none';
-}
+        function closeMenu() {
+            menuIcon.removeEventListener("click", closeMenu);
+            menuIcon.addEventListener("click", openMenu);
+            menu.style.display = "none";
+        }
+    }
+});
 
 window.addEventListener("resize", () => {
     if (window.innerWidth > 940) {
