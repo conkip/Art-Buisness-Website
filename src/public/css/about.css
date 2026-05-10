@@ -11,5 +11,13 @@
 }
 
 .about-image {
-    height: 21.875rem;
+    max-height: 21.875rem;
+    flex: 1;
+    min-height: 0;
+    object-fit: contain;
+    padding: 0 1rem;
+}
+
+#about-description{
+    padding:0 1rem;
 }

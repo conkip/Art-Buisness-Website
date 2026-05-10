@@ -1,19 +1,29 @@
 // utils/s3.js
-import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import {
+    S3Client,
+    DeleteObjectCommand,
+    CopyObjectCommand,
+} from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
-const S3_BASE_URL = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/`;
+const bucketName = process.env.S3_BUCKET_NAME;
+const region = process.env.AWS_REGION;
+
+const S3_BASE_URL = `https://${bucketName}.s3.${region}.amazonaws.com/`;
 
 const S3 = new S3Client({
-    region: process.env.AWS_REGION,
-    // no credentials needed — EC2 role handles it automatically
+    region,
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
 });
 
 const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
     const upload = new Upload({
         client: S3,
         params: {
-            Bucket: process.env.S3_BUCKET_NAME,
+            Bucket: bucketName,
             Key: fileName,
             Body: fileBuffer,
             ContentType: mimeType,
@@ -21,20 +31,47 @@ const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
     });
 
     await upload.done();
-
-    // Return the public URL
-    return `${S3_BASE_URL}${key}`;
+    return `${S3_BASE_URL}${fileName}`;
 };
 
-const deleteFromS3 = async (imageUrl) => {
-    // Extract the key from the URL
-    const key = imageUrl.split(".amazonaws.com/")[1];
+const deleteFromS3 = async (imageUrlOrKey) => {
+    const key = imageUrlOrKey.includes(".amazonaws.com/")
+        ? imageUrlOrKey.split(".amazonaws.com/")[1]
+        : imageUrlOrKey;
+
     await S3.send(
         new DeleteObjectCommand({
-            Bucket: process.env.S3_BUCKET_NAME,
+            Bucket: bucketName,
             Key: key,
         }),
     );
 };
 
-export default { uploadToS3, deleteFromS3, S3_BASE_URL };
+const copyInS3 = async (sourceKey, destinationKey, mimeType) => {
+    await S3.send(
+        new CopyObjectCommand({
+            Bucket: bucketName,
+            CopySource: `${bucketName}/${sourceKey}`,
+            Key: destinationKey,
+            ContentType: mimeType,
+            MetadataDirective: "REPLACE",
+        }),
+    );
+    return `${S3_BASE_URL}${destinationKey}`;
+};
+
+const renameInS3 = async (oldKeyOrUrl, newKey, mimeType = "image/webp") => {
+    const sourceKey = oldKeyOrUrl.includes(".amazonaws.com/")
+        ? oldKeyOrUrl.split(".amazonaws.com/")[1]
+        : oldKeyOrUrl;
+
+    if (sourceKey === newKey) {
+        return `${S3_BASE_URL}${newKey}`;
+    }
+
+    await copyInS3(sourceKey, newKey, mimeType);
+    await deleteFromS3(sourceKey);
+    return `${S3_BASE_URL}${newKey}`;
+};
+
+export default { uploadToS3, deleteFromS3, renameInS3, S3_BASE_URL };

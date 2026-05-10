@@ -6,22 +6,32 @@
         >
     </div>
     <!--menu gotten from https://www.sliderrevolution.com/resources/css-hamburger-menu/ Author: Mikael Ainalem-->
-    <svg id="nav-menu-icon" class="ham hamRotate ham7" viewBox="0 0 100 100" width="65" onclick="this.classList.toggle('active')">
+    <svg
+        id="nav-menu-icon"
+        class="ham hamRotate ham7"
+        viewBox="-5 -5 110 110"
+        width="65"
+        onclick="this.classList.toggle('active')"
+    >
         <path
             class="line top"
-            d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013" />
-        <path
-            class="line middle"
-            d="m 70,50 h -40" />
+            d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013"
+        />
+        <path class="line middle" d="m 70,50 h -40" />
         <path
             class="line bottom"
-            d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40" />
+            d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40"
+        />
     </svg>
     <ul class="nav-list">
         <li><a class="big-p" href="index.html">Home</a></li>
         <li><a class="big-p" href="gallery.html">Gallery</a></li>
         <li><a class="big-p" href="profile.html">Profile</a></li>
-        <li><a class="big-p admin-link" href="admin.html" style="display: none">Admin</a></li>
+        <li>
+            <a class="big-p admin-link" href="admin.html" style="display: none"
+                >Admin</a
+            >
+        </li>
     </ul>
     <ul class="nav-list nav-logged-out">
         <li><a class="big-p" href="auth.html?mode=login">Log in</a></li>
@@ -29,7 +39,10 @@
     </ul>
     <ul class="nav-list nav-logged-in" style="display: none">
         <li><a class="big-p" onclick="logout()">Log out</a></li>
-        <li><a class="big-p" onclick="showDeleteAccountModal()">Delete Account</a>
+        <li>
+            <a class="big-p" onclick="showDeleteAccountModal()"
+                >Delete Account</a
+            >
         </li>
     </ul>
 </nav>
@@ -38,9 +51,21 @@
     <li><a class="big-p" href="index.html">Home</a></li>
     <li><a class="big-p" href="gallery.html">Gallery</a></li>
     <li><a class="big-p" href="profile.html">Profile</a></li>
-    <li><a class="big-p admin-link" href="admin.html" style="display: none">Admin</a></li>
-    <li class="nav-logged-out"><a class="big-p" href="auth.html?mode=login">Log in</a></li>
-    <li class="nav-logged-out"><a class="big-p" href="auth.html?mode=signup">Sign up</a></li>
-    <li class="nav-logged-in"><a class="big-p" onclick="logout()">Log out</a></li>
-    <li class= "nav-logged-in"><a class="big-p" onclick="showDeleteAccountModal()">Delete Account</a></li>
+    <li>
+        <a class="big-p admin-link" href="admin.html" style="display: none"
+            >Admin</a
+        >
+    </li>
+    <li class="nav-logged-out">
+        <a class="big-p" href="auth.html?mode=login">Log in</a>
+    </li>
+    <li class="nav-logged-out">
+        <a class="big-p" href="auth.html?mode=signup">Sign up</a>
+    </li>
+    <li class="nav-logged-in">
+        <a class="big-p" onclick="logout()">Log out</a>
+    </li>
+    <li class="nav-logged-in">
+        <a class="big-p" onclick="showDeleteAccountModal()">Delete Account</a>
+    </li>
 </ul>

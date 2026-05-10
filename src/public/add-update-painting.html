@@ -1,0 +1,188 @@
+<!-- 
+  Author: Connor Kippes
+  
+  Add, edit, or update a painting (must be Admin).
+-->
+<!doctype html>
+<html lang="en">
+    <head>
+        <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Creative Canvas</title>
+        <link rel="stylesheet" type="text/css" href="./css/all.css" />
+        <link rel="stylesheet" type="text/css" href="./css/nav.css" />
+        <link rel="stylesheet" type="text/css" href="./css/footer.css" />
+        <link rel="stylesheet" type="text/css" href="./css/add-update-painting.css" />
+        <link rel="icon" type="image/png" href="./images/logo.png" />
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-RL9DJJ4Y2V"
+    ></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-RL9DJJ4Y2V");
+    </script>
+
+    <body>
+        <div id="page-wrapper">
+            <div id="nav-container"></div>
+
+            <main>
+                <form id="add-update-painting-form" novalidate>
+                    <div class = "input-container">
+                        <label for="name">Name:</label>
+                        <input
+                            id="name"
+                            class="text-input"
+                            type="text"
+                            name="name"
+                            required
+                        />
+                    </div>
+                    <p>dimensions (in inches):</p>
+                    <div class = "input-container">
+                        <label for="length">Length (ex- 20):</label>
+                        <input
+                            id="length"
+                            class="text-input"
+                            type="text"
+                            name="length"
+                        />
+                    </div>
+                    <div class = "input-container">
+                        <label for="width">Width (ex- 20):</label>
+                        <input
+                            id="width"
+                            class="text-input"
+                            type="text"
+                            name="width"
+                        />
+                    </div>
+                    <div class = "input-container">
+                        <label for="depth">Depth (ex- 2):</label>
+                        <input
+                            id="depth"
+                            class="text-input"
+                            type="text"
+                            name="depth"
+                        />
+                    </div>
+                    
+                    <div class = "input-container">
+                        <label for="paint">Paint (ex- Acryclic):</label>
+                        <input
+                            id="paint"
+                            class="text-input"
+                            type="text"
+                            name="paint"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="canvas">Canvas Type (ex- Wood Panel):</label>
+                        <input
+                            id="canvas"
+                            class="text-input"
+                            type="text"
+                            name="canvas"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="finish">Finish: (ex- Epoxy Coating):</label>
+                        <input
+                            id="finish"
+                            class="text-input"
+                            type="text"
+                            name="finish"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="price">Price: (ex- 100):</label>
+                        <input
+                            id="price"
+                            class="text-input"
+                            type="text"
+                            name="price"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="mult">Multi-painting?</label>
+                        <input
+                            id="mult"
+                            class="checkbox"
+                            type="checkbox"
+                            name="mult"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="framed">Framed?</label>
+                        <input
+                            id="framed"
+                            class="checkbox"
+                            type="checkbox"
+                            name="framed"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="sold">Sold?</label>
+                        <input
+                            id="sold"
+                            class="checkbox"
+                            type="checkbox"
+                            name="sold"
+                        />
+                    </div>
+
+                    <div class = "input-container">
+                        <label for="desc">Description:</label>
+                        <textarea id="desc" class="text-input" name="desc" rows="5" cols="50"></textarea>
+                    </div>
+
+                    <div id = "upload-image-container">
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                        <div class="upload-box"></div>
+                    </div>
+
+                    <div id ="button-container">
+                        <button
+                            class="red-bg"
+                            type="button" 
+                            onclick="handleCancel()"
+                        >Cancel</button>
+
+                        <button
+                            class="green-bg"
+                            type="submit"
+                            name="save"
+                            value=""
+                        >Save</button>
+                    </div>
+                </form>
+            </main>
+
+            <div id="footer-container"></div>
+        </div>
+
+        <div id="toast-container"></div>
+
+        <script src="./js/all.js"></script>
+        <script src="./js/add-update-painting.js"></script>
+    </body>
+</html>

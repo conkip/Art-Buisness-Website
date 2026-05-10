@@ -5,14 +5,14 @@
     Restructured to await for observer.
 */
 
-async function onStartup() {
+async function verifyUser() {
     try {
         const response = await fetch(`/user/me`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json"
-            }
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
         });
 
         const contentType = response.headers.get("Content-Type");
@@ -27,9 +27,8 @@ async function onStartup() {
                 "Hello, Guest";
             await setupGuestPaintings();
         } else {
-            document.getElementById(
-                "profile-greeting"
-            ).innerText = `Hello, ${data.username}!`;
+            document.getElementById("profile-greeting").innerText =
+                `Hello, ${data.username}!`;
             await setupPaintings(data.my_likes);
         }
     } catch (error) {
@@ -39,7 +38,9 @@ async function onStartup() {
 
 async function setupGuestPaintings() {
     try {
-        const response = await fetch("/user/guest/likes");
+        const response = await fetch("/user/guest/likes", {
+            credentials: "include",
+        });
         let data = await response.text();
         data = data.trim();
 
@@ -72,7 +73,7 @@ async function setupPaintings(likes) {
     }
 }
 
-onStartup().then(() => {
+verifyUser().then(() => {
     const hiddenElements = document.getElementsByClassName("hidden");
 
     for (let i = 0; i < hiddenElements.length; i++) {

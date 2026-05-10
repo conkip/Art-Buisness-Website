@@ -4,12 +4,10 @@
     Admin page JS: list all paintings for editing / deleting.
 */
 
-const editPaintingsContainer = document.getElementById(
-    "edit-paintings-container",
-);
+const editPaintingsContainer = document.getElementById("painting-container");
 const paintingSearchInput = document.getElementById("painting-search");
-const editIconTemplate = document.getElementById("icon-edit");
-const deleteIconTemplate = document.getElementById("icon-delete");
+const editIconTemplate = document.getElementById("edit-icon-template");
+const deleteIconTemplate = document.getElementById("delete-icon-template");
 let paintingsCache = [];
 
 async function ensureAdmin() {
@@ -37,7 +35,7 @@ async function loadPaintingsForAdmin() {
     } catch (err) {
         console.error(err);
         editPaintingsContainer.innerHTML =
-            "<p class='big-p text-red'>Unable to load paintings.</p>";
+            "<p class='center-text' >Unable to load paintings.</p>";
     }
 }
 
@@ -55,7 +53,7 @@ function renderPaintingList(paintings) {
 
     if (sortedPaintings.length === 0) {
         editPaintingsContainer.innerHTML =
-            "<p class='empty'>No paintings found.</p>";
+            "<p class='center-text'>No paintings found.</p>";
         return;
     }
 
@@ -72,16 +70,16 @@ function renderPaintingList(paintings) {
         name.className = "painting-name";
         name.textContent = painting.name;
 
-        const actions = document.createElement("div");
-        actions.className = "painting-actions";
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "button-container";
 
         const editBtn = document.createElement("button");
         editBtn.className = "icon-btn edit";
-        editBtn.title = "Edit";
+        editBtn.title = "Edit painting";
         editBtn.setAttribute("aria-label", "Edit painting");
         editBtn.appendChild(cloneIcon(editIconTemplate));
         editBtn.addEventListener("click", () => {
-            window.location.href = `admin-edit.html?name=${encodeURIComponent(painting.name)}`;
+            window.location.href = `add-update-painting.html?name=${encodeURIComponent(painting.name)}`;
         });
 
         const deleteBtn = document.createElement("button");
@@ -94,12 +92,12 @@ function renderPaintingList(paintings) {
             deletePainting(painting._id, row);
         });
 
-        actions.appendChild(editBtn);
-        actions.appendChild(deleteBtn);
+        buttonContainer.appendChild(editBtn);
+        buttonContainer.appendChild(deleteBtn);
 
         row.appendChild(thumb);
         row.appendChild(name);
-        row.appendChild(actions);
+        row.appendChild(buttonContainer);
 
         editPaintingsContainer.appendChild(row);
     }
@@ -117,12 +115,15 @@ async function deletePainting(id, rowElem) {
 
         if (!res.ok) throw new Error("Delete failed");
 
-        rowElem.remove();
+        showToast("Painting Deleted", 2000, "toast-error");
+        window.location.reload();
     } catch (err) {
         console.error(err);
-        showToast("Failed to delete painting.");
+        showToast("Failed Deleting Painting", 3000, "toast-error");
     }
 }
+
+/* search bar filter logic */
 
 function filterPaintingsByName() {
     const query = paintingSearchInput?.value.trim().toLowerCase() || "";
@@ -135,6 +136,13 @@ function filterPaintingsByName() {
 (async () => {
     if (paintingSearchInput) {
         paintingSearchInput.addEventListener("input", filterPaintingsByName);
+    }
+
+    const toastMessage = sessionStorage.getItem("toastMessage");
+    if (toastMessage) {
+        const { text, className } = JSON.parse(toastMessage);
+        showToast(text, 2000, className);
+        sessionStorage.removeItem("toastMessage");
     }
 
     if (await ensureAdmin()) {

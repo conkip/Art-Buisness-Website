@@ -24,10 +24,13 @@ fetch("/footer.html")
         document.getElementById("footer-container").innerHTML = html;
     });
 
-function showToast(message, duration = 2000) {
+function showToast(message, duration = 2000, className = "") {
     const toastContainer = document.getElementById("toast-container");
     let toast = document.createElement("div");
     toast.classList.add("toast");
+    if (className) {
+        toast.classList.add(className);
+    }
     toast.textContent = message;
     toastContainer.appendChild(toast);
 

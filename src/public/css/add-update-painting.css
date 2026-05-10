@@ -1,0 +1,108 @@
+/* 
+  Author: Connor Kippes
+
+  CSS for adding or updating a painting.
+*/
+#add-update-painting-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.input-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+label {
+    min-width: 8rem;
+}
+
+.text-input {
+    max-width: 30rem;
+}
+
+.checkbox {
+    height: 1.5rem;
+    width: 1.5rem;
+    border: var(--border);
+    border-radius: var(--border-radius);
+}
+
+#button-container {
+    display: flex;
+    align-self: center;
+    gap: 1rem;
+}
+
+#upload-image-container {
+    display: flex;
+    gap: 1rem;
+}
+
+/* upload box- done with AI */
+
+/* ── Change --size to resize all boxes at once ── */
+.upload-box {
+    --size: 12.5rem;
+
+    width: var(--size);
+    height: var(--size);
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.upload-box.dragover {
+    border-color: #555;
+    background: #f0f0f0;
+}
+
+.upload-box .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #aaa;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+.upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.upload-box .remove {
+    display: none;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.upload-box:hover .remove {
+    display: flex;
+}
+
+input[type="file"] {
+    display: none;
+}

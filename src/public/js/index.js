@@ -47,4 +47,5 @@ async function onStartup() {
         window.observer.observe(hiddenElements[i]);
     }
 }
-onStartup()
+
+onStartup();

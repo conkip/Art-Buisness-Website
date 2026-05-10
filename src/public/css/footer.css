@@ -28,7 +28,7 @@ footer {
 .footer-content-section {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.25rem;
 }
 
 .contact-logo {
@@ -38,7 +38,8 @@ footer {
 }
 
 .contact-logo:hover {
-    scale: 1.15;
+    scale: 1.1;
+    filter: brightness(1.125);
 }
 
 .footer-divider {
@@ -52,12 +53,6 @@ footer {
     display: flex;
     flex-direction: row;
     gap: 1.25rem;
-}
-
-.about-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 @media (max-width: 768px) {

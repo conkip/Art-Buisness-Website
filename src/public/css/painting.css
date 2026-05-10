@@ -53,19 +53,17 @@
     gap: 1rem;
 }
 
-img {
-    border-radius: 0;
-}
-
 #title-container {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
 }
 
 #heart-icon:hover {
-    filter: brightness(2);
+    transform: scale(1.1);
+    filter: brightness(1.125);
 }
+
 #painting-details-container {
     gap: 0.5rem;
     flex-direction: column;
