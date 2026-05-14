@@ -34,7 +34,6 @@ nav {
 #nav-website-title {
     font-weight: 550 !important;
     color: white !important;
-    /* color: var(--text-color); */
 }
 
 .nav-list {
@@ -47,7 +46,6 @@ nav {
 
 .nav-list li a {
     color: white !important;
-    /* color: var(--text-color); */
 }
 
 .nav-list li a:hover {
