@@ -83,9 +83,15 @@ async function createPainting({
     sold,
     files,
 }) {
-    const normalizedName = normalizePaintingName(name);
-    const baseName = normalizeImageBaseName(normalizedName);
-    const baseFilename = buildImageFileName(baseName, 0); // e.g., "BlackCat.webp"
+    const normalizedName = normalizePaintingName(name); // e.g., "black cAt" -> "Black Cat"
+    const existing = await Painting.findOne({ name: normalizedName });
+    if (existing) {
+        throw Object.assign(new Error(`A painting named "${normalizedName}" already exists`), { status: 409 });
+    }
+
+
+    const baseName = normalizeImageBaseName(normalizedName); // e.g., "Black Cat" -> "BlackCat.webp"
+    const baseFilename = buildImageFileName(baseName, 0);
 
     for (let i = 0; i < (files?.length || 0); i++) {
         const filename = buildImageFileName(baseName, i);
