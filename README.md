@@ -3,27 +3,36 @@
 <br>
 **Demo:** https://www.youtube.com/watch?v=Q-4lL0wdbSs
 <br><br>
-<img width="2544" height="1269" alt="image" src="https://github.com/user-attachments/assets/01b042d8-6a8d-486a-b14f-367d2beeca92" />
+## Home page
+<img width="2555" height="1268" alt="image" src="https://github.com/user-attachments/assets/af773fde-de7d-4244-a596-e3eda1307bfc" />
 <br>
 
 ***
-
-<img width="2543" height="1266" alt="image" src="https://github.com/user-attachments/assets/9506dc86-ff96-4b49-b991-87d48ba46995" />
+## Gallery
+<img width="2557" height="1261" alt="image" src="https://github.com/user-attachments/assets/87d49175-3980-45b1-9e99-82200def1251" />
 <br>
 
 ***
-
-<img width="2557" height="1267" alt="image" src="https://github.com/user-attachments/assets/567081e5-8892-42c8-9551-c81c29a7e7b1" />
+## Painting Details
+<img width="2556" height="1268" alt="image" src="https://github.com/user-attachments/assets/43a4b7d4-39ea-4aac-b242-6daaee55e792" />
 <br>
 
 ***
-
-<img width="2557" height="1269" alt="image" src="https://github.com/user-attachments/assets/6609804d-d0b3-4b46-a0fb-4c73c3299529" />
+## Profile
+<img width="2557" height="1261" alt="image" src="https://github.com/user-attachments/assets/0821e3b5-76fd-4436-89e4-6afa95be2639" />
 <br>
 
 ***
+## Admin Page (Admin only)
+<img width="2555" height="1263" alt="image" src="https://github.com/user-attachments/assets/20c61e80-e997-4d3a-87c5-050ffc6c79cf" />
+<br>
 
+***
+## Adding/ Editing a painting (Admin only)
+<img width="2558" height="1262" alt="image" src="https://github.com/user-attachments/assets/5de8f976-fd69-43b8-a9f4-9294ff97e60d" />
+<br>
 
 **Front-End:** HTML, CSS, Javascript<br>
-**Back-End:** Node.js, Express.js, MongoDB for DB<br>
-Hosted on Digital Ocean with https through nginx<br>
+**Back-End:** Node.js, Express.js, MongoDB<br>
+Hosted on an AWS EC2 and an S3 bucket for image files.
+<br>
