@@ -88,10 +88,18 @@ async function createPainting({
     const baseFilename = buildImageFileName(baseName, 0); // e.g., "BlackCat.webp"
 
     for (let i = 0; i < (files?.length || 0); i++) {
-        const file = files[i];
-        const processedBuffer = await processImageBuffer(file.buffer);
         const filename = buildImageFileName(baseName, i);
-        await s3.uploadToS3(processedBuffer, filename, "image/webp");
+        let processedBuffer;
+        try {
+            processedBuffer = await processImageBuffer(files[i].buffer);
+        } catch (err) {
+            throw Object.assign(new Error(`Failed to process image "${files[i].originalname}": unsupported format or corrupted file`), { status: 400 });
+        }
+        try {
+            await s3.uploadToS3(processedBuffer, filename, "image/webp");
+        } catch (err) {
+            throw Object.assign(new Error(`Failed to upload image "${files[i].originalname}" to S3`), { status: 502 });
+        }
     }
 
     const painting = await Painting.create({
@@ -158,12 +166,16 @@ async function updatePainting(
     const normalizedDate = date ? Number(date) : painting.date;
 
     const newBaseName = normalizeImageBaseName(normalizedNewName);
-    let baseFilename = painting.image;
+    const oldBaseName = normalizeImageBaseName(painting.name);
+    const uploadedSlots = new Set();
 
+    // upload new painting images
     if (files && files.length > 0) {
         for (let i = 0; i < files.length; i++) {
             const slot = imageSlots[i] ?? i;
-            const oldFilename = buildImageFileName(normalizeImageBaseName(painting.name), slot);
+            uploadedSlots.add(slot);
+
+            const oldFilename = buildImageFileName(oldBaseName, slot);
             const newFilename = buildImageFileName(newBaseName, slot);
 
             try {
@@ -172,32 +184,36 @@ async function updatePainting(
                 console.warn(`Unable to delete slot ${slot} from S3`, err);
             }
 
-            const processedBuffer = await processImageBuffer(files[i].buffer);
-            await s3.uploadToS3(processedBuffer, newFilename, "image/webp");
-        }
-        baseFilename = buildImageFileName(newBaseName, 0);
-    } else if (normalizedNewName !== painting.name) {
-        // Rename existing images
-        const oldBaseName = normalizeImageBaseName(painting.name);
-        for (let i = 0; i < 5; i++) {
-            const oldFilename = buildImageFileName(oldBaseName, i);
-            const newFilename = buildImageFileName(newBaseName, i);
-            if (oldFilename !== newFilename) {
-                try {
-                    await s3.renameInS3(oldFilename, newFilename, "image/webp");
-                } catch (err) {
-                    console.warn(
-                        `Unable to rename S3 file from ${oldFilename} to ${newFilename}`,
-                        err,
-                    );
-                }
+            let processedBuffer;
+            try {
+                processedBuffer = await processImageBuffer(files[i].buffer);
+            } catch (err) {
+                throw Object.assign(new Error(`Failed to process image "${files[i].originalname}": unsupported format or corrupted file`), { status: 400 });
+            }
+            try {
+                await s3.uploadToS3(processedBuffer, newFilename, "image/webp");
+            } catch (err) {
+                throw Object.assign(new Error(`Failed to upload image "${files[i].originalname}" to S3`), { status: 502 });
             }
         }
-        baseFilename = buildImageFileName(newBaseName, 0);
+    }
+
+    // rename old painting images
+    if (normalizedNewName !== painting.name) {
+        for (let i = 0; i < 5; i++) {
+            if (uploadedSlots.has(i)) continue;
+            const oldFilename = buildImageFileName(oldBaseName, i);
+            const newFilename = buildImageFileName(newBaseName, i);
+            try {
+                await s3.renameInS3(oldFilename, newFilename, "image/webp");
+            } catch (err) {
+                console.warn(`Unable to rename S3 file from ${oldFilename} to ${newFilename}`, err);
+            }
+        }
     }
 
     painting.name = normalizedNewName;
-    painting.image = baseFilename;
+    painting.image = buildImageFileName(newBaseName, 0);
     painting.dimensions = {
         length: normalizedLength,
         width: normalizedWidth,

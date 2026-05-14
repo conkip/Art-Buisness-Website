@@ -142,7 +142,7 @@ document
             Authorization: `Bearer ${token}`,
         };
 
-        let url, method, successMessage, errorMessage;
+        let url, method, successMessage;
         if (addPainting) {
             url = "/painting";
             method = "POST";
@@ -150,20 +150,12 @@ document
                 text: "Painting Added",
                 className: "toast-success",
             };
-            errorMessage = {
-                text: "Error Adding Painting",
-                className: "toast-error",
-            };
         } else {
             url = `/painting/${encodeURIComponent(curPainting.name)}`;
             method = "PUT";
             successMessage = {
                 text: "Painting Updated",
                 className: "toast-success",
-            };
-            errorMessage = {
-                text: "Error Updating Painting",
-                className: "toast-error",
             };
             if (name !== curPainting.name) {
                 formData.append("newName", name);
@@ -178,17 +170,15 @@ document
             });
 
             if (response.ok) {
-                sessionStorage.setItem(
-                    "toastMessage",
-                    JSON.stringify(successMessage),
-                );
+                sessionStorage.setItem("toastMessage", JSON.stringify(successMessage));
                 window.location.href = "/admin.html";
             } else {
-                showToast(errorMessage.text, 3000, errorMessage.className);
+                const errorText = await response.text();
+                showToast(errorText || "Server Error", 3000, "toast-error");
             }
         } catch (error) {
             console.error("Error:", error);
-            showToast(errorMessage.text, 3000, errorMessage.className);
+            showToast("Something went wrong", 3000, "toast-error");
         }
     });
 
