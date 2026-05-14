@@ -40,15 +40,22 @@
     --text-color: #e0ffd6;
     --accent-color: #baf8a0;
     */
-
     --ff: "Roboto";
+    --h1: bold 2.441rem/1.2  var(--ff);
+    --h2: bold 1.953rem/1.25 var(--ff);
+    --big-p: 1.25rem/1.875rem  var(--ff);
+    --p: 1rem/1.6 var(--ff);
+    --links: 1rem/1 var(--ff);
+    --subtext: 0.8rem/1.5 var(--ff);
+
+    /* --ff: "Roboto";
     --h1: bold 3rem/3.5rem var(--ff);
     --h2: bold 2rem/2.5rem var(--ff);
     --big-p: 1.3125rem/1.875rem var(--ff);
     --links: bold 1rem/1rem var(--ff);
     --p: 1.125rem/1.875rem var(--ff);
     --button-text: 1.3125rem/1.3125rem var(--ff);
-    --subtext: 0.84375rem/1.25rem var(--ff);
+    --subtext: 0.84375rem/1.25rem var(--ff); */
 
     --box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
     --box-shadow2: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2); /* less shadow */
@@ -160,10 +167,10 @@ a:hover {
 }
 
 .icon {
-    min-width: 2.25rem;
-    width: 2.25rem;
-    min-height: 2.25rem;
-    height: 2.25rem;
+    min-width: 2rem;
+    width: 2rem;
+    min-height: 2rem;
+    height: 2rem;
     fill: var(--text-color);
     transition:
         transform 0.2s ease,
@@ -175,7 +182,7 @@ a:hover {
     width: 100%;
     padding: 0.75rem;
     border: var(--border);
-    font: var(--button-text);
+    font: var(--links);
     color: var(--text-color);
     background: var(--main-bg-color);
     border-radius: var(--border-radius);
@@ -200,11 +207,11 @@ a:hover {
 
 button {
     border: none;
-    padding: 0.75rem 4.75rem;
+    padding: 0.75rem 4.5rem;
     max-width: 100%;
     background-color: var(--accent-color);
     color: var(--main-bg-color);
-    font: var(--button-text) !important;
+    font: var(--links) !important;
     text-align: center;
     border-radius: var(--border-radius);
     cursor:pointer;
@@ -312,4 +319,7 @@ img {
 }
 
 @media (max-width: 768px) {
+    button {
+        padding: 0.75rem 3.5rem;
+    }
 }

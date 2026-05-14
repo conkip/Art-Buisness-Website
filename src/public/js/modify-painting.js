@@ -83,7 +83,7 @@ function titleCase(str) {
 }
 
 document
-    .getElementById("add-update-painting-form")
+    .getElementById("modify-painting-form")
     .addEventListener("submit", async (e) => {
         e.preventDefault();
 

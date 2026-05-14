@@ -79,7 +79,7 @@ function renderPaintingList(paintings) {
         editBtn.setAttribute("aria-label", "Edit painting");
         editBtn.appendChild(cloneIcon(editIconTemplate));
         editBtn.addEventListener("click", () => {
-            window.location.href = `add-update-painting.html?name=${encodeURIComponent(painting.name)}`;
+            window.location.href = `modify-painting.html?name=${encodeURIComponent(painting.name)}`;
         });
 
         const deleteBtn = document.createElement("button");
