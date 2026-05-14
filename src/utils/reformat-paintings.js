@@ -23,7 +23,7 @@ export function normalizeString(value) {
 }
 
 export function normalizePaintingName(value) {
-    return normalizeString(value);
+    return normalizeString(value)?.replace(/[?#%]/g, "");
 }
 
 export function normalizeImageBaseName(value) {
@@ -38,6 +38,7 @@ export function buildImageFileName(baseName, index = 0) {
 
 export async function processImageBuffer(buffer) {
     return sharp(buffer)
+        .rotate()
         .resize({ width: maxWidth })
         .webp({ quality: 80 })
         .toBuffer();
