@@ -41,6 +41,20 @@ function logout() {
 
 // Delete account function
 async function deleteAccount() {
+    // fetch name before deleting
+    let name = "";
+    try {
+        const res = await fetch("/user/me", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+        if (res.ok) {
+            const data = await res.json();
+            name = data.name || data.username || "";
+        }
+    } catch {}
+
     await fetch("/auth/delete", {
         method: "DELETE",
         headers: {
@@ -49,7 +63,13 @@ async function deleteAccount() {
     });
 
     localStorage.removeItem("token");
-    showToast("Account deleted", 2000, "toast-success");
+    localStorage.setItem(
+        "pendingToast",
+        JSON.stringify({
+            message: `User ${name} was deleted`,
+            className: "toast-success",
+        }),
+    );
     window.location.reload(true);
 }
 
@@ -70,25 +90,24 @@ fetch("/auth/admin-status", {
         // Not admin, link stays hidden
     });
 
-
 // Define these first
 function openMenu() {
-    menuIcon.removeEventListener('click', openMenu);
-    menuIcon.addEventListener('click', closeMenu);
-    menu.style.display = 'flex';
+    menuIcon.removeEventListener("click", openMenu);
+    menuIcon.addEventListener("click", closeMenu);
+    menu.style.display = "flex";
 }
 
 function closeMenu() {
-    menuIcon.removeEventListener('click', closeMenu);
-    menuIcon.addEventListener('click', openMenu);
-    menu.style.display = 'none';
+    menuIcon.removeEventListener("click", closeMenu);
+    menuIcon.addEventListener("click", openMenu);
+    menu.style.display = "none";
 }
 
 // Then the rest of your code that uses them
-const menuIcon = document.getElementById('nav-menu-icon');
-const menu = document.getElementById('nav-mobile-menu');
-menu.style.display = 'none';
-menuIcon.addEventListener('click', openMenu);
+const menuIcon = document.getElementById("nav-menu-icon");
+const menu = document.getElementById("nav-mobile-menu");
+menu.style.display = "none";
+menuIcon.addEventListener("click", openMenu);
 
 window.addEventListener("resize", () => {
     if (window.innerWidth > 940) {

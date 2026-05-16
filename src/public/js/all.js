@@ -1,14 +1,18 @@
 /*
     Author: Connor Kippes
 
-    JS used in all pages.
+    JS used in all pages. Adds the nav and footer, as well as the modal and toast logic.
 */
 
 //add nav
 fetch("/nav.html")
     .then((res) => res.text())
     .then((html) => {
-        document.getElementById("nav-container").innerHTML = html;
+        // add nav container to top
+        const navContainer = document.createElement("div");
+        navContainer.id = "nav-container";
+        navContainer.innerHTML = html;
+        document.getElementById("page-wrapper").prepend(navContainer);
 
         const navScript = document.createElement("script");
         navScript.src = "/js/nav.js?v=2";
@@ -19,10 +23,21 @@ fetch("/nav.html")
 fetch("/footer.html")
     .then((res) => res.text())
     .then((html) => {
-        document.getElementById("footer-container").innerHTML = html;
+        // add footer to bottom
+        const footerContainer = document.createElement("div");
+        footerContainer.id = "footer-container";
+        footerContainer.innerHTML = html;
+        document.getElementById("page-wrapper").append(footerContainer);
     });
 
-function showToast(message, duration = 2000, className = "") {
+/*-----------TOAST-----------*/
+
+// always create toast container immediately
+const toastContainer = document.createElement("div");
+toastContainer.id = "toast-container";
+document.body.appendChild(toastContainer);
+
+function showToast(message, className = "") {
     const toastContainer = document.getElementById("toast-container");
     let toast = document.createElement("div");
     toast.classList.add("toast");
@@ -32,10 +47,21 @@ function showToast(message, duration = 2000, className = "") {
     toast.textContent = message;
     toastContainer.appendChild(toast);
 
+    const duration = 3000;
     setTimeout(() => {
         toast.remove();
     }, duration);
 }
+
+// show any pending toast from before a reload
+const pendingToast = localStorage.getItem("pendingToast");
+if (pendingToast) {
+    const { message, className } = JSON.parse(pendingToast);
+    localStorage.removeItem("pendingToast");
+    showToast(message, className);
+}
+
+/*-------MODAL---------*/
 
 function showConfirmModal({
     message = "Are you sure?",
@@ -51,8 +77,10 @@ function showConfirmModal({
     <div id="modal-container">
         <div id="modal-content">
             <p class="big-p">${message}</p>
-            <button id="modal-confirm">${confirmText}</button>
-            <button id="modal-cancel">${cancelText}</button>
+            <div class="modal-button-container">
+                <button id="modal-confirm">${confirmText}</button>
+                <button id="modal-cancel">${cancelText}</button>
+            </div>
         </div>
     </div>
     `;

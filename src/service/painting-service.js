@@ -6,11 +6,11 @@ import {
     buildImageFileName,
     processImageBuffer,
     extractKey,
-    normalizeSlots
+    normalizeSlots,
 } from "../utils/painting-utils.js";
- 
+
 const toBoolean = (val) => val === "true" || val === true;
- 
+
 function getUrlList(baseFilename) {
     if (!baseFilename) return [];
     const baseUrl = `${s3.S3_BASE_URL}${baseFilename}`;
@@ -26,7 +26,7 @@ function getUrlList(baseFilename) {
     }
     return urls;
 }
- 
+
 function imageResponse(painting) {
     const urls = getUrlList(painting.image);
     return {
@@ -35,7 +35,7 @@ function imageResponse(painting) {
         images: urls,
     };
 }
- 
+
 /** Process and upload a single new file to S3. Throws with an appropriate status on failure. */
 async function processAndUpload(file, filename) {
     let processedBuffer;
@@ -43,7 +43,9 @@ async function processAndUpload(file, filename) {
         processedBuffer = await processImageBuffer(file.buffer);
     } catch {
         throw Object.assign(
-            new Error(`Failed to process image "${file.originalname}": unsupported format or corrupted file`),
+            new Error(
+                `Failed to process image "${file.originalname}": unsupported format or corrupted file`,
+            ),
             { status: 400 },
         );
     }
@@ -56,26 +58,26 @@ async function processAndUpload(file, filename) {
         );
     }
 }
- 
+
 async function getAllPaintings() {
     const paintings = await Painting.find({})
         .collation({ locale: "en", strength: 2 })
         .sort({ name: 1 })
         .lean();
- 
+
     return paintings.map(imageResponse);
 }
- 
+
 async function getPaintingByName(name) {
     const painting = await Painting.findOne({ name }).lean();
     if (!painting) return null;
     return imageResponse(painting);
 }
- 
+
 async function deletePainting(id) {
     const painting = await Painting.findById(id);
     if (!painting) return;
- 
+
     for (let i = 0; i < 5; i++) {
         try {
             await s3.deleteFromS3(buildImageFileName(painting.name, i));
@@ -85,7 +87,7 @@ async function deletePainting(id) {
     }
     await Painting.findByIdAndDelete(id);
 }
- 
+
 async function createPainting({
     name,
     length,
@@ -110,33 +112,33 @@ async function createPainting({
             { status: 409 },
         );
     }
- 
+
     for (let i = 0; i < (files?.length || 0); i++) {
         await processAndUpload(files[i], buildImageFileName(normalizedName, i));
     }
- 
+
     const painting = await Painting.create({
         name: normalizedName,
         image: buildImageFileName(normalizedName, 0),
         dimensions: {
             length: length ? Number(length) : undefined,
-            width:  width  ? Number(width)  : undefined,
-            depth:  depth  ? Number(depth)  : undefined,
+            width: width ? Number(width) : undefined,
+            depth: depth ? Number(depth) : undefined,
         },
-        date:   date   ? Number(date)   : undefined,
-        paint:  normalizeString(paint),
+        date: date ? Number(date) : undefined,
+        paint: normalizeString(paint),
         canvas: normalizeString(canvas),
         finish: normalizeString(finish),
-        desc:   desc   ? desc.trim()    : undefined,
-        price:  price  ? Number(price)  : undefined,
-        mult:   toBoolean(mult),
+        desc: desc ? desc.trim() : undefined,
+        price: price ? Number(price) : undefined,
+        mult: toBoolean(mult),
         framed: toBoolean(framed),
-        sold:   toBoolean(sold),
+        sold: toBoolean(sold),
     });
- 
+
     return imageResponse(painting.toObject());
 }
- 
+
 async function updatePainting(
     name,
     {
@@ -154,7 +156,7 @@ async function updatePainting(
         framed,
         sold,
         files,
-        slots
+        slots,
     },
 ) {
     const parsedSlots = JSON.parse(slots || "[]");
@@ -163,7 +165,9 @@ async function updatePainting(
     const painting = await Painting.findOne({ name });
     if (!painting) return null;
 
-    const normalizedNewName = newName ? normalizeString(newName) : painting.name;
+    const normalizedNewName = newName
+        ? normalizeString(newName)
+        : painting.name;
 
     const originalKeys = new Set();
     const survivingKeys = new Set();
@@ -192,7 +196,7 @@ async function updatePainting(
             if (srcKey && srcKey !== targetKey) {
                 renameOperations.push({
                     srcKey,
-                    targetKey
+                    targetKey,
                 });
             }
         }
@@ -255,9 +259,12 @@ async function updatePainting(
 
     painting.date = date ? Number(date) : painting.date;
 
-    painting.paint = paint !== undefined ? normalizeString(paint) : painting.paint;
-    painting.canvas = canvas !== undefined ? normalizeString(canvas) : painting.canvas;
-    painting.finish = finish !== undefined ? normalizeString(finish) : painting.finish;
+    painting.paint =
+        paint !== undefined ? normalizeString(paint) : painting.paint;
+    painting.canvas =
+        canvas !== undefined ? normalizeString(canvas) : painting.canvas;
+    painting.finish =
+        finish !== undefined ? normalizeString(finish) : painting.finish;
 
     painting.desc = desc !== undefined ? desc.trim() : painting.desc;
 
@@ -271,7 +278,7 @@ async function updatePainting(
 
     return imageResponse(painting.toObject());
 }
- 
+
 export default {
     getAllPaintings,
     getPaintingByName,

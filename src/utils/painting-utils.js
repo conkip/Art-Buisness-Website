@@ -14,15 +14,17 @@ const supportedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
 
 export function normalizeString(value) {
     if (!value || typeof value !== "string") return undefined;
-    return value
-        .trim()
-        .toLowerCase()
-        .replace(/[^a-zA-Z0-9\s]/g, "")
-        .split(/\s+/)
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ")
-        // remove trailing numbers at end of final string to prevent possible file overwriting
-        .replace(/\s*\d+$/, "");
+    return (
+        value
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-zA-Z0-9\s]/g, "")
+            .split(/\s+/)
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+            // remove trailing numbers at end of final string to prevent possible file overwriting
+            .replace(/(\s*\d+)+$/, "")
+    );
 }
 
 export function buildImageFileName(name, index = 0) {

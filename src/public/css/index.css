@@ -112,7 +112,7 @@
     opacity: 1;
     transform: translateX(0);
 }
-.index-divider{
+.index-divider {
     border: none;
     height: 1px;
     background-color: var(--text-color);

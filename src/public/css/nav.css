@@ -16,7 +16,7 @@ nav {
     padding: 0rem 2rem;
     background-color: var(--accent-color);
     /* background-color: white; */
-    opacity:95%;
+    opacity: 95%;
 }
 
 #nav-website {
@@ -54,7 +54,7 @@ nav {
 
 /*----menu animation gotten from https://www.sliderrevolution.com/resources/css-hamburger-menu/ Author: Mikael Ainalem -----*/
 .ham {
-    display:none;
+    display: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     transition: transform 400ms;
@@ -70,11 +70,13 @@ nav {
     transform: rotate(180deg);
 }
 .line {
-    fill:none;
-    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-    stroke:white;
-    stroke-width:5.5;
-    stroke-linecap:round;
+    fill: none;
+    transition:
+        stroke-dasharray 400ms,
+        stroke-dashoffset 400ms;
+    stroke: white;
+    stroke-width: 5.5;
+    stroke-linecap: round;
 }
 .ham7 .top {
     stroke-dasharray: 40 82;
@@ -83,20 +85,20 @@ nav {
     stroke-dasharray: 40 111;
 }
 .ham7 .bottom {
-     stroke-dasharray: 40 161;
+    stroke-dasharray: 40 161;
 }
 .ham7.active .top {
-     stroke-dasharray: 17 82;
-      stroke-dashoffset: -62px;
+    stroke-dasharray: 17 82;
+    stroke-dashoffset: -62px;
 }
 .ham7.active .middle {
-     stroke-dashoffset: 23px;
+    stroke-dashoffset: 23px;
 }
 .ham7.active .bottom {
-     stroke-dashoffset: -83px;
+    stroke-dashoffset: -83px;
 }
 #nav-mobile-menu {
-    display:none;
+    display: none;
 }
 
 @media (max-width: 940px) {
@@ -127,7 +129,7 @@ nav {
         list-style: none;
         position: fixed;
         flex-direction: column;
-        z-index:1000;
+        z-index: 1000;
         top: 3.5rem;
         left: 0;
         width: 100%;
@@ -136,7 +138,7 @@ nav {
         padding: 1rem 2rem 4rem 2rem; /*t r d l */
         transition: all 0.3s ease;
     }
-    #nav-mobile-menu li a{
+    #nav-mobile-menu li a {
         color: white !important;
     }
 }

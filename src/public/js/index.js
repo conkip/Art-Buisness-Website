@@ -31,8 +31,6 @@ async function loadRainbowGalleryPainting(imgElem) {
     }
 }
 
-
-
 async function onStartup() {
     // need this so that logout button updates
     await setTimeout(() => {}, 500);

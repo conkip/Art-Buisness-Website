@@ -44,10 +44,10 @@ async function handleAuthSubmit(e) {
             window.location.replace("./index.html");
         } else {
             const errorMsg = await res.text();
-            showToast(errorMsg, 3000, "toast-error");
+            showToast(errorMsg, "toast-error");
         }
     } catch (error) {
-        showToast("An error occurred. Please try again.", 3000, "toast-error");
+        showToast("An error occurred. Please try again.", "toast-error");
         console.error("Auth error:", error);
     }
 }

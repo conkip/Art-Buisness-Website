@@ -119,11 +119,20 @@ async function deletePainting(id, rowElem) {
 
         if (!res.ok) throw new Error("Delete failed");
 
-        showToast("Painting Deleted", 2000, "toast-error");
+        const painting = paintingsCache.find((p) => p._id === id);
+        const name = painting?.name || "Painting";
+
+        localStorage.setItem(
+            "pendingToast",
+            JSON.stringify({
+                message: `"${name}" was deleted`,
+                className: "toast-error",
+            }),
+        );
         window.location.reload();
     } catch (err) {
         console.error(err);
-        showToast("Failed Deleting Painting", 3000, "toast-error");
+        showToast("Failed to delete painting", "toast-error");
     }
 }
 
@@ -140,13 +149,6 @@ function filterPaintingsByName() {
 (async () => {
     if (paintingSearchInput) {
         paintingSearchInput.addEventListener("input", filterPaintingsByName);
-    }
-
-    const toastMessage = sessionStorage.getItem("toastMessage");
-    if (toastMessage) {
-        const { text, className } = JSON.parse(toastMessage);
-        showToast(text, 2000, className);
-        sessionStorage.removeItem("toastMessage");
     }
 
     if (await ensureAdmin()) {

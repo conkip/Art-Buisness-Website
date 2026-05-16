@@ -19,7 +19,7 @@ async function login(username, password) {
     if (!user) {
         throw { status: 401, message: "User does not exist" };
     }
-    if(!(await bcrypt.compare(password, user.password))) {
+    if (!(await bcrypt.compare(password, user.password))) {
         throw { status: 401, message: "Wrong password" };
     }
 

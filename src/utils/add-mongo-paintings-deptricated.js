@@ -50,7 +50,7 @@ async function populateDb(Painting) {
         price: 350,
         sold: true,
     });
-    
+
     await painting75.save();
 
     let painting74 = new Painting({
@@ -132,7 +132,7 @@ async function populateDb(Painting) {
             width: 12,
             depth: 0.875,
         },
-        date:2025,
+        date: 2025,
         paint: "Acrylic",
         canvas: "Wood Panel",
         finish: "Epoxy Coating",

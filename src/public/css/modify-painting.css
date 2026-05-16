@@ -68,7 +68,7 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: .5rem;
+    gap: 0.5rem;
     color: #aaa;
     pointer-events: none;
 }
@@ -81,13 +81,13 @@ label {
 }
 
 .upload-box .remove {
-    all:unset;
+    all: unset;
     display: none;
     position: absolute;
-    align-items:center;
+    align-items: center;
     justify-content: center;
-    top: .5rem;
-    right: .5rem;
+    top: 0.5rem;
+    right: 0.5rem;
     width: 1.25rem;
     height: 1.25rem;
     padding: 0;
@@ -107,15 +107,15 @@ input[type="file"] {
     display: none;
 }
 
-main{
-    padding:1rem;
+main {
+    padding: 1rem;
 }
 
 /* Mobile */
 @media (max-width: 900px) {
     #upload-image-container {
         flex-direction: column;
-        align-items:center;
+        align-items: center;
     }
 
     label {

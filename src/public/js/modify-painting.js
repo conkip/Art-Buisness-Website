@@ -13,12 +13,10 @@ async function ensureAdmin() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
     });
-
     if (!res.ok) {
         window.location.href = "/";
         return false;
     }
-
     return true;
 }
 
@@ -42,7 +40,7 @@ async function setupPage() {
     const painting = await response.json();
     curPainting = painting;
 
-    // Populate text fields
+    // populate text fields
     document.getElementById("name").value = painting.name;
     document.getElementById("length").value = painting.dimensions?.length || "";
     document.getElementById("width").value = painting.dimensions?.width || "";
@@ -56,7 +54,7 @@ async function setupPage() {
     document.getElementById("sold").checked = painting.sold;
     document.getElementById("desc").value = painting.desc || "";
 
-    // Populate image boxes — store the S3 URL so the server can rename
+    // populate image boxes — store the S3 URL so the server can rename
     // (not re-compress) the file if the painting name changes or order shifts.
     const uploadBoxes = document.querySelectorAll(".upload-box");
     (painting.images || []).forEach((imgUrl, index) => {
@@ -64,19 +62,26 @@ async function setupPage() {
         const box = uploadBoxes[index];
         const key = imgUrl.split(".amazonaws.com/")[1].split("?")[0];
 
-        box._state = {
-            type: "existing",
-            file: null,
-            key,
-            url: imgUrl,
-            blobUrl: null,
-        };
-
         const img = new Image();
+        img.draggable = false;
+
         img.onload = () => {
+            // only set state and populate box if the image actually exists
+            box._state = {
+                type: "existing",
+                file: null,
+                key,
+                url: imgUrl,
+                blobUrl: null,
+            };
             box.appendChild(img);
             box.querySelector(".placeholder").style.display = "none";
         };
+
+        img.onerror = () => {
+            // image doesn't exist in S3 — leave box empty
+        };
+
         img.src = imgUrl;
     });
 }
@@ -116,27 +121,19 @@ document
         const imageSlots = [];
 
         for (const box of boxes) {
-            const s = box._state;
-
-            if (s.type === "new") {
-                imageSlots.push({
-                    type: "new",
-                });
-            } else if (s.type === "existing") {
-                imageSlots.push({
-                    type: "existing",
-                    key: s.key,
-                });
+            const state = box._state;
+            if (state.type === "new") {
+                imageSlots.push({ type: "new" });
+            } else if (state.type === "existing") {
+                imageSlots.push({ type: "existing", key: state.key });
             } else {
-                imageSlots.push({
-                    type: "empty",
-                });
+                imageSlots.push({ type: "empty" });
             }
         }
 
         // required first slot image
-        if (addPainting && imageSlots[0]?.type === "empty") {
-            showToast("First image slot is required", 3000, "toast-error");
+        if (imageSlots[0]?.type === "empty") {
+            showToast("First image slot is required", "toast-error");
             return;
         }
 
@@ -155,6 +152,12 @@ document
         if (desc) formData.append("desc", desc);
         formData.append("slots", JSON.stringify(imageSlots));
 
+        for (const box of boxes) {
+            if (box._state.type === "new") {
+                formData.append("images", box._state.file);
+            }
+        }
+
         const token = localStorage.getItem("token");
         const headers = { Authorization: `Bearer ${token}` };
 
@@ -163,14 +166,14 @@ document
             url = "/painting";
             method = "POST";
             successMessage = {
-                text: "Painting Added",
+                message: `Painting "${name}" was added`,
                 className: "toast-success",
             };
         } else {
             url = `/painting/${encodeURIComponent(curPainting.name)}`;
             method = "PUT";
             successMessage = {
-                text: "Painting Updated",
+                message: `Painting "${name}" was updated`,
                 className: "toast-success",
             };
             if (name !== curPainting.name) {
@@ -186,25 +189,22 @@ document
             });
 
             if (response.ok) {
-                sessionStorage.setItem(
-                    "toastMessage",
+                localStorage.setItem(
+                    "pendingToast",
                     JSON.stringify(successMessage),
                 );
                 window.location.href = "/admin.html";
             } else {
                 const errorText = await response.text();
-                //showToast(errorText || "WTF?!?!", 3000, "toast-error"); // for testing purposes:
-                showToast("Internal server error", 3000, "toast-error");
+                showToast(errorText || "Internal server error", "toast-error");
             }
         } catch (error) {
             console.error("Error:", error);
-            showToast("Something went wrong", 3000, "toast-error");
+            showToast("Something went wrong", "toast-error");
         }
     });
 
 /* ── Upload box logic ── */
-
-let draggingBox = null;
 
 document.querySelectorAll(".upload-box").forEach((box) => {
     box.innerHTML = `
@@ -216,7 +216,7 @@ document.querySelectorAll(".upload-box").forEach((box) => {
         </svg>
         <span>Drop or click</span>
       </div>
-      <input type="file" accept="image/">
+      <input type="file" accept="image/*">
       <button type="button" class="remove">x</button>
     `;
 
@@ -260,11 +260,17 @@ function enableDrag(box) {
         window.__draggingBox = box;
 
         const ghost = document.createElement("div");
-        ghost.style.width = "1px";
-        ghost.style.height = "1px";
+        ghost.style.cssText =
+            "position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;";
         document.body.appendChild(ghost);
         e.dataTransfer.setDragImage(ghost, 0, 0);
-        setTimeout(() => ghost.remove(), 0);
+        box.addEventListener(
+            "dragend",
+            () => {
+                ghost.remove();
+            },
+            { once: true },
+        );
     });
 
     box.addEventListener("dragover", (e) => {
@@ -281,12 +287,18 @@ function enableDrag(box) {
         box.classList.remove("dragover");
 
         const from = window.__draggingBox;
-        const to = box;
 
-        if (!from || from === to) return;
+        if (!from) {
+            const file = e.dataTransfer.files?.[0];
+            if (file && file.type.startsWith("image/")) {
+                setBoxFile(box, file);
+            }
+            return;
+        }
 
-        swapStates(from, to);
+        if (from === box) return;
 
+        swapStates(from, box);
         window.__draggingBox = null;
     });
 }
@@ -295,9 +307,7 @@ function enableDrag(box) {
 
 function setBoxFile(box, file) {
     clearBox(box);
-
     const blobUrl = URL.createObjectURL(file);
-
     box._state = {
         type: "new",
         file,
@@ -305,7 +315,6 @@ function setBoxFile(box, file) {
         url: null,
         blobUrl,
     };
-
     renderImage(box, blobUrl);
 }
 
@@ -317,7 +326,6 @@ function setBoxExisting(box, url) {
         url,
         blobUrl: null,
     };
-
     renderImage(box, url);
 }
 
@@ -325,7 +333,6 @@ function clearBox(box) {
     if (box._state?.blobUrl) {
         URL.revokeObjectURL(box._state.blobUrl);
     }
-
     box._state = {
         type: "empty",
         file: null,
@@ -333,21 +340,18 @@ function clearBox(box) {
         url: null,
         blobUrl: null,
     };
-
     const img = box.querySelector("img");
     if (img) img.remove();
-
     box.querySelector(".placeholder").style.display = "flex";
 }
 
 function renderImage(box, src) {
     let img = box.querySelector("img");
-
     if (!img) {
         img = document.createElement("img");
+        img.draggable = false;
         box.appendChild(img);
     }
-
     img.src = src;
     box.querySelector(".placeholder").style.display = "none";
 }
@@ -355,10 +359,8 @@ function renderImage(box, src) {
 function swapStates(a, b) {
     const tempA = a._state;
     const tempB = b._state;
-
     a._state = tempB;
     b._state = tempA;
-
     rerender(a);
     rerender(b);
 }
@@ -366,13 +368,10 @@ function swapStates(a, b) {
 function rerender(box) {
     const img = box.querySelector("img");
     if (img) img.remove();
-
     if (box._state.type === "empty") {
         box.querySelector(".placeholder").style.display = "flex";
         return;
     }
-
     const src = box._state.type === "new" ? box._state.blobUrl : box._state.url;
-
     renderImage(box, src);
 }

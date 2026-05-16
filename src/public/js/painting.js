@@ -118,7 +118,7 @@ function formatDimensions(dimensions) {
     if (dimensions.length != null) parts.push(dimensions.length + '" L');
     if (dimensions.width != null) parts.push(dimensions.width + '" W');
     if (dimensions.depth != null) parts.push(dimensions.depth + '" D');
-    return parts.join(' x ');
+    return parts.join(" x ");
 }
 
 async function setupPainting() {
@@ -153,7 +153,9 @@ async function setupPainting() {
     // add the painting details
 
     const dimensionsElem = document.getElementById("dimensions");
-    const dimStr = painting.dimensions ? formatDimensions(painting.dimensions) : "";
+    const dimStr = painting.dimensions
+        ? formatDimensions(painting.dimensions)
+        : "";
     if (dimStr) {
         let dimensions = dimStr;
         if (painting.mult) {
@@ -278,7 +280,7 @@ async function heartClicked() {
                 credentials: "include",
             });
 
-            showToast("Like added", 2000, "toast-success");
+            showToast("Like added", "toast-success");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
             fetch(`/user/guest/likes/${curPainting.name}`, {
@@ -289,7 +291,7 @@ async function heartClicked() {
                 credentials: "include",
             });
 
-            showToast("Like removed", 2000, "toast-error");
+            showToast("Like removed", "toast-error");
         }
     } else {
         if (heart.style.fill === "rgb(75, 75, 75)") {
@@ -307,7 +309,7 @@ async function heartClicked() {
                 },
             });
 
-            showToast("Like added", 2000, "toast-success");
+            showToast("Like added", "toast-success");
         } else {
             heart.style.fill = "rgb(75, 75, 75)";
 
@@ -318,7 +320,7 @@ async function heartClicked() {
                 },
             });
 
-            showToast("Like removed", 2000, "toast-error");
+            showToast("Like removed", "toast-error");
         }
     }
 }

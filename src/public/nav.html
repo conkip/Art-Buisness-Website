@@ -38,12 +38,17 @@
     <ul class="nav-list nav-logged-in" style="display: none">
         <li><a class="big-p" onclick="logout()">Log out</a></li>
         <li>
-            <a class="big-p" onclick=`showConfirmModal({
-                message: "Are you sure you want to delete your account?",
-                confirmText: "Delete account",
-                onConfirm: deleteAccount,
-            });`
-                >Delete Account</a
+            <a
+                class="big-p"
+                onclick="
+                    showConfirmModal({
+                        message:
+                            'Are you sure you want to delete your account?',
+                        confirmText: 'Delete account',
+                        onConfirm: deleteAccount,
+                    })
+                "
+                >Delete account</a
             >
         </li>
     </ul>
@@ -66,10 +71,17 @@
         <a class="big-p" onclick="logout()">Log out</a>
     </li>
     <li class="nav-logged-in">
-        <a class="big-p" onclick=`showConfirmModal({
-            message: "Are you sure you want to delete your account?",
-            confirmText: "Delete account",
-            onConfirm: deleteAccount,
-        })`>Delete Account</a>
+        <a
+            class="big-p"
+            onclick="
+                showConfirmModal({
+                    message: 'Are you sure you want to delete your account?',
+                    confirmText: 'Delete account',
+                    onConfirm: deleteAccount,
+                })
+            "
+        >
+            Delete account</a
+        >
     </li>
 </ul>
