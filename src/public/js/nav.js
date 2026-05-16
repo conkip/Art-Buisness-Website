@@ -53,45 +53,6 @@ async function deleteAccount() {
     window.location.reload(true);
 }
 
-// Show delete confirmation modal
-function showDeleteAccountModal() {
-    const modalHTML = `
-    <div id="modal-container">
-        <div id="modal-content">
-            <p class="big-p">Are you sure you want to delete your account?</p>
-            <button id="modal-confirm-delete">Yes, delete</button>
-            <button id="modal-cancel-delete">Cancel</button>
-        </div>
-    </div>
-    `;
-
-    document.body.insertAdjacentHTML("beforeend", modalHTML);
-
-    // Prevent clicks inside modal from bubbling
-    document.getElementById("modal-content").addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    // Add onclicks to buttons
-    document.getElementById("modal-cancel-delete").onclick = closeModal;
-    document.getElementById("modal-confirm-delete").onclick = () => {
-        deleteAccount();
-        closeModal();
-    };
-
-    // Click outside closes
-    document
-        .getElementById("modal-container")
-        .addEventListener("click", (e) => {
-            if (!e.target.closest("#modal-content")) closeModal();
-        });
-}
-
-function closeModal() {
-    console.log("modal closed!");
-    document.getElementById("modal-container")?.remove();
-}
-
 // Check admin status
 fetch("/auth/admin-status", {
     headers: {

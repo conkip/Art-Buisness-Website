@@ -1,15 +1,16 @@
 import Painting from "../model/painting.js";
 import s3 from "../utils/s3-utils.js";
+import crypto from "crypto";
 import {
-    normalizePaintingName,
     normalizeString,
-    normalizeImageBaseName,
     buildImageFileName,
     processImageBuffer,
-} from "../utils/reformat-paintings.js";
-
+    extractKey,
+    normalizeSlots
+} from "../utils/painting-utils.js";
+ 
 const toBoolean = (val) => val === "true" || val === true;
-
+ 
 function getUrlList(baseFilename) {
     if (!baseFilename) return [];
     const baseUrl = `${s3.S3_BASE_URL}${baseFilename}`;
@@ -25,7 +26,7 @@ function getUrlList(baseFilename) {
     }
     return urls;
 }
-
+ 
 function imageResponse(painting) {
     const urls = getUrlList(painting.image);
     return {
@@ -34,39 +35,57 @@ function imageResponse(painting) {
         images: urls,
     };
 }
-
+ 
+/** Process and upload a single new file to S3. Throws with an appropriate status on failure. */
+async function processAndUpload(file, filename) {
+    let processedBuffer;
+    try {
+        processedBuffer = await processImageBuffer(file.buffer);
+    } catch {
+        throw Object.assign(
+            new Error(`Failed to process image "${file.originalname}": unsupported format or corrupted file`),
+            { status: 400 },
+        );
+    }
+    try {
+        await s3.uploadToS3(processedBuffer, filename, "image/webp");
+    } catch {
+        throw Object.assign(
+            new Error(`Failed to upload image "${file.originalname}" to S3`),
+            { status: 502 },
+        );
+    }
+}
+ 
 async function getAllPaintings() {
     const paintings = await Painting.find({})
         .collation({ locale: "en", strength: 2 })
         .sort({ name: 1 })
         .lean();
-
+ 
     return paintings.map(imageResponse);
 }
-
+ 
 async function getPaintingByName(name) {
     const painting = await Painting.findOne({ name }).lean();
     if (!painting) return null;
     return imageResponse(painting);
 }
-
+ 
 async function deletePainting(id) {
     const painting = await Painting.findById(id);
     if (!painting) return;
-
-    try {
-        const baseName = normalizeImageBaseName(painting.name);
-        for (let i = 0; i < 5; i++) {
-            const filename = buildImageFileName(baseName, i);
-            await s3.deleteFromS3(filename);
+ 
+    for (let i = 0; i < 5; i++) {
+        try {
+            await s3.deleteFromS3(buildImageFileName(painting.name, i));
+        } catch (_) {
+            // Slot may not exist — that's fine
         }
-    } catch (err) {
-        console.warn("Unable to delete from S3", err);
     }
-
     await Painting.findByIdAndDelete(id);
 }
-
+ 
 async function createPainting({
     name,
     length,
@@ -83,53 +102,41 @@ async function createPainting({
     sold,
     files,
 }) {
-    const normalizedName = normalizePaintingName(name); // e.g., "black cAt" -> "Black Cat"
+    const normalizedName = normalizeString(name);
     const existing = await Painting.findOne({ name: normalizedName });
     if (existing) {
-        throw Object.assign(new Error(`A painting named "${normalizedName}" already exists`), { status: 409 });
+        throw Object.assign(
+            new Error(`A painting named "${normalizedName}" already exists`),
+            { status: 409 },
+        );
     }
-
-
-    const baseName = normalizeImageBaseName(normalizedName); // e.g., "Black Cat" -> "BlackCat.webp"
-    const baseFilename = buildImageFileName(baseName, 0);
-
+ 
     for (let i = 0; i < (files?.length || 0); i++) {
-        const filename = buildImageFileName(baseName, i);
-        let processedBuffer;
-        try {
-            processedBuffer = await processImageBuffer(files[i].buffer);
-        } catch (err) {
-            throw Object.assign(new Error(`Failed to process image "${files[i].originalname}": unsupported format or corrupted file`), { status: 400 });
-        }
-        try {
-            await s3.uploadToS3(processedBuffer, filename, "image/webp");
-        } catch (err) {
-            throw Object.assign(new Error(`Failed to upload image "${files[i].originalname}" to S3`), { status: 502 });
-        }
+        await processAndUpload(files[i], buildImageFileName(normalizedName, i));
     }
-
+ 
     const painting = await Painting.create({
         name: normalizedName,
-        image: baseFilename,
+        image: buildImageFileName(normalizedName, 0),
         dimensions: {
             length: length ? Number(length) : undefined,
-            width: width ? Number(width) : undefined,
-            depth: depth ? Number(depth) : undefined,
+            width:  width  ? Number(width)  : undefined,
+            depth:  depth  ? Number(depth)  : undefined,
         },
-        date: date ? Number(date) : undefined,
-        paint: normalizeString(paint),
+        date:   date   ? Number(date)   : undefined,
+        paint:  normalizeString(paint),
         canvas: normalizeString(canvas),
         finish: normalizeString(finish),
-        desc: desc ? desc.trim() : undefined,
-        price: price ? Number(price) : undefined,
-        mult: toBoolean(mult),
+        desc:   desc   ? desc.trim()    : undefined,
+        price:  price  ? Number(price)  : undefined,
+        mult:   toBoolean(mult),
         framed: toBoolean(framed),
-        sold: toBoolean(sold),
+        sold:   toBoolean(sold),
     });
-
+ 
     return imageResponse(painting.toObject());
 }
-
+ 
 async function updatePainting(
     name,
     {
@@ -147,98 +154,124 @@ async function updatePainting(
         framed,
         sold,
         files,
-        imageSlots = []
+        slots
     },
 ) {
+    const parsedSlots = JSON.parse(slots || "[]");
+    const SLOT_COUNT = Math.max(5, parsedSlots.length);
+
     const painting = await Painting.findOne({ name });
     if (!painting) return null;
 
-    const normalizedNewName = newName
-        ? normalizePaintingName(newName)
-        : painting.name;
-    const normalizedPaint =
-        paint !== undefined ? normalizeString(paint) : painting.paint;
-    const normalizedCanvas =
-        canvas !== undefined ? normalizeString(canvas) : painting.canvas;
-    const normalizedFinish =
-        finish !== undefined ? normalizeString(finish) : painting.finish;
-    const normalizedDesc = desc !== undefined ? desc.trim() : painting.desc;
-    const normalizedLength = length
-        ? Number(length)
-        : painting.dimensions?.length;
-    const normalizedWidth = width ? Number(width) : painting.dimensions?.width;
-    const normalizedDepth = depth ? Number(depth) : painting.dimensions?.depth;
-    const normalizedPrice = price ? Number(price) : painting.price;
-    const normalizedDate = date ? Number(date) : painting.date;
+    const normalizedNewName = newName ? normalizeString(newName) : painting.name;
 
-    const newBaseName = normalizeImageBaseName(normalizedNewName);
-    const oldBaseName = normalizeImageBaseName(painting.name);
-    const uploadedSlots = new Set();
+    const originalKeys = new Set();
+    const survivingKeys = new Set();
+    const renameOperations = [];
 
-    // upload new painting images
-    if (files && files.length > 0) {
-        for (let i = 0; i < files.length; i++) {
-            const slot = imageSlots[i] ?? i;
-            uploadedSlots.add(slot);
+    // old keys
+    for (let i = 0; i < SLOT_COUNT; i++) {
+        originalKeys.add(buildImageFileName(painting.name, i));
+    }
 
-            const oldFilename = buildImageFileName(oldBaseName, slot);
-            const newFilename = buildImageFileName(newBaseName, slot);
+    let fileIndex = 0;
 
-            try {
-                await s3.deleteFromS3(oldFilename);
-            } catch (err) {
-                console.warn(`Unable to delete slot ${slot} from S3`, err);
+    for (let slot = 0; slot < SLOT_COUNT; slot++) {
+        const curSlot = parsedSlots[slot];
+        const targetKey = buildImageFileName(normalizedNewName, slot);
+
+        if (!curSlot || curSlot.type === "empty") {
+            continue;
+        }
+
+        if (curSlot.type === "existing") {
+            const srcKey = curSlot.key;
+
+            survivingKeys.add(targetKey);
+
+            if (srcKey && srcKey !== targetKey) {
+                renameOperations.push({
+                    srcKey,
+                    targetKey
+                });
             }
+        }
 
-            let processedBuffer;
-            try {
-                processedBuffer = await processImageBuffer(files[i].buffer);
-            } catch (err) {
-                throw Object.assign(new Error(`Failed to process image "${files[i].originalname}": unsupported format or corrupted file`), { status: 400 });
-            }
-            try {
-                await s3.uploadToS3(processedBuffer, newFilename, "image/webp");
-            } catch (err) {
-                throw Object.assign(new Error(`Failed to upload image "${files[i].originalname}" to S3`), { status: 502 });
-            }
+        if (curSlot.type === "new") {
+            const file = files?.[fileIndex++];
+
+            if (!file) continue;
+
+            await processAndUpload(file, targetKey);
+            survivingKeys.add(targetKey);
         }
     }
 
-    // rename old painting images
-    if (normalizedNewName !== painting.name) {
-        for (let i = 0; i < 5; i++) {
-            if (uploadedSlots.has(i)) continue;
-            const oldFilename = buildImageFileName(oldBaseName, i);
-            const newFilename = buildImageFileName(newBaseName, i);
+    // =========================
+    // SAFE RENAME (2 PHASE)
+    // =========================
+
+    const tempOps = [];
+
+    for (const op of renameOperations) {
+        const tempKey = `temp-${crypto.randomUUID()}-${op.srcKey}`;
+
+        await s3.renameInS3(op.srcKey, tempKey, "image/webp");
+
+        tempOps.push({
+            tempKey,
+            finalKey: op.targetKey,
+        });
+    }
+
+    for (const op of tempOps) {
+        await s3.renameInS3(op.tempKey, op.finalKey, "image/webp");
+    }
+
+    // =========================
+    // DELETE OLD UNUSED KEYS
+    // =========================
+
+    for (const key of originalKeys) {
+        if (!survivingKeys.has(key)) {
             try {
-                await s3.renameInS3(oldFilename, newFilename, "image/webp");
-            } catch (err) {
-                console.warn(`Unable to rename S3 file from ${oldFilename} to ${newFilename}`, err);
-            }
+                await s3.deleteFromS3(key);
+            } catch (_) {}
         }
     }
+
+    // =========================
+    // UPDATE MONGO
+    // =========================
 
     painting.name = normalizedNewName;
-    painting.image = buildImageFileName(newBaseName, 0);
+    painting.image = buildImageFileName(normalizedNewName, 0);
+
     painting.dimensions = {
-        length: normalizedLength,
-        width: normalizedWidth,
-        depth: normalizedDepth,
+        length: length ? Number(length) : painting.dimensions?.length,
+        width: width ? Number(width) : painting.dimensions?.width,
+        depth: depth ? Number(depth) : painting.dimensions?.depth,
     };
-    painting.date = normalizedDate;
-    painting.paint = normalizedPaint;
-    painting.canvas = normalizedCanvas;
-    painting.finish = normalizedFinish;
-    painting.desc = normalizedDesc;
-    painting.price = normalizedPrice;
+
+    painting.date = date ? Number(date) : painting.date;
+
+    painting.paint = paint !== undefined ? normalizeString(paint) : painting.paint;
+    painting.canvas = canvas !== undefined ? normalizeString(canvas) : painting.canvas;
+    painting.finish = finish !== undefined ? normalizeString(finish) : painting.finish;
+
+    painting.desc = desc !== undefined ? desc.trim() : painting.desc;
+
+    painting.price = price ? Number(price) : painting.price;
+
     painting.mult = toBoolean(mult);
     painting.framed = toBoolean(framed);
     painting.sold = toBoolean(sold);
 
     await painting.save();
+
     return imageResponse(painting.toObject());
 }
-
+ 
 export default {
     getAllPaintings,
     getPaintingByName,

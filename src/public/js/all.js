@@ -36,3 +36,55 @@ function showToast(message, duration = 2000, className = "") {
         toast.remove();
     }, duration);
 }
+
+function showConfirmModal({
+    message = "Are you sure?",
+    confirmText = "Confirm",
+    cancelText = "Cancel",
+    onConfirm,
+    onCancel,
+}) {
+    // prevent duplicates
+    closeModal();
+
+    const modalHTML = `
+    <div id="modal-container">
+        <div id="modal-content">
+            <p class="big-p">${message}</p>
+            <button id="modal-confirm">${confirmText}</button>
+            <button id="modal-cancel">${cancelText}</button>
+        </div>
+    </div>
+    `;
+
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+    const container = document.getElementById("modal-container");
+    const content = document.getElementById("modal-content");
+    const confirmBtn = document.getElementById("modal-confirm");
+    const cancelBtn = document.getElementById("modal-cancel");
+
+    // stop inside clicks from closing
+    content.addEventListener("click", (e) => e.stopPropagation());
+
+    // actions
+    confirmBtn.onclick = () => {
+        closeModal();
+        onConfirm?.();
+    };
+
+    cancelBtn.onclick = () => {
+        closeModal();
+        onCancel?.();
+    };
+
+    // click outside closes
+    container.addEventListener("click", () => {
+        closeModal();
+        onCancel?.();
+    });
+}
+
+function closeModal() {
+    document.getElementById("modal-container")?.remove();
+}

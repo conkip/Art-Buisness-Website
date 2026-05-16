@@ -40,10 +40,9 @@ async function setupPage() {
         `/painting/${encodeURIComponent(paintingName)}`,
     );
     const painting = await response.json();
-    console.log(painting);
     curPainting = painting;
 
-    // Populate fields
+    // Populate text fields
     document.getElementById("name").value = painting.name;
     document.getElementById("length").value = painting.dimensions?.length || "";
     document.getElementById("width").value = painting.dimensions?.width || "";
@@ -57,20 +56,28 @@ async function setupPage() {
     document.getElementById("sold").checked = painting.sold;
     document.getElementById("desc").value = painting.desc || "";
 
-    // Populate images
+    // Populate image boxes — store the S3 URL so the server can rename
+    // (not re-compress) the file if the painting name changes or order shifts.
     const uploadBoxes = document.querySelectorAll(".upload-box");
-    const imageUrls = painting.images || [];
-    imageUrls.forEach((imgUrl, index) => {
-        if (index < uploadBoxes.length && imgUrl) {
-            const box = uploadBoxes[index];
-            const img = new Image();
-            img.onload = () => {
-                box.appendChild(img);
-                box.querySelector(".placeholder").style.display = "none";
-            };
-            // if image doesn't exist, do nothing — placeholder stays
-            img.src = imgUrl;
-        }
+    (painting.images || []).forEach((imgUrl, index) => {
+        if (index >= uploadBoxes.length || !imgUrl) return;
+        const box = uploadBoxes[index];
+        const key = imgUrl.split(".amazonaws.com/")[1].split("?")[0];
+
+        box._state = {
+            type: "existing",
+            file: null,
+            key,
+            url: imgUrl,
+            blobUrl: null,
+        };
+
+        const img = new Image();
+        img.onload = () => {
+            box.appendChild(img);
+            box.querySelector(".placeholder").style.display = "none";
+        };
+        img.src = imgUrl;
     });
 }
 
@@ -79,7 +86,7 @@ function handleCancel() {
 }
 
 function titleCase(str) {
-    return str.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+    return str.toLowerCase().replace(/(^|\s)[a-z]/g, (l) => l.toUpperCase());
 }
 
 document
@@ -87,7 +94,6 @@ document
     .addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // Parse inputs
         const name = titleCase(document.getElementById("name").value.trim());
         const length = document.getElementById("length").value.trim();
         const width = document.getElementById("width").value.trim();
@@ -103,18 +109,34 @@ document
         const mult = document.getElementById("mult").checked;
         const framed = document.getElementById("framed").checked;
         const sold = document.getElementById("sold").checked;
-        const desc = document.getElementById("desc").value.trim(); // no parsing for desc
+        const desc = document.getElementById("desc").value.trim();
 
-        // Collect selected files from the upload boxes
-        const fileEntries = [];
-        document.querySelectorAll(".upload-box").forEach((box, index) => {
-            if (box._selectedFile) {
-                fileEntries.push({ file: box._selectedFile, index });
+        const boxes = [...document.querySelectorAll(".upload-box")];
+
+        const imageSlots = [];
+
+        for (const box of boxes) {
+            const s = box._state;
+
+            if (s.type === "new") {
+                imageSlots.push({
+                    type: "new",
+                });
+            } else if (s.type === "existing") {
+                imageSlots.push({
+                    type: "existing",
+                    key: s.key,
+                });
+            } else {
+                imageSlots.push({
+                    type: "empty",
+                });
             }
-        });
+        }
 
-        if (fileEntries.length === 0 && addPainting) {
-            alert("Please select at least one image.");
+        // required first slot image
+        if (addPainting && imageSlots[0]?.type === "empty") {
+            showToast("First image slot is required", 3000, "toast-error");
             return;
         }
 
@@ -131,16 +153,10 @@ document
         formData.append("framed", framed);
         formData.append("sold", sold);
         if (desc) formData.append("desc", desc);
-
-        fileEntries.forEach(({ file, index }) => {
-            formData.append("images", file);
-            formData.append("imageSlots", index);
-        });
+        formData.append("slots", JSON.stringify(imageSlots));
 
         const token = localStorage.getItem("token");
-        const headers = {
-            Authorization: `Bearer ${token}`,
-        };
+        const headers = { Authorization: `Bearer ${token}` };
 
         let url, method, successMessage;
         if (addPainting) {
@@ -170,11 +186,15 @@ document
             });
 
             if (response.ok) {
-                sessionStorage.setItem("toastMessage", JSON.stringify(successMessage));
+                sessionStorage.setItem(
+                    "toastMessage",
+                    JSON.stringify(successMessage),
+                );
                 window.location.href = "/admin.html";
             } else {
                 const errorText = await response.text();
-                showToast(errorText || "Server Error", 3000, "toast-error");
+                //showToast(errorText || "WTF?!?!", 3000, "toast-error"); // for testing purposes:
+                showToast("Internal server error", 3000, "toast-error");
             }
         } catch (error) {
             console.error("Error:", error);
@@ -182,69 +202,177 @@ document
         }
     });
 
-/* upload image logic- done with AI */
-document.querySelectorAll(".upload-box").forEach((box, index) => {
+/* ── Upload box logic ── */
+
+let draggingBox = null;
+
+document.querySelectorAll(".upload-box").forEach((box) => {
     box.innerHTML = `
       <div class="placeholder">
-        <svg width="28" height="28" fill="none" stroke="#aaa" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="30" height="30" fill="none" stroke="#aaa" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
           <polyline points="17 8 12 3 7 8"/>
           <line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
         <span>Drop or click</span>
       </div>
-      <input type="file" accept="image/*" name="images">
-      <button type="button" class="remove" title="Remove">×</button>
+      <input type="file" accept="image/">
+      <button type="button" class="remove">x</button>
     `;
 
+    box._state = {
+        type: "empty",
+        file: null,
+        key: null,
+        url: null,
+        blobUrl: null,
+    };
+
     const input = box.querySelector("input");
-    const placeholder = box.querySelector(".placeholder");
     const removeBtn = box.querySelector(".remove");
 
-    box.addEventListener("click", (e) => {
-        if (e.target !== removeBtn) input.click();
-    });
-
     input.addEventListener("change", () => {
-        if (input.files[0]) {
-            box._selectedFile = input.files[0];
-            loadImage(input.files[0]);
+        if (input.files?.[0]) {
+            setBoxFile(box, input.files[0]);
             input.value = "";
         }
+    });
+
+    removeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        clearBox(box);
+    });
+
+    box.addEventListener("click", () => input.click());
+
+    enableDrag(box);
+});
+
+function enableDrag(box) {
+    box.draggable = true;
+
+    box.addEventListener("dragstart", (e) => {
+        if (box._state.type === "empty") {
+            e.preventDefault();
+            return;
+        }
+
+        window.__draggingBox = box;
+
+        const ghost = document.createElement("div");
+        ghost.style.width = "1px";
+        ghost.style.height = "1px";
+        document.body.appendChild(ghost);
+        e.dataTransfer.setDragImage(ghost, 0, 0);
+        setTimeout(() => ghost.remove(), 0);
     });
 
     box.addEventListener("dragover", (e) => {
         e.preventDefault();
         box.classList.add("dragover");
     });
-    box.addEventListener("dragleave", () => box.classList.remove("dragover"));
+
+    box.addEventListener("dragleave", () => {
+        box.classList.remove("dragover");
+    });
+
     box.addEventListener("drop", (e) => {
         e.preventDefault();
         box.classList.remove("dragover");
-        const file = e.dataTransfer.files[0];
-        if (file && file.type.startsWith("image/")) loadImage(file);
-    });
 
-    removeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const img = box.querySelector("img");
-        if (img) {
-            URL.revokeObjectURL(img.src);
-            img.remove();
-        }
-        box._selectedFile = null;
-        placeholder.style.display = "flex";
-    });
+        const from = window.__draggingBox;
+        const to = box;
 
-    function loadImage(file) {
-        let img = box.querySelector("img");
-        if (!img) {
-            img = document.createElement("img");
-            box.appendChild(img);
-        } else {
-            URL.revokeObjectURL(img.src);
-        }
-        img.src = URL.createObjectURL(file);
-        placeholder.style.display = "none";
+        if (!from || from === to) return;
+
+        swapStates(from, to);
+
+        window.__draggingBox = null;
+    });
+}
+
+/* ── Box state helpers ── */
+
+function setBoxFile(box, file) {
+    clearBox(box);
+
+    const blobUrl = URL.createObjectURL(file);
+
+    box._state = {
+        type: "new",
+        file,
+        key: null,
+        url: null,
+        blobUrl,
+    };
+
+    renderImage(box, blobUrl);
+}
+
+function setBoxExisting(box, url) {
+    box._state = {
+        type: "existing",
+        file: null,
+        key: extractKey(url),
+        url,
+        blobUrl: null,
+    };
+
+    renderImage(box, url);
+}
+
+function clearBox(box) {
+    if (box._state?.blobUrl) {
+        URL.revokeObjectURL(box._state.blobUrl);
     }
-});
+
+    box._state = {
+        type: "empty",
+        file: null,
+        key: null,
+        url: null,
+        blobUrl: null,
+    };
+
+    const img = box.querySelector("img");
+    if (img) img.remove();
+
+    box.querySelector(".placeholder").style.display = "flex";
+}
+
+function renderImage(box, src) {
+    let img = box.querySelector("img");
+
+    if (!img) {
+        img = document.createElement("img");
+        box.appendChild(img);
+    }
+
+    img.src = src;
+    box.querySelector(".placeholder").style.display = "none";
+}
+
+function swapStates(a, b) {
+    const tempA = a._state;
+    const tempB = b._state;
+
+    a._state = tempB;
+    b._state = tempA;
+
+    rerender(a);
+    rerender(b);
+}
+
+function rerender(box) {
+    const img = box.querySelector("img");
+    if (img) img.remove();
+
+    if (box._state.type === "empty") {
+        box.querySelector(".placeholder").style.display = "flex";
+        return;
+    }
+
+    const src = box._state.type === "new" ? box._state.blobUrl : box._state.url;
+
+    renderImage(box, src);
+}

@@ -88,8 +88,12 @@ function renderPaintingList(paintings) {
         deleteBtn.setAttribute("aria-label", "Delete painting");
         deleteBtn.appendChild(cloneIcon(deleteIconTemplate));
         deleteBtn.addEventListener("click", () => {
-            if (!confirm(`Delete \"${painting.name}\"?`)) return;
-            deletePainting(painting._id, row);
+            showConfirmModal({
+                message: `Delete "${painting.name}"?`,
+                confirmText: "Yes, delete",
+                cancelText: "Cancel",
+                onConfirm: () => deletePainting(painting._id, row),
+            });
         });
 
         buttonContainer.appendChild(editBtn);

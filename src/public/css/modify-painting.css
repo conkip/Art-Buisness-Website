@@ -68,9 +68,8 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: .5rem;
     color: #aaa;
-    font-size: 13px;
     pointer-events: none;
 }
 
@@ -82,21 +81,22 @@ label {
 }
 
 .upload-box .remove {
+    all:unset;
     display: none;
     position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 22px;
-    height: 22px;
+    align-items:center;
+    justify-content: center;
+    top: .5rem;
+    right: .5rem;
+    width: 1.25rem;
+    height: 1.25rem;
     padding: 0;
     background: rgba(0, 0, 0, 0.55);
     color: #fff;
     border: none;
     border-radius: 50%;
-    font-size: 14px;
-    line-height: 1;
+    font-size: 1rem !important;
     cursor: pointer;
-    justify-content: center;
 }
 
 .upload-box:hover .remove {
@@ -132,7 +132,7 @@ main{
     }
 
     .upload-box {
-        --size: calc(80vw);
+        --size: calc(75vw);
     }
 
     #button-container {
