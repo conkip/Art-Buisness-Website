@@ -126,7 +126,7 @@ async function deletePainting(id, rowElem) {
             "pendingToast",
             JSON.stringify({
                 message: `"Painting ${name}" was deleted`,
-                className: "toast-sucess",
+                className: "toast-success",
             }),
         );
         window.location.reload();
