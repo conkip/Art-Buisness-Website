@@ -3,10 +3,8 @@ import s3 from "../utils/s3-utils.js";
 import crypto from "crypto";
 import {
     normalizeString,
-    buildImageFileName,
+    buildImageFilename,
     processImageBuffer,
-    extractKey,
-    normalizeSlots,
 } from "../utils/painting-utils.js";
 
 const toBoolean = (val) => val === "true" || val === true;
@@ -80,7 +78,7 @@ async function deletePainting(id) {
 
     for (let i = 0; i < 5; i++) {
         try {
-            await s3.deleteFromS3(buildImageFileName(painting.name, i));
+            await s3.deleteFromS3(buildImageFilename(painting.name, i));
         } catch (_) {
             // Slot may not exist — that's fine
         }
@@ -114,12 +112,12 @@ async function createPainting({
     }
 
     for (let i = 0; i < (files?.length || 0); i++) {
-        await processAndUpload(files[i], buildImageFileName(normalizedName, i));
+        await processAndUpload(files[i], buildImageFilename(normalizedName, i));
     }
 
     const painting = await Painting.create({
         name: normalizedName,
-        image: buildImageFileName(normalizedName, 0),
+        image: buildImageFilename(normalizedName, 0),
         dimensions: {
             length: length ? Number(length) : undefined,
             width: width ? Number(width) : undefined,
@@ -160,6 +158,13 @@ async function updatePainting(
     },
 ) {
     const parsedSlots = JSON.parse(slots || "[]");
+    if (!parsedSlots[0] || parsedSlots[0].type === "empty") {
+        throw Object.assign(
+            new Error("First image slot is required"),
+            { status: 400 },
+        );
+    }
+
     const SLOT_COUNT = Math.max(5, parsedSlots.length);
 
     const painting = await Painting.findOne({ name });
@@ -169,77 +174,89 @@ async function updatePainting(
         ? normalizeString(newName)
         : painting.name;
 
-    const originalKeys = new Set();
-    const survivingKeys = new Set();
-    const renameOperations = [];
+    const originalFilenames = new Set();
+    const survivingFilenames = new Set();
+    const renameOperations = []; // {oldFilename, newFilename}
 
-    // old keys
+    // old filenames
     for (let i = 0; i < SLOT_COUNT; i++) {
-        originalKeys.add(buildImageFileName(painting.name, i));
+        originalFilenames.add(buildImageFilename(painting.name, i));
     }
 
+    // collect rename operations and new-file slots separately
+    // so we can do ALL renames before ANY uploads. This prevents
+    // a new upload from overwriting an existing file that still
+    // needs to be renamed (e.g. drag-swap existing + new image).
+    const newFileSlots = []; // { file, newFilename }
     let fileIndex = 0;
 
     for (let slot = 0; slot < SLOT_COUNT; slot++) {
         const curSlot = parsedSlots[slot];
-        const targetKey = buildImageFileName(normalizedNewName, slot);
+        const newFilename = buildImageFilename(normalizedNewName, slot);
 
         if (!curSlot || curSlot.type === "empty") {
             continue;
         }
 
         if (curSlot.type === "existing") {
-            const srcKey = curSlot.key;
+            const oldFilename = curSlot.filename;
 
-            survivingKeys.add(targetKey);
+            survivingFilenames.add(newFilename);
 
-            if (srcKey && srcKey !== targetKey) {
+            if (oldFilename && oldFilename !== newFilename) {
                 renameOperations.push({
-                    srcKey,
-                    targetKey,
+                    oldFilename,
+                    newFilename,
                 });
             }
         }
 
         if (curSlot.type === "new") {
             const file = files?.[fileIndex++];
-
             if (!file) continue;
-
-            await processAndUpload(file, targetKey);
-            survivingKeys.add(targetKey);
+            newFileSlots.push({ file, newFilename });
+            survivingFilenames.add(newFilename);
         }
     }
 
     // =========================
-    // SAFE RENAME (2 PHASE)
+    // SAFE RENAME (PHASE 2)
+    // Run ALL renames before ANY uploads so a new file can't
+    // overwrite an existing filename that still needs to be moved.
     // =========================
 
     const tempOps = [];
 
     for (const op of renameOperations) {
-        const tempKey = `temp-${crypto.randomUUID()}-${op.srcKey}`;
-
-        await s3.renameInS3(op.srcKey, tempKey, "image/webp");
-
+        const tempFilename = `temp-${crypto.randomUUID()}-${op.oldFilename}`;
+        await s3.renameInS3(op.oldFilename, tempFilename, "image/webp");
         tempOps.push({
-            tempKey,
-            finalKey: op.targetKey,
+            tempFilename,
+            newFilename: op.newFilename,
         });
     }
 
     for (const op of tempOps) {
-        await s3.renameInS3(op.tempKey, op.finalKey, "image/webp");
+        await s3.renameInS3(op.tempFilename, op.newFilename, "image/webp");
     }
 
     // =========================
-    // DELETE OLD UNUSED KEYS
+    // UPLOAD NEW FILES
+    // Done after renames so existing filenames are safely out of the way.
+    // =========================
+ 
+    for (const { file, newFilename } of newFileSlots) {
+        await processAndUpload(file, newFilename);
+    }
+
+    // =========================
+    // DELETE OLD UNUSED FILENAMES
     // =========================
 
-    for (const key of originalKeys) {
-        if (!survivingKeys.has(key)) {
+    for (const filename of originalFilenames) {
+        if (!survivingFilenames.has(filename)) {
             try {
-                await s3.deleteFromS3(key);
+                await s3.deleteFromS3(filename);
             } catch (_) {}
         }
     }
@@ -249,7 +266,7 @@ async function updatePainting(
     // =========================
 
     painting.name = normalizedNewName;
-    painting.image = buildImageFileName(normalizedNewName, 0);
+    painting.image = buildImageFilename(normalizedNewName, 0);
 
     painting.dimensions = {
         length: length ? Number(length) : painting.dimensions?.length,

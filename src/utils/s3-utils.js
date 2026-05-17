@@ -19,59 +19,70 @@ const S3 = new S3Client({
     },
 });
 
-const uploadToS3 = async (fileBuffer, fileName, mimeType) => {
+const uploadToS3 = async (fileBuffer, filename, mimeType) => {
     const upload = new Upload({
         client: S3,
         params: {
             Bucket: bucketName,
-            Key: fileName,
+            Key: filename,
             Body: fileBuffer,
             ContentType: mimeType,
         },
     });
 
     await upload.done();
-    return `${S3_BASE_URL}${fileName}`;
+    return `${S3_BASE_URL}${filename}`;
 };
 
-const deleteFromS3 = async (imageUrlOrKey) => {
-    const key = imageUrlOrKey.includes(".amazonaws.com/")
-        ? imageUrlOrKey.split(".amazonaws.com/")[1]
-        : imageUrlOrKey;
+const deleteFromS3 = async (imageUrlOrFilename) => {
+    const filename = extractFilename(imageUrlOrFilename);
 
     await S3.send(
         new DeleteObjectCommand({
             Bucket: bucketName,
-            Key: key,
+            Key: filename,
         }),
     );
 };
 
-const copyInS3 = async (sourceKey, destinationKey, mimeType) => {
+const copyInS3 = async (sourceFilename, destinationFilename, mimeType) => {
     await S3.send(
         new CopyObjectCommand({
             Bucket: bucketName,
-            CopySource: `${bucketName}/${sourceKey}`,
-            Key: destinationKey,
+            CopySource: `${bucketName}/${sourceFilename}`,
+            Key: destinationFilename,
             ContentType: mimeType,
             MetadataDirective: "REPLACE",
         }),
     );
-    return `${S3_BASE_URL}${destinationKey}`;
+    return `${S3_BASE_URL}${destinationFilename}`;
 };
 
-const renameInS3 = async (oldKeyOrUrl, newKey, mimeType = "image/webp") => {
-    const sourceKey = oldKeyOrUrl.includes(".amazonaws.com/")
-        ? oldKeyOrUrl.split(".amazonaws.com/")[1]
-        : oldKeyOrUrl;
+const renameInS3 = async (
+    oldFilenameOrUrl,
+    newFilename,
+    mimeType = "image/webp",
+) => {
+    const oldFilename = extractFilename(oldFilenameOrUrl);
 
-    if (sourceKey === newKey) {
-        return `${S3_BASE_URL}${newKey}`;
+    if (oldFilename === newFilename) {
+        return `${S3_BASE_URL}${newFilename}`;
     }
 
-    await copyInS3(sourceKey, newKey, mimeType);
-    await deleteFromS3(sourceKey);
-    return `${S3_BASE_URL}${newKey}`;
+    await copyInS3(oldFilename, newFilename, mimeType);
+    await deleteFromS3(oldFilename);
+    return `${S3_BASE_URL}${newFilename}`;
 };
+
+//also used in modify-paintings.js
+function extractFilename(url) {
+    if (!url) return null;
+
+    if (url.includes(".amazonaws.com/")) {
+        return url.split(".amazonaws.com/")[1].split("?")[0];
+    }
+
+    return url;
+}
 
 export default { uploadToS3, deleteFromS3, renameInS3, S3_BASE_URL };

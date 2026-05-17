@@ -27,7 +27,7 @@ export function normalizeString(value) {
     );
 }
 
-export function buildImageFileName(name, index = 0) {
+export function buildImageFilename(name, index = 0) {
     if (!name || typeof name !== "string") return undefined;
     const baseName = normalizeString(name).replace(/\s+/g, "");
     if (!baseName) return undefined;
@@ -40,39 +40,6 @@ export async function processImageBuffer(buffer) {
         .resize({ width: maxWidth })
         .webp({ quality: 80 })
         .toBuffer();
-}
-
-export function extractKey(url) {
-    if (!url) return null;
-    if (url.includes(".amazonaws.com/")) {
-        return url.split(".amazonaws.com/")[1].split("?")[0];
-    }
-    return url;
-}
-
-export function normalizeSlots(imageTypes, files, imageRefs) {
-    const compactTypes = [];
-    const compactFiles = [];
-    const compactRefs = [];
-
-    let fileIdx = 0;
-    let refIdx = 0;
-
-    for (const type of imageTypes) {
-        if (type === "new") {
-            compactTypes.push("new");
-            compactFiles.push(files[fileIdx++]);
-        } else if (type === "existing") {
-            compactTypes.push("existing");
-            compactRefs.push(imageRefs[refIdx++]);
-        }
-    }
-
-    return {
-        imageTypes: compactTypes,
-        files: compactFiles,
-        imageRefs: compactRefs,
-    };
 }
 
 const currentFile = typeof process !== "undefined" && process.argv?.[1];

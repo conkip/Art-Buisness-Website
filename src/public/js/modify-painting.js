@@ -3,7 +3,6 @@
 
     Handles adding or updating a painting.
 */
-
 let addPainting = false;
 let curPainting = null;
 
@@ -60,7 +59,7 @@ async function setupPage() {
     (painting.images || []).forEach((imgUrl, index) => {
         if (index >= uploadBoxes.length || !imgUrl) return;
         const box = uploadBoxes[index];
-        const key = imgUrl.split(".amazonaws.com/")[1].split("?")[0];
+        const filename = extractFilename(imgUrl);
 
         const img = new Image();
         img.draggable = false;
@@ -70,7 +69,7 @@ async function setupPage() {
             box._state = {
                 type: "existing",
                 file: null,
-                key,
+                filename,
                 url: imgUrl,
                 blobUrl: null,
             };
@@ -118,18 +117,22 @@ document
 
         const boxes = [...document.querySelectorAll(".upload-box")];
 
-        const imageSlots = [];
-
-        for (const box of boxes) {
+        const imageSlots = boxes.map((box) => {
             const state = box._state;
+
             if (state.type === "new") {
-                imageSlots.push({ type: "new" });
-            } else if (state.type === "existing") {
-                imageSlots.push({ type: "existing", key: state.key });
-            } else {
-                imageSlots.push({ type: "empty" });
+                return { type: "new" };
             }
-        }
+
+            if (state.type === "existing") {
+                return {
+                    type: "existing",
+                    filename: state.filename,
+                };
+            }
+
+            return { type: "empty" };
+        });
 
         // required first slot image
         if (imageSlots[0]?.type === "empty") {
@@ -223,7 +226,7 @@ document.querySelectorAll(".upload-box").forEach((box) => {
     box._state = {
         type: "empty",
         file: null,
-        key: null,
+        filename: null,
         url: null,
         blobUrl: null,
     };
@@ -311,7 +314,7 @@ function setBoxFile(box, file) {
     box._state = {
         type: "new",
         file,
-        key: null,
+        filename: null,
         url: null,
         blobUrl,
     };
@@ -322,7 +325,7 @@ function setBoxExisting(box, url) {
     box._state = {
         type: "existing",
         file: null,
-        key: extractKey(url),
+        filename: extractFilename(url),
         url,
         blobUrl: null,
     };
@@ -336,7 +339,7 @@ function clearBox(box) {
     box._state = {
         type: "empty",
         file: null,
-        key: null,
+        filename: null,
         url: null,
         blobUrl: null,
     };
@@ -374,4 +377,15 @@ function rerender(box) {
     }
     const src = box._state.type === "new" ? box._state.blobUrl : box._state.url;
     renderImage(box, src);
+}
+
+// also used in s3-utils
+function extractFilename(url) {
+    if (!url) return null;
+
+    if (url.includes(".amazonaws.com/")) {
+        return url.split(".amazonaws.com/")[1].split("?")[0];
+    }
+
+    return url;
 }
