@@ -291,7 +291,7 @@ async function heartClicked() {
                 credentials: "include",
             });
 
-            showToast("Like removed", "toast-error");
+            showToast("Like removed", "toast-success");
         }
     } else {
         if (heart.style.fill === "rgb(75, 75, 75)") {
@@ -320,7 +320,7 @@ async function heartClicked() {
                 },
             });
 
-            showToast("Like removed", "toast-error");
+            showToast("Like removed", "toast-success");
         }
     }
 }

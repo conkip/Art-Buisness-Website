@@ -125,8 +125,8 @@ async function deletePainting(id, rowElem) {
         localStorage.setItem(
             "pendingToast",
             JSON.stringify({
-                message: `"${name}" was deleted`,
-                className: "toast-error",
+                message: `"Painting ${name}" was deleted`,
+                className: "toast-sucess",
             }),
         );
         window.location.reload();
