@@ -97,6 +97,7 @@ APP_HOME=$(runuser -l "${APP_USER}" -c 'echo $HOME' 2>/dev/null || echo "/home/$
 # Resolve binaries or fall back to sensible defaults
 MONGOSH_BIN=$(command -v mongosh || echo /usr/bin/mongosh)
 CURL_BIN=$(command -v curl || echo /usr/bin/curl)
+APP_URL=${APP_URL:-"http://127.0.0.1:3000/painting/"}
 
 sudo tee /usr/local/bin/kasey-healthcheck.sh > /dev/null <<EOF
 #!/usr/bin/env bash
