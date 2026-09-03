@@ -80,3 +80,35 @@ else
 fi
 
 echo "Maintenance setup complete. Review /var/log/kasey-maintenance.log after first run."
+
+# Install a lightweight healthcheck that restarts services only when unhealthy
+
+sudo tee /usr/local/bin/kasey-healthcheck.sh > /dev/null <<'EOF'
+#!/usr/bin/env bash
+set -e
+# Use full paths to commands where possible to avoid PATH issues in cron
+MONGOSH_BIN=/usr/bin/mongosh
+CURL_BIN=/usr/bin/curl
+
+# If Mongo is unresponsive, restart it
+if ! ${MONGOSH_BIN} --quiet --eval "db.runCommand({ping:1})" >/dev/null 2>&1; then
+  echo "$(date -Iseconds) mongod unresponsive — restarting" >> /var/log/kasey-maintenance.log 2>&1 || true
+  systemctl restart mongod || true
+fi
+
+# If the local app is not responding, restart pm2-managed apps as the ubuntu user
+if ! ${CURL_BIN} -fsS http://127.0.0.1:3000/painting/ >/dev/null 2>&1; then
+  echo "$(date -Iseconds) app unresponsive — restarting pm2" >> /var/log/kasey-maintenance.log 2>&1 || true
+  # Restart pm2 under the ubuntu user so the correct pm2 home is used
+  runuser -l ubuntu -c 'export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; pm2 restart all' || true
+fi
+EOF
+
+sudo chmod +x /usr/local/bin/kasey-healthcheck.sh
+
+sudo tee /etc/cron.d/kasey-healthcheck > /dev/null <<'EOF'
+# Run healthcheck every 30 minutes
+*/30 * * * * root /usr/local/bin/kasey-healthcheck.sh >> /var/log/kasey-healthcheck.log 2>&1
+EOF
+
+echo "Installed healthcheck and cron (/etc/cron.d/kasey-healthcheck)"
