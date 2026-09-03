@@ -39,8 +39,9 @@ EOF'
 echo "Installed journald drop-in and restarting systemd-journald..."
 sudo systemctl restart systemd-journald || true
 
+
 # Create maintenance script and cron job
-sudo bash -c 'cat > /usr/local/bin/kasey-maintenance.sh <<"EOF"
+sudo tee /usr/local/bin/kasey-maintenance.sh > /dev/null <<'EOF'
 #!/usr/bin/env bash
 set -e
 # basic cleanup tasks
@@ -52,7 +53,7 @@ if command -v snap >/dev/null 2>&1; then
     snap remove --revision="$rev" "$snapname" || true
   done
 fi
-EOF'
+EOF
 
 sudo chmod +x /usr/local/bin/kasey-maintenance.sh
 
