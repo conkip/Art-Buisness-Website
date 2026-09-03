@@ -64,6 +64,12 @@ EOF'
 
 echo "Installed cron job /etc/cron.d/kasey-maintenance"
 
+# If a logrotate file exists in the repo, install it to /etc/logrotate.d
+if [ -f "${HOME}/kasey-creative-canvas/scripts/kasey-maintenance.logrotate" ]; then
+  sudo cp "${HOME}/kasey-creative-canvas/scripts/kasey-maintenance.logrotate" /etc/logrotate.d/kasey-maintenance
+  echo "Installed /etc/logrotate.d/kasey-maintenance from repo"
+fi
+
 # Ensure a modest swapfile exists (512MB)
 if ! swapon --show | grep -q '/swapfile' 2>/dev/null; then
   echo "Creating 512MB swapfile at /swapfile"
